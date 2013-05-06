@@ -9,7 +9,10 @@ public class GlobalBehavior : MonoBehaviour {
 		// spwaning enemy ...
 	public GameObject mIndestructubleWall = null;
 	
-	private const float wallSize = 12.5f;
+	private const int width = 15;
+	private const int height = 13;
+	private const float wallHeight = 12.5f;
+	private const float wallWidth = 15.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,13 +33,42 @@ public class GlobalBehavior : MonoBehaviour {
 	}
 	
 	void initializeMap() {
+		
+		/*
+		 *  Walls within the map
+		 */
+		float minZ = mMainCamera.orthographicSize * -1 + 6.25f;
+		float minX = mMainCamera.orthographicSize * mMainCamera.aspect * -1 + 7.5f;
+		
+		float tempZ = minZ + wallHeight / 2;
+		float tempX = minX + wallWidth / 2;
+		
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				
+				// Create indestructuble wall
+				if (x % 2 == 1 && y % 2 == 1) {
+					GameObject go = Instantiate(mIndestructubleWall) as GameObject;
+					IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
+					
+					wall.initialize(tempX, tempZ);
+				}
+				tempX += wallWidth;
+			}
+			tempX = minX + wallWidth / 2;
+			tempZ += wallHeight;
+		}
+		
+		
+		/*
+		 * Walls outlining the map
+		 */
 		float maxZ = mMainCamera.orthographicSize;
 		float maxX = mMainCamera.orthographicSize * mMainCamera.aspect;
-		
 		float temp = maxZ * -1;
 		
 		// initialize left and right sides
-		while(temp < maxZ) {
+		for (int i = 0; i < height + 2; i++) {
 			GameObject goLeft = Instantiate(mIndestructubleWall) as GameObject;
 			IndestructubleWall leftWall = goLeft.GetComponent<IndestructubleWall>();
 			
@@ -44,26 +76,27 @@ public class GlobalBehavior : MonoBehaviour {
 			IndestructubleWall rightWall = goRight.GetComponent<IndestructubleWall>();
 			
 			leftWall.initialize(maxX * -1, temp);
-			rightWall.initialize(maxX, temp);
+			rightWall.initialize(wallWidth * width / 2 - 5.0f, temp);
 			
-			temp += wallSize;
+			temp += wallHeight;
 		}
 		
 		// initialize top and bottom sides
-		temp = maxX * -1 + 6.25f;
+		temp = maxX * -1 + 7.5f;
 		
-		while (temp < maxX) {
+		for (int i = 0; i <= width ; i++) {
 			GameObject goTop = Instantiate(mIndestructubleWall) as GameObject;
 			IndestructubleWall topWall = goTop.GetComponent<IndestructubleWall>();
 			
 			GameObject goBottom = Instantiate(mIndestructubleWall) as GameObject;
 			IndestructubleWall bottomWall = goBottom.GetComponent<IndestructubleWall>();
 			
-			topWall.initialize(temp, maxZ);
+			topWall.initialize(temp, wallHeight * height / 2 - 6.25f);
 			bottomWall.initialize(temp, maxZ * -1);
 			
-			temp += wallSize;
+			temp += wallWidth;
 		}
+		
 	}
 	
 	public void UpdateWorldWindowBound() {
