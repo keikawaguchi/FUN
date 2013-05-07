@@ -39,7 +39,9 @@ public class GlobalBehavior : MonoBehaviour {
 		
 	}
 	
+	// creates the basic map layout with the indestructuble walls
 	void initializeMap() {
+		
 		var grid = new bool[gridWidth, gridHeight];
 		
 		for (int x = 0; x < gridWidth; x++) {
@@ -58,10 +60,10 @@ public class GlobalBehavior : MonoBehaviour {
 	}
 	
 	// converts grid x-coord into x-position
-	float getXCoord(int x) { return xMin + (x * wallSize) + (wallSize / 2); }
+	public float getXCoord(int x) { return xMin + (x * wallSize) + (wallSize / 2); }
 	
 	// converts grid y-coord into y-position
-	float getYCoord(int y) { return yMin + (y * wallSize) + (wallSize / 2); }
+	public float getYCoord(int y) { return yMin + (y * wallSize) + (wallSize / 2); }
 	
 	// converts x-position to grid x-coord
 	int getXPos(float x) { return Mathf.RoundToInt( (x - xMin - (wallSize / 2) ) / wallSize); }
