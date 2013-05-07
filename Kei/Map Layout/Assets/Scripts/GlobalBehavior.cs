@@ -60,8 +60,14 @@ public class GlobalBehavior : MonoBehaviour {
 	// converts grid x-coord into x-position
 	float getXCoord(int x) { return xMin + (x * wallSize) + (wallSize / 2); }
 	
-	// converts g y-coord into y-position
+	// converts grid y-coord into y-position
 	float getYCoord(int y) { return yMin + (y * wallSize) + (wallSize / 2); }
+	
+	// converts x-position to grid x-coord
+	int getXPos(float x) { return Mathf.RoundToInt( (x - xMin - (wallSize / 2) ) / wallSize); }
+	
+	// converts y-position to grid y-coord
+	int getYPos(float y) { return Mathf.RoundToInt( (y - yMin - (wallSize / 2) ) / wallSize); }
 	
 	// returns true if coordinate is an edge of the map
 	bool isEdge(int x, int y) {
@@ -92,12 +98,6 @@ public class GlobalBehavior : MonoBehaviour {
 			c.y -= (0.5f * sizeY);
 			mWorldBound.center = c;
 			mWorldBound.size = new Vector3(sizeX, sizeY, sizeZ);
-			
-			// DELETE
-			Debug.Log("Aspect Ratio: " + mMainCamera.aspect);
-			Debug.Log("X: " + sizeX);
-			Debug.Log("Y: " + sizeY);
-			Debug.Log("Z: " + sizeZ);
 		}
 	}
 	
