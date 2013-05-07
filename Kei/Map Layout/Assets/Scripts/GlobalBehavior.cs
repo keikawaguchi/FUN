@@ -6,19 +6,26 @@ public class GlobalBehavior : MonoBehaviour {
 	private Bounds mWorldBound;  // this is the world bound
 	private Camera mMainCamera;
 	
-		// spwaning enemy ...
+	// spwaning enemy ...
 	public GameObject mIndestructubleWall = null;
 	
-	private const int width = 15;
-	private const int height = 13;
-	private const float wallHeight = 12.5f;
-	private const float wallWidth = 15.0f;
+	private float xMin;						// lower left hand corner x-pos
+	private float yMin;						// lower left hand corner y-pos
+	
+	private const float wallSize = 14f;	// dimension of wall
+	
+	private const int gridWidth = 19;		// width of map
+	private const int gridHeight = 13;		// height of map
 
 	// Use this for initialization
 	void Start () {
 		mMainCamera = Camera.main;
 		mWorldBound = new Bounds(Vector3.zero, Vector3.one);
 		UpdateWorldWindowBound();
+		
+		// calculate lower left hand corner of screen
+		xMin = mMainCamera.orthographicSize * mMainCamera.aspect * -1;
+		yMin = mMainCamera.orthographicSize * -1;
 		
 		// initialize map layout
 		if (null == mIndestructubleWall) 
@@ -33,70 +40,41 @@ public class GlobalBehavior : MonoBehaviour {
 	}
 	
 	void initializeMap() {
+		var grid = new bool[gridWidth, gridHeight];
 		
-		/*
-		 *  Walls within the map
-		 */
-		float minZ = mMainCamera.orthographicSize * -1 + 6.25f;
-		float minX = mMainCamera.orthographicSize * mMainCamera.aspect * -1 + 7.5f;
-		
-		float tempZ = minZ + wallHeight / 2;
-		float tempX = minX + wallWidth / 2;
-		
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
+		for (int x = 0; x < gridWidth; x++) {
+			
+			for (int y = 0; y < gridHeight; y++) {
 				
-				// Create indestructuble wall
-				if (x % 2 == 1 && y % 2 == 1) {
+				if (isEdge(x, y) || (x % 2 == 0 && y % 2 == 0)) {
+					
 					GameObject go = Instantiate(mIndestructubleWall) as GameObject;
 					IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-					
-					wall.initialize(tempX, tempZ);
+
+					wall.initialize(getXCoord(x), getYCoord(y));
 				}
-				tempX += wallWidth;
 			}
-			tempX = minX + wallWidth / 2;
-			tempZ += wallHeight;
 		}
+	}
+	
+	// converts grid x-coord into x-position
+	float getXCoord(int x) { return xMin + (x * wallSize) + (wallSize / 2); }
+	
+	// converts g y-coord into y-position
+	float getYCoord(int y) { return yMin + (y * wallSize) + (wallSize / 2); }
+	
+	// returns true if coordinate is an edge of the map
+	bool isEdge(int x, int y) {
 		
+		// left or bottom edge
+		if (x == 0 || y == 0)
+			return true;
 		
-		/*
-		 * Walls outlining the map
-		 */
-		float maxZ = mMainCamera.orthographicSize;
-		float maxX = mMainCamera.orthographicSize * mMainCamera.aspect;
-		float temp = maxZ * -1;
+		// right or top edge
+		if (x == (gridWidth - 1) || y == (gridHeight - 1))
+			return true;
 		
-		// initialize left and right sides
-		for (int i = 0; i < height + 2; i++) {
-			GameObject goLeft = Instantiate(mIndestructubleWall) as GameObject;
-			IndestructubleWall leftWall = goLeft.GetComponent<IndestructubleWall>();
-			
-			GameObject goRight = Instantiate(mIndestructubleWall) as GameObject;
-			IndestructubleWall rightWall = goRight.GetComponent<IndestructubleWall>();
-			
-			leftWall.initialize(maxX * -1, temp);
-			rightWall.initialize(wallWidth * width / 2 - 5.0f, temp);
-			
-			temp += wallHeight;
-		}
-		
-		// initialize top and bottom sides
-		temp = maxX * -1 + 7.5f;
-		
-		for (int i = 0; i <= width ; i++) {
-			GameObject goTop = Instantiate(mIndestructubleWall) as GameObject;
-			IndestructubleWall topWall = goTop.GetComponent<IndestructubleWall>();
-			
-			GameObject goBottom = Instantiate(mIndestructubleWall) as GameObject;
-			IndestructubleWall bottomWall = goBottom.GetComponent<IndestructubleWall>();
-			
-			topWall.initialize(temp, wallHeight * height / 2 - 6.25f);
-			bottomWall.initialize(temp, maxZ * -1);
-			
-			temp += wallWidth;
-		}
-		
+		return false;
 	}
 	
 	public void UpdateWorldWindowBound() {
@@ -115,6 +93,7 @@ public class GlobalBehavior : MonoBehaviour {
 			mWorldBound.center = c;
 			mWorldBound.size = new Vector3(sizeX, sizeY, sizeZ);
 			
+			// DELETE
 			Debug.Log("Aspect Ratio: " + mMainCamera.aspect);
 			Debug.Log("X: " + sizeX);
 			Debug.Log("Y: " + sizeY);
