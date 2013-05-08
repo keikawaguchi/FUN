@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{13EDDB3A-6291-6E1A-FCA6-5AA26902D15B}</ProjectGuid>
+	<ProjectGuid>{3E5CA467-EA5F-D7CA-3F18-DF1AFA5E4DA1}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -45,10 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BombBehavior.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\Scripts\Enemy.cs" />
-=======
->>>>>>> Beshoy's Menu Stuff
      <Compile Include="Assets\Scripts\Explosion.cs" />
      <Compile Include="Assets\Scripts\FireBehavior.cs" />
      <Compile Include="Assets\Scripts\GlobalBehavior.cs" />
@@ -57,10 +54,8 @@
      <Compile Include="Assets\Scripts\IndestructubleWall.cs" />
      <Compile Include="Assets\Scripts\LSBehaviour.cs" />
      <Compile Include="Assets\Scripts\LSEnemy.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\Scripts\ShootGrapple.cs" />
-=======
->>>>>>> Beshoy's Menu Stuff
+     <Compile Include="Assets\Scripts\TextControl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
