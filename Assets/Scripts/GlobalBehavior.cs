@@ -3,11 +3,15 @@ using System.Collections;
 
 public class GlobalBehavior : MonoBehaviour {
 	
+	public bool isLevelOne = false;
+	public bool isLevelTwo = false;
+	
 	private Bounds mWorldBound;  // this is the world bound
 	private Camera mMainCamera;
 	
 	// spwaning enemy ...
 	public GameObject mIndestructubleWall = null;
+	public GameObject DestructubleWall = null;
 	
 	private float xMin;						// lower left hand corner x-pos
 	private float yMin;						// lower left hand corner y-pos
@@ -30,6 +34,8 @@ public class GlobalBehavior : MonoBehaviour {
 		// initialize map layout
 		if (null == mIndestructubleWall) 
 			mIndestructubleWall = Resources.Load("Prefabs/Indestructuble Wall") as GameObject;
+		if(null == DestructubleWall)
+			DestructubleWall = Resources.Load("Prefabs/Destructuble Wall") as GameObject;
 		
 		initializeMap();
 	}
@@ -41,8 +47,20 @@ public class GlobalBehavior : MonoBehaviour {
 	
 	// creates the basic map layout with the indestructuble walls
 	void initializeMap() {
-		
+				
 		var grid = new bool[gridWidth, gridHeight];
+		if(isLevelOne == true)
+		{
+			GameObject nogo = Instantiate(DestructubleWall) as GameObject;
+			IndestructubleWall daWall = nogo.GetComponent<IndestructubleWall>();
+			daWall.initialize(getXCoord(3), getYCoord(3));
+			GameObject wall2 = Instantiate(DestructubleWall) as GameObject;
+			IndestructubleWall daWall2 = wall2.GetComponent<IndestructubleWall>();
+			daWall2.initialize(getXCoord(3), getYCoord(4));
+			GameObject wall3 = Instantiate(DestructubleWall) as GameObject;
+			IndestructubleWall daWall3 = wall3.GetComponent<IndestructubleWall>();
+			daWall3.initialize(getXCoord(3), getYCoord(2));
+		}
 		
 		for (int x = 0; x < gridWidth; x++) {
 			
