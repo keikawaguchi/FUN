@@ -12,13 +12,14 @@ public class Lure : MonoBehaviour {
 	#region Class Members
 	const string LURE_UNIT_PREFAB_PATH = "Prefabs/Skill_Prefabs/LureUnit";
 	
-	public float distance;
+	public float distanceToTravel;
 	public float width;
 	public float speed;
 	public float coolDownInSeconds;
+	private float lureUnitSpawnDelayInSeconds;
+	private float timeOfLastLureUnitSpawn;
 	
 	private Stack lureUnitStack;
-	
 	private GameObject lureUnitPrefab;
 	#endregion
 	
@@ -39,6 +40,11 @@ public class Lure : MonoBehaviour {
 		else {
 			Debug.Log ("Lure Unit loaded successfully");
 		}
+	}
+	
+	private void calculateLureUnitSpawnDelay() {
+		float lureUnitHeight = lureUnitPrefab.transform.localScale.z;
+		lureUnitSpawnDelayInSeconds = distanceToTravel / lureUnitHeight;
 	}
 	
 	private void addLureUnit() {
