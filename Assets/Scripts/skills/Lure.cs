@@ -9,6 +9,7 @@ using System.Collections;
 
 public class Lure : MonoBehaviour {
 	
+	#region Class Members
 	const string LURE_UNIT_PREFAB_PATH = "Prefabs/Skill_Prefabs/LureUnit";
 	
 	public float distance;
@@ -19,6 +20,7 @@ public class Lure : MonoBehaviour {
 	private Stack lureUnitStack;
 	
 	private GameObject lureUnitPrefab;
+	#endregion
 	
 	void Start () {
 		loadLureUnitPrefab();
@@ -26,7 +28,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	void Update () {
-	
+		
 	}
 	
 	private void loadLureUnitPrefab() {
@@ -37,5 +39,15 @@ public class Lure : MonoBehaviour {
 		else {
 			Debug.Log ("Lure Unit loaded successfully");
 		}
+	}
+	
+	private void addLureUnit() {
+		GameObject newLureUnit = Instantiate(lureUnitPrefab) as GameObject;
+		lureUnitStack.Push(newLureUnit);
+	}
+	
+	private void removeLureUnit() {
+		GameObject lureUnitToRemove = lureUnitStack.Pop() as GameObject;
+		Destroy(lureUnitToRemove);
 	}
 }
