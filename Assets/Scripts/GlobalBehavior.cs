@@ -51,15 +51,61 @@ public class GlobalBehavior : MonoBehaviour {
 		var grid = new bool[gridWidth, gridHeight];
 		if(isLevelOne == true)
 		{
-			GameObject nogo = Instantiate(DestructubleWall) as GameObject;
-			IndestructubleWall daWall = nogo.GetComponent<IndestructubleWall>();
-			daWall.initialize(getXCoord(3), getYCoord(3));
-			GameObject wall2 = Instantiate(DestructubleWall) as GameObject;
-			IndestructubleWall daWall2 = wall2.GetComponent<IndestructubleWall>();
-			daWall2.initialize(getXCoord(3), getYCoord(4));
-			GameObject wall3 = Instantiate(DestructubleWall) as GameObject;
-			IndestructubleWall daWall3 = wall3.GetComponent<IndestructubleWall>();
-			daWall3.initialize(getXCoord(3), getYCoord(2));
+			for(int i = 0; i <= 17; i++)
+			{
+				if( i == 4 || i == 6 || i == 8 || i == 10 || i == 12 || i == 14)
+				{
+					for( int m = 1; m <= 11; m+=2)
+					{
+						GameObject wall1 = Instantiate(DestructubleWall) as GameObject;
+						IndestructubleWall daWall1 = wall1.GetComponent<IndestructubleWall>();
+						daWall1.initialize(getXCoord(i), getYCoord(m));
+					}
+				}
+				if( i == 5 || i == 7 || i == 11 || i == 13)
+				{
+					for( int m = 1; m <= 11; m++)
+					{
+						GameObject wall2 = Instantiate(DestructubleWall) as GameObject;
+						IndestructubleWall daWall2 = wall2.GetComponent<IndestructubleWall>();
+						daWall2.initialize(getXCoord(i), getYCoord(m));
+					}
+				}
+				if( i == 1 || i == 17)
+				{
+					for( int m = 4; m <= 8; m++)
+					{
+						GameObject wall3 = Instantiate(DestructubleWall) as GameObject;
+						IndestructubleWall daWall3 = wall3.GetComponent<IndestructubleWall>();
+						daWall3.initialize(getXCoord(i), getYCoord(m));
+					}
+				}
+				if( i == 9 )
+				{
+					for( int m = 1; m <= 4; m++)
+					{
+						GameObject wall4 = Instantiate(DestructubleWall) as GameObject;
+						IndestructubleWall daWall4 = wall4.GetComponent<IndestructubleWall>();
+						daWall4.initialize(getXCoord(i), getYCoord(m));
+					}
+					for( int m = 6; m <= 11; m++)
+					{
+						GameObject wall4 = Instantiate(DestructubleWall) as GameObject;
+						IndestructubleWall daWall4 = wall4.GetComponent<IndestructubleWall>();
+						daWall4.initialize(getXCoord(i), getYCoord(m));
+					}
+				}
+				if( i == 3 || i == 15 )
+				{
+					for( int m = 2; m <= 10; m++)
+					{
+						GameObject wall5 = Instantiate(DestructubleWall) as GameObject;
+						IndestructubleWall daWall5 = wall5.GetComponent<IndestructubleWall>();
+						daWall5.initialize(getXCoord(i), getYCoord(m));
+					}
+				}
+			}
+			
 		}
 		
 		for (int x = 0; x < gridWidth; x++) {
