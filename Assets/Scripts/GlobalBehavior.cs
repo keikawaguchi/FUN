@@ -81,7 +81,6 @@ public class GlobalBehavior : MonoBehaviour {
 		}
 		
 		// initialize destructuble walls
-		/*
 		for (int x = 1; x < gridWidth - 1; x++) {
 			for (int y = 1; y < gridHeight - 1; y++) {
 				
@@ -108,7 +107,6 @@ public class GlobalBehavior : MonoBehaviour {
 				grid[x,y] = true;
 			}
 		}
-		*/
 	}
 	
 	// converts grid x-coord into x-position
@@ -122,6 +120,13 @@ public class GlobalBehavior : MonoBehaviour {
 	
 	// converts y-position to grid y-coord
 	public int getYPos(float y) { return Mathf.RoundToInt( (y - yMin - (wallSize / 2) ) / wallSize); }
+	
+	public bool isGridEmpty(Vector3 position) {
+		int x = getXPos(position.x);
+		int y = getYPos(position.z);
+		
+		return !grid[x,y];
+	}
 	
 	// returns true if coordinate is an edge of the map
 	bool isEdge(int x, int y) {
