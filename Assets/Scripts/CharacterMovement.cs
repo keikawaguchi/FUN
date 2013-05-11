@@ -4,6 +4,7 @@ using System.Collections;
 public class CharacterMovement : MonoBehaviour {
 	
 	public float speed;
+	private Vector3 aimDirection;
 
 	void Start () {
 	
@@ -11,7 +12,14 @@ public class CharacterMovement : MonoBehaviour {
 	
 	void Update () {
 		updateMovement();
+		updateRotation();
 	}
+	
+	#region Public Methods
+	public Vector3 getAimDirection() {
+		return aimDirection;
+	}
+	#endregion
 	
 	private void updateMovement() {
 		Vector3 movement;
@@ -21,7 +29,9 @@ public class CharacterMovement : MonoBehaviour {
 		this.transform.Translate (movement);
 	}
 	
-	private void updateRotation() {
-		//transform.Rotate(0, rotation, 0);
+	private void updateAimDirection() {
+		aimDirection.y = 0;
+		aimDirection.x = Input.GetAxis("Horizontal");
+		aimDirection.z = Input.GetAxis("Vertical");
 	}
 }
