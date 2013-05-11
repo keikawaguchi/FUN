@@ -9,9 +9,10 @@ public class GlobalBehavior : MonoBehaviour {
 	private Bounds mWorldBound;  // this is the world bound
 	private Camera mMainCamera;
 	
-	// spwaning enemy ...
 	public GameObject mIndestructubleWall = null;
 	public GameObject DestructubleWall = null;
+	
+	private GameObject upgrade;
 	
 	private float xMin;						// lower left hand corner x-pos
 	private float yMin;						// lower left hand corner y-pos
@@ -38,8 +39,14 @@ public class GlobalBehavior : MonoBehaviour {
 			mIndestructubleWall = Resources.Load("Prefabs/Indestructuble Wall") as GameObject;
 		if(null == DestructubleWall)
 			DestructubleWall = Resources.Load("Prefabs/Destructuble Wall") as GameObject;
+		if(null == upgrade)
+			upgrade = Resources.Load("Prefabs/Upgrade") as GameObject;
 		
 		initializeMap();
+		
+		// initialize upgrade
+		GameObject instantiateUpgrade = Instantiate (upgrade) as GameObject;
+		instantiateUpgrade.transform.position = new Vector3( getXCoord(gridWidth / 2), 0f, getYCoord(gridHeight / 2) );
 	}
 	
 	// Update is called once per frame
@@ -74,7 +81,6 @@ public class GlobalBehavior : MonoBehaviour {
 		}
 		
 		// initialize destructuble walls
-		/*
 		for (int x = 1; x < gridWidth - 1; x++) {
 			for (int y = 1; y < gridHeight - 1; y++) {
 				
@@ -101,7 +107,6 @@ public class GlobalBehavior : MonoBehaviour {
 				grid[x,y] = true;
 			}
 		}
-		*/
 	}
 	
 	// converts grid x-coord into x-position
