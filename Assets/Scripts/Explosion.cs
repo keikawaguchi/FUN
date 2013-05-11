@@ -51,13 +51,11 @@ public class Explosion : MonoBehaviour {
 		if (numberOfFireUnitsCreatedX < explosionDistanceX) {		
 			
 			// right
-			Debug.Log("Right explosion");
 			fireUnitPos = transform.position;
 			fireUnitPos.x += numberOfFireUnitsCreatedX * scale;
 			spawnFireUnit(fireUnitPos);		
-			// left
 			
-			Debug.Log("Left explosion");
+			// left
 			fireUnitPos = transform.position;
 			fireUnitPos.x -= numberOfFireUnitsCreatedX * scale;
 			spawnFireUnit (fireUnitPos);
@@ -71,13 +69,11 @@ public class Explosion : MonoBehaviour {
 		if (numberOfFireUnitsCreatedZ < explosionDistanceZ) {	
 			
 			// up
-			Debug.Log("Up explosion");
 			fireUnitPos = transform.position;
 			fireUnitPos.z += numberOfFireUnitsCreatedZ * scale;
 			spawnFireUnit(fireUnitPos);	
 			
 			// down
-			Debug.Log("Down explosion");
 			fireUnitPos = transform.position;
 			fireUnitPos.z -= numberOfFireUnitsCreatedZ * scale;
 			spawnFireUnit(fireUnitPos);
