@@ -129,7 +129,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void retractLure() {
-		//removeLureUnit();	
+		removeLureUnit();	
 	}
 	
 	private void checkPlayerCollision() {
