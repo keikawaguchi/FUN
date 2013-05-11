@@ -46,8 +46,8 @@ public class Lure : MonoBehaviour {
 		
 		if (isTimeToSpawnLureUnit()) {
 			if (currentState == State.Extending) {
-				checkPlayerCollision();
 				extendLure();
+				checkPlayerCollision();
 			}
 			else {
 				retractLure();
@@ -90,7 +90,7 @@ public class Lure : MonoBehaviour {
 	#endregion
 
 	private void destoryLureObject() {
-		Debug.Log("Lure skill complete");
+		Debug.Log("Lure: Skill complete");
 		Destroy(gameObject);
 	}
 	
@@ -129,7 +129,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void retractLure() {
-		removeLureUnit();	
+		//removeLureUnit();	
 	}
 	
 	private void checkPlayerCollision() {
@@ -138,19 +138,22 @@ public class Lure : MonoBehaviour {
 		}
 		
 		GameObject lastLureUnit;
-		LureUnit lureUnit;
+		LureUnit lureUnitScript;
 		lastLureUnit = lureUnitStack.Peek() as GameObject;
-		lureUnit = lastLureUnit.GetComponent<LureUnit>();
-		grabbedPlayer = lureUnit.getGrabbedPlayer();
+		lureUnitScript = lastLureUnit.GetComponent<LureUnit>();
+		grabbedPlayer = lureUnitScript.getGrabbedPlayer();
 
 		if (grabbedPlayer != null) {
-			Debug.Log("Lure collision with player!");
+			Debug.Log("Lure: Collision with player!");
+		} 
+		else {
+			Debug.Log("Lure: No collision with player!");
 		}
 	}
 	
 	private void moveHookedPlayer() {
 		if (grabbedPlayer == null) {
-			Debug.Log ("Grabbed player is NULL");
+			Debug.Log ("Lure: Grabbed player is NULL");
 			return;
 		}
 		

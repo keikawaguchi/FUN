@@ -36,10 +36,10 @@ public class TemptressBehavior : MonoBehaviour {
 	private void loadSkills() {
 		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
 		if (lureSkillPrefab == null) {
-			Debug.Log ("Lure skill loaded unsuccessfully");	
+			Debug.Log ("Temptress: Lure skill loaded unsuccessfully");	
 		}
 		else {
-			Debug.Log ("Lure skill loaded successfully");	
+			Debug.Log ("Temptress: Lure skill loaded successfully");	
 		}
 	}
 	

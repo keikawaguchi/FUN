@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\IndestructubleWall.cs" />
      <Compile Include="Assets\Scripts\LSBehaviour.cs" />
      <Compile Include="Assets\Scripts\LSEnemy.cs" />
+     <Compile Include="Assets\Scripts\PlayerReferences.cs" />
      <Compile Include="Assets\Scripts\UpgradePickUp.cs" />
      <Compile Include="Assets\Scripts\characters\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\skills\Lure.cs" />
