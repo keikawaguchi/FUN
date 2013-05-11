@@ -78,7 +78,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private bool isTimeToSpawnLureUnit() {
-		return (Time.time - timeOfLastLureUnitSpawn) > calculateLureUnitSpawnDelay;
+		return (Time.time - timeOfLastLureUnitSpawn) > lureUnitSpawnDelayInSeconds;
 	}
 	
 	private bool isFullyExtended() {
