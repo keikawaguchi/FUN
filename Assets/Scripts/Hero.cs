@@ -8,7 +8,6 @@ public class Hero : MonoBehaviour {
 	
 	private GameObject bomb;
 	private GlobalBehavior globalBehavior;
-	
 	private CharacterMovement characterMovement;
 
 	void Start () {
