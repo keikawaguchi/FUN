@@ -54,6 +54,8 @@ public class Lure : MonoBehaviour {
 				retractLure();
 			}
 		}
+		
+		updateState();
 	}
 	
 	#region Public Methods
@@ -84,7 +86,7 @@ public class Lure : MonoBehaviour {
 	#endregion
 	
 	private bool isComplete() {	
-		return lureUnitStack.Count == 0;
+		return lureUnitStack.Count < 1;
 	}
 	
 	private void destoryLureObject() {
@@ -99,6 +101,12 @@ public class Lure : MonoBehaviour {
 	
 	private bool isFullyExtended() {
 		return lureUnitStack.Count >= numberOfLureUnitsToSpawn;
+	}
+	
+	private void updateState() {
+		if (isFullyExtended ()) {
+			currentState = State.Retracting;
+		}
 	}
 	
 	private void extendLure() {
@@ -133,6 +141,10 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void removeLureUnit() {
+		if (isComplete()) {
+			return;
+		}
+		
 		Debug.Log("Lure unit removed");
 		GameObject lureUnitToRemove = lureUnitStack.Pop() as GameObject;
 		Destroy(lureUnitToRemove);

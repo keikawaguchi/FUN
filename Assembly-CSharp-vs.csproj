@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\LSEnemy.cs" />
      <Compile Include="Assets\Scripts\ShootGrapple.cs" />
      <Compile Include="Assets\Scripts\UpgradePickUp.cs" />
+     <Compile Include="Assets\Scripts\characters\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\skills\Lure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
