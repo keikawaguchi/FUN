@@ -6,7 +6,7 @@ public class TemptressBehavior : MonoBehaviour {
 	private Lure lureSkill;
 
 	void Start () {
-		
+
 	}
 	
 	void Update () {

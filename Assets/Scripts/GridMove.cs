@@ -17,28 +17,54 @@ class GridMove : MonoBehaviour {
     private Vector3 endPosition;
     private float t;
     private float factor;
+	private GlobalBehavior globalBehavior;
 	
 	void Start() {
 		// DELETE, temp start position at [1,1]
 		transform.position = new Vector3(-112.3f, 0, -79);
+		globalBehavior = GameObject.Find("Global Behavior").GetComponent<GlobalBehavior>();
 	}
  
     public void Update() {
+		bool toMove = true;
+		
         if (!isMoving) {
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             if (!allowDiagonals) {
                 if (Mathf.Abs(input.x) > Mathf.Abs(input.y)) {
                     input.y = 0;
+					if (System.Math.Sign(input.x) > 0) {
+						if ( isGridFull((transform.position.x + gridSize), transform.position.z) )
+							toMove = false;
+					} else {
+						if ( isGridFull((transform.position.x - gridSize), transform.position.z) )
+							toMove = false;
+					}
                 } else {
                     input.x = 0;
+					if (System.Math.Sign(input.y) > 0) {
+						if ( isGridFull(transform.position.x, (transform.position.z + gridSize)) )
+							toMove = false;
+					} else {
+						if ( isGridFull(transform.position.x, (transform.position.z - gridSize)) )
+							toMove = false;
+					}
+					
                 }
             }
  
-            if (input != Vector2.zero) {
+            if (input != Vector2.zero && toMove) {
                 StartCoroutine(move(transform));
             }
         }
     }
+	
+	public bool isGridFull(float x, float y) {
+		int xCoord = globalBehavior.getXPos(x);
+		int yCoord = globalBehavior.getYPos(y);
+		
+		return globalBehavior.grid[xCoord, yCoord];
+	}
  
     public IEnumerator move(Transform transform) {
         isMoving = true;
