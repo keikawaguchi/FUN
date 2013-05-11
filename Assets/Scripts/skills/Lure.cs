@@ -19,7 +19,7 @@ public class Lure : MonoBehaviour {
 	
 	public float distanceToTravel;
 	public float lureUnitsSpawnedPerSecond;
-	private float scaleSpeed;
+	private float scaleSpeed = 1f;
 	private float lureUnitSpawnDelayInSeconds;
 	private float numberOfLureUnitsToSpawn;
 	private float timeOfLastLureUnitSpawn;
@@ -71,7 +71,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void calculateLureUnitSpawnDelay() {
-		lureUnitSpawnDelayInSeconds = 60f / lureUnitsSpawnedPerSecond;
+		lureUnitSpawnDelayInSeconds = 1f / lureUnitsSpawnedPerSecond;
 	}
 	
 	private void calculateNumberOfUnitsToSpawn() {
@@ -100,9 +100,9 @@ public class Lure : MonoBehaviour {
 	
 	private void extendLure() {
 		Transform newLureUnitPosition;
-		Vector3 forwardDirection;
 		GameObject lastLureUnit;
-		float lureUnitHeight = lureUnitPrefab.transform.localScale.z;
+		
+		timeOfLastLureUnitSpawn = Time.time;
 		
 		if (lureUnitStack.Count == 0) {
 			newLureUnitPosition = this.transform;
@@ -112,13 +112,8 @@ public class Lure : MonoBehaviour {
 			newLureUnitPosition = lastLureUnit.transform;		
 		}
 		
-		// Calculate new forward direction for lure unit
-		forwardDirection = newLureUnitPosition.transform.forward;
-		forwardDirection.y = 0f;
-		newLureUnitPosition.transform.forward = forwardDirection;
-		
-		// Calculate new position for lure unit
-		newLureUnitPosition.transform.position += newLureUnitPosition.transform.forward * lureUnitHeight;
+		newLureUnitPosition.transform.forward = calculateForwardDirection(newLureUnitPosition);
+		newLureUnitPosition.transform.position = calculatePosition(newLureUnitPosition);
 		addLureUnit(newLureUnitPosition);
 	}
 	
@@ -128,7 +123,6 @@ public class Lure : MonoBehaviour {
 	
 	private void addLureUnit(Transform unitTransform) {
 		Debug.Log("Lure unit added");
-		timeOfLastLureUnitSpawn = Time.time;
 		GameObject newLureUnit = Instantiate(lureUnitPrefab) as GameObject;
 		newLureUnit.transform.forward = unitTransform.forward;
 		newLureUnit.transform.position = unitTransform.transform.position;
@@ -139,5 +133,21 @@ public class Lure : MonoBehaviour {
 		Debug.Log("Lure unit removed");
 		GameObject lureUnitToRemove = lureUnitStack.Pop() as GameObject;
 		Destroy(lureUnitToRemove);
+	}
+	
+	private Vector3 calculateForwardDirection(Transform newLureUnitPosition) {
+		Vector3 forwardDirection;
+		forwardDirection = newLureUnitPosition.transform.forward;
+		forwardDirection.y = 0f;
+		return forwardDirection;
+	}
+	
+	private Vector3 calculatePosition(Transform newLureUnitPosition) {
+		float lureUnitHeight;
+		Vector3 position;
+		lureUnitHeight = lureUnitPrefab.transform.localScale.z;
+		position = newLureUnitPosition.transform.forward * lureUnitHeight;
+		position += newLureUnitPosition.transform.position;
+		return position;
 	}
 }
