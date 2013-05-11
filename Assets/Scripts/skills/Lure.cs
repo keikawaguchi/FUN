@@ -36,6 +36,9 @@ public class Lure : MonoBehaviour {
 		currentState = State.Extending;
 		lureUnitStack = new Stack();
 		extendLure();
+		
+		// for debugging
+		showVariableValues();
 	}
 	
 	void Update () {
@@ -71,12 +74,12 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void calculateLureUnitSpawnDelay() {
-		lureUnitSpawnDelayInSeconds = 1f / lureUnitsSpawnedPerSecond;
+		lureUnitSpawnDelayInSeconds = 1.0f / lureUnitsSpawnedPerSecond;
 	}
 	
 	private void calculateNumberOfUnitsToSpawn() {
 		float lureUnitHeight = lureUnitPrefab.transform.localScale.z;
-		lureUnitSpawnDelayInSeconds = distanceToTravel / lureUnitHeight;
+		numberOfLureUnitsToSpawn = distanceToTravel / lureUnitHeight;
 	}
 	#endregion
 	
@@ -149,5 +152,14 @@ public class Lure : MonoBehaviour {
 		position = newLureUnitPosition.transform.forward * lureUnitHeight;
 		position += newLureUnitPosition.transform.position;
 		return position;
+	}
+	
+	private void showVariableValues() {
+		Debug.Log("distanceToTravel: " + distanceToTravel);
+		Debug.Log("lureUnitsSpawnedPerSecond: " + lureUnitsSpawnedPerSecond);
+		Debug.Log("scaleSpeed: " + scaleSpeed);
+		Debug.Log("lureUnitSpawnDelayInSeconds: " + lureUnitSpawnDelayInSeconds);
+		Debug.Log("numberOfLureUnitsToSpaw: " + numberOfLureUnitsToSpawn);
+		Debug.Log("timeOfLastLureUnitSpawn: " + timeOfLastLureUnitSpawn);
 	}
 }
