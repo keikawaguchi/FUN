@@ -31,8 +31,12 @@ class GridMove : MonoBehaviour {
         if (!isMoving) {
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             if (!allowDiagonals) {
+				
+				// check for which direction you're going
                 if (Mathf.Abs(input.x) > Mathf.Abs(input.y)) {
-                    input.y = 0;
+					input.y = 0;
+					
+					// determine if hero is going left or right
 					if (System.Math.Sign(input.x) > 0) {
 						if ( isGridFull((transform.position.x + gridSize), transform.position.z) )
 							toMove = false;
@@ -42,6 +46,8 @@ class GridMove : MonoBehaviour {
 					}
                 } else {
                     input.x = 0;
+					
+					// determine if hero is going up or down
 					if (System.Math.Sign(input.y) > 0) {
 						if ( isGridFull(transform.position.x, (transform.position.z + gridSize)) )
 							toMove = false;

@@ -74,6 +74,7 @@ public class GlobalBehavior : MonoBehaviour {
 		}
 		
 		// initialize destructuble walls
+		/*
 		for (int x = 1; x < gridWidth - 1; x++) {
 			for (int y = 1; y < gridHeight - 1; y++) {
 				
@@ -100,7 +101,7 @@ public class GlobalBehavior : MonoBehaviour {
 				grid[x,y] = true;
 			}
 		}
-		
+		*/
 	}
 	
 	// converts grid x-coord into x-position
