@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\GlobalBehavior.cs" />
      <Compile Include="Assets\Scripts\Grapple.cs" />
      <Compile Include="Assets\Scripts\GridMove.cs" />
+     <Compile Include="Assets\Scripts\Hero.cs" />
      <Compile Include="Assets\Scripts\IndestructubleWall.cs" />
      <Compile Include="Assets\Scripts\LSBehaviour.cs" />
      <Compile Include="Assets\Scripts\LSEnemy.cs" />

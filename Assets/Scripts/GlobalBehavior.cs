@@ -100,6 +100,7 @@ public class GlobalBehavior : MonoBehaviour {
 				grid[x,y] = true;
 			}
 		}
+		
 	}
 	
 	// converts grid x-coord into x-position
