@@ -25,7 +25,7 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	#region Public Methods
-	public void updateState(MovementState newState) {
+	public void setState(MovementState newState) {
 		currentMovementState = newState;
 	}
 	
