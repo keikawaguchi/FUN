@@ -36,9 +36,6 @@ public class Lure : MonoBehaviour {
 		currentState = State.Extending;
 		lureUnitStack = new Stack();
 		extendLure();
-		
-		// for debugging
-		showVariableValues();
 	}
 	
 	void Update () {
