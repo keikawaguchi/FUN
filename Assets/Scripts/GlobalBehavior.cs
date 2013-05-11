@@ -57,74 +57,8 @@ public class GlobalBehavior : MonoBehaviour {
 			for (int y = 0; y < gridHeight; y++)
 				grid[x,y] = false;
 		
-		
-		
-		if(isLevelOne == true) {
-			
-			for(int i = 0; i <= 17; i++) {
-				
-				if( i == 4 || i == 6 || i == 8 || i == 10 || i == 12 || i == 14) {
-					for( int m = 1; m <= 11; m+=2) {
-						GameObject go = Instantiate(DestructubleWall) as GameObject;
-						IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-						wall.initialize(getXCoord(i), getYCoord(m));
-						
-						grid[i,m] = true;
-					}
-				}
-				
-				if( i == 5 || i == 7 || i == 11 || i == 13) {
-					for( int m = 1; m <= 11; m++) {
-						GameObject go = Instantiate(DestructubleWall) as GameObject;
-						IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-						wall.initialize(getXCoord(i), getYCoord(m));
-						
-						grid[i,m] = true;
-					}
-				}
-				
-				if( i == 1 || i == 17) {
-					for( int m = 4; m <= 8; m++) {
-						GameObject go = Instantiate(DestructubleWall) as GameObject;
-						IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-						wall.initialize(getXCoord(i), getYCoord(m));
-						
-						grid[i,m] = true;
-					}
-				}
-				
-				if( i == 9 ) {
-					for( int m = 1; m <= 4; m++) {
-						GameObject go = Instantiate(DestructubleWall) as GameObject;
-						IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-						wall.initialize(getXCoord(i), getYCoord(m));
-						
-						grid[i,m] = true;
-					}
-					
-					for( int m = 6; m <= 11; m++) {
-						GameObject go = Instantiate(DestructubleWall) as GameObject;
-						IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-						wall.initialize(getXCoord(i), getYCoord(m));
-						
-						grid[i,m] = true;
-					}
-				}
-				
-				if( i == 3 || i == 15 ) {
-					for( int m = 2; m <= 10; m++) {
-						GameObject go = Instantiate(DestructubleWall) as GameObject;
-						IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-						wall.initialize(getXCoord(i), getYCoord(m));
-						
-						grid[i,m] = true;
-					}
-				}
-			}
-		}
-		
+		// initialize indestructuble walls
 		for (int x = 0; x < gridWidth; x++) {
-			
 			for (int y = 0; y < gridHeight; y++) {
 				
 				if (isEdge(x, y) || (x % 2 == 0 && y % 2 == 0)) {
@@ -136,6 +70,34 @@ public class GlobalBehavior : MonoBehaviour {
 					
 					grid[x,y] = true;
 				}
+			}
+		}
+		
+		// initialize destructuble walls
+		for (int x = 1; x < gridWidth - 1; x++) {
+			for (int y = 1; y < gridHeight - 1; y++) {
+				
+				// don't create wall on indestructuble walls
+				if (grid[x,y])
+					continue;	
+				
+				// don't create walls in corners of map
+				if (x == 1 || x == (gridWidth - 2)) {
+					if (y == 1 || y == 2 || y == (gridHeight - 2) || y == (gridHeight - 3))
+						continue;
+				} else if (x == 2 || x == (gridWidth - 3))
+					if (y == 1 || y == (gridHeight - 2))
+						continue;
+				
+				// don't create wall in center of map
+				if (x == (gridWidth / 2) && y == (gridHeight / 2))
+					continue;
+				
+				GameObject go = Instantiate(DestructubleWall) as GameObject;
+				IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
+				wall.initialize(getXCoord(x), getYCoord(y));
+					
+				grid[x,y] = true;
 			}
 		}
 	}
