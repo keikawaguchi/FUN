@@ -23,6 +23,7 @@ public class Lure : MonoBehaviour {
 	private float lureUnitSpawnDelayInSeconds;
 	private float numberOfLureUnitsToSpawn;
 	private float timeOfLastLureUnitSpawn;
+	private GameObject grabbedPlayer;
 	
 	private State currentState;
 	private Stack lureUnitStack;
@@ -46,9 +47,11 @@ public class Lure : MonoBehaviour {
 		if (isTimeToSpawnLureUnit()) {
 			if (currentState == State.Extending) {
 				extendLure();
+				checkPlayerCollision();
 			}
 			else {
 				retractLure();
+				moveHookedPlayer();
 			}
 		}
 		
@@ -126,7 +129,29 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void retractLure() {
-		removeLureUnit();
+		removeLureUnit();	
+	}
+	
+	private void checkPlayerCollision() {
+		Debug.Log ("Checking for player collision");
+		GameObject lastLureUnit;
+		LureUnit lureUnit;
+		lastLureUnit = lureUnitStack.Peek() as GameObject;
+		lureUnit = lastLureUnit.GetComponent<LureUnit>();
+
+		if (grabbedPlayer != null) {
+			Debug.Log("Lure collision with player!");
+		}
+	}
+	
+	private void moveHookedPlayer() {
+		if (grabbedPlayer == null) {
+			return;
+		}
+		
+		GameObject lastLureUnit;
+		lastLureUnit = lureUnitStack.Peek() as GameObject;
+		grabbedPlayer.transform.position = lastLureUnit.transform.position;
 	}
 	
 	private void addLureUnit(Transform unitTransform) {

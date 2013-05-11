@@ -11,14 +11,13 @@ public class LureUnit : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider collisionObject) {
-		Debug.Log ("Lure collision!");
 		if (collisionObject.GetComponent<Hero>() == null) {
 			return;
 		}
 		
-		string name = collisionObject.name;
-		if (name == "Temptress") {
-			grabbedPlayer = GameObject.Find("Temptress");
+		grabbedPlayer = collisionObject.gameObject;
+		if (grabbedPlayer != null) {
+			Debug.Log("Lure hooked to player");
 		}
 	}
 	
