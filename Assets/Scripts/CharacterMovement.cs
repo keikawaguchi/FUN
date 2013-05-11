@@ -23,7 +23,7 @@ public class CharacterMovement : MonoBehaviour {
 			updateAimDirection();
 		}
 	}
-	
+
 	#region Public Methods
 	public void setState(MovementState newState) {
 		currentMovementState = newState;
