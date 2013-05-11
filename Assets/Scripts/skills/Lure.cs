@@ -35,6 +35,7 @@ public class Lure : MonoBehaviour {
 		calculateNumberOfUnitsToSpawn();
 		currentState = State.Extending;
 		lureUnitStack = new Stack();
+		extendLure();
 	}
 	
 	void Update () {
@@ -80,12 +81,11 @@ public class Lure : MonoBehaviour {
 	#endregion
 	
 	private bool isComplete() {	
-		Debug.Log("Lure skill complete");
 		return lureUnitStack.Count == 0;
 	}
 	
 	private void destoryLureObject() {
-		Debug.Log("Lure skill destoryed");
+		Debug.Log("Lure skill complete");
 		Destroy(gameObject);
 	}
 	
@@ -99,13 +99,26 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void extendLure() {
-		Vector3 newLureUnitPosition;
-		Vector3 forwardDirection = transform.forward;
+		Transform newLureUnitPosition;
+		Vector3 forwardDirection;
+		GameObject lastLureUnit;
 		float lureUnitHeight = lureUnitPrefab.transform.localScale.z;
-		GameObject lastLureUnit = lureUnitStack.Peek() as GameObject;
 		
-		newLureUnitPosition = lastLureUnit.transform.position;
-		newLureUnitPosition += forwardDirection * lureUnitHeight;
+		if (lureUnitStack.Count == 0) {
+			newLureUnitPosition = this.transform;
+		}
+		else {
+			lastLureUnit = lureUnitStack.Peek() as GameObject;
+			newLureUnitPosition = lastLureUnit.transform;		
+		}
+		
+		// Calculate new forward direction for lure unit
+		forwardDirection = newLureUnitPosition.transform.forward;
+		forwardDirection.y = 0f;
+		newLureUnitPosition.transform.forward = forwardDirection;
+		
+		// Calculate new position for lure unit
+		newLureUnitPosition.transform.position += newLureUnitPosition.transform.forward * lureUnitHeight;
 		addLureUnit(newLureUnitPosition);
 	}
 	
@@ -113,10 +126,12 @@ public class Lure : MonoBehaviour {
 		removeLureUnit();
 	}
 	
-	private void addLureUnit(Vector3 position) {
+	private void addLureUnit(Transform unitTransform) {
 		Debug.Log("Lure unit added");
+		timeOfLastLureUnitSpawn = Time.time;
 		GameObject newLureUnit = Instantiate(lureUnitPrefab) as GameObject;
-		newLureUnit.transform.position = position;
+		newLureUnit.transform.forward = unitTransform.forward;
+		newLureUnit.transform.position = unitTransform.transform.position;
 		lureUnitStack.Push(newLureUnit);
 	}
 	
