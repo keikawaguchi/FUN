@@ -11,10 +11,7 @@ public class LureUnit : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider collisionObject) {
-		Debug.Log ("LureUnit: Collision");
-		
 		if (collisionObject.GetComponent<Hero>() == null) {
-			Debug.Log("LureUnit: No player collision");
 			return;
 		}
 		

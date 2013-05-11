@@ -50,7 +50,8 @@ public class Lure : MonoBehaviour {
 				checkPlayerCollision();
 			}
 			else {
-				retractLure();
+				checkPlayerCollision();
+				retractLure();	
 				moveHookedPlayer();
 			}
 		}
@@ -152,8 +153,10 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void moveHookedPlayer() {
+		if (isComplete ()) {
+			return;
+		}	
 		if (grabbedPlayer == null) {
-			Debug.Log ("Lure: Grabbed player is NULL");
 			return;
 		}
 		
