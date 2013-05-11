@@ -18,8 +18,8 @@ public class Lure : MonoBehaviour {
 	const string LURE_UNIT_PREFAB_PATH = "Prefabs/Skill_Prefabs/LureUnit";
 	
 	public float distanceToTravel;
-	public float grabWidth;
-	public float scaleSpeed;
+	public float lureUnitsSpawnedPerSecond;
+	private float scaleSpeed;
 	private float lureUnitSpawnDelayInSeconds;
 	private float numberOfLureUnitsToSpawn;
 	private float timeOfLastLureUnitSpawn;
@@ -31,6 +31,8 @@ public class Lure : MonoBehaviour {
 	
 	void Start () {
 		loadLureUnitPrefab();
+		calculateLureUnitSpawnDelay();
+		calculateNumberOfUnitsToSpawn();
 		currentState = State.Extending;
 		lureUnitStack = new Stack();
 	}
@@ -45,6 +47,10 @@ public class Lure : MonoBehaviour {
 		}
 	}
 	
+	public void scaleLureSpeed(float scalePercentage) {
+		scaleSpeed = scalePercentage / 100.0f;
+	}
+	
 	#region Initialization Methods
 	private void loadLureUnitPrefab() {
 		lureUnitPrefab = Resources.Load(LURE_UNIT_PREFAB_PATH) as GameObject;
@@ -57,8 +63,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void calculateLureUnitSpawnDelay() {
-		float lureUnitHeight = lureUnitPrefab.transform.localScale.z;
-		lureUnitSpawnDelayInSeconds = distanceToTravel / lureUnitHeight;
+		lureUnitSpawnDelayInSeconds = 60f / lureUnitsSpawnedPerSecond;
 	}
 	
 	private void calculateNumberOfUnitsToSpawn() {
@@ -78,7 +83,8 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private bool isTimeToSpawnLureUnit() {
-		return (Time.time - timeOfLastLureUnitSpawn) > lureUnitSpawnDelayInSeconds;
+		float scaledSpeedTime = (Time.time - timeOfLastLureUnitSpawn) * scaleSpeed;
+		return scaledSpeedTime > lureUnitSpawnDelayInSeconds;
 	}
 	
 	private bool isFullyExtended() {
