@@ -5,18 +5,27 @@ public class Explosion : MonoBehaviour {
 	
 	const string FIRE_UNIT_PREFAB_PATH = "Prefabs/Fire";
 	
-	public float explosionDistanceX = 5.0f;
-	public float explosionDistanceZ = 5.0f;
+	public float explosionDistanceX = 2.0f;
+	public float explosionDistanceZ = 3.0f;
 	public float secondsBetweenFireSpawns = 0.5f;
-	public float scale = 10.0f;
+	public float scale = 14.0f;
 	
 	float timeOfLastFireSpawn;
 	int numberOfFireUnitsCreatedX;
 	int numberOfFireUnitsCreatedZ;
 	
+	private bool spawnRight;
+	private bool spawnLeft;
+	private bool spawnUp;
+	private bool spawnDown;
+	
 	GameObject fireUnit;
+	
+	private GlobalBehavior globalBehavior;
 
 	void Start() {
+		globalBehavior = GameObject.Find("Global Behavior").GetComponent<GlobalBehavior>();
+		
 		fireUnit = Resources.Load(FIRE_UNIT_PREFAB_PATH) as GameObject;
 		if (fireUnit == null) {
 			Debug.Log ("Fire is NULL");
@@ -24,6 +33,9 @@ public class Explosion : MonoBehaviour {
 		numberOfFireUnitsCreatedX = 0;
 		numberOfFireUnitsCreatedZ = 0;
 		timeOfLastFireSpawn = -100.0f;	// explode on first update
+		
+		// attempt to spawn in all directions
+		spawnRight = spawnLeft = spawnUp = spawnDown = true;
 	}
 	
 	void Update() {
@@ -49,16 +61,27 @@ public class Explosion : MonoBehaviour {
 	private void spawnFireUnitsInXDirection() {
 		Vector3 fireUnitPos;	
 		if (numberOfFireUnitsCreatedX < explosionDistanceX) {		
+
 			
-			// right
-			fireUnitPos = transform.position;
-			fireUnitPos.x += numberOfFireUnitsCreatedX * scale;
-			spawnFireUnit(fireUnitPos);		
-			
-			// left
-			fireUnitPos = transform.position;
-			fireUnitPos.x -= numberOfFireUnitsCreatedX * scale;
-			spawnFireUnit (fireUnitPos);
+			// make sure there isn't an indestructible wall right
+			if (spawnRight) {
+				fireUnitPos = transform.position;
+				fireUnitPos.x += numberOfFireUnitsCreatedX * scale;
+				if (gridEmpty(fireUnitPos))
+					spawnFireUnit(fireUnitPos);
+				else 
+					spawnRight = false;
+			}
+		
+			// make sure there isn't an indestructible wall left
+			if (spawnLeft) {
+				fireUnitPos = transform.position;
+				fireUnitPos.x -= numberOfFireUnitsCreatedX * scale;
+				if (gridEmpty(fireUnitPos))
+					spawnFireUnit(fireUnitPos);
+				else 
+					spawnLeft = false;
+			}
 			
 			numberOfFireUnitsCreatedX++;
 		}	
@@ -68,15 +91,25 @@ public class Explosion : MonoBehaviour {
 		Vector3 fireUnitPos;
 		if (numberOfFireUnitsCreatedZ < explosionDistanceZ) {	
 			
-			// up
-			fireUnitPos = transform.position;
-			fireUnitPos.z += numberOfFireUnitsCreatedZ * scale;
-			spawnFireUnit(fireUnitPos);	
+			// make sure there isn't an indestructible wall up
+			if (spawnUp) {
+				fireUnitPos = transform.position;
+				fireUnitPos.z += numberOfFireUnitsCreatedX * scale;
+				if (gridEmpty(fireUnitPos))
+					spawnFireUnit(fireUnitPos);
+				else 
+					spawnUp = false;
+			}
 			
-			// down
-			fireUnitPos = transform.position;
-			fireUnitPos.z -= numberOfFireUnitsCreatedZ * scale;
-			spawnFireUnit(fireUnitPos);
+			// make sure there isn't an indestructible wall down
+			if (spawnDown) {
+				fireUnitPos = transform.position;
+				fireUnitPos.z -= numberOfFireUnitsCreatedX * scale;
+				if (gridEmpty(fireUnitPos))
+					spawnFireUnit(fireUnitPos);
+				else 
+					spawnDown = false;
+			}
 			
 			numberOfFireUnitsCreatedZ++;
 		}
@@ -84,7 +117,11 @@ public class Explosion : MonoBehaviour {
 	
 	private void spawnFireUnit(Vector3 position) {
 		GameObject newFireUnit = Instantiate(fireUnit) as GameObject;
-		newFireUnit.transform.position = position;
+		
+		int x = globalBehavior.getXPos(position.x);
+		int y = globalBehavior.getYPos(position.z);
+		
+		newFireUnit.transform.position = new Vector3(globalBehavior.getXCoord(x), 0, globalBehavior.getYCoord(y));
 	}
 	
 	private bool explosionIsComplete() {
@@ -95,5 +132,12 @@ public class Explosion : MonoBehaviour {
 	private void destoryExplosionInstance() {
 		Debug.Log ("Fire destroyed");
 		Destroy(gameObject);
+	}
+	
+	private bool gridEmpty(Vector3 fireUnitPos) {
+		int x = globalBehavior.getXPos(fireUnitPos.x);
+		int y = globalBehavior.getYPos(fireUnitPos.z);
+		
+		return !globalBehavior.grid[x,y];
 	}
 }
