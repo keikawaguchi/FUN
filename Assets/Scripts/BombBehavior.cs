@@ -3,29 +3,45 @@ using System.Collections;
 
 public class BombBehavior : MonoBehaviour {
 	
-	public float explosionDelayInSeconds = 0.0f;
-
-	float spawnTime;
+	const string EXPLOSION_PREFAB_PATH = "Prefabs/Explosion";
 	
-	GameObject explosion;
+	public float explosionPrefabDelayInSeconds = 1.0f;
+	private float spawnTime;
+	
+	GameObject explosionPrefab;
 
-	// Use this for initialization
+	
 	void Start() {
+		loadBombPrefab();
 		spawnTime = Time.time;
-		explosion = Resources.Load("Prefabs/Explosion") as GameObject;
-		if (explosion == null) Debug.Log ("Explosion is NULL");
 	}
-	
-	// Update is called once per frame
+
 	void Update() {
-		if (Time.time - spawnTime > explosionDelayInSeconds) {
+		if (isTimeToExplode()) {
 			explode();
 		}
 	}
 	
+	#region Initialization Methods
+	private void loadBombPrefab() {
+		explosionPrefab = Resources.Load("Prefabs/Explosion") as GameObject;
+		if (explosionPrefab == null) {
+			Debug.Log ("Explosion loaded unsuccessfully");
+		}
+		else {
+			Debug.Log ("Explosion loaded successfully");
+		}
+	}
+	#endregion
+	
+	private bool isTimeToExplode() {
+		return (Time.time - spawnTime) > explosionPrefabDelayInSeconds;
+	}
+	
 	void explode() {
 		Debug.Log("Bomb Exploded...");
-		Instantiate(explosion);
+		GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+		explosion.transform.position = this.transform.position;
 		Destroy(gameObject);
 	}
 }
