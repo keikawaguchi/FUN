@@ -46,8 +46,8 @@ public class Lure : MonoBehaviour {
 		
 		if (isTimeToSpawnLureUnit()) {
 			if (currentState == State.Extending) {
-				extendLure();
 				checkPlayerCollision();
+				extendLure();
 			}
 			else {
 				retractLure();
@@ -133,11 +133,15 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void checkPlayerCollision() {
-		Debug.Log ("Checking for player collision");
+		if (grabbedPlayer != null) {
+			return;
+		}
+		
 		GameObject lastLureUnit;
 		LureUnit lureUnit;
 		lastLureUnit = lureUnitStack.Peek() as GameObject;
 		lureUnit = lastLureUnit.GetComponent<LureUnit>();
+		grabbedPlayer = lureUnit.getGrabbedPlayer();
 
 		if (grabbedPlayer != null) {
 			Debug.Log("Lure collision with player!");
@@ -146,6 +150,7 @@ public class Lure : MonoBehaviour {
 	
 	private void moveHookedPlayer() {
 		if (grabbedPlayer == null) {
+			Debug.Log ("Grabbed player is NULL");
 			return;
 		}
 		
@@ -159,10 +164,12 @@ public class Lure : MonoBehaviour {
 		GameObject newLureUnit;
 		
 		// previous hook unit can't grab anymore
+		/*
 		if (!isComplete()) {
 			previousLureUnit = lureUnitStack.Peek() as GameObject;
 			previousLureUnit.GetComponent<LureUnit>().setToGrabPlayers(false);
 		}
+		*/
 		
 		newLureUnit = Instantiate(lureUnitPrefab) as GameObject;
 		newLureUnit.transform.forward = unitTransform.forward;
