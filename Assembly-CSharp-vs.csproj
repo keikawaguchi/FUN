@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\UpgradePickUp.cs" />
      <Compile Include="Assets\Scripts\characters\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\skills\Lure.cs" />
+     <Compile Include="Assets\Scripts\skills\LureUnit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -130,11 +130,21 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void addLureUnit(Transform unitTransform) {
-		Debug.Log("Lure unit added");
-		GameObject newLureUnit = Instantiate(lureUnitPrefab) as GameObject;
+		GameObject previousLureUnit;
+		GameObject newLureUnit;
+		
+		// previous hook unit can't grab anymore
+		if (!isComplete()) {
+			previousLureUnit = lureUnitStack.Peek() as GameObject;
+			previousLureUnit.GetComponent<LureUnit>().setToGrabPlayers(false);
+		}
+		
+		newLureUnit = Instantiate(lureUnitPrefab) as GameObject;
 		newLureUnit.transform.forward = unitTransform.forward;
 		newLureUnit.transform.position = unitTransform.transform.position;
+		newLureUnit.GetComponent<LureUnit>().setToGrabPlayers(true);
 		lureUnitStack.Push(newLureUnit);
+		Debug.Log("Lure unit added");
 	}
 	
 	private void removeLureUnit() {
