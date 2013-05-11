@@ -11,7 +11,7 @@ public class Lure : MonoBehaviour {
 	
 	private enum State {
 		Extending,
-		Returning
+		Retracting
 	}
 	
 	#region Class Members
@@ -43,13 +43,20 @@ public class Lure : MonoBehaviour {
 		}
 		
 		if (isTimeToSpawnLureUnit()) {
-			
+			if (currentState == State.Extending) {
+				extendLure();
+			}
+			else {
+				retractLure();
+			}
 		}
 	}
 	
+	#region Public Methods
 	public void scaleLureSpeed(float scalePercentage) {
 		scaleSpeed = scalePercentage / 100.0f;
 	}
+	#endregion
 	
 	#region Initialization Methods
 	private void loadLureUnitPrefab() {
@@ -89,6 +96,21 @@ public class Lure : MonoBehaviour {
 	
 	private bool isFullyExtended() {
 		return lureUnitStack.Count >= numberOfLureUnitsToSpawn;
+	}
+	
+	private void extendLure() {
+		Vector3 newLureUnitPosition;
+		Vector3 forwardDirection = transform.forward;
+		float lureUnitHeight = lureUnitPrefab.transform.localScale.z;
+		GameObject lastLureUnit = lureUnitStack.Peek() as GameObject;
+		
+		newLureUnitPosition = lastLureUnit.transform.position;
+		newLureUnitPosition += forwardDirection * lureUnitHeight;
+		addLureUnit(newLureUnitPosition);
+	}
+	
+	private void retractLure() {
+		removeLureUnit();
 	}
 	
 	private void addLureUnit(Vector3 position) {
