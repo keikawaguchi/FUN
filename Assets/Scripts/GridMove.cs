@@ -20,13 +20,17 @@ class GridMove : MonoBehaviour {
 	private GlobalBehavior globalBehavior;
 	
 	void Start() {
-		// DELETE, temp start position at [1,1]
-		transform.position = new Vector3(-112.3f, 0, -79);
 		globalBehavior = GameObject.Find("Global Behavior").GetComponent<GlobalBehavior>();
+		
+		// CHANGE ME - should pass in 
+		transform.position = new Vector3(-112.3f, 0, -79f);
 	}
  
     public void Update() {
 		bool toMove = true;
+		
+		if (isMoving)
+			Debug.Log(transform.forward);
 		
         if (!isMoving) {
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -90,7 +94,10 @@ class GridMove : MonoBehaviour {
         } else {
             factor = 1f;
         }
- 
+ 		
+		// rotate hero to look at travel direction
+		transform.LookAt(endPosition);
+		
         while (t < 1f) {
             t += Time.deltaTime * (moveSpeed/gridSize) * factor;
             transform.position = Vector3.Lerp(startPosition, endPosition, t);
