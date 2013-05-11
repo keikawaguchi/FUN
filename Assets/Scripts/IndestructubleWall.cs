@@ -12,9 +12,7 @@ public class IndestructubleWall : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider collisionObject) {
-		if (collisionObject.GetComponent<FireBehavior>() != null) {
-			Debug.Log("YAY");
-		}
+
 
 	}
 

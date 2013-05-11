@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
  
 class GridMove : MonoBehaviour {
-    private float moveSpeed = 60f;
+    private float moveSpeed = 50f;
     private float gridSize = 14f;
 
     private Vector2 input;
@@ -20,10 +20,7 @@ class GridMove : MonoBehaviour {
  
     public void Update() {
 		bool toMove = true;
-		
-		if (isMoving)
-			Debug.Log(transform.forward);
-		
+
         if (!isMoving) {
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 			
