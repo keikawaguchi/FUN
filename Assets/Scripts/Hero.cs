@@ -8,12 +8,11 @@ public class Hero : MonoBehaviour {
 	
 	private GameObject bomb;
 	
-	// Use this for initialization
+
 	void Start () {
 		bomb = Resources.Load (BOMB_PREFAB_PATH) as GameObject;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 		// Create bomb on spacebar down

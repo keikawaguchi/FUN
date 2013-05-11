@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour {
 	
 	void Update () {
 		updateMovement();
-		updateRotation();
+		updateAimDirection();
 	}
 	
 	#region Public Methods
