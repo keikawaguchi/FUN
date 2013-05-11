@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class Hero : MonoBehaviour {
-	
+
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb";
 	const string BOMB_DROP_BUTTON = "Jump";
 	
@@ -31,10 +31,11 @@ public class Hero : MonoBehaviour {
 		}
 	}
 	
+	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
 		if (characterMovement == null) {
 			Debug.Log("CharacterMovement script is NULL");
 		}
-	}
+	} 
 }

@@ -8,7 +8,8 @@ public class TemptressBehavior : MonoBehaviour {
 	const string LOVESTRUCK_BUTTON = "Fire2";
 	
 	private CharacterMovement characterMovement;
-	private GameObject lureSkill;
+	private GameObject lureSkillPrefab;
+	private GameObject currentLure;
 
 	void Start () {
 		loadSkills();
@@ -16,17 +17,21 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetButtonDown(LURE_BUTTON)) {
-			GameObject newLure = Instantiate(lureSkill) as GameObject;
-			newLure.transform.position = this.transform.position;
-			newLure.transform.forward = characterMovement.getAimDirection();
+		if (currentLure == null) {
+			checkLureButtonPress();
+			return;
 		}
+		
+		if (currentLure.GetComponent<Lure>().isComplete ()) {
+			currentLure = null;
+			return;
+		}	
 	}
 	
 	#region Initialization Methods
 	private void loadSkills() {
-		lureSkill = Resources.Load(LURE_PREFAB_PATH) as GameObject;
-		if (lureSkill == null) {
+		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
+		if (lureSkillPrefab == null) {
 			Debug.Log ("Lure skill loaded unsuccessfully");	
 		}
 		else {
@@ -39,11 +44,11 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	#endregion
 	
-	private void updateLureSkill() {
+	private void checkLureButtonPress() {
 		if (Input.GetButtonDown(LURE_BUTTON)) {
-			GameObject newLure = Instantiate(lureSkill) as GameObject;
-			newLure.transform.position = this.transform.position;
-			newLure.transform.forward = this.transform.forward;
+			currentLure = Instantiate(lureSkillPrefab) as GameObject;
+			currentLure.transform.position = this.transform.position;
+			currentLure.transform.forward = characterMovement.getAimDirection();
 		}
 	}
 }

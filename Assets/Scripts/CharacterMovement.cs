@@ -3,19 +3,32 @@ using System.Collections;
 
 public class CharacterMovement : MonoBehaviour {
 	
-	public float speed;
-	private Vector3 aimDirection;
-
-	void Start () {
-	
+	public enum MovementState {
+		CanMove,
+		CannotMove
 	}
 	
-	void Update () {
-		updateMovement();
-		updateAimDirection();
+	public float speed;
+	private Vector3 aimDirection;
+	MovementState currentMovementState;
+	
+	
+	public void Start() {
+		currentMovementState = MovementState.CanMove;
+	}
+	
+	public void Update() {
+		if (currentMovementState == MovementState.CanMove) {
+			updateMovement();
+			updateAimDirection();
+		}
 	}
 	
 	#region Public Methods
+	public void updateState(MovementState newState) {
+		currentMovementState = newState;
+	}
+	
 	public Vector3 getAimDirection() {
 		return aimDirection;
 	}

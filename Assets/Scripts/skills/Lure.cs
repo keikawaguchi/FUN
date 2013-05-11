@@ -56,6 +56,10 @@ public class Lure : MonoBehaviour {
 	}
 	
 	#region Public Methods
+	public bool isComplete() {	
+		return lureUnitStack.Count < 1;
+	}
+	
 	public void scaleLureSpeed(float scalePercentage) {
 		scaleSpeed = scalePercentage / 100.0f;
 	}
@@ -81,11 +85,7 @@ public class Lure : MonoBehaviour {
 		numberOfLureUnitsToSpawn = distanceToTravel / lureUnitHeight;
 	}
 	#endregion
-	
-	private bool isComplete() {	
-		return lureUnitStack.Count < 1;
-	}
-	
+
 	private void destoryLureObject() {
 		Debug.Log("Lure skill complete");
 		Destroy(gameObject);
