@@ -25,6 +25,14 @@ public class GridSystem : MonoBehaviour {
 		yMin = mMainCamera.orthographicSize * -1;	
 	}
 	
+	public int getGridWidth() {
+		return gridWidth;
+	}
+	
+	public int getGridHeight() {
+		return gridHeight;
+	}
+	
 	// converts grid x-coord into x-position
 	public float getXCoord(int x) { return xMin + (x * wallSize) + (wallSize / 2); }
 	
@@ -38,7 +46,7 @@ public class GridSystem : MonoBehaviour {
 	public int getYPos(float y) { return Mathf.RoundToInt( (y - yMin - (wallSize / 2) ) / wallSize); }
 	
 	// returns true if coordinate is an edge of the map
-	bool isEdge(int x, int y) {
+	public bool isEdge(int x, int y) {
 		
 		// left or bottom edge
 		if (x == 0 || y == 0)
