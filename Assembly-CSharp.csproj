@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BombBehavior.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
+     <Compile Include="Assets\Scripts\Characters\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Explosion.cs" />
@@ -56,13 +57,13 @@
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
      <Compile Include="Assets\Scripts\Hero.cs" />
      <Compile Include="Assets\Scripts\IndestructubleWall.cs" />
-     <Compile Include="Assets\Scripts\LSBehaviour.cs" />
-     <Compile Include="Assets\Scripts\LSEnemy.cs" />
      <Compile Include="Assets\Scripts\PlayerReferences.cs" />
+     <Compile Include="Assets\Scripts\Skills\Blink.cs" />
+     <Compile Include="Assets\Scripts\Skills\LSBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Skills\LSEnemy.cs" />
+     <Compile Include="Assets\Scripts\Skills\Lure.cs" />
+     <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
      <Compile Include="Assets\Scripts\UpgradePickUp.cs" />
-     <Compile Include="Assets\Scripts\characters\TemptressBehavior.cs" />
-     <Compile Include="Assets\Scripts\skills\Lure.cs" />
-     <Compile Include="Assets\Scripts\skills\LureUnit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
