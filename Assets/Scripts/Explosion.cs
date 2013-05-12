@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Explosion : MonoBehaviour {
 	
@@ -60,7 +62,7 @@ public class Explosion : MonoBehaviour {
 	
 	private void spawnFireUnitsInXDirection() {
 		Vector3 fireUnitPos;	
-		if (numberOfFireUnitsCreatedX < explosionDistanceX) {		
+		if (numberOfFireUnitsCreatedX < explosionDistanceX) {	
 
 			// make sure there isn't a wall on the right
 			if (spawnRight) {
@@ -68,8 +70,28 @@ public class Explosion : MonoBehaviour {
 				fireUnitPos.x += numberOfFireUnitsCreatedX * scale;
 				if (gridEmpty(fireUnitPos))
 					spawnFireUnit(fireUnitPos);
-				else
+				else {
+					// check if it's a destructible wall
+					// if it is, get the object and destroy it
+					
+					DestructibleWall myObject = null;
+					
+        			DestructibleWall[] walls = FindObjectsOfType(typeof(DestructibleWall)) as DestructibleWall[];
+        			foreach (DestructibleWall wall in walls) {
+						int x = globalBehavior.getXPos(fireUnitPos.x);
+						int y  = globalBehavior.getYPos(fireUnitPos.z);
+						
+						if (x == globalBehavior.getXPos(wall.transform.position.x) && y == globalBehavior.getYPos(wall.transform.position.z)) {
+							myObject = wall;
+							globalBehavior.grid[x,y] = false;
+							break;
+						}
+        			}
+					
+					Destroy(myObject);
 					spawnRight = false;
+
+				}
 			}
 
 		

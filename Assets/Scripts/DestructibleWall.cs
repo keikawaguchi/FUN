@@ -19,6 +19,7 @@ public class DestructibleWall : MonoBehaviour {
 		if (collisionObject.gameObject.name == "Fire(Clone)") {
 			
 			// check if explosion came from same row or column
+			/*
 			if ((collisionObject.transform.position.x == transform.position.x) || (collisionObject.transform.position.z == transform.position.z)) {
 				
 				// destroy wall
@@ -28,8 +29,9 @@ public class DestructibleWall : MonoBehaviour {
 				int x = globalBehavior.getXPos(transform.position.x);
 				int y = globalBehavior.getYPos(transform.position.z);
 				
-				// globalBehavior.grid[x,y] = false;
+				globalBehavior.grid[x,y] = false;
 			}
+			*/
 		}
 
 	}

@@ -1,13 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/IndestructubleWall.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FireBehavior.cs">
     <Files>
       <File FileName="../../../../../Downloads/2.PerPixelCollision/Assets/Scripts/CollidableTexture.cs" Line="50" Column="4" />
-      <File FileName="Assets/Scripts/GlobalBehavior.cs" Line="101" Column="15" />
-      <File FileName="Assets/Scripts/Explosion.cs" Line="71" Column="4" />
+      <File FileName="Assets/Scripts/GlobalBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Explosion.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/IndestructubleWall.cs" Line="19" Column="1" />
       <File FileName="Assets/Scripts/FireBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/skills/LureUnit.cs" Line="16" Column="4" />
+      <File FileName="Assets/Scripts/skills/LureUnit.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
