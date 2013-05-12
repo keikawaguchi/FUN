@@ -19,6 +19,7 @@ public class Map : MonoBehaviour {
 
 	void Start () {
 		loadResources();
+		loadScripts();
 		buildMap();
 		spawnUpgrade();
 	}
@@ -33,15 +34,25 @@ public class Map : MonoBehaviour {
 	public bool isGridFull(int x, int y) {
 		return grid[x, y];
 	}
+	
+	public GameObject getObjectAtGridLocation(int x, int y) {
+		int playerPositionX = 0;
+		int playerPositionY = 0;
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		
+		for (int i = 0; players[i] != null; i++) {
+			playerPositionX = gridSystem.getXPos(players[i].transform.position.x);
+			playerPositionY = gridSystem.getYPos(players[i].transform.position.z);
+			if (playerPositionX == x && playerPositionY == y) {
+				return players[i];
+			}
+		}
+		return null;
+	}
 	#endregion
 	
 	#region Initialize Methods
 	private void loadResources() {
-		gridSystem = this.GetComponent<GridSystem>();
-		if (gridSystem == null) {
-			Debug.Log("GridSystem is null");
-		}
-		
 		indestructableBlockPrefab = Resources.Load(INDESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;
 		if (indestructableBlockPrefab == null) {
 			Debug.Log("Indestructable block prefab is null");
@@ -55,6 +66,13 @@ public class Map : MonoBehaviour {
 		upgrade = Resources.Load(UPGRADE_PREFAB_PATH) as GameObject;
 		if (indestructableBlockPrefab == null) {
 			Debug.Log("Upgrade block prefab is null");
+		}
+	}
+	
+	private void loadScripts() {
+		gridSystem = this.GetComponent<GridSystem>();
+		if (gridSystem == null) {
+			Debug.Log("GridSystem is null");
 		}
 	}
 	#endregion
