@@ -71,29 +71,10 @@ public class Explosion : MonoBehaviour {
 				if (gridEmpty(fireUnitPos))
 					spawnFireUnit(fireUnitPos);
 				else {
-					// check if it's a destructible wall
-					// if it is, get the object and destroy it
-					
-					DestructibleWall myObject = null;
-					
-        			DestructibleWall[] walls = FindObjectsOfType(typeof(DestructibleWall)) as DestructibleWall[];
-        			foreach (DestructibleWall wall in walls) {
-						int x = globalBehavior.getXPos(fireUnitPos.x);
-						int y  = globalBehavior.getYPos(fireUnitPos.z);
-						
-						if (x == globalBehavior.getXPos(wall.transform.position.x) && y == globalBehavior.getYPos(wall.transform.position.z)) {
-							myObject = wall;
-							globalBehavior.grid[x,y] = false;
-							break;
-						}
-        			}
-					
-					Destroy(myObject);
+					destroyDestructible(fireUnitPos);
 					spawnRight = false;
-
 				}
 			}
-
 		
 			// make sure there isn't an indestructible wall left
 			if (spawnLeft) {
@@ -101,8 +82,10 @@ public class Explosion : MonoBehaviour {
 				fireUnitPos.x -= numberOfFireUnitsCreatedX * scale;
 				if (globalBehavior.isGridEmpty(fireUnitPos))
 					spawnFireUnit(fireUnitPos);
-				else 
+				else {
+					destroyDestructible(fireUnitPos);
 					spawnLeft = false;
+				}
 			}
 			
 			numberOfFireUnitsCreatedX++;
@@ -119,8 +102,10 @@ public class Explosion : MonoBehaviour {
 				fireUnitPos.z += numberOfFireUnitsCreatedX * scale;
 				if (gridEmpty(fireUnitPos))
 					spawnFireUnit(fireUnitPos);
-				else 
+				else {
+					destroyDestructible(fireUnitPos);
 					spawnUp = false;
+				}
 			}
 			
 			// make sure there isn't an indestructible wall down
@@ -129,8 +114,10 @@ public class Explosion : MonoBehaviour {
 				fireUnitPos.z -= numberOfFireUnitsCreatedX * scale;
 				if (gridEmpty(fireUnitPos))
 					spawnFireUnit(fireUnitPos);
-				else 
+				else {
+					destroyDestructible(fireUnitPos);
 					spawnDown = false;
+				}
 			}
 			
 			numberOfFireUnitsCreatedZ++;
@@ -161,5 +148,24 @@ public class Explosion : MonoBehaviour {
 		int y = globalBehavior.getYPos(fireUnitPos.z);
 		
 		return !globalBehavior.grid[x,y];
+	}
+	
+	/*
+	 * THIS IS REALLY BAD. LETS TRY TO FIX THIS!
+	 */
+	private void destroyDestructible(Vector3 fireUnitPos) {
+		
+		DestructibleWall[] walls = FindObjectsOfType(typeof(DestructibleWall)) as DestructibleWall[];
+        foreach (DestructibleWall wall in walls) {
+			
+			int x = globalBehavior.getXPos(fireUnitPos.x);
+			int y  = globalBehavior.getYPos(fireUnitPos.z);
+						
+			if (x == globalBehavior.getXPos(wall.transform.position.x) && y == globalBehavior.getYPos(wall.transform.position.z)) {
+				wall.transform.position = new Vector3(-200f, 0, 0);
+				globalBehavior.grid[x,y] = false;
+				break;
+			}
+        }
 	}
 }

@@ -23,6 +23,7 @@ public class GlobalBehavior : MonoBehaviour {
 	private const int gridHeight = 13;		// height of map
 	
 	public bool[,] grid;
+	public bool[,] destructibleWallGrid;
 
 	// Use this for initialization
 	void Start () {
@@ -59,11 +60,13 @@ public class GlobalBehavior : MonoBehaviour {
 	void initializeMap() {
 				
 		grid = new bool[gridWidth, gridHeight];
+		destructibleWallGrid = new bool[gridWidth, gridHeight];
 		
 		// initialize grid array
 		for (int x = 0; x < gridWidth; x++)
-			for (int y = 0; y < gridHeight; y++)
+			for (int y = 0; y < gridHeight; y++) {
 				grid[x,y] = false;
+		}
 		
 		// initialize indestructuble walls
 		for (int x = 0; x < gridWidth; x++) {
