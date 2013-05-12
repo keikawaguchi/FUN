@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{C9C5ACED-AF37-B251-9AC8-2374AADD4A08}</ProjectGuid>
+	<ProjectGuid>{3E5CA467-EA5F-D7CA-3F18-DF1AFA5E4DA1}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BombBehavior.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
+     <Compile Include="Assets\Scripts\Characters\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Explosion.cs" />
@@ -54,6 +55,7 @@
      <Compile Include="Assets\Scripts\GridMove.cs" />
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
+     <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\Hero.cs" />
      <Compile Include="Assets\Scripts\IndestructubleWall.cs" />
      <Compile Include="Assets\Scripts\PlayerReferences.cs" />
@@ -63,7 +65,6 @@
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
      <Compile Include="Assets\Scripts\UpgradePickUp.cs" />
-     <Compile Include="Assets\Scripts\characters\TemptressBehavior.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

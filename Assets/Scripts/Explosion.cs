@@ -23,10 +23,12 @@ public class Explosion : MonoBehaviour {
 	
 	GameObject fireUnit;
 	
-	private GlobalBehavior globalBehavior;
+	private GridSystem gridSystem;
+	private Map map;
 
 	void Start() {
-		globalBehavior = GameObject.Find("Global Behavior").GetComponent<GlobalBehavior>();
+		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
+		map = GameObject.Find("Map").GetComponent<Map>();
 		
 		fireUnit = Resources.Load(FIRE_UNIT_PREFAB_PATH) as GameObject;
 		if (fireUnit == null) {
@@ -68,7 +70,7 @@ public class Explosion : MonoBehaviour {
 			if (spawnRight) {
 				fireUnitPos = transform.position;
 				fireUnitPos.x += numberOfFireUnitsCreatedX * scale;
-				if (gridEmpty(fireUnitPos))
+				if (!map.isGridFull(fireUnitPos.x, fireUnitPos.z))
 					spawnFireUnit(fireUnitPos);
 				else {
 					destroyDestructible(fireUnitPos);
@@ -80,7 +82,7 @@ public class Explosion : MonoBehaviour {
 			if (spawnLeft) {
 				fireUnitPos = transform.position;
 				fireUnitPos.x -= numberOfFireUnitsCreatedX * scale;
-				if (globalBehavior.isGridEmpty(fireUnitPos))
+				if (!map.isGridFull(fireUnitPos.x, fireUnitPos.z))
 					spawnFireUnit(fireUnitPos);
 				else {
 					destroyDestructible(fireUnitPos);
@@ -100,7 +102,7 @@ public class Explosion : MonoBehaviour {
 			if (spawnUp) {
 				fireUnitPos = transform.position;
 				fireUnitPos.z += numberOfFireUnitsCreatedX * scale;
-				if (gridEmpty(fireUnitPos))
+				if (!map.isGridFull(fireUnitPos.x, fireUnitPos.z))
 					spawnFireUnit(fireUnitPos);
 				else {
 					destroyDestructible(fireUnitPos);
@@ -112,7 +114,7 @@ public class Explosion : MonoBehaviour {
 			if (spawnDown) {
 				fireUnitPos = transform.position;
 				fireUnitPos.z -= numberOfFireUnitsCreatedX * scale;
-				if (gridEmpty(fireUnitPos))
+				if (!map.isGridFull(fireUnitPos.x, fireUnitPos.z))
 					spawnFireUnit(fireUnitPos);
 				else {
 					destroyDestructible(fireUnitPos);
@@ -127,10 +129,10 @@ public class Explosion : MonoBehaviour {
 	private void spawnFireUnit(Vector3 position) {
 		GameObject newFireUnit = Instantiate(fireUnit) as GameObject;
 		
-		int x = globalBehavior.getXPos(position.x);
-		int y = globalBehavior.getYPos(position.z);
+		int x = gridSystem.getXPos(position.x);
+		int y = gridSystem.getYPos(position.z);
 		
-		newFireUnit.transform.position = new Vector3(globalBehavior.getXCoord(x), 0, globalBehavior.getYCoord(y));
+		newFireUnit.transform.position = new Vector3(gridSystem.getXCoord(x), 0, gridSystem.getYCoord(y));
 	}
 	
 	private bool explosionIsComplete() {
@@ -143,27 +145,17 @@ public class Explosion : MonoBehaviour {
 		Destroy(gameObject);
 	}
 	
-	private bool gridEmpty(Vector3 fireUnitPos) {
-		int x = globalBehavior.getXPos(fireUnitPos.x);
-		int y = globalBehavior.getYPos(fireUnitPos.z);
-		
-		return !globalBehavior.grid[x,y];
-	}
-	
-	/*
-	 * THIS IS REALLY BAD. LETS TRY TO FIX THIS!
-	 */
 	private void destroyDestructible(Vector3 fireUnitPos) {
 		
 		DestructibleWall[] walls = FindObjectsOfType(typeof(DestructibleWall)) as DestructibleWall[];
         foreach (DestructibleWall wall in walls) {
 			
-			int x = globalBehavior.getXPos(fireUnitPos.x);
-			int y  = globalBehavior.getYPos(fireUnitPos.z);
+			int x = gridSystem.getXPos(fireUnitPos.x);
+			int y  = gridSystem.getYPos(fireUnitPos.z);
 						
-			if (x == globalBehavior.getXPos(wall.transform.position.x) && y == globalBehavior.getYPos(wall.transform.position.z)) {
+			if (x == gridSystem.getXPos(wall.transform.position.x) && y == gridSystem.getYPos(wall.transform.position.z)) {
 				wall.transform.position = new Vector3(-200f, 0, 0);
-				globalBehavior.grid[x,y] = false;
+				map.grid[x,y] = false;
 				break;
 			}
         }

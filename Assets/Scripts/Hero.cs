@@ -7,14 +7,12 @@ public class Hero : MonoBehaviour {
 	const string BOMB_DROP_BUTTON = "Jump";
 	
 	private GameObject bomb;
-	private GlobalBehavior globalBehavior;
+	private GridSystem gridSystem;
 	private CharacterMovement characterMovement;
 
 	void Start () {
 		loadResources();
 		loadScripts();
-		
-		globalBehavior = GameObject.Find("Global Behavior").GetComponent<GlobalBehavior>();
 	}
 	
 	void Update () {
@@ -24,14 +22,15 @@ public class Hero : MonoBehaviour {
 			GameObject instantiateBomb = Instantiate (bomb) as GameObject;
 			
 			// place bomb in closest grid position
-			int xCoord = globalBehavior.getXPos(transform.position.x);
-			int yCoord = globalBehavior.getYPos(transform.position.z);
+			int xCoord = gridSystem.getXPos(transform.position.x);
+			int yCoord = gridSystem.getYPos(transform.position.z);
 			
-			Vector3 bombLocation = new Vector3(globalBehavior.getXCoord(xCoord), 0f, globalBehavior.getYCoord(yCoord));
+			Vector3 bombLocation = new Vector3(gridSystem.getXCoord(xCoord), 0f, gridSystem.getYCoord(yCoord));
 			instantiateBomb.transform.position = bombLocation;
 		}
 	}
 	
+	#region Initialization Methods
 	private void loadResources() {
 		bomb = Resources.Load (BOMB_PREFAB_PATH) as GameObject;
 		if (bomb == null) {
@@ -39,11 +38,16 @@ public class Hero : MonoBehaviour {
 		}
 	}
 	
-	
 	private void loadScripts() {
+		gridSystem = GetComponent<GridSystem>();
+		if (gridSystem == null) {
+			Debug.Log ("Hero.cs: Grid system is null");
+		}
+		
 		characterMovement = GetComponent<CharacterMovement>();
 		if (characterMovement == null) {
 			Debug.Log("CharacterMovement script is NULL");
 		}
 	} 
+	#endregion
 }

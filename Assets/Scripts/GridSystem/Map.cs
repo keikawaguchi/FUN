@@ -19,31 +19,48 @@ public class Map : MonoBehaviour {
 
 	void Start () {
 		loadResources();
-		initializeMap();
+		buildMap();
 		spawnUpgrade();
 	}
 	
+	#region Public Methods
+	public bool isGridFull(float x, float y) {
+		int xCoord = gridSystem.getXPos(x);
+		int yCoord = gridSystem.getYPos(y);
+		
+		return grid[xCoord, yCoord];
+	}
+	public bool isGridFull(int x, int y) {
+		return grid[x, y];
+	}
+	#endregion
+	
 	#region Initialize Methods
 	private void loadResources() {
+		gridSystem = this.GetComponent<GridSystem>();
+		if (gridSystem == null) {
+			Debug.Log("GridSystem is null");
+		}
+		
 		indestructableBlockPrefab = Resources.Load(INDESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;
 		if (indestructableBlockPrefab == null) {
-			Debug.Log ("Indestructable block prefab is null");
+			Debug.Log("Indestructable block prefab is null");
 		}
+		
 		destructableBlockPrefab = Resources.Load(DESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;
 		if (indestructableBlockPrefab == null) {
-			Debug.Log ("Destructable block prefab is null");
+			Debug.Log("Destructable block prefab is null");
 		}
+		
 		upgrade = Resources.Load(UPGRADE_PREFAB_PATH) as GameObject;
 		if (indestructableBlockPrefab == null) {
-			Debug.Log ("Upgrade block prefab is null");
+			Debug.Log("Upgrade block prefab is null");
 		}
-
-		gridSystem = this.GetComponent<GridSystem>();
 	}
 	#endregion
 	
 	// creates the basic map layout with the indestructuble walls
-	void initializeMap() {
+	private void buildMap() {
 		
 		int gridWidth = gridSystem.getGridWidth();
 		int gridHeight = gridSystem.getGridHeight();
