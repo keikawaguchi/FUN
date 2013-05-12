@@ -46,7 +46,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BombBehavior.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
-     <Compile Include="Assets\Scripts\Characters\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Explosion.cs" />
@@ -64,6 +63,7 @@
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
      <Compile Include="Assets\Scripts\UpgradePickUp.cs" />
+     <Compile Include="Assets\Scripts\characters\TemptressBehavior.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
