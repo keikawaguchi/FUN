@@ -29,7 +29,9 @@ public class TemptressBehavior : MonoBehaviour {
 		if (currentLure.GetComponent<Lure>().isComplete ()) {
 			currentLure = null;
 			return;
-		}	
+		}
+		
+		
 	}
 	
 	#region Initialization Methods

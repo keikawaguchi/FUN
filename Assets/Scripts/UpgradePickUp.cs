@@ -11,14 +11,17 @@ public class UpgradePickUp : MonoBehaviour {
 		if( upgradeType == 1)
 		{
 			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/SpeedUpgrade") as Material;
+			renderer.name = "SpeedUpgrade";
 		}
 		else if( upgradeType == 2 )
 		{
 			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/ExplosionUpgrade") as Material;
+			renderer.name = "ExplosionUpgrade";
 		}
 		else if( upgradeType == 3 )
 		{
 			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/BombUpgrade") as Material;
+			renderer.name = "BombUpgrade";
 		}
 		renderer.enabled = true;
 	}
@@ -32,14 +35,17 @@ public class UpgradePickUp : MonoBehaviour {
 			if( upgradeType == 1)
 			{
 				GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/SpeedUpgrade") as Material;
+				renderer.name = "SpeedUpgrade";
 			}
 			else if( upgradeType == 2 )
 			{
 				GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/ExplosionUpgrade") as Material;
+				renderer.name = "ExplosionUpgrade";
 			}
 			else if( upgradeType == 3 )
 			{
 				GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/BombUpgrade") as Material;
+				renderer.name = "BombUpgrade";
 			}
 		}
 	}

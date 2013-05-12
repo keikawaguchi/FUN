@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\GlobalBehavior.cs" />
      <Compile Include="Assets\Scripts\GridMove.cs" />
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
+     <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
      <Compile Include="Assets\Scripts\Hero.cs" />
      <Compile Include="Assets\Scripts\IndestructubleWall.cs" />
      <Compile Include="Assets\Scripts\PlayerReferences.cs" />
