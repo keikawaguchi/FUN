@@ -22,6 +22,14 @@ public class BombBehavior : MonoBehaviour {
 		}
 	}
 	
+	public void OnTriggerEnter(Collider theCollision)
+	{
+		if(theCollision.gameObject.name == "Explosion")
+		{
+			explode();
+		}
+	}
+	
 	#region Initialization Methods
 	private void loadBombPrefab() {
 		explosionPrefab = Resources.Load("Prefabs/Explosion") as GameObject;
