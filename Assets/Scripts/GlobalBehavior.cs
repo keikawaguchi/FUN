@@ -33,6 +33,7 @@ public class GlobalBehavior : MonoBehaviour {
 		// calculate lower left hand corner of screen
 		xMin = mMainCamera.orthographicSize * mMainCamera.aspect * -1;
 		yMin = mMainCamera.orthographicSize * -1;
+
 		
 		// initialize map layout
 		if (null == mIndestructubleWall) 
@@ -101,7 +102,7 @@ public class GlobalBehavior : MonoBehaviour {
 					continue;
 				
 				GameObject go = Instantiate(DestructubleWall) as GameObject;
-				IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
+				DestructibleWall wall = go.GetComponent<DestructibleWall>();
 				wall.initialize(getXCoord(x), getYCoord(y));
 					
 				grid[x,y] = true;

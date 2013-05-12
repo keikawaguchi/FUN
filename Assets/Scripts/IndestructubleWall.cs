@@ -11,11 +11,6 @@ public class IndestructubleWall : MonoBehaviour {
 	
 	}
 	
-	void OnTriggerEnter(Collider collisionObject) {
-
-
-	}
-
 	public void initialize(float x, float z) {
 		transform.position = new Vector3(x, 0, z);
 	}

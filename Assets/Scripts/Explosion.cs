@@ -5,7 +5,7 @@ public class Explosion : MonoBehaviour {
 	
 	const string FIRE_UNIT_PREFAB_PATH = "Prefabs/Fire";
 	
-	public float explosionDistanceX = 2.0f;
+	public float explosionDistanceX = 4.0f;
 	public float explosionDistanceZ = 3.0f;
 	public float secondsBetweenFireSpawns = 0.5f;
 	public float scale = 14.0f;
@@ -62,22 +62,22 @@ public class Explosion : MonoBehaviour {
 		Vector3 fireUnitPos;	
 		if (numberOfFireUnitsCreatedX < explosionDistanceX) {		
 
-			
-			// make sure there isn't an indestructible wall right
+			// make sure there isn't a wall on the right
 			if (spawnRight) {
 				fireUnitPos = transform.position;
 				fireUnitPos.x += numberOfFireUnitsCreatedX * scale;
 				if (gridEmpty(fireUnitPos))
 					spawnFireUnit(fireUnitPos);
-				else 
+				else
 					spawnRight = false;
 			}
+
 		
 			// make sure there isn't an indestructible wall left
 			if (spawnLeft) {
 				fireUnitPos = transform.position;
 				fireUnitPos.x -= numberOfFireUnitsCreatedX * scale;
-				if (gridEmpty(fireUnitPos))
+				if (globalBehavior.isGridEmpty(fireUnitPos))
 					spawnFireUnit(fireUnitPos);
 				else 
 					spawnLeft = false;
