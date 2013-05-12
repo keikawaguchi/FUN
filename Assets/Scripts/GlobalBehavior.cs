@@ -85,32 +85,32 @@ public class GlobalBehavior : MonoBehaviour {
 		}
 		
 		// initialize destructuble walls
-		for (int x = 1; x < gridWidth - 1; x++) {
-			for (int y = 1; y < gridHeight - 1; y++) {
-				
-				// don't create wall on indestructuble walls
-				if (grid[x,y])
-					continue;	
-				
-				// don't create walls in corners of map
-				if (x == 1 || x == (gridWidth - 2)) {
-					if (y == 1 || y == 2 || y == (gridHeight - 2) || y == (gridHeight - 3))
-						continue;
-				} else if (x == 2 || x == (gridWidth - 3))
-					if (y == 1 || y == (gridHeight - 2))
-						continue;
-				
-				// don't create wall in center of map
-				if (x == (gridWidth / 2) && y == (gridHeight / 2))
-					continue;
-				
-				GameObject go = Instantiate(DestructubleWall) as GameObject;
-				DestructibleWall wall = go.GetComponent<DestructibleWall>();
-				wall.initialize(getXCoord(x), getYCoord(y));
-					
-				grid[x,y] = true;
-			}
-		}
+//		for (int x = 1; x < gridWidth - 1; x++) {
+//			for (int y = 1; y < gridHeight - 1; y++) {
+//				
+//				// don't create wall on indestructuble walls
+//				if (grid[x,y])
+//					continue;	
+//				
+//				// don't create walls in corners of map
+//				if (x == 1 || x == (gridWidth - 2)) {
+//					if (y == 1 || y == 2 || y == (gridHeight - 2) || y == (gridHeight - 3))
+//						continue;
+//				} else if (x == 2 || x == (gridWidth - 3))
+//					if (y == 1 || y == (gridHeight - 2))
+//						continue;
+//				
+//				// don't create wall in center of map
+//				if (x == (gridWidth / 2) && y == (gridHeight / 2))
+//					continue;
+//				
+//				GameObject go = Instantiate(DestructubleWall) as GameObject;
+//				DestructibleWall wall = go.GetComponent<DestructibleWall>();
+//				wall.initialize(getXCoord(x), getYCoord(y));
+//					
+//				grid[x,y] = true;
+//			}
+//		}
 	}
 	
 	// converts grid x-coord into x-position

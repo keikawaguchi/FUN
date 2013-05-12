@@ -70,7 +70,7 @@ class GridMove : MonoBehaviour {
  
         endPosition = new Vector3(startPosition.x + System.Math.Sign(input.x) * gridSize,
         	startPosition.y, startPosition.z + System.Math.Sign(input.y) * gridSize);
- 		
+ 		Debug.Log("end pos: " + endPosition);
 		// rotate hero to look at travel direction
 		transform.LookAt(endPosition);
 		
