@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour {
 	public float speed;
 	private Vector3 aimDirection;
 	MovementState currentMovementState;
-	
+	float newSpeed = 1;
 	
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
@@ -31,6 +31,14 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public Vector3 getAimDirection() {
 		return aimDirection;
+	}
+	public void IncScaleSpeed(float param)
+	{
+		newSpeed += param;
+	}
+	public void decSpeed(float param)
+	{
+		newSpeed -= param;
 	}
 	#endregion
 	
