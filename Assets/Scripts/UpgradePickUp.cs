@@ -7,23 +7,7 @@ public class UpgradePickUp : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		upgradeType = Random.Range(1,4);
-		if( upgradeType == 1)
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/SpeedUpgrade") as Material;
-			renderer.name = "SpeedUpgrade";
-		}
-		else if( upgradeType == 2 )
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/ExplosionUpgrade") as Material;
-			renderer.name = "ExplosionUpgrade";
-		}
-		else if( upgradeType == 3 )
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/BombUpgrade") as Material;
-			renderer.name = "BombUpgrade";
-		}
-		renderer.enabled = true;
+
 	}
 	
 	// Update is called once per frame
@@ -46,18 +30,21 @@ public class UpgradePickUp : MonoBehaviour {
 		{
 			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/SpeedUpgrade") as Material;
 			renderer.name = "SpeedUpgrade";
+			renderer.enabled = true;
 		}
 		else if( upgradeType == 2 )
 		{
 			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/ExplosionUpgrade") as Material;
 			renderer.name = "ExplosionUpgrade";
+			renderer.enabled = true;
 		}
 		else if( upgradeType == 3 )
 		{
 			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/BombUpgrade") as Material;
 			renderer.name = "BombUpgrade";
+			renderer.enabled = true;
 		}
-		renderer.enabled = true;
+		
 	}
 	
 	public enum upgrades
