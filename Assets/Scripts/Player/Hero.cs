@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Hero : MonoBehaviour {
 
-	const string BOMB_PREFAB_PATH = "Prefabs/Bomb";
+	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
 	const string BOMB_DROP_BUTTON = "Jump";
 	
 	private GameObject bomb;

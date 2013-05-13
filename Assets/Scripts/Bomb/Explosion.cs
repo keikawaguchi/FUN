@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Explosion : MonoBehaviour {
 	
-	const string FIRE_UNIT_PREFAB_PATH = "Prefabs/Fire";
+	const string FIRE_UNIT_PREFAB_PATH = "Prefabs/Bomb/Fire";
 	
 	public float explosionDistanceX = 4.0f;
 	public float explosionDistanceZ = 3.0f;

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BombBehavior : MonoBehaviour {
 	
-	const string EXPLOSION_PREFAB_PATH = "Prefabs/Explosion";
+	const string EXPLOSION_PREFAB_PATH = "Prefabs/Bomb/Explosion";
 	
 	public float explosionPrefabDelayInSeconds = 1.5f;
 	private float spawnTime;
@@ -32,7 +32,7 @@ public class BombBehavior : MonoBehaviour {
 	
 	#region Initialization Methods
 	private void loadBombPrefab() {
-		explosionPrefab = Resources.Load("Prefabs/Explosion") as GameObject;
+		explosionPrefab = Resources.Load(EXPLOSION_PREFAB_PATH) as GameObject;
 		if (explosionPrefab == null) {
 			Debug.Log ("Explosion loaded unsuccessfully");
 		}

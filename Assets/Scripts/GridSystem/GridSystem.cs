@@ -33,6 +33,14 @@ public class GridSystem : MonoBehaviour {
 		return gridHeight;
 	}
 	
+	public float getSingleGridWidth() {
+		return singleGridSize;
+	}
+	
+	public float getSingleGridHeight() {
+		return singleGridSize;
+	}
+	
 	// converts grid x-coord into x-position
 	public float getXCoord(int x) { return xMin + (x * singleGridSize) + (singleGridSize / 2); }
 	

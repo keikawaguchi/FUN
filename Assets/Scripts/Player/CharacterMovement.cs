@@ -15,11 +15,11 @@ public class CharacterMovement : MonoBehaviour {
 	private MovementState currentMovementState;
 	
 	private Map map;
-	
+	private GridSystem gridSystem;
 	
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
-		map = GameObject.Find("Map").GetComponent<Map>();
+		loadScripts();
 	}
 	
 	public void Update() {
@@ -52,6 +52,18 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	#endregion
 	
+	private void loadScripts() {
+		map = GameObject.Find("Map").GetComponent<Map>();
+		if (map == null) {
+			Debug.Log("Map is null");
+		}
+		
+		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
+		if (gridSystem == null) {
+			Debug.Log("GridSystem is null");
+		}
+	}
+	
 	private void translateInputToMovement() {
 		movement.y = 0;
 		movement.x = Input.GetAxis("Horizontal") * calculateSpeed();
@@ -74,8 +86,10 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	private void stopMovementOnCollision() {
-		float playerWidth = transform.localScale.x / 2;
-		float playerHeight = transform.localScale.z / 2;
+		float playerWidth = transform.localScale.x / 2f;
+		float playerHeight = transform.localScale.z / 2f;
+		float blockWidth = gridSystem.getSingleGridWidth() / 2f;
+		float blockHeight = gridSystem.getSingleGridHeight() / 2f;
 		
 		if (movement.x < 0) {
 			playerWidth *= -1f;
