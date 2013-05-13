@@ -50,15 +50,25 @@ public class CharacterMovement : MonoBehaviour {
 	#endregion
 	
 	private void updateMovement() {
+		float playerWidth = transform.localScale.x / 2;
+		float playerHeight = transform.localScale.z / 2;
 		Vector3 movement;
+		
 		movement.y = 0;
 		movement.x = Input.GetAxis("Horizontal") * calculateSpeed();
 		movement.z = Input.GetAxis("Vertical") * calculateSpeed();
 		
-		if (map.isGridFull(transform.position.x + movement.x, transform.position.z)) {
+		if (movement.x < 0) {
+			playerWidth *= -1f;
+		}
+		if (movement.z < 0) {
+			playerHeight *= -1f;
+		}
+		
+		if (map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z)) {
 			movement.x = 0;
 		}
-		if (map.isGridFull(transform.position.x, transform.position.z + movement.z)) {
+		if (map.isGridFull(transform.position.x, transform.position.z + movement.z + playerHeight)) {
 			movement.z = 0;
 		}
 		
