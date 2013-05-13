@@ -6,6 +6,9 @@ public class Hero : MonoBehaviour {
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
 	const string BOMB_DROP_BUTTON = "Jump";
 	
+	public float dropBombCoolDownSeconds = 2f;
+	private float timeOfLastBombDrop;
+	
 	private GameObject bomb;
 	private GridSystem gridSystem;
 	private CharacterMovement characterMovement;
@@ -13,21 +16,11 @@ public class Hero : MonoBehaviour {
 	void Start () {
 		loadResources();
 		loadScripts();
+		timeOfLastBombDrop = -999f;
 	}
 	
-	void Update () {
-		
-		// Create bomb on spacebar down
-		if (Input.GetButtonDown (BOMB_DROP_BUTTON)) {
-			GameObject instantiateBomb = Instantiate (bomb) as GameObject;
-			
-			// place bomb in closest grid position
-			int xCoord = gridSystem.getXPos(transform.position.x);
-			int yCoord = gridSystem.getYPos(transform.position.z);
-			
-			Vector3 bombLocation = new Vector3(gridSystem.getXCoord(xCoord), 0f, gridSystem.getYCoord(yCoord));
-			instantiateBomb.transform.position = bombLocation;
-		}
+	void Update () {	
+		handleControllerInput();
 	}
 	
 	#region Initialization Methods
@@ -50,4 +43,27 @@ public class Hero : MonoBehaviour {
 		}
 	} 
 	#endregion
+	
+	private void handleControllerInput() {
+		if (Input.GetButtonDown (BOMB_DROP_BUTTON)) {
+			dropBomb();
+		}
+	}
+	
+	private void dropBomb() {
+		if (Time.time - timeOfLastBombDrop < dropBombCoolDownSeconds) {
+			return;
+		}
+		
+		GameObject instantiateBomb = Instantiate (bomb) as GameObject;
+			
+		// place bomb in closest grid position
+		int xCoord = gridSystem.getXPos(transform.position.x);
+		int yCoord = gridSystem.getYPos(transform.position.z);
+		
+		Vector3 bombLocation = new Vector3(gridSystem.getXCoord(xCoord), 0f, gridSystem.getYCoord(yCoord));
+		instantiateBomb.transform.position = bombLocation;
+		
+		timeOfLastBombDrop = Time.time;
+	}
 }
