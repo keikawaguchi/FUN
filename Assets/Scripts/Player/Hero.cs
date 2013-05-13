@@ -11,7 +11,6 @@ public class Hero : MonoBehaviour {
 	
 	private GameObject bomb;
 	private GridSystem gridSystem;
-	private CharacterMovement characterMovement;
 
 	void Start () {
 		loadResources();
@@ -21,6 +20,13 @@ public class Hero : MonoBehaviour {
 	
 	void Update () {	
 		handleControllerInput();
+	}
+	
+	public void OnTriggerEnter(Collider collider) {
+		if (collider.gameObject.tag == "KillsPlayer") {
+			Debug.Log("Player DEAD");
+			renderer.material.color = new Color(1.0f, 0.0f, 0.0f);
+		}
 	}
 	
 	#region Initialization Methods
@@ -35,11 +41,6 @@ public class Hero : MonoBehaviour {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
 		if (gridSystem == null) {
 			Debug.Log ("Hero.cs: Grid system is null");
-		}
-		
-		characterMovement = GetComponent<CharacterMovement>();
-		if (characterMovement == null) {
-			Debug.Log("CharacterMovement script is NULL");
 		}
 	} 
 	#endregion
