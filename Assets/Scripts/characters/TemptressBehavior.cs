@@ -17,6 +17,10 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
+		if(Input.GetButtonDown(LOVESTRUCK_BUTTON))
+		{
+			LoveStruckButtonPress();
+		}
 		if (currentLure == null) {
 			characterMovement.setMovementState(CharacterMovement.MovementState.CanMove);
 			checkLureButtonPress();
@@ -30,6 +34,7 @@ public class TemptressBehavior : MonoBehaviour {
 			currentLure = null;
 			return;
 		}
+
 		
 		
 	}
@@ -64,5 +69,48 @@ public class TemptressBehavior : MonoBehaviour {
 			
 			currentLure.transform.forward = characterMovement.getAimDirection();
 		}
+	}
+	
+	private void LoveStruckButtonPress()
+	{
+		Debug.Log ("LOVESTRUCK");
+		GameObject temp;
+		Map map = GameObject.Find("Map").GetComponent<Map>();
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x+1, (int)transform.position.z);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x+2, (int)transform.position.z);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x-1, (int)transform.position.z);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x-2, (int)transform.position.z);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z+1);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z+2);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z-1);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;
+		
+		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z-2);
+		if(temp != null)
+			temp.GetComponent<CharacterMovement>().speed = 10;		
 	}
 }

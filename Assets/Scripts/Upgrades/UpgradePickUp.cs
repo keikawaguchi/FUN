@@ -35,13 +35,14 @@ public class UpgradePickUp : MonoBehaviour {
 	
 	public void OnTriggerEnter(Collider player)
 	{
-		if(player.name == "Hero")
+		if(player.name == "Temptress")
 			StartCoroutine(wait());
 	}
 	
-	IEnumerator wait()
+	public IEnumerator wait()
 	{
 		renderer.enabled = false;
+		
 		yield return new WaitForSeconds(30);
 		
 		upgradeType = Random.Range(1,4);
@@ -65,12 +66,4 @@ public class UpgradePickUp : MonoBehaviour {
 		}
 		
 	}
-	
-	public enum upgrades
-	{
-		SpeedUp = 1,
-		Explosion = 2,
-		Bomb = 3
-		
-	};
 }
