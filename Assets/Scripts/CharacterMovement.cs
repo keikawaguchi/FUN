@@ -32,14 +32,7 @@ public class CharacterMovement : MonoBehaviour {
 	public Vector3 getAimDirection() {
 		return aimDirection;
 	}
-	public void IncScaleSpeed(float param)
-	{
-		newSpeed += param;
-	}
-	public void decSpeed(float param)
-	{
-		newSpeed -= param;
-	}
+
 	#endregion
 	
 	private void updateMovement() {

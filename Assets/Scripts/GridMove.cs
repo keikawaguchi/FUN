@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
  
 class GridMove : MonoBehaviour {
-    private float moveSpeed = 50f;
+    public float moveSpeed = 50f;
     private float gridSize = 14f;
 
     private Vector2 input;
@@ -17,7 +17,7 @@ class GridMove : MonoBehaviour {
 		// CHANGE ME - should pass in 
 		transform.position = new Vector3(-112.3f, 0, -79f);
 	}
- 
+	
     public void Update() {
 		bool toMove = true;
 
