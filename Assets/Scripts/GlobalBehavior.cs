@@ -38,9 +38,9 @@ public class GlobalBehavior : MonoBehaviour {
 		
 		// initialize map layout
 		if (null == mIndestructubleWall) 
-			mIndestructubleWall = Resources.Load("Prefabs/Indestructuble Wall") as GameObject;
+			mIndestructubleWall = Resources.Load("Prefabs/Wall/Indestructuble Wall") as GameObject;
 		if(null == DestructubleWall)
-			DestructubleWall = Resources.Load("Prefabs/Destructuble Wall") as GameObject;
+			DestructubleWall = Resources.Load("Prefabs/Wall/Destructuble Wall") as GameObject;
 		if(null == upgrade)
 			upgrade = Resources.Load("Prefabs/Upgrade") as GameObject;
 		
