@@ -18,12 +18,12 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	void Update () {
 		if (currentLure == null) {
-			characterMovement.setState(CharacterMovement.MovementState.CanMove);
+			characterMovement.setMovementState(CharacterMovement.MovementState.CanMove);
 			checkLureButtonPress();
 			return;
 		}
 		else {
-			characterMovement.setState(CharacterMovement.MovementState.CannotMove);
+			characterMovement.setMovementState(CharacterMovement.MovementState.CannotMove);
 		}
 		
 		if (currentLure.GetComponent<Lure>().isComplete ()) {

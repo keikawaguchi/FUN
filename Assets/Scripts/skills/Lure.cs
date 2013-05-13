@@ -210,13 +210,4 @@ public class Lure : MonoBehaviour {
 		position += newLureUnitPosition.transform.position;
 		return position;
 	}
-	
-	private void showVariableValues() {
-		Debug.Log("distanceToTravel: " + distanceToTravel);
-		Debug.Log("lureUnitsSpawnedPerSecond: " + lureUnitsSpawnedPerSecond);
-		Debug.Log("scaleSpeed: " + scaleSpeed);
-		Debug.Log("lureUnitSpawnDelayInSeconds: " + lureUnitSpawnDelayInSeconds);
-		Debug.Log("numberOfLureUnitsToSpaw: " + numberOfLureUnitsToSpawn);
-		Debug.Log("timeOfLastLureUnitSpawn: " + timeOfLastLureUnitSpawn);
-	}
 }

@@ -25,8 +25,11 @@ public class CharacterMovement : MonoBehaviour {
 	}
 
 	#region Public Methods
-	public void setState(MovementState newState) {
+	public void setMovementState(MovementState newState) {
 		currentMovementState = newState;
+	}
+	public MovementState getMovementState() {
+		return currentMovementState;
 	}
 	
 	public Vector3 getAimDirection() {
@@ -34,16 +37,12 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	public void increaseSpeedByPercentage(float percentage) {
-		if (percentage >= 10) {
-			percentage /= 10f;
-		}
+		percentage /= 100f;
 		speedModifier += percentage;
 	}
 	
 	public void decreaseSpeedByPercentage(float percentage) {
-		if (percentage >= 10) {
-			percentage /= 10f;
-		}
+		percentage /= 100f;
 		speedModifier -= percentage;
 	}
 	#endregion
