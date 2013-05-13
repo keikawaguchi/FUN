@@ -6,13 +6,15 @@ public class Blink : MonoBehaviour {
 	private const float TELEPORT_DISTANCE = 14f * 3f;
 	
 	private GameObject heroObj;
-	private GameObject globalBehviorObject;
+//	private GlobalBehavior globalBehavior;
+	private GridMove grid;
 
 	// Use this for initialization
 	void Start () {
 		heroObj = GameObject.Find ("Hero");
-		globalBehviorObject = GameObject.Find ("Global Behavior");
-		Bounds worldBound = globalBehviorObject.GetComponent<GlobalBehavior>().WorldBound;
+//		GameObject globalBehviorObject = globalBehviorObject = GameObject.Find ("Global Behavior");
+//		globalBehavior = globalBehviorObject.GetComponent<GlobalBehavior>();
+//		GameObject gridMoveObj = GameObject.Find ();
 	}
 	
 	// Update is called once per frame
@@ -25,8 +27,9 @@ public class Blink : MonoBehaviour {
 		 */
 		
 		if (Input.GetButtonDown(BLINK_BUTTON)) {
-			
-			heroObj.transform.position += heroObj.transform.forward * TELEPORT_DISTANCE;  // teleport to facing direction
+			Vector3 heroPos = heroObj.transform.position;
+//			if (globalBehavior.getXPos(heroPos) > 
+				heroObj.transform.position += heroObj.transform.forward * TELEPORT_DISTANCE;  // teleport to facing direction
 		}
 	}
 }

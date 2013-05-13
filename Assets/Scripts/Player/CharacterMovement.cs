@@ -17,26 +17,29 @@ public class CharacterMovement : MonoBehaviour {
 	private Map map;
 	private GridSystem gridSystem;
 	
+	// effects from abilities
+	private float stunInterval;
+	
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
 		loadScripts();
+		stunInterval = 0f;
 	}
 	
 	public void Update() {
-		if (currentMovementState == MovementState.CanMove) {
+		switch(currentMovementState) {
+		case MovementState.CanMove:
 			translateInputToMovement();
 			stopMovementOnCollision();
 			applyMovement();
 			updateAimDirection();
-		}
-	}
-	
-	public void OnTriggerEnter(Collider param)
-	{
-		if(param.name == "SpeedUpgrade")
-		{
-			if(speed < 200)
-				speed+=15;
+			stunInterval = 0f;  // reset timer
+			break;
+		case MovementState.CannotMove:
+			stunInterval += Time.smoothDeltaTime;
+			if (stunInterval >= 2f)
+				currentMovementState = MovementState.CanMove;
+			break;
 		}
 	}
 

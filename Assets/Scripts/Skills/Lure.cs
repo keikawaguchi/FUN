@@ -15,7 +15,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	#region Class Members
-	const string LURE_UNIT_PREFAB_PATH = "Prefabs/Skills/LureUnit";
+	const string LURE_UNIT_PREFAB_PATH = "Prefabs/Skill_Prefabs/LureUnit";
 	
 	public float distanceToTravel;
 	public float lureUnitsSpawnedPerSecond;
@@ -136,9 +136,6 @@ public class Lure : MonoBehaviour {
 	private void checkPlayerCollision() {
 		if (grabbedPlayer != null) {
 			return;
-		}	
-		if (isComplete()) {
-			return;
 		}
 		
 		GameObject lastLureUnit;
@@ -212,5 +209,14 @@ public class Lure : MonoBehaviour {
 		position = newLureUnitPosition.transform.forward * lureUnitHeight;
 		position += newLureUnitPosition.transform.position;
 		return position;
+	}
+	
+	private void showVariableValues() {
+		Debug.Log("distanceToTravel: " + distanceToTravel);
+		Debug.Log("lureUnitsSpawnedPerSecond: " + lureUnitsSpawnedPerSecond);
+		Debug.Log("scaleSpeed: " + scaleSpeed);
+		Debug.Log("lureUnitSpawnDelayInSeconds: " + lureUnitSpawnDelayInSeconds);
+		Debug.Log("numberOfLureUnitsToSpaw: " + numberOfLureUnitsToSpawn);
+		Debug.Log("timeOfLastLureUnitSpawn: " + timeOfLastLureUnitSpawn);
 	}
 }

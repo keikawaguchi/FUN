@@ -55,10 +55,10 @@
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\Player\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
+     <Compile Include="Assets\Scripts\LSBehaviour.cs" />
+     <Compile Include="Assets\Scripts\LSEnemy.cs" />
      <Compile Include="Assets\Scripts\PlayerReferences.cs" />
      <Compile Include="Assets\Scripts\Skills\Blink.cs" />
-     <Compile Include="Assets\Scripts\Skills\LSBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Skills\LSEnemy.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
      <Compile Include="Assets\Scripts\Upgrades\UpgradePickUp.cs" />
