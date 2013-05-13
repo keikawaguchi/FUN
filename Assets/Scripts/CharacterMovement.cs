@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	public float speed = 100f;
-	private float speedModifier = 1f;	// 1 = 100% speed
+	private float speedModifierPercentage = 100f;
 	private Vector3 aimDirection;		// direction for aiming skills
 	MovementState currentMovementState;
 	
@@ -37,13 +37,11 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	public void increaseSpeedByPercentage(float percentage) {
-		percentage /= 100f;
-		speedModifier += percentage;
+		speedModifierPercentage += percentage;
 	}
 	
 	public void decreaseSpeedByPercentage(float percentage) {
-		percentage /= 100f;
-		speedModifier -= percentage;
+		speedModifierPercentage -= percentage;
 	}
 	#endregion
 	
@@ -56,7 +54,8 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	private float calculateSpeed() {
-		return speed * speedModifier * Time.smoothDeltaTime;
+		float scaleSpeed = speedModifierPercentage / 100f;
+		return speed * scaleSpeed * Time.smoothDeltaTime;
 	}
 	
 	private void updateAimDirection() {
