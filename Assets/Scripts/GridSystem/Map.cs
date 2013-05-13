@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Map : MonoBehaviour {
 	
-	const string INDESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Indestructuble Wall";
-	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Destructuble Wall";
+	const string INDESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Indestructuble Wall";
+	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Destructuble Wall";
 	const string UPGRADE_PREFAB_PATH = "Prefabs/Upgrade";
 	
 	public GameObject indestructableBlockPrefab;
