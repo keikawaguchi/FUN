@@ -2,14 +2,18 @@ using UnityEngine;
 using System.Collections;
 
 public class Trap : MonoBehaviour {
+	private float visibleInberval;
+	
 	// Use this for initialization
 	void Start () {
-		
+		visibleInberval = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		visibleInberval += Time.smoothDeltaTime;
+		if (visibleInberval >= 3f)
+			renderer.enabled = false;
 	}
 	
 	void OnTriggerEnter(Collider collision) {

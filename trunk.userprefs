@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Skills\Stun.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\CharacterMovement.cs">
     <Files>
-      <File FileName="Assets\Scripts\Skills\Stun.cs" Line="29" Column="77" />
-      <File FileName="Assets\Scripts\Player\Hero.cs" Line="38" Column="2" />
-      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="96" Column="2" />
-      <File FileName="Assets\Scripts\GridSystem\Map.cs" Line="27" Column="24" />
+      <File FileName="Assets\Scripts\Skills\Trap.cs" Line="15" Column="27" />
+      <File FileName="Assets\Scripts\Skills\Stun.cs" Line="17" Column="50" />
+      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="16" Column="27" />
+      <File FileName="Assets\Scripts\GridSystem\Map.cs" Line="39" Column="27" />
       <File FileName="Assets\Scripts\GlobalBehavior.cs" Line="15" Column="27" />
       <File FileName="Assets\Scripts\GridSystem\GridSystem.cs" Line="28" Column="29" />
     </Files>

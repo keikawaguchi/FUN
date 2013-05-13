@@ -8,6 +8,8 @@ public class CharacterMovement : MonoBehaviour {
 		CannotMove
 	}
 	
+	private const float MAX_STUN_TIME = 4f;
+	
 	public float speed = 100f;
 	private float speedModifierPercentage = 100f;
 	private Vector3 aimDirection;
