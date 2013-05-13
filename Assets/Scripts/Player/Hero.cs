@@ -8,6 +8,8 @@ public class Hero : MonoBehaviour {
 	
 	public float dropBombCoolDownSeconds = 2f;
 	private float timeOfLastBombDrop;
+	public float bombX = 4;
+	public float bombZ = 3;
 	
 	private GameObject bomb;
 	private GridSystem gridSystem;
@@ -26,6 +28,11 @@ public class Hero : MonoBehaviour {
 		if (collider.gameObject.tag == "KillsPlayer") {
 			Debug.Log("Player DEAD");
 			renderer.material.color = new Color(1.0f, 0.0f, 0.0f);
+		}
+		if(collider.name == "BombUpgrade")
+		{
+			if(dropBombCoolDownSeconds > 0)
+				dropBombCoolDownSeconds-=.5f;
 		}
 	}
 	
@@ -55,13 +62,11 @@ public class Hero : MonoBehaviour {
 		if (Time.time - timeOfLastBombDrop < dropBombCoolDownSeconds) {
 			return;
 		}
-		
 		GameObject instantiateBomb = Instantiate (bomb) as GameObject;
-			
+
 		// place bomb in closest grid position
 		int xCoord = gridSystem.getXPos(transform.position.x);
 		int yCoord = gridSystem.getYPos(transform.position.z);
-		
 		Vector3 bombLocation = new Vector3(gridSystem.getXCoord(xCoord), 0f, gridSystem.getYCoord(yCoord));
 		instantiateBomb.transform.position = bombLocation;
 		

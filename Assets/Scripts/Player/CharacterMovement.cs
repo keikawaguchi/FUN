@@ -30,6 +30,15 @@ public class CharacterMovement : MonoBehaviour {
 			updateAimDirection();
 		}
 	}
+	
+	public void OnTriggerEnter(Collider param)
+	{
+		if(param.name == "SpeedUpgrade")
+		{
+			if(speed < 200)
+				speed+=15;
+		}
+	}
 
 	#region Public Methods
 	public void setMovementState(MovementState newState) {

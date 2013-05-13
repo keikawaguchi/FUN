@@ -1,12 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UpgradePickUp.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Upgrades\UpgradePickUp.cs">
     <Files>
-      <File FileName="Assets\Scripts\UpgradePickUp.cs" Line="53" Column="4" />
-      <File FileName="Assets\Scripts\CharacterMovement.cs" Line="35" Column="1" />
-      <File FileName="Assets\Scripts\PlayerReferences.cs" Line="18" Column="2" />
-      <File FileName="Assets\Scripts\Hero.cs" Line="31" Column="3" />
-      <File FileName="Assets\Scripts\GridMove.cs" Line="24" Column="21" />
+      <File FileName="Assets\Scripts\Player\Hero.cs" Line="50" Column="30" />
+      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="34" Column="32" />
+      <File FileName="Assets\Scripts\Bomb\Explosion.cs" Line="27" Column="18" />
+      <File FileName="Assets\Scripts\Bomb\BombBehavior.cs" Line="13" Column="2" />
+      <File FileName="Assets\Scripts\Upgrades\UpgradePickUp.cs" Line="57" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
