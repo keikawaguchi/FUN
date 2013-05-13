@@ -6,7 +6,7 @@ public class Hero : MonoBehaviour {
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
 	const string BOMB_DROP_BUTTON = "Jump";
 	
-	public float dropBombCoolDownSeconds = 2f;
+	public float dropBombCoolDownSeconds = 1.5f;
 	private float timeOfLastBombDrop;
 	public float bombX = 4;
 	public float bombZ = 3;
@@ -29,6 +29,7 @@ public class Hero : MonoBehaviour {
 			Debug.Log("Player DEAD");
 			renderer.material.color = new Color(1.0f, 0.0f, 0.0f);
 		}
+		
 		if(collider.name == "BombUpgrade")
 		{
 			if(dropBombCoolDownSeconds > 0)
