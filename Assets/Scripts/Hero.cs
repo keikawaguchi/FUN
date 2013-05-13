@@ -39,7 +39,7 @@ public class Hero : MonoBehaviour {
 	}
 	
 	private void loadScripts() {
-		gridSystem = GetComponent<GridSystem>();
+		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
 		if (gridSystem == null) {
 			Debug.Log ("Hero.cs: Grid system is null");
 		}
