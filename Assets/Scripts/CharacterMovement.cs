@@ -13,8 +13,12 @@ public class CharacterMovement : MonoBehaviour {
 	private Vector3 aimDirection;		// direction for aiming skills
 	MovementState currentMovementState;
 	
+	private Map map;
+	
+	
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
+		map = GameObject.Find("Map").GetComponent<Map>();
 	}
 	
 	public void Update() {
@@ -50,7 +54,15 @@ public class CharacterMovement : MonoBehaviour {
 		movement.y = 0;
 		movement.x = Input.GetAxis("Horizontal") * calculateSpeed();
 		movement.z = Input.GetAxis("Vertical") * calculateSpeed();
-		this.transform.Translate(movement);
+		
+		if (map.isGridFull(transform.position.x + movement.x, transform.position.z)) {
+			movement.x = 0;
+		}
+		if (map.isGridFull(transform.position.x, transform.position.z + movement.z)) {
+			movement.z = 0;
+		}
+		
+		transform.Translate(movement);
 	}
 	
 	private float calculateSpeed() {

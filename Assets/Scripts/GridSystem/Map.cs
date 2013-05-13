@@ -27,8 +27,7 @@ public class Map : MonoBehaviour {
 	#region Public Methods
 	public bool isGridFull(float x, float y) {
 		int xCoord = gridSystem.getXPos(x);
-		int yCoord = gridSystem.getYPos(y);
-		
+		int yCoord = gridSystem.getYPos(y);	
 		return grid[xCoord, yCoord];
 	}
 	public bool isGridFull(int x, int y) {
