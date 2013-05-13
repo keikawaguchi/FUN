@@ -9,7 +9,7 @@ public class GridSystem : MonoBehaviour {
 	private float xMin;					// lower left hand corner x-pos
 	private float yMin;					// lower left hand corner y-pos
 	
-	private const float wallSize = 14f;	// dimension of wall
+	private const float singleGridSize = 14f;	// dimension of wall
 	
 	private const int gridWidth = 19;	// width of map
 	private const int gridHeight = 13;	// height of map
@@ -34,16 +34,16 @@ public class GridSystem : MonoBehaviour {
 	}
 	
 	// converts grid x-coord into x-position
-	public float getXCoord(int x) { return xMin + (x * wallSize) + (wallSize / 2); }
+	public float getXCoord(int x) { return xMin + (x * singleGridSize) + (singleGridSize / 2); }
 	
 	// converts grid y-coord into y-position
-	public float getYCoord(int y) { return yMin + (y * wallSize) + (wallSize / 2); }
+	public float getYCoord(int y) { return yMin + (y * singleGridSize) + (singleGridSize / 2); }
 	
 	// converts x-position to grid x-coord
-	public int getXPos(float x) { return Mathf.RoundToInt( (x - xMin - (wallSize / 2) ) / wallSize); }
+	public int getXPos(float x) { return Mathf.RoundToInt( (x - xMin - (singleGridSize / 2) ) / singleGridSize); }
 	
 	// converts y-position to grid y-coord
-	public int getYPos(float y) { return Mathf.RoundToInt( (y - yMin - (wallSize / 2) ) / wallSize); }
+	public int getYPos(float y) { return Mathf.RoundToInt( (y - yMin - (singleGridSize / 2) ) / singleGridSize); }
 	
 	// returns true if coordinate is an edge of the map
 	public bool isEdge(int x, int y) {

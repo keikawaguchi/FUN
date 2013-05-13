@@ -136,6 +136,9 @@ public class Lure : MonoBehaviour {
 	private void checkPlayerCollision() {
 		if (grabbedPlayer != null) {
 			return;
+		}	
+		if (isComplete()) {
+			return;
 		}
 		
 		GameObject lastLureUnit;

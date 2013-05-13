@@ -10,8 +10,9 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public float speed = 100f;
 	private float speedModifierPercentage = 100f;
-	private Vector3 aimDirection;		// direction for aiming skills
-	MovementState currentMovementState;
+	private Vector3 aimDirection;
+	private Vector3 movement;
+	private MovementState currentMovementState;
 	
 	private Map map;
 	
@@ -23,7 +24,9 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public void Update() {
 		if (currentMovementState == MovementState.CanMove) {
-			updateMovement();
+			translateInputToMovement();
+			stopMovementOnCollision();
+			applyMovement();
 			updateAimDirection();
 		}
 	}
@@ -49,14 +52,30 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	#endregion
 	
-	private void updateMovement() {
-		float playerWidth = transform.localScale.x / 2;
-		float playerHeight = transform.localScale.z / 2;
-		Vector3 movement;
-		
+	private void translateInputToMovement() {
 		movement.y = 0;
 		movement.x = Input.GetAxis("Horizontal") * calculateSpeed();
 		movement.z = Input.GetAxis("Vertical") * calculateSpeed();
+	}
+	
+	private void applyMovement() {
+		transform.Translate(movement);
+	}
+	
+	private void updateAimDirection() {
+		aimDirection.y = 0;
+		aimDirection.x = Input.GetAxis("Horizontal");
+		aimDirection.z = Input.GetAxis("Vertical");
+	}
+	
+	private float calculateSpeed() {
+		float scaleSpeed = speedModifierPercentage / 100f;
+		return speed * scaleSpeed * Time.smoothDeltaTime;
+	}
+	
+	private void stopMovementOnCollision() {
+		float playerWidth = transform.localScale.x / 2;
+		float playerHeight = transform.localScale.z / 2;
 		
 		if (movement.x < 0) {
 			playerWidth *= -1f;
@@ -71,18 +90,5 @@ public class CharacterMovement : MonoBehaviour {
 		if (map.isGridFull(transform.position.x, transform.position.z + movement.z + playerHeight)) {
 			movement.z = 0;
 		}
-		
-		transform.Translate(movement);
-	}
-	
-	private float calculateSpeed() {
-		float scaleSpeed = speedModifierPercentage / 100f;
-		return speed * scaleSpeed * Time.smoothDeltaTime;
-	}
-	
-	private void updateAimDirection() {
-		aimDirection.y = 0;
-		aimDirection.x = Input.GetAxis("Horizontal");
-		aimDirection.z = Input.GetAxis("Vertical");
 	}
 }
