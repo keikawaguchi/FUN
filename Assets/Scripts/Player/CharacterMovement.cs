@@ -102,21 +102,58 @@ public class CharacterMovement : MonoBehaviour {
 	private void stopMovementOnCollision() {
 		float playerWidth = transform.localScale.x / 2f;
 		float playerHeight = transform.localScale.z / 2f;
-		float blockWidth = gridSystem.getSingleGridWidth() / 2f;
-		float blockHeight = gridSystem.getSingleGridHeight() / 2f;
+			
+			// traveling right
+			if (movement.x > 0) {
+			
+				if(map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z + (playerHeight - 0.1f)))
+					movement.x = 0;
+			
+				if(map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z - (playerHeight - 0.1f)))
+					movement.x = 0;
+				
+				if (map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z))
+ 					movement.x = 0;
+				
+			// traveling left
+			} else if (movement.x < 0) {
+				
+				if(map.isGridFull(transform.position.x + movement.x - playerWidth, transform.position.z + (playerHeight - 0.1f)))
+					movement.x = 0;
+			
+				if(map.isGridFull(transform.position.x + movement.x - playerWidth, transform.position.z - (playerHeight - 0.1f)))
+					movement.x = 0;
+				
+				if (map.isGridFull(transform.position.x + movement.x - playerWidth, transform.position.z))
+ 					movement.x = 0;
+			}
+
+			
+			// traveling up
+			if (movement.z > 0) {
+				
+				if (map.isGridFull(transform.position.x + (playerWidth - 0.1f), transform.position.z + movement.z + playerHeight))
+					movement.z = 0;
+				
+				if (map.isGridFull(transform.position.x - (playerWidth - 0.1f), transform.position.z + movement.z + playerHeight))
+					movement.z = 0;
+
+				if (map.isGridFull(transform.position.x, transform.position.z + movement.z + playerHeight))
+ 					movement.z = 0;
+				
+			// traveling down
+			} else if (movement.z < 0) {
+				
+				if (map.isGridFull(transform.position.x + (playerWidth - 0.1f), transform.position.z + movement.z - playerHeight))
+					movement.z = 0;
+				
+				if (map.isGridFull(transform.position.x - (playerWidth - 0.1f), transform.position.z + movement.z - playerHeight))
+					movement.z = 0;
+				
+				if (map.isGridFull(transform.position.x, transform.position.z + movement.z - playerHeight))
+ 					movement.z = 0;
+			}
+			
 		
-		if (movement.x < 0) {
-			playerWidth *= -1f;
-		}
-		if (movement.z < 0) {
-			playerHeight *= -1f;
-		}
-		
-		if (map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z)) {
-			movement.x = 0;
-		}
-		if (map.isGridFull(transform.position.x, transform.position.z + movement.z + playerHeight)) {
-			movement.z = 0;
-		}
 	}
 }
