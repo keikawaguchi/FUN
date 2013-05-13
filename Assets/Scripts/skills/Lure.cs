@@ -15,7 +15,7 @@ public class Lure : MonoBehaviour {
 	}
 	
 	#region Class Members
-	const string LURE_UNIT_PREFAB_PATH = "Prefabs/Skill_Prefabs/LureUnit";
+	const string LURE_UNIT_PREFAB_PATH = "Prefabs/Skills/LureUnit";
 	
 	public float distanceToTravel;
 	public float lureUnitsSpawnedPerSecond;
