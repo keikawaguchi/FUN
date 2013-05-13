@@ -5,11 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-<<<<<<< HEAD
 	<ProjectGuid>{3E5CA467-EA5F-D7CA-3F18-DF1AFA5E4DA1}</ProjectGuid>
-=======
-	<ProjectGuid>{13EDDB3A-6291-6E1A-FCA6-5AA26902D15B}</ProjectGuid>
->>>>>>> Free movement with characters/wall collisions work (needs clean up)
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -41,17 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-<<<<<<< HEAD
 	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-=======
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
->>>>>>> Free movement with characters/wall collisions work (needs clean up)
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -68,20 +57,16 @@
      <Compile Include="Assets\Scripts\Player\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
      <Compile Include="Assets\Scripts\PlayerReferences.cs" />
+     <Compile Include="Assets\Scripts\Skills\Blink.cs" />
+     <Compile Include="Assets\Scripts\Skills\LSBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Skills\LSEnemy.cs" />
+     <Compile Include="Assets\Scripts\Skills\Lure.cs" />
+     <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
+     <Compile Include="Assets\Scripts\Skills\Stun.cs" />
+     <Compile Include="Assets\Scripts\Skills\Trap.cs" />
      <Compile Include="Assets\Scripts\Upgrades\UpgradePickUp.cs" />
      <Compile Include="Assets\Scripts\Walls\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Walls\IndestructubleWall.cs" />
-<<<<<<< HEAD
-=======
-     <Compile Include="Assets\Scripts\characters\TemptressBehavior.cs" />
-     <Compile Include="Assets\Scripts\skills\Blink.cs" />
-     <Compile Include="Assets\Scripts\skills\LSBehaviour.cs" />
-     <Compile Include="Assets\Scripts\skills\LSEnemy.cs" />
-     <Compile Include="Assets\Scripts\skills\Lure.cs" />
-     <Compile Include="Assets\Scripts\skills\LureUnit.cs" />
-     <Compile Include="Assets\Scripts\skills\Stun.cs" />
-     <Compile Include="Assets\Scripts\skills\Trap.cs" />
->>>>>>> Free movement with characters/wall collisions work (needs clean up)
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

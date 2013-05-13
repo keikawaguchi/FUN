@@ -3,16 +3,12 @@ using System.Collections;
 
 public class DestructibleWall : MonoBehaviour {
 	
-	private GlobalBehavior globalBehavior;
+	private Map map;
+	private GridSystem gridSystem;
 	
 	// Use this for initialization
 	void Start () {
-		globalBehavior = GameObject.Find("Global Behavior").GetComponent<GlobalBehavior>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		loadScripts();
 	}
 	
 	void OnTriggerEnter(Collider collisionObject) {
@@ -26,14 +22,19 @@ public class DestructibleWall : MonoBehaviour {
 				Destroy(gameObject);
 				
 				// update grid array
-				int x = globalBehavior.getXPos(transform.position.x);
-				int y = globalBehavior.getYPos(transform.position.z);
+				int x = map.getXPos(transform.position.x);
+				int y = map.getYPos(transform.position.z);
 				
-				globalBehavior.grid[x,y] = false;
+				map.grid[x,y] = false;
 			}
 			*/
 		}
 
+	}
+	
+	private void loadScripts() {
+		map = GameObject.Find("Map").GetComponent<Map>();
+		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
 	}
 	
 	public void initialize(float x, float z) {
