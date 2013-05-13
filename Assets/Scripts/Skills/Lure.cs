@@ -134,6 +134,9 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void checkPlayerCollision() {
+		if (isComplete()) {
+			return;
+		}
 		if (grabbedPlayer != null) {
 			return;
 		}
@@ -153,12 +156,14 @@ public class Lure : MonoBehaviour {
 	}
 	
 	private void moveHookedPlayer() {
-		if (isComplete ()) {
-			return;
-		}	
 		if (grabbedPlayer == null) {
 			return;
 		}
+		
+		if (isComplete ()) {
+			grabbedPlayer.transform.position = transform.position;
+			return;
+		}	
 		
 		GameObject lastLureUnit;
 		lastLureUnit = lureUnitStack.Peek() as GameObject;
