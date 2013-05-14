@@ -1,13 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\CharacterMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Upgrades\UpgradePickUp.cs">
     <Files>
       <File FileName="Assets\Scripts\Skills\Trap.cs" Line="15" Column="27" />
       <File FileName="Assets\Scripts\Skills\Stun.cs" Line="17" Column="50" />
-      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="16" Column="27" />
+      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="89" Column="43" />
       <File FileName="Assets\Scripts\GridSystem\Map.cs" Line="39" Column="27" />
       <File FileName="Assets\Scripts\GlobalBehavior.cs" Line="15" Column="27" />
       <File FileName="Assets\Scripts\GridSystem\GridSystem.cs" Line="28" Column="29" />
+      <File FileName="Assets\Scripts\Upgrades\UpgradePickUp.cs" Line="60" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

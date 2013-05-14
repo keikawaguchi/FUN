@@ -66,6 +66,14 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	#endregion
 	
+	public void OnTriggerEnter(Collider collision) 
+	{
+		if(collision.name == "SpeedUpgrade" && speed < 200)
+		{
+			speed += 15;
+		}
+	}
+	
 	private void loadScripts() {
 		map = GameObject.Find("Map").GetComponent<Map>();
 		if (map == null) {

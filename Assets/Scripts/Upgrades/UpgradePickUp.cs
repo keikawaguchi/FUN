@@ -4,7 +4,7 @@ using System.Collections;
 public class UpgradePickUp : MonoBehaviour {
 	
 	const string SPEED_UPGRADE_PREFAB = "Materials/SpeedUpgrade";
-	const string EXPLOSION_UPGRADE_PREFAB = "Materials/SpeedUpgrade";
+	const string EXPLOSION_UPGRADE_PREFAB = "Materials/ExplosionUpgrade";
 	const string BOMB_UPGRADE_PREFAB = "Materials/BombUpgrade";
 	
 	public float upgradeRespawnTime = 30.0f;
@@ -22,7 +22,7 @@ public class UpgradePickUp : MonoBehaviour {
 	}
 	
 	public void OnTriggerEnter(Collider player) {
-		if (player.tag == "Player") {
+		if (player.name == "Temptress") {
 			upgradePickedUp();
 		}
 	}
@@ -34,6 +34,7 @@ public class UpgradePickUp : MonoBehaviour {
 	
 	private void upgradePickedUp() {
 		renderer.enabled = false;
+		gameObject.collider.enabled = false;
 	}
 	
 	private void spawnRandomUpgrade() {
@@ -56,5 +57,6 @@ public class UpgradePickUp : MonoBehaviour {
 		}
 		
 		renderer.enabled = true;
+		gameObject.collider.enabled = true;
 	}
 }
