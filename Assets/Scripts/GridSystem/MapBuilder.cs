@@ -2,21 +2,33 @@ using UnityEngine;
 using System.Collections;
 using System.IO;
 
-public class MapBuilder : MonoBehaviour
-{
+public class MapBuilder : MonoBehaviour {
 	
 	private const char INDESTRUCTABLE_WALL = '#';
 	private const char DESTRUCTABLE_WALL = '+';
+	private const char UPGRADE = 'u';
+	
+	const string INDESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Indestructuble Wall";
+	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Destructuble Wall";
+	const string UPGRADE_PREFAB_PATH = "Prefabs/Upgrade";
+	
+	GameObject indestructableWallPrefab;
+	GameObject destructableWallPrefab;	
+	GameObject upgradePrefab;
+	
 	private string[] maps;
+	
+	GridSystem gridSystem;
 
-	void Start ()
-	{
+	void Start () {
 		maps = new string[10];
 		maps [1] = "Maps/map1";
 		maps [2] = "Maps/map2";
+		loadResources();
+		loadScripts();
 	}
 	
-	public void buildMap (bool[,] indestructable, bool[,] destructable, int mapID) {
+	public void buildMap (GameObject[,] indestructable, GameObject[,] destructable, int mapID) {
 		TextAsset mapFile;
 		StringReader mapReader;
 		
@@ -35,10 +47,15 @@ public class MapBuilder : MonoBehaviour
 			gridX = 0;
 			foreach (char mapUnit in inputFileLine) {
 				if (mapUnit == INDESTRUCTABLE_WALL) {
-					indestructable [gridX, gridY] = true;
+					indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
+					indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
 				}
 				if (mapUnit == DESTRUCTABLE_WALL) {
-					destructable [gridX, gridY] = true;
+					destructable[gridX, gridY] = Instantiate(destructableWallPrefab) as GameObject;
+					destructable[gridX, gridY].GetComponent<DestructibleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
+				}
+				if (mapUnit == UPGRADE) {
+					spawnUpgrade(gridX, gridY);
 				}
 				gridX++;
 			}
@@ -46,11 +63,33 @@ public class MapBuilder : MonoBehaviour
 		}
 	}
 	
+	#region Initialization Methods
+	private void loadResources() {
+		indestructableWallPrefab = Resources.Load(INDESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;
+		destructableWallPrefab = Resources.Load(DESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;	
+		upgradePrefab = Resources.Load(UPGRADE_PREFAB_PATH) as GameObject;
+	}
+	
+	private void loadScripts() {
+		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
+	}
+	#endregion
+	
 	private TextAsset loadMapFile(int mapID) {
 		string mapToLoad = maps [mapID];
 		if (mapToLoad == null) {
 			Debug.Log ("MapID " + mapID + " does not exist.");
 		}	
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
+	}
+	
+	private void spawnUpgrade(int x, int y) {
+		Vector3 position;
+		position.y = 0;
+		position.x = gridSystem.getXCoord(x);
+		position.z = gridSystem.getYCoord(y);
+		
+		GameObject upgrade = Instantiate(upgradePrefab) as GameObject;
+		upgrade.transform.position = position;
 	}
 }

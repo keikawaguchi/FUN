@@ -16,13 +16,13 @@ public class UpgradePickUp : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (shouldSpawnNewUpgrade ()) {
+		if (shouldSpawnNewUpgrade()) {
 			spawnRandomUpgrade();
 		}
 	}
 	
 	public void OnTriggerEnter(Collider player) {
-		if(player.tag == "Player") {
+		if (player.tag == "Player") {
 			upgradePickedUp();
 		}
 	}
