@@ -47,12 +47,10 @@ public class MapBuilder : MonoBehaviour {
 			gridX = 0;
 			foreach (char mapUnit in inputFileLine) {
 				if (mapUnit == INDESTRUCTABLE_WALL) {
-					indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
-					indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
+					spawnIndestructableWall(gridX, gridY, indestructable);
 				}
 				if (mapUnit == DESTRUCTABLE_WALL) {
-					destructable[gridX, gridY] = Instantiate(destructableWallPrefab) as GameObject;
-					destructable[gridX, gridY].GetComponent<DestructibleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
+					spawnDestructableWall(gridX, gridY, destructable);
 				}
 				if (mapUnit == UPGRADE) {
 					spawnUpgrade(gridX, gridY);
@@ -81,6 +79,16 @@ public class MapBuilder : MonoBehaviour {
 			Debug.Log ("MapID " + mapID + " does not exist.");
 		}	
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
+	}
+	
+	private void spawnIndestructableWall(int gridX, int gridY, GameObject[,] indestructable) {
+		indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
+		indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
+	}
+	
+	private void spawnDestructableWall(int gridX, int gridY, GameObject[,] destructable) {
+		destructable[gridX, gridY] = Instantiate(destructableWallPrefab) as GameObject;
+		destructable[gridX, gridY].GetComponent<DestructibleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
 	}
 	
 	private void spawnUpgrade(int x, int y) {
