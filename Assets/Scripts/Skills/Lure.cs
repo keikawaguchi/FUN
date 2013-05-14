@@ -23,7 +23,9 @@ public class Lure : MonoBehaviour {
 	private float lureUnitSpawnDelayInSeconds;
 	private float numberOfLureUnitsToSpawn;
 	private float timeOfLastLureUnitSpawn;
+	private GameObject lureOwner;
 	private GameObject grabbedPlayer;
+	private Vector3 pullToLocation;
 	
 	private State currentState;
 	private Stack lureUnitStack;
@@ -60,6 +62,14 @@ public class Lure : MonoBehaviour {
 	}
 	
 	#region Public Methods
+	public void setPullToLocation(Vector3 location) {
+		pullToLocation = location;
+	}
+	
+	public void setLureOwner(GameObject owner) {
+		lureOwner = owner;
+	}
+	
 	public bool isComplete() {	
 		return lureUnitStack.Count < 1;
 	}
@@ -146,6 +156,11 @@ public class Lure : MonoBehaviour {
 		lastLureUnit = lureUnitStack.Peek() as GameObject;
 		lureUnitScript = lastLureUnit.GetComponent<LureUnit>();
 		grabbedPlayer = lureUnitScript.getGrabbedPlayer();
+		
+		// if lure collides with person that shot it
+		if (grabbedPlayer == lureOwner) {
+			grabbedPlayer = null;
+		}
 
 		if (grabbedPlayer != null) {
 			Debug.Log("Lure: Collision with player!");
@@ -161,7 +176,7 @@ public class Lure : MonoBehaviour {
 		}
 		
 		if (isComplete ()) {
-			grabbedPlayer.transform.position = transform.position;
+			grabbedPlayer.transform.position = pullToLocation;
 			return;
 		}	
 		

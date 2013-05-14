@@ -64,6 +64,8 @@ public class TemptressBehavior : MonoBehaviour {
 			}
 			
 			currentLure = Instantiate(lureSkillPrefab) as GameObject;
+			currentLure.GetComponent<Lure>().setLureOwner(gameObject);
+			currentLure.GetComponent<Lure>().setPullToLocation(transform.position);
 			currentLure.transform.position = this.transform.position;
 			currentLure.transform.position += aimDirection * playerHeight;
 			
