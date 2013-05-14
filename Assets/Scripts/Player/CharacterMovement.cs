@@ -98,6 +98,9 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private void updateAimDirection() {
 		aimDirection.y = 0;
+		if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) {
+			return;
+		}
 		aimDirection.x = Input.GetAxis("Horizontal");
 		aimDirection.z = Input.GetAxis("Vertical");
 	}
