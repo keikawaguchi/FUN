@@ -10,9 +10,7 @@ public class AI : MonoBehaviour {
 	
 	private const float MAX_STUN_TIME = 4f;
 	
-	public float speed = 100f;
-	public float directionChangetInterval = 2f;
-	private float lastDirectionChangeTime;
+	public float speed = 50f;
 	private float speedModifierPercentage = 100f;
 	private Vector3 aimDirection;
 	private Vector3 movement;
@@ -28,7 +26,6 @@ public class AI : MonoBehaviour {
 		currentMovementState = MovementState.CanMove;
 		loadScripts();
 		stunInterval = 0f;
-		lastDirectionChangeTime = -999f;
 	}
 	
 	public void Update() {
@@ -71,26 +68,17 @@ public class AI : MonoBehaviour {
 	
 	private void loadScripts() {
 		map = GameObject.Find("Map").GetComponent<Map>();
-		if (map == null) {
-			Debug.Log("Map is null");
-		}
-		
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
-		if (gridSystem == null) {
-			Debug.Log("GridSystem is null");
-		}
 	}
 	
 	private void translateInputToMovement() {
-		if (Time.time - lastDirectionChangeTime < directionChangetInterval){
-			return;
-		}
-		
-		lastDirectionChangeTime = Time.time;
-		float randomMovement = Random.Range(-1f, 1f);
 		movement.y = 0;
-		movement.x = randomMovement * calculateSpeed();
-		movement.z = randomMovement * calculateSpeed();
+		if (movement.x == 0) {
+			movement.x = Random.Range(-1f, 1f) * calculateSpeed();
+		}
+		if (movement.z == 0) {
+			movement.z = Random.Range(-1f, 1f) * calculateSpeed();
+		}
 	}
 	
 	private void applyMovement() {
