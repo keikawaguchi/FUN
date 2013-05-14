@@ -22,7 +22,7 @@ public class UpgradePickUp : MonoBehaviour {
 	}
 	
 	public void OnTriggerEnter(Collider player) {
-		if (player.name == "Temptress") {
+		if (player.tag == "Player") {
 			upgradePickedUp();
 		}
 	}
