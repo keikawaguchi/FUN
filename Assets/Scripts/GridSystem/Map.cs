@@ -19,16 +19,15 @@ public class Map : MonoBehaviour {
 	
 	#region Public Methods
 	public bool isGridFull(float x, float y) {
-		int xCoord = gridSystem.getXPos(x);
-		int yCoord = gridSystem.getYPos(y);	
-		return (grid[xCoord, yCoord] != null) 
-			|| (destructibleWallGrid[xCoord, yCoord] != null);
+		return isGridFull(gridSystem.getXPos(x), gridSystem.getYPos(y));
 	}
 	public bool isGridFull(int x, int y) {
-		return (grid[x, y] != null) 
-			|| (destructibleWallGrid[x, y] != null);
+		return (grid[x, y] != null) || (destructibleWallGrid[x, y] != null);
 	}
 	
+	public GameObject getObjectAtGridLocation(float x, float y) {
+		return getObjectAtGridLocation(gridSystem.getXPos(x), gridSystem.getYPos(y));
+	}
 	public GameObject getObjectAtGridLocation(int x, int y) {
 		int playerPositionX = 0;
 		int playerPositionY = 0;

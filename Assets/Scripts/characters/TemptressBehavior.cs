@@ -67,9 +67,8 @@ public class TemptressBehavior : MonoBehaviour {
 		}
 	}
 	
-	private void LoveStruckButtonPress()
-	{
-		Debug.Log ("LOVESTRUCK");
+	private void LoveStruckButtonPress() {
+		Debug.Log ("LoveStruck skill used");
 		GameObject temp;
 		Map map = GameObject.Find("Map").GetComponent<Map>();
 		
