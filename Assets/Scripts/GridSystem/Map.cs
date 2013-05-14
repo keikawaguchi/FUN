@@ -32,8 +32,9 @@ public class Map : MonoBehaviour {
 	public GameObject getObjectAtGridLocation(int x, int y) {
 		int playerPositionX = 0;
 		int playerPositionY = 0;
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		
+		// Check for players first
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		for (int i = 0; i < players.Length; i++) {
 			playerPositionX = gridSystem.getXPos(players[i].transform.position.x);
 			playerPositionY = gridSystem.getYPos(players[i].transform.position.z);
@@ -41,6 +42,16 @@ public class Map : MonoBehaviour {
 				return players[i];
 			}
 		}
+		
+		// If no players, check if a wall exists
+		if (grid[x, y] != null) {
+			return grid[x, y];
+		}
+		
+		if (destructibleWallGrid[x, y] != null) {
+			return destructibleWallGrid[x, y];
+		}
+		
 		return null;
 	}
 	
