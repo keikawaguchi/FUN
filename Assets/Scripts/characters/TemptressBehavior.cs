@@ -8,6 +8,7 @@ public class TemptressBehavior : MonoBehaviour {
 	const string LOVESTRUCK_BUTTON = "Fire2";
 	
 	private CharacterMovement characterMovement;
+	private Player1Controller controller;
 	private GameObject lureSkillPrefab;
 	private GameObject currentLure;
 
@@ -17,7 +18,7 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(Input.GetButtonDown(LOVESTRUCK_BUTTON))
+		if(Input.GetButtonDown(controller.getButton("skill_2")))
 		{
 			LoveStruckButtonPress();
 		}
@@ -42,21 +43,16 @@ public class TemptressBehavior : MonoBehaviour {
 	#region Initialization Methods
 	private void loadSkills() {
 		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
-		if (lureSkillPrefab == null) {
-			Debug.Log ("Temptress: Lure skill loaded unsuccessfully");	
-		}
-		else {
-			Debug.Log ("Temptress: Lure skill loaded successfully");	
-		}
 	}
 	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
+		controller = GetComponent<Player1Controller>();
 	}
 	#endregion
 	
 	private void checkLureButtonPress() {
-		if (Input.GetButtonDown(LURE_BUTTON)) {
+		if (Input.GetButtonDown(controller.getButton("skill_1"))) {
 			float playerHeight = this.transform.localScale.z;
 			Vector3 aimDirection = characterMovement.getAimDirection();
 			if (aimDirection == new Vector3(0, 0, 0)) {
