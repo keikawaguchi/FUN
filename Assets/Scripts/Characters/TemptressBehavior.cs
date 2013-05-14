@@ -70,42 +70,43 @@ public class TemptressBehavior : MonoBehaviour {
 	private void LoveStruckButtonPress() {
 		Debug.Log ("LoveStruck skill used");
 		GameObject temp;
-		Map map = GameObject.Find("Map").GetComponent<Map>();
+		Map map = GameObject.Find ("Map").GetComponent<Map>();
+		GridSystem GS = GameObject.Find("Map").GetComponent<GridSystem>();
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x, transform.position.z);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x+1, (int)transform.position.z);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x+1, transform.position.z);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x+2, (int)transform.position.z);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x+2, transform.position.z);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x-1, (int)transform.position.z);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x-1, transform.position.z);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x-2, (int)transform.position.z);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x-2, transform.position.z);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z+1);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x, transform.position.z+1);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z+2);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x, transform.position.z+2);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z-1);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;
+		temp = map.getObjectAtGridLocation(transform.position.x, transform.position.z-1);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
 		
-		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z-2);
-		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 50;		
+		temp = map.getObjectAtGridLocation(transform.position.x, transform.position.z-2);
+		if(temp != null && temp != gameObject)
+			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);	
 	}
 }
