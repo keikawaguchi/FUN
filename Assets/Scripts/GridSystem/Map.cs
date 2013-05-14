@@ -7,6 +7,7 @@ public class Map : MonoBehaviour {
 	
 	public GameObject[,] grid;
 	public GameObject[,] destructibleWallGrid;
+	private GameObject[,] impassableObjects;
 	
 	GridSystem gridSystem;
 	MapBuilder mapBuilder;
@@ -22,7 +23,9 @@ public class Map : MonoBehaviour {
 		return isGridFull(gridSystem.getXPos(x), gridSystem.getYPos(y));
 	}
 	public bool isGridFull(int x, int y) {
-		return (grid[x, y] != null) || (destructibleWallGrid[x, y] != null);
+		return (grid[x, y] != null) 
+			|| (destructibleWallGrid[x, y] != null) 
+			|| (impassableObjects[x, y] != null);
 	}
 	
 	public GameObject getObjectAtGridLocation(float x, float y) {
@@ -42,7 +45,12 @@ public class Map : MonoBehaviour {
 			}
 		}
 		
-		// If no players, check if a wall exists
+		// Check for random impassable objects
+		if (impassableObjects[x, y] != null) {
+			return impassableObjects[x, y];
+		}
+		
+		// Check if a wall exists
 		if (grid[x, y] != null) {
 			return grid[x, y];
 		}
@@ -68,6 +76,17 @@ public class Map : MonoBehaviour {
 			Destroy(destructibleWallGrid[x, y].gameObject);
 			destructibleWallGrid[x, y] = null;	
 		}
+	}
+	
+	public bool addImpassableObject(float x, float y, GameObject obj) {
+		return addImpassableObject(gridSystem.getXPos(x), gridSystem.getYPos(y), obj);
+	}
+	public bool addImpassableObject(int x, int y, GameObject obj) {
+		if (impassableObjects[x, y] != null) {
+			return false;
+		}
+		impassableObjects[x, y] = obj;
+		return true;
 	}
 	#endregion
 	
@@ -96,11 +115,13 @@ public class Map : MonoBehaviour {
 				
 		grid = new GameObject[gridWidth, gridHeight];
 		destructibleWallGrid = new GameObject[gridWidth, gridHeight];
+		impassableObjects = new GameObject[gridWidth, gridHeight];
 
 		for (int x = 0; x < gridWidth; x++) {
 			for (int y = 0; y < gridHeight; y++) {
 				grid[x,y] = null;
 				destructibleWallGrid[x,y] = null;
+				impassableObjects[x, y] = null;
 			}
 		}
 	}

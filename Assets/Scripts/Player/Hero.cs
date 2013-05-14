@@ -17,6 +17,7 @@ public class Hero : MonoBehaviour {
 	
 	private GameObject bomb;
 	private GridSystem gridSystem;
+	private Map map;
 
 	void Start () {
 		loadResources();
@@ -70,14 +71,12 @@ public class Hero : MonoBehaviour {
 	
 	private void loadScripts() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
-		if (gridSystem == null) {
-			Debug.Log ("Hero.cs: Grid system is null");
-		}
+		map = GameObject.Find("Map").GetComponent<Map>();
 	} 
 	#endregion
 	
 	private void handleControllerInput() {
-		if (Input.GetButtonDown (BOMB_DROP_BUTTON)) {
+		if (Input.GetButtonDown(BOMB_DROP_BUTTON)) {
 			dropBomb();
 		}
 	}
@@ -86,11 +85,12 @@ public class Hero : MonoBehaviour {
 		if (Time.time - timeOfLastBombDrop < dropBombCoolDownSeconds) {
 			return;
 		}
-		GameObject instantiateBomb = Instantiate (bomb) as GameObject;
+		GameObject instantiateBomb = Instantiate(bomb) as GameObject;
 
 		// place bomb in closest grid position
 		int xCoord = gridSystem.getXPos(transform.position.x);
 		int yCoord = gridSystem.getYPos(transform.position.z);
+		
 		Vector3 bombLocation = new Vector3(gridSystem.getXCoord(xCoord), 0f, gridSystem.getYCoord(yCoord));
 		instantiateBomb.transform.position = bombLocation;
 		BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();

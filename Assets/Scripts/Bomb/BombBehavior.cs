@@ -6,20 +6,21 @@ public class BombBehavior : MonoBehaviour {
 	const string EXPLOSION_PREFAB_PATH = "Prefabs/Bomb/Explosion";
 	
 	public float explosionPrefabDelayInSeconds = 1.5f;
-	private float spawnTime;
-	
-	GameObject explosionPrefab;
-	
 	public float bombX = 4;
 	public float bombZ = 3;
+	private float spawnTime;
 	
+	private GameObject explosionPrefab;
+	
+	private Map map;
+
 	void Start() {
 		loadBombPrefab();
+		loadScripts();
 		spawnTime = Time.time;
 	}
 	
-	public void setter(float x, float z)
-	{
+	public void setter(float x, float z) {
 		bombX = x;
 		bombZ = z;
 	}
@@ -30,10 +31,8 @@ public class BombBehavior : MonoBehaviour {
 		}
 	}
 	
-	public void OnTriggerEnter(Collider theCollision)
-	{
-		if(theCollision.gameObject.name == "Explosion")
-		{
+	public void OnTriggerEnter(Collider theCollision) {
+		if(theCollision.gameObject.name == "Explosion") {
 			explode();
 		}
 	}
@@ -46,6 +45,19 @@ public class BombBehavior : MonoBehaviour {
 		}
 		else {
 			Debug.Log ("Explosion loaded successfully");
+		}
+	}
+	
+	private void loadScripts() {
+		map = GameObject.Find("Map").GetComponent<Map>();
+	}
+	
+	private void addBombToMap() {
+		bool addedBombToMap;
+		addedBombToMap = 
+			map.addImpassableObject(transform.position.x, transform.position.z, this.gameObject);
+		if (!addedBombToMap) {
+			Destroy(gameObject);
 		}
 	}
 	#endregion

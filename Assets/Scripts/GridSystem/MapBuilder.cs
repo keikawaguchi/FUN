@@ -28,6 +28,7 @@ public class MapBuilder : MonoBehaviour {
 		loadScripts();
 	}
 	
+	#region Public Methods
 	public void buildMap (GameObject[,] indestructable, GameObject[,] destructable, int mapID) {
 		TextAsset mapFile;
 		StringReader mapReader;
@@ -61,6 +62,27 @@ public class MapBuilder : MonoBehaviour {
 		}
 	}
 	
+	public void spawnIndestructableWall(int gridX, int gridY, GameObject[,] indestructable) {
+		indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
+		indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
+	}
+	
+	public void spawnDestructableWall(int gridX, int gridY, GameObject[,] destructable) {
+		destructable[gridX, gridY] = Instantiate(destructableWallPrefab) as GameObject;
+		destructable[gridX, gridY].GetComponent<DestructibleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
+	}
+	
+	public void spawnUpgrade(int x, int y) {
+		Vector3 position;
+		position.y = 0;
+		position.x = gridSystem.getXCoord(x);
+		position.z = gridSystem.getYCoord(y);
+		
+		GameObject upgrade = Instantiate(upgradePrefab) as GameObject;
+		upgrade.transform.position = position;
+	}
+	#endregion
+	
 	#region Initialization Methods
 	private void loadResources() {
 		indestructableWallPrefab = Resources.Load(INDESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;
@@ -80,24 +102,5 @@ public class MapBuilder : MonoBehaviour {
 		}	
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
 	}
-	
-	private void spawnIndestructableWall(int gridX, int gridY, GameObject[,] indestructable) {
-		indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
-		indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
-	}
-	
-	private void spawnDestructableWall(int gridX, int gridY, GameObject[,] destructable) {
-		destructable[gridX, gridY] = Instantiate(destructableWallPrefab) as GameObject;
-		destructable[gridX, gridY].GetComponent<DestructibleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
-	}
-	
-	private void spawnUpgrade(int x, int y) {
-		Vector3 position;
-		position.y = 0;
-		position.x = gridSystem.getXCoord(x);
-		position.z = gridSystem.getYCoord(y);
-		
-		GameObject upgrade = Instantiate(upgradePrefab) as GameObject;
-		upgrade.transform.position = position;
-	}
+
 }
