@@ -3,67 +3,58 @@ using System.Collections;
 
 public class UpgradePickUp : MonoBehaviour {
 	
-	int upgradeType;
-	// Use this for initialization
-	void Start () 
-	{
-		upgradeType = Random.Range(1,4);
-		if( upgradeType == 1)
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/SpeedUpgrade") as Material;
-			renderer.name = "SpeedUpgrade";
-			renderer.enabled = true;
-		}
-		else if( upgradeType == 2 )
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/ExplosionUpgrade") as Material;
-			renderer.name = "ExplosionUpgrade";
-			renderer.enabled = true;
-		}
-		else if( upgradeType == 3 )
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/BombUpgrade") as Material;
-			renderer.name = "BombUpgrade";
-			renderer.enabled = true;
+	const string SPEED_UPGRADE_PREFAB = "Materials/SpeedUpgrade";
+	const string EXPLOSION_UPGRADE_PREFAB = "Materials/SpeedUpgrade";
+	const string BOMB_UPGRADE_PREFAB = "Materials/BombUpgrade";
+	
+	public float upgradeRespawnTime = 30.0f;
+	private int upgradeType;
+	private float timeOfLastSpawn;
+	
+	void Start ()  {
+		spawnRandomUpgrade();
+	}
+	
+	void Update() {
+		if (shouldSpawnNewUpgrade ()) {
+			spawnRandomUpgrade();
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
+	public void OnTriggerEnter(Collider player) {
+		if(player.tag == "Player") {
+			upgradePickedUp();
+		}
 	}
 	
-	public void OnTriggerEnter(Collider player)
-	{
-		if(player.name == "Temptress")
-			StartCoroutine(wait());
+	private bool shouldSpawnNewUpgrade() {
+		return (Time.time - timeOfLastSpawn > upgradeRespawnTime)
+			&& (renderer.enabled == false);
 	}
 	
-	public IEnumerator wait()
-	{
+	private void upgradePickedUp() {
 		renderer.enabled = false;
+	}
+	
+	private void spawnRandomUpgrade() {
+		timeOfLastSpawn = Time.time;
+		upgradeType = Random.Range(1,3);
 		
-		yield return new WaitForSeconds(30);
-		
-		upgradeType = Random.Range(1,4);
-		if( upgradeType == 1)
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/SpeedUpgrade") as Material;
+		if( upgradeType == 1) {
+			GetComponent<MeshRenderer>().renderer.material = Resources.Load (SPEED_UPGRADE_PREFAB) as Material;
 			renderer.name = "SpeedUpgrade";
-			renderer.enabled = true;
-		}
-		else if( upgradeType == 2 )
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/ExplosionUpgrade") as Material;
-			renderer.name = "ExplosionUpgrade";
-			renderer.enabled = true;
-		}
-		else if( upgradeType == 3 )
-		{
-			GetComponent<MeshRenderer>().renderer.material = Resources.Load ("Materials/BombUpgrade") as Material;
-			renderer.name = "BombUpgrade";
-			renderer.enabled = true;
 		}
 		
+		if( upgradeType == 2 ) {
+			GetComponent<MeshRenderer>().renderer.material = Resources.Load (EXPLOSION_UPGRADE_PREFAB) as Material;
+			renderer.name = "ExplosionUpgrade";
+		}
+		
+		if( upgradeType == 3 ) {
+			GetComponent<MeshRenderer>().renderer.material = Resources.Load (BOMB_UPGRADE_PREFAB) as Material;
+			renderer.name = "BombUpgrade";
+		}
+		
+		renderer.enabled = true;
 	}
 }
