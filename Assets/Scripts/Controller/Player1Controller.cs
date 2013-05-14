@@ -8,9 +8,9 @@ public class Player1Controller : MonoBehaviour {
 	
 	void Start() {
 		buttons = new OrderedDictionary();
-		buttons["drop_bomb"] = "Jump";
-		buttons["skill_1"] = "Fire1";
-		buttons["skill_2"] = "Fire2";
+		buttons["DropBomb"] = "Jump";
+		buttons["Skill1"] = "Fire1";
+		buttons["Skill2"] = "Fire2";
 	}
 	
 	public string getButton(string action) {
