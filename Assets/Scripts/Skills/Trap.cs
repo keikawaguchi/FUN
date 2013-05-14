@@ -26,8 +26,4 @@ public class Trap : MonoBehaviour {
 			Destroy (gameObject);
 		}
 	}
-	
-//	private IEnumerator Wait(float sec) {
-//		yield return new WaitForSeconds(sec);
-//	}
 }

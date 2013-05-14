@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Stun : MonoBehaviour {
 	private const string STUN_BUTTON = "Jump";
-	private const string TRAP_PREFAB_PATH = "Prefabs/Trap";
+	private const string TRAP_PREFAB_PATH = "Prefabs/Skills/Trap";
 	 
 	private GameObject trap;
 	private GameObject heroObj;

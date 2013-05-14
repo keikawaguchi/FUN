@@ -16,7 +16,7 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(Input.GetButtonDown(controller.getButton("skill_2")))
+		if(Input.GetButtonDown(controller.getButton("Skill2")))
 		{
 			LoveStruckButtonPress();
 		}
@@ -50,7 +50,7 @@ public class TemptressBehavior : MonoBehaviour {
 	#endregion
 	
 	private void checkLureButtonPress() {
-		if (Input.GetButtonDown(controller.getButton("skill_1"))) {
+		if (Input.GetButtonDown(controller.getButton("Skill1"))) {
 			float playerHeight = this.transform.localScale.z;
 			Vector3 aimDirection = characterMovement.getAimDirection();
 			if (aimDirection == new Vector3(0, 0, 0)) {
