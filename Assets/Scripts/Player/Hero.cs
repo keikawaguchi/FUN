@@ -12,6 +12,8 @@ public class Hero : MonoBehaviour {
 	private float timeOfLastBombDrop;
 	private float deathTimer = 0f;
 	
+	private float lives = 5;
+	
 	public float bombX = 4;
 	public float bombZ = 3;
 	
@@ -32,7 +34,12 @@ public class Hero : MonoBehaviour {
 		if (deathTimer > 0) {
 				
 			// how long a hero is dead should be grabbed from another script
-			if (Time.time - deathTimer > 2.0f) {
+			if (lives == 0) {
+				Debug.Log ("Game Over");
+			} else if (deathTimer != 0 && Time.time - deathTimer > 2.0f) {
+				lives--;
+				
+				Debug.Log ("Lives Left: " + lives);
 				deathTimer = 0;
 				GetComponent<MeshRenderer>().enabled = true;
 				
