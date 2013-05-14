@@ -12,10 +12,11 @@ public class Blink : MonoBehaviour {
 	private CharacterMovement characterMovement;
 	private float singleGridSize;
 	private float blinkDistance;
+	private Vector3 blinkPos;
+	private bool blinked;
 
 	// Use this for initialization
 	void Start () {
-		heroObj = GameObject.Find ("Hero");
 		GameObject mapObj = GameObject.Find ("Map");
 		map = mapObj.GetComponent<Map>();
 		gridSystem = mapObj.GetComponent<GridSystem>();
@@ -23,6 +24,7 @@ public class Blink : MonoBehaviour {
 		
 		singleGridSize = gridSystem.getSingleGridWidth();
 		blinkDistance = singleGridSize * BLINK_UNITS;
+		blinked = false;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +36,9 @@ public class Blink : MonoBehaviour {
 		 * 3. Jump onto bombs
 		 */
 		
-		if (Input.GetButtonDown(BLINK_BUTTON)) {
+//		if (Input.GetButtonDown(BLINK_BUTTON)) {
+		if (!blinked) {  // same here, why do i need this??????
+			blinked = true;
 			Vector3 newPos = heroObj.transform.position;
 			Vector3 lastPos = heroObj.transform.position;
 			Vector3 blinkDirection = characterMovement.getAimDirection();
@@ -70,6 +74,11 @@ public class Blink : MonoBehaviour {
 					newPos.x = gridSystem.getXCoord(gridSystem.getXPos (newPos.x) - 1);
 			}
 			heroObj.transform.position = newPos;  // teleport to facing direction
+//		}
 		}
+	}
+	
+	public void SetGameObject(GameObject obj) {
+		heroObj = obj;
 	}
 }
