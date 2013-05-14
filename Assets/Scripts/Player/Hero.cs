@@ -7,7 +7,11 @@ public class Hero : MonoBehaviour {
 	const string BOMB_DROP_BUTTON = "Jump";
 	
 	public float dropBombCoolDownSeconds = 1.5f;
+	
+	// timers
 	private float timeOfLastBombDrop;
+	private float deathTimer = 0f;
+	
 	public float bombX = 4;
 	public float bombZ = 3;
 	
@@ -22,12 +26,26 @@ public class Hero : MonoBehaviour {
 	
 	void Update () {	
 		handleControllerInput();
+		
+		// check if dead
+		if (deathTimer > 0) {
+				
+			// how long a hero is dead should be grabbed from another script
+			if (Time.time - deathTimer > 5.0f) {
+				deathTimer = 0;
+				GetComponent<MeshRenderer>().enabled = true;
+				
+				// call gridsystem to get a respawn point
+				transform.position = new Vector3(-112.3f, 0f, -79f);
+			}
+		}
 	}
 	
 	public void OnTriggerEnter(Collider collider) {
 		if (collider.gameObject.tag == "KillsPlayer") {
-			Debug.Log("Player DEAD");
-			renderer.material.color = new Color(1.0f, 0.0f, 0.0f);
+			
+			GetComponent<MeshRenderer>().enabled = false;
+			deathTimer = Time.time;
 		}
 		
 		if(collider.name == "BombUpgrade")
