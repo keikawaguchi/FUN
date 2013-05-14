@@ -4,8 +4,6 @@ using System.Collections;
 public class TemptressBehavior : MonoBehaviour {
 	
 	const string LURE_PREFAB_PATH = "Prefabs/Skills/Lure";
-	const string LURE_BUTTON = "Fire1";
-	const string LOVESTRUCK_BUTTON = "Fire2";
 	
 	private CharacterMovement characterMovement;
 	private Player1Controller controller;
