@@ -34,7 +34,7 @@ public class Map : MonoBehaviour {
 		int playerPositionY = 0;
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		
-		for (int i = 0; players[i] != null; i++) {
+		for (int i = 0; i < players.Length; i++) {
 			playerPositionX = gridSystem.getXPos(players[i].transform.position.x);
 			playerPositionY = gridSystem.getYPos(players[i].transform.position.z);
 			if (playerPositionX == x && playerPositionY == y) {
