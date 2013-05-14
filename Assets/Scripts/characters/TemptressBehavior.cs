@@ -81,38 +81,38 @@ public class TemptressBehavior : MonoBehaviour {
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x+1, (int)transform.position.z);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x+2, (int)transform.position.z);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x-1, (int)transform.position.z);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x-2, (int)transform.position.z);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z+1);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z+2);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z-1);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;
+			temp.GetComponent<CharacterMovement>().speed = 50;
 		
 		temp = map.getObjectAtGridLocation((int)transform.position.x, (int)transform.position.z-2);
 		if(temp != null)
-			temp.GetComponent<CharacterMovement>().speed = 10;		
+			temp.GetComponent<CharacterMovement>().speed = 50;		
 	}
 }
