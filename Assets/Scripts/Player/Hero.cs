@@ -53,6 +53,11 @@ public class Hero : MonoBehaviour {
 			if(dropBombCoolDownSeconds > 0)
 				dropBombCoolDownSeconds-=.5f;
 		}
+		if(collider.name == "ExplosionUpgrade")
+		{
+			bombX++;
+			bombZ++;
+		}
 	}
 	
 	#region Initialization Methods
@@ -88,6 +93,8 @@ public class Hero : MonoBehaviour {
 		int yCoord = gridSystem.getYPos(transform.position.z);
 		Vector3 bombLocation = new Vector3(gridSystem.getXCoord(xCoord), 0f, gridSystem.getYCoord(yCoord));
 		instantiateBomb.transform.position = bombLocation;
+		BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();
+		boom.setter(bombX,bombZ);
 		
 		timeOfLastBombDrop = Time.time;
 	}

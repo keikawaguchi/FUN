@@ -9,13 +9,21 @@ public class BombBehavior : MonoBehaviour {
 	private float spawnTime;
 	
 	GameObject explosionPrefab;
-
+	
+	public float bombX = 4;
+	public float bombZ = 3;
 	
 	void Start() {
 		loadBombPrefab();
 		spawnTime = Time.time;
 	}
-
+	
+	public void setter(float x, float z)
+	{
+		bombX = x;
+		bombZ = z;
+	}
+	
 	void Update() {
 		if (isTimeToExplode()) {
 			explode();
@@ -47,8 +55,11 @@ public class BombBehavior : MonoBehaviour {
 	}
 	
 	void explode() {
+		Explosion boom;
 		Debug.Log("Bomb Exploded...");
 		GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+		boom = explosion.GetComponent<Explosion>();
+		boom.setter(bombX,bombZ);
 		explosion.transform.position = this.transform.position;
 		Destroy(gameObject);
 	}

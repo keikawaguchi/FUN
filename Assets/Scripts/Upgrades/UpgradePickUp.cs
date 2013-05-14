@@ -39,7 +39,7 @@ public class UpgradePickUp : MonoBehaviour {
 	
 	private void spawnRandomUpgrade() {
 		timeOfLastSpawn = Time.time;
-		upgradeType = Random.Range(1,3);
+		upgradeType = Random.Range(1,4);
 		
 		if( upgradeType == 1) {
 			GetComponent<MeshRenderer>().renderer.material = Resources.Load (SPEED_UPGRADE_PREFAB) as Material;

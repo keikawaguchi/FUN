@@ -25,6 +25,12 @@ public class Explosion : MonoBehaviour {
 	
 	private GridSystem gridSystem;
 	private Map map;
+	
+	public void setter(float x, float z)
+	{
+		explosionDistanceX = x;
+		explosionDistanceZ = z;
+	}
 
 	void Start() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
