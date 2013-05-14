@@ -7,15 +7,17 @@ public class Map : MonoBehaviour {
 	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Destructuble Wall";
 	const string UPGRADE_PREFAB_PATH = "Prefabs/Upgrade";
 	
-	public GameObject indestructableBlockPrefab;
-	public GameObject destructableBlockPrefab;
+	public int mapID = 1;
+	
+	private GameObject indestructableBlockPrefab;
+	private GameObject destructableBlockPrefab;
 	private GameObject upgrade;
 	
 	public bool[,] grid;
 	public bool[,] destructibleWallGrid;
 	
 	GridSystem gridSystem;
-
+	MapBuilder mapBuilder;
 
 	void Start () {
 		loadResources();
@@ -28,10 +30,10 @@ public class Map : MonoBehaviour {
 	public bool isGridFull(float x, float y) {
 		int xCoord = gridSystem.getXPos(x);
 		int yCoord = gridSystem.getYPos(y);	
-		return grid[xCoord, yCoord];
+		return grid[xCoord, yCoord] || destructibleWallGrid[xCoord, yCoord];
 	}
 	public bool isGridFull(int x, int y) {
-		return grid[x, y];
+		return grid[x, y] || destructibleWallGrid[x, y];
 	}
 	
 	public GameObject getObjectAtGridLocation(int x, int y) {
@@ -47,6 +49,17 @@ public class Map : MonoBehaviour {
 			}
 		}
 		return null;
+	}
+	
+	public void removeWall(int x, int y) {
+		grid[x, y] = false;
+		destructibleWallGrid[x, y] = false;
+	}
+	public void removeWall(float x, float y) {
+		int gridX = gridSystem.getXPos(x);
+		int gridY = gridSystem.getYPos(y);
+		grid[gridX, gridY] = false;
+		destructibleWallGrid[gridX, gridY] = false;
 	}
 	#endregion
 	
@@ -69,69 +82,62 @@ public class Map : MonoBehaviour {
 	}
 	
 	private void loadScripts() {
-		gridSystem = this.GetComponent<GridSystem>();
-		if (gridSystem == null) {
-			Debug.Log("GridSystem is null");
-		}
+		gridSystem = GetComponent<GridSystem>();
+		mapBuilder = GetComponent<MapBuilder>();
 	}
 	#endregion
 	
-	// creates the basic map layout with the indestructuble walls
-	private void buildMap() {
-		
+	private void buildMap() {	
+		int gridWidth = gridSystem.getGridWidth();
+		int gridHeight = gridSystem.getGridHeight();
+				
+		initializeGrids();
+		mapBuilder.buildMap (grid, destructibleWallGrid, mapID);
+		buildIndestructableWalls();
+		buildDestructableWalls();
+	}
+	
+	private void initializeGrids() {
 		int gridWidth = gridSystem.getGridWidth();
 		int gridHeight = gridSystem.getGridHeight();
 				
 		grid = new bool[gridWidth, gridHeight];
 		destructibleWallGrid = new bool[gridWidth, gridHeight];
-		
-		// initialize grid array
-		for (int x = 0; x < gridWidth; x++)
-			for (int y = 0; y < gridHeight; y++) {
-				grid[x,y] = false;
-		}
-		
-		// initialize indestructuble walls
+
 		for (int x = 0; x < gridWidth; x++) {
 			for (int y = 0; y < gridHeight; y++) {
-				
-				if (gridSystem.isEdge(x, y) || (x % 2 == 0 && y % 2 == 0)) {
-					
+				grid[x,y] = false;
+				destructibleWallGrid[x,y] = false;
+			}
+		}
+	}
+	
+	private void buildIndestructableWalls() {
+		int gridWidth = gridSystem.getGridWidth();
+		int gridHeight = gridSystem.getGridHeight();
+		
+		for (int x = 0; x < gridWidth; x++) {
+			for (int y = 0; y < gridHeight; y++) {
+				if (grid[x, y] == true) {
 					GameObject go = Instantiate(indestructableBlockPrefab) as GameObject;
 					IndestructubleWall wall = go.GetComponent<IndestructubleWall>();
-					
 					wall.initialize(gridSystem.getXCoord(x), gridSystem.getYCoord(y));
-					
-					grid[x,y] = true;
 				}
 			}
 		}
+	}
+	
+	private void buildDestructableWalls() {
+		int gridWidth = gridSystem.getGridWidth();
+		int gridHeight = gridSystem.getGridHeight();
 		
-		// initialize destructuble walls
-		for (int x = 1; x < gridWidth - 1; x++) {
-			for (int y = 1; y < gridHeight - 1; y++) {
-				
-				// don't create wall on indestructuble walls
-				if (grid[x,y])
-					continue;	
-				
-				// don't create walls in corners of map
-				if (x == 1 || x == (gridWidth - 2)) {
-					if (y == 1 || y == 2 || y == (gridHeight - 2) || y == (gridHeight - 3))
-						continue;
-				} else if (x == 2 || x == (gridWidth - 3))
-					if (y == 1 || y == (gridHeight - 2))
-						continue;
-				
-				// don't create wall in center of map
-				if (x == (gridWidth / 2) && y == (gridHeight / 2))
-					continue;
-				
-				GameObject go = Instantiate(destructableBlockPrefab) as GameObject;
-				DestructibleWall wall = go.GetComponent<DestructibleWall>();
-				wall.initialize(gridSystem.getXCoord(x), gridSystem.getYCoord(y));
-					
-				grid[x,y] = true;
+		for (int x = 0; x < gridWidth; x++) {
+			for (int y = 0; y < gridHeight; y++) {
+				if (destructibleWallGrid[x, y] == true) {
+					GameObject go = Instantiate(destructableBlockPrefab) as GameObject;
+					DestructibleWall wall = go.GetComponent<DestructibleWall>();
+					wall.initialize(gridSystem.getXCoord(x), gridSystem.getYCoord(y));
+				}
 			}
 		}
 	}

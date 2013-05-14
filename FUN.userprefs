@@ -1,14 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\Hero.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GridSystem\MapBuilder.cs">
     <Files>
-      <File FileName="Assets\Scripts\GridSystem\Map.cs" Line="18" Column="2" />
+      <File FileName="Assets\Scripts\GridSystem\Map.cs" Line="27" Column="24" />
+      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GridSystem\GridSystem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skills\Lure.cs" Line="26" Column="35" />
-      <File FileName="Assets\Scripts\characters\TemptressBehavior.cs" Line="6" Column="49" />
-      <File FileName="Assets\Scripts\Player\Hero.cs" Line="23" Column="3" />
-      <File FileName="Assets\Scripts\Bomb\BombBehavior.cs" Line="30" Column="4" />
+      <File FileName="Assets\Scripts\Skills\Lure.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\characters\TemptressBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\Hero.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Bomb\BombBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Bomb\FireBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Walls\DestructibleWall.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GridSystem\MapBuilder.cs" Line="29" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

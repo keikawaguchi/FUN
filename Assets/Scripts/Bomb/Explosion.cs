@@ -154,8 +154,8 @@ public class Explosion : MonoBehaviour {
 			int y  = gridSystem.getYPos(fireUnitPos.z);
 						
 			if (x == gridSystem.getXPos(wall.transform.position.x) && y == gridSystem.getYPos(wall.transform.position.z)) {
-				wall.transform.position = new Vector3(-200f, 0, 0);
-				map.grid[x,y] = false;
+				map.removeWall(x, y);
+				Destroy(wall.gameObject);
 				break;
 			}
         }
