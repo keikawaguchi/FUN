@@ -31,7 +31,7 @@ public class Hero : MonoBehaviour {
 		if (deathTimer > 0) {
 				
 			// how long a hero is dead should be grabbed from another script
-			if (Time.time - deathTimer > 5.0f) {
+			if (Time.time - deathTimer > 2.0f) {
 				deathTimer = 0;
 				GetComponent<MeshRenderer>().enabled = true;
 				
