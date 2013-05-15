@@ -28,10 +28,11 @@ public class Trap : MonoBehaviour {
 		//TO-DO: Fix passing in the Trap owner name
 //		Debug.Log ("Collision name: " + collision.gameObject.name);
 //		Debug.Log ("Trap owner name: " + trapOwner.name);
-		if (collision.tag == PLAYER_TAG && collision.gameObject.name != "Albion") {  // later need to check by tag
-			GameObject enemyObj = GameObject.FindGameObjectWithTag (PLAYER_TAG);  // later need to find by tag
+		// check the collision with tag and exlude the trap owner
+		if (collision.tag == PLAYER_TAG && collision.gameObject.name != "Albion") {
+			GameObject enemyObj = GameObject.FindGameObjectWithTag (PLAYER_TAG);
 			CharacterMovement characterMove = enemyObj.GetComponent<CharacterMovement>();
-			characterMove.setMovementState (CharacterMovement.MovementState.CannotMove);
+			characterMove.setMovementState (CharacterMovement.MovementState.Stunned);
 			Destroy (gameObject);
 		}
 	}
