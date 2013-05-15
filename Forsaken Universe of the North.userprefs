@@ -1,11 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Characters/AlbionBehavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/skills/Trap.cs">
     <Files>
       <File FileName="Assets/Scripts/GridSystem/Map.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Player/Hero.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Characters/AlbionBehavior.cs" Line="16" Column="16" />
-      <File FileName="Assets/Scripts/Characters/TemptressBehavior.cs" Line="14" Column="16" />
+      <File FileName="Assets/Scripts/Characters/AlbionBehavior.cs" Line="20" Column="31" />
+      <File FileName="Assets/Scripts/Characters/TemptressBehavior.cs" Line="15" Column="31" />
+      <File FileName="Assets/Scripts/skills/Trap.cs" Line="23" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
