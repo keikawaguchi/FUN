@@ -31,6 +31,7 @@ public class Controller : MonoBehaviour {
 		buttons["DropBomb"] = "ButtonAController" + controllerNumber;
 		buttons["Skill1"] = "ButtonXController" + controllerNumber;
 		buttons["Skill2"] = "ButtonBController" + controllerNumber;
+		buttons["Skill3"] = "ButtonYController" + controllerNumber;
 		buttons["HorizontalAxis"] = "HorizontalController" + controllerNumber;
 		buttons["VerticalAxis"] = "VerticalController" + controllerNumber;
 	}
