@@ -16,8 +16,8 @@ public class AlbionBehavior : MonoBehaviour {
 	private const float trapCD = 10f;
 	
 	// skill timers
-	private float blinkTimer = 0f;
-	private float trapTimer = 0f;
+	private float blinkTimer = -99f;
+	private float trapTimer = -99f;
 	
 	void Start () {
 		LoadSkills();

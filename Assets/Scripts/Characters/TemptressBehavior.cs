@@ -12,7 +12,7 @@ public class TemptressBehavior : MonoBehaviour {
 	private Controller controller;
 	
 	private const float lureCD = 5f;
-	private float lureTimer = 0f;
+	private float lureTimer = -99f;
 	
 
 	void Start () {

@@ -20,8 +20,7 @@ public class Trap : MonoBehaviour {
 			trapPlaced = true;
 		
 		visibleInberval += Time.smoothDeltaTime;
-		if (visibleInberval >= 3f)
-			renderer.enabled = false;
+
 	}
 	
 	void OnTriggerEnter(Collider collision) {
