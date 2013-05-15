@@ -53,30 +53,17 @@ public class Blink : MonoBehaviour {
 				blinkDirection.z = -1;
 			
 			newPos += blinkDirection * blinkDistance;  // blink to facing direction
+			int blinkToGridX = gridSystem.getXPos(newPos.x);
+			int blinkToGridY = gridSystem.getYPos(newPos.z);
 			
-			// check world bound with respect to x-direction
-			if (newPos.x >= gridSystem.getXCoord(gridSystem.getGridWidth()) - 1)
-				newPos.x = gridSystem.getXCoord(gridSystem.getGridWidth() - 2);  // clamp at bound
-			if (newPos.x <= gridSystem.getXCoord(GRID_MIN_COORD))
-				newPos.x = gridSystem.getXCoord(GRID_MIN_COORD + 1);
-			// check world bound with repect to y-direction
-			if (newPos.z >= gridSystem.getYCoord(gridSystem.getGridHeight()) - 1)
-				newPos.z = gridSystem.getYCoord(gridSystem.getGridHeight() - 2);  // clamp at bound
-			if (newPos.z <= gridSystem.getYCoord(GRID_MIN_COORD))
-				newPos.z = gridSystem.getYCoord(GRID_MIN_COORD + 1);
-			
-			if (map.isGridFull (newPos.x, newPos.z)) {  // check whether the grid has bomb or wall or not
-				if (newPos.x == lastPos.x && newPos.z > lastPos.z)  // blink towards top
-					newPos.z = gridSystem.getYCoord(gridSystem.getYPos (newPos.z) - 1);
-				if (newPos.x == lastPos.x && newPos.z < lastPos.z)  // blink towards bottom
-					newPos.z = gridSystem.getYCoord(gridSystem.getYPos (newPos.z) + 1);
-				if (newPos.x < lastPos.x && newPos.z == lastPos.z)  // blink towards left
-					newPos.x = gridSystem.getXCoord(gridSystem.getXPos (newPos.x) + 1);
-				if (newPos.x > lastPos.x && newPos.z == lastPos.z)  // blink towards right
-					newPos.x = gridSystem.getXCoord(gridSystem.getXPos (newPos.x) - 1);
-				newPos.x = gridSystem.getXCoord(gridSystem.getXPos(newPos.x));
-				newPos.z = gridSystem.getYCoord(gridSystem.getYPos(newPos.z));
+			while (map.isGridFull(blinkToGridX,blinkToGridY) && blinkToGridX != 0) {
+				blinkToGridX -= (int)blinkDirection.x;
+				blinkToGridY -= (int)blinkDirection.z;
 			}
+			
+			newPos.x = gridSystem.getXCoord(blinkToGridX);
+			newPos.z = gridSystem.getYCoord(blinkToGridY);
+			
 			heroObj.transform.position = newPos;  // teleport to facing direction
 		}
 	}
