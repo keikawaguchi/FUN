@@ -5,10 +5,12 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	const string LURE_PREFAB_PATH = "Prefabs/Skills/Lure";
 	
-	private CharacterMovement characterMovement;
-	private Player1Controller controller;
 	private GameObject lureSkillPrefab;
 	private GameObject currentLure;
+	
+	private CharacterMovement characterMovement;
+	private Controller controller;
+	
 
 	void Start () {
 		loadSkills();
@@ -16,8 +18,7 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(Input.GetButtonDown(controller.getButton("Skill2")))
-		{
+		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
 			LoveStruckButtonPress();
 		}
 		if (currentLure == null) {
@@ -45,7 +46,7 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Player1Controller>();
+		controller = GetComponent<Controller>();
 	}
 	#endregion
 	

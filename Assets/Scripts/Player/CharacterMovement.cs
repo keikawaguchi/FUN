@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private Map map;
 	private GridSystem gridSystem;
+	private Controller controller;
 	
 	// effects from abilities
 	private float stunInterval;
@@ -68,28 +69,21 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public void OnTriggerEnter(Collider collision) 
 	{
-		if(collision.name == "SpeedUpgrade" && speed < 200)
-		{
+		if(collision.name == "SpeedUpgrade" && speed < 200) {
 			speed += 15;
 		}
 	}
 	
 	private void loadScripts() {
 		map = GameObject.Find("Map").GetComponent<Map>();
-		if (map == null) {
-			Debug.Log("Map is null");
-		}
-		
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
-		if (gridSystem == null) {
-			Debug.Log("GridSystem is null");
-		}
+		controller = GetComponent<Controller>();
 	}
 	
 	private void translateInputToMovement() {
 		movement.y = 0;
-		movement.x = Input.GetAxis("Horizontal") * calculateSpeed();
-		movement.z = Input.GetAxis("Vertical") * calculateSpeed();
+		movement.x = controller.getAxis("Horizontal") * calculateSpeed();
+		movement.z = controller.getAxis("Vertical") * calculateSpeed();
 	}
 	
 	private void applyMovement() {
@@ -98,11 +92,11 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private void updateAimDirection() {
 		aimDirection.y = 0;
-		if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) {
+		if (controller.getAxis("Horizontal") == 0 && controller.getAxis("Vertical") == 0) {
 			return;
 		}
-		aimDirection.x = Input.GetAxis("Horizontal");
-		aimDirection.z = Input.GetAxis("Vertical");
+		aimDirection.x = controller.getAxis("Horizontal");
+		aimDirection.z = controller.getAxis("Vertical");
 	}
 	
 	private float calculateSpeed() {

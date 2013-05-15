@@ -5,7 +5,7 @@ public class AlbionBehavior : MonoBehaviour {
 	private const string STUN_PREFAB_PATH = "Prefabs/Skills/Stun";
 	private const string BLINK_PREFAB_PATH = "Prefabs/Skills/Blink";
 	
-	private Player1Controller controller;
+	private Controller controller;
 	private GameObject stunPrefab;
 	private GameObject stun;
 	private GameObject blinkPrefab;
@@ -29,7 +29,7 @@ public class AlbionBehavior : MonoBehaviour {
 	}
 	
 	private void LoadScripts() {
-		controller = GetComponent<Player1Controller>();
+		controller = GetComponent<Controller>();
 	}
 	
 	private void StunButtonPress() {

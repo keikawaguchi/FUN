@@ -4,7 +4,6 @@ using System.Collections;
 public class Hero : MonoBehaviour {
 
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
-	const string BOMB_DROP_BUTTON = "Jump";
 	
 	public float dropBombCoolDownSeconds = 1.5f;
 	
@@ -20,6 +19,7 @@ public class Hero : MonoBehaviour {
 	private GameObject bomb;
 	private GridSystem gridSystem;
 	private Map map;
+	private Controller controller;
 
 	void Start () {
 		loadResources();
@@ -79,11 +79,12 @@ public class Hero : MonoBehaviour {
 	private void loadScripts() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
 		map = GameObject.Find("Map").GetComponent<Map>();
+		controller = GetComponent<Controller>();
 	} 
 	#endregion
 	
 	private void handleControllerInput() {
-		if (Input.GetButtonDown(BOMB_DROP_BUTTON)) {
+		if (Input.GetButtonDown(controller.getButton("DropBomb"))) {
 			dropBomb();
 		}
 	}
