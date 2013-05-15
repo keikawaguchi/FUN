@@ -49,8 +49,7 @@
      <Compile Include="Assets\Scripts\Bomb\FireBehavior.cs" />
      <Compile Include="Assets\Scripts\Characters\AlbionBehavior.cs" />
      <Compile Include="Assets\Scripts\Characters\TemptressBehavior.cs" />
-     <Compile Include="Assets\Scripts\Controller\Player1Controller.cs" />
-     <Compile Include="Assets\Scripts\Controller\XboxController.cs" />
+     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyTemp.cs" />
      <Compile Include="Assets\Scripts\GlobalBehavior.cs" />
