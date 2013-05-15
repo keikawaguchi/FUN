@@ -18,6 +18,10 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (isStunned()) {
+			return;
+		}
+		
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
 			LoveStruckButtonPress();
 		}
@@ -46,6 +50,10 @@ public class TemptressBehavior : MonoBehaviour {
 		controller = GetComponent<Controller>();
 	}
 	#endregion
+	
+	private bool isStunned() {
+		return characterMovement.getMovementState() == CharacterMovement.MovementState.Stunned;
+	}
 	
 	private void checkLureButtonPress() {
 		if (Input.GetButtonDown(controller.getButton("Skill1"))) {
