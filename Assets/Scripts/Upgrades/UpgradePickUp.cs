@@ -23,7 +23,7 @@ public class UpgradePickUp : MonoBehaviour {
 	
 	public void OnTriggerEnter(Collider player) {
 		if (player.tag == "Player") {
-			upgradePickedUp();
+			StartCoroutine(upgradePickedUp());
 		}
 	}
 	
@@ -32,9 +32,19 @@ public class UpgradePickUp : MonoBehaviour {
 			&& (renderer.enabled == false);
 	}
 	
-	private void upgradePickedUp() {
+	private IEnumerator upgradePickedUp() {
+		if(renderer.name == "SpeedUpgrade")
+			GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "Speed Upgrade";
+		if(renderer.name == "ExplosionUpgrade")
+			GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "Explosion Upgrade";
+		if(renderer.name == "BombUpgrade")
+			GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "Bomb Upgrade";
+		
 		renderer.enabled = false;
 		gameObject.collider.enabled = false;
+		
+		yield return new WaitForSeconds(3);
+		GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "";
 	}
 	
 	private void spawnRandomUpgrade() {
