@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Upgrades\UpgradePickUp.cs" />
      <Compile Include="Assets\Scripts\Walls\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Walls\IndestructubleWall.cs" />
+     <Compile Include="Assets\Scripts\skills\AlterSpeed.cs" />
      <Compile Include="Assets\Scripts\skills\Blink.cs" />
      <Compile Include="Assets\Scripts\skills\LSBehaviour.cs" />
      <Compile Include="Assets\Scripts\skills\LSEnemy.cs" />
