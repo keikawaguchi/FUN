@@ -13,7 +13,6 @@ public class Map : MonoBehaviour {
 	MapBuilder mapBuilder;
 
 	void Start () {
-		loadResources();
 		loadScripts();
 		buildMap();
 	}
@@ -23,6 +22,9 @@ public class Map : MonoBehaviour {
 		return isGridFull(gridSystem.getXPos(x), gridSystem.getYPos(y));
 	}
 	public bool isGridFull(int x, int y) {
+		if (isOutOfBounds(x, y)) {
+			return true;
+		}	
 		return (grid[x, y] != null) 
 			|| (destructibleWallGrid[x, y] != null) 
 			|| (impassableObjects[x, y] != null);
@@ -32,6 +34,10 @@ public class Map : MonoBehaviour {
 		return getObjectAtGridLocation(gridSystem.getXPos(x), gridSystem.getYPos(y));
 	}
 	public GameObject getObjectAtGridLocation(int x, int y) {
+		if (isOutOfBounds(x, y)) {
+			return null;
+		}
+		
 		int playerPositionX = 0;
 		int playerPositionY = 0;
 		
@@ -45,7 +51,7 @@ public class Map : MonoBehaviour {
 			}
 		}
 		
-		// Check for random impassable objects
+		// Check for impassable objects
 		if (impassableObjects[x, y] != null) {
 			return impassableObjects[x, y];
 		}
@@ -68,6 +74,10 @@ public class Map : MonoBehaviour {
 		removeWall(gridX, gridY);
 	}
 	public void removeWall(int x, int y) {
+		if (isOutOfBounds(x, y)) {
+			return;
+		}
+		
 		if (grid[x, y] != null) {
 			Destroy(grid[x, y].gameObject);
 			grid[x, y] = null;
@@ -82,6 +92,10 @@ public class Map : MonoBehaviour {
 		return addImpassableObject(gridSystem.getXPos(x), gridSystem.getYPos(y), obj);
 	}
 	public bool addImpassableObject(int x, int y, GameObject obj) {
+		if (isOutOfBounds(x, y)) {
+			return false;
+		}
+		
 		if (impassableObjects[x, y] != null) {
 			return false;
 		}
@@ -91,10 +105,6 @@ public class Map : MonoBehaviour {
 	#endregion
 	
 	#region Initialize Methods
-	private void loadResources() {
-		
-	}
-	
 	private void loadScripts() {
 		gridSystem = GetComponent<GridSystem>();
 		mapBuilder = GetComponent<MapBuilder>();
@@ -124,5 +134,10 @@ public class Map : MonoBehaviour {
 				impassableObjects[x, y] = null;
 			}
 		}
+	}
+	
+	private bool isOutOfBounds(int x, int y) {
+		return (x < 0 && x >= gridSystem.getGridWidth())
+			&& (y < 0 && y >= gridSystem.getGridHeight());
 	}
 }
