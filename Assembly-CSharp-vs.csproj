@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{13EDDB3A-6291-6E1A-FCA6-5AA26902D15B}</ProjectGuid>
+	<ProjectGuid>{3E5CA467-EA5F-D7CA-3F18-DF1AFA5E4DA1}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Characters\AlbionBehavior.cs" />
      <Compile Include="Assets\Scripts\Characters\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\Controller\Player1Controller.cs" />
+     <Compile Include="Assets\Scripts\Controller\XboxController.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyTemp.cs" />
      <Compile Include="Assets\Scripts\GlobalBehavior.cs" />
@@ -62,16 +63,16 @@
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
      <Compile Include="Assets\Scripts\Player\Respawn.cs" />
      <Compile Include="Assets\Scripts\PlayerReferences.cs" />
+     <Compile Include="Assets\Scripts\Skills\Blink.cs" />
+     <Compile Include="Assets\Scripts\Skills\LSBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Skills\LSEnemy.cs" />
+     <Compile Include="Assets\Scripts\Skills\Lure.cs" />
+     <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
+     <Compile Include="Assets\Scripts\Skills\Stun.cs" />
+     <Compile Include="Assets\Scripts\Skills\Trap.cs" />
      <Compile Include="Assets\Scripts\Upgrades\UpgradePickUp.cs" />
      <Compile Include="Assets\Scripts\Walls\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Walls\IndestructubleWall.cs" />
-     <Compile Include="Assets\Scripts\skills\Blink.cs" />
-     <Compile Include="Assets\Scripts\skills\LSBehaviour.cs" />
-     <Compile Include="Assets\Scripts\skills\LSEnemy.cs" />
-     <Compile Include="Assets\Scripts\skills\Lure.cs" />
-     <Compile Include="Assets\Scripts\skills\LureUnit.cs" />
-     <Compile Include="Assets\Scripts\skills\Stun.cs" />
-     <Compile Include="Assets\Scripts\skills\Trap.cs" />
      <None Include="Assets\Resources\Maps\map1.txt" />
      <None Include="Assets\Resources\Maps\map2.txt" />
   </ItemGroup>
