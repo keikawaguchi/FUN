@@ -36,32 +36,34 @@ public class Blink : MonoBehaviour {
 		 * 3. Jump onto bombs
 		 */
 		
-//		if (Input.GetButtonDown(BLINK_BUTTON)) {
 		if (!blinked) {  // same here, why do i need this??????
 			blinked = true;
 			Vector3 newPos = heroObj.transform.position;
 			Vector3 lastPos = heroObj.transform.position;
 			Vector3 blinkDirection = characterMovement.getAimDirection();
-			if (blinkDirection == Vector3.zero)
-				blinkDirection = Vector3.forward;  // (0, 0, 1)
+			
+			// makes the 
+			if (blinkDirection.x > 0)
+				blinkDirection.x = 1;
+			if (blinkDirection.x < 0)
+				blinkDirection.x = -1;
+			if (blinkDirection.z > 0)
+				blinkDirection.z = 1;
+			if (blinkDirection.z  < 0)
+				blinkDirection.z = -1;
 			
 			newPos += blinkDirection * blinkDistance;  // blink to facing direction
 			
 			// check world bound with respect to x-direction
-			if (newPos.x >= gridSystem.getXCoord(gridSystem.getGridWidth()))
-				newPos.x = gridSystem.getXCoord(gridSystem.getGridWidth() - 1);  // clamp at bound
+			if (newPos.x >= gridSystem.getXCoord(gridSystem.getGridWidth()) - 1)
+				newPos.x = gridSystem.getXCoord(gridSystem.getGridWidth() - 2);  // clamp at bound
 			if (newPos.x <= gridSystem.getXCoord(GRID_MIN_COORD))
 				newPos.x = gridSystem.getXCoord(GRID_MIN_COORD + 1);
 			// check world bound with repect to y-direction
 			if (newPos.z >= gridSystem.getYCoord(gridSystem.getGridHeight()) - 1)
-//			if (gridSystem.getYPos (newPos.z) >= gridSystem.getGridHeight())
 				newPos.z = gridSystem.getYCoord(gridSystem.getGridHeight() - 2);  // clamp at bound
 			if (newPos.z <= gridSystem.getYCoord(GRID_MIN_COORD))
 				newPos.z = gridSystem.getYCoord(GRID_MIN_COORD + 1);
-			Debug.Log ("Pos: " + newPos);
-			Debug.Log("Grid Height: " + gridSystem.getYCoord (gridSystem.getGridHeight()));
-//			Debug.Log ("New Pos YCoord: " + gridSystem.getYPos (newPos.z));
-//			Debug.Log("Grid Height: " + gridSystem.getGridHeight());
 			
 			if (map.isGridFull (newPos.x, newPos.z)) {  // check whether the grid has bomb or wall or not
 				if (newPos.x == lastPos.x && newPos.z > lastPos.z)  // blink towards top
@@ -72,9 +74,10 @@ public class Blink : MonoBehaviour {
 					newPos.x = gridSystem.getXCoord(gridSystem.getXPos (newPos.x) + 1);
 				if (newPos.x > lastPos.x && newPos.z == lastPos.z)  // blink towards right
 					newPos.x = gridSystem.getXCoord(gridSystem.getXPos (newPos.x) - 1);
+				newPos.x = gridSystem.getXCoord(gridSystem.getXPos(newPos.x));
+				newPos.z = gridSystem.getYCoord(gridSystem.getYPos(newPos.z));
 			}
 			heroObj.transform.position = newPos;  // teleport to facing direction
-//		}
 		}
 	}
 	

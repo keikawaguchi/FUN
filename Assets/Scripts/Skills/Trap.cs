@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class Trap : MonoBehaviour {
-	private string collisionObjectName;
+	private const string PLAYER_TAG = "Player";
+	
+	private GameObject trapOwner;
 	private float visibleInberval;
 	private bool trapPlaced;
 	
@@ -14,23 +16,27 @@ public class Trap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!trapPlaced) {  // don't know why i need this, it instantiate a lot of trap
-			collisionObjectName = "EnemyForTest";  // how do i know who's colliding?
-			
+		if (!trapPlaced)  // don't know why i need this, it instantiate a lot of trap
 			trapPlaced = true;
-		}
+		
 		visibleInberval += Time.smoothDeltaTime;
-		if (visibleInberval >= 3f) {
+		if (visibleInberval >= 3f)
 			renderer.enabled = false;
-		}
 	}
 	
 	void OnTriggerEnter(Collider collision) {
-		if (collision.gameObject.name == collisionObjectName) {  // later need to check by tag
-			GameObject enemyObj = GameObject.Find (collisionObjectName);  // later need to find by tag
+		//TO-DO: Fix passing in the Trap owner name
+//		Debug.Log ("Collision name: " + collision.gameObject.name);
+//		Debug.Log ("Trap owner name: " + trapOwner.name);
+		if (collision.tag == PLAYER_TAG && collision.gameObject.name != "Albion") {  // later need to check by tag
+			GameObject enemyObj = GameObject.FindGameObjectWithTag (PLAYER_TAG);  // later need to find by tag
 			CharacterMovement characterMove = enemyObj.GetComponent<CharacterMovement>();
 			characterMove.setMovementState (CharacterMovement.MovementState.CannotMove);
 			Destroy (gameObject);
 		}
+	}
+	
+	public void SetTrapOwner(GameObject owner) {
+		trapOwner = owner;
 	}
 }

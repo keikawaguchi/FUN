@@ -35,7 +35,7 @@ public class AlbionBehavior : MonoBehaviour {
 	private void StunButtonPress() {
 		if (Input.GetButtonDown (controller.getButton ("Skill1"))) {
 			stun = Instantiate (stunPrefab) as GameObject;
-			stun.GetComponent<Stun>().SetTrapPosition (transform.position);
+			stun.GetComponent<Stun>().SetStunOwner (gameObject);
 		}
 	}
 	
