@@ -34,9 +34,6 @@ public class TemptressBehavior : MonoBehaviour {
 			currentLure = null;
 			return;
 		}
-
-		
-		
 	}
 	
 	#region Initialization Methods

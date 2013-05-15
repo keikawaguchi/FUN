@@ -24,6 +24,7 @@ public class Hero : MonoBehaviour {
 	void Start () {
 		loadResources();
 		loadScripts();
+		initialize();
 		timeOfLastBombDrop = -999f;
 	}
 	
@@ -81,6 +82,10 @@ public class Hero : MonoBehaviour {
 		map = GameObject.Find("Map").GetComponent<Map>();
 		controller = GetComponent<Controller>();
 	} 
+	
+	private void initialize() {
+		collider.isTrigger = true;
+	}
 	#endregion
 	
 	private void handleControllerInput() {

@@ -11,13 +11,12 @@ public class AlbionBehavior : MonoBehaviour {
 	private GameObject blinkPrefab;
 	private GameObject blink;
 	
-	// Use this for initialization
+	
 	void Start () {
 		LoadSkills();
 		LoadScripts();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		StunButtonPress ();
 		BlinkButtonPress ();
