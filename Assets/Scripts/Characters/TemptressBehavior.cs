@@ -11,6 +11,9 @@ public class TemptressBehavior : MonoBehaviour {
 	private CharacterMovement characterMovement;
 	private Controller controller;
 	
+	private const float lureCD = 5f;
+	private float lureTimer = 0f;
+	
 
 	void Start () {
 		loadSkills();
@@ -57,19 +60,25 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	private void checkLureButtonPress() {
 		if (Input.GetButtonDown(controller.getButton("Skill1"))) {
-			float playerHeight = this.transform.localScale.z;
-			Vector3 aimDirection = characterMovement.getAimDirection();
-			if (aimDirection == new Vector3(0, 0, 0)) {
-				aimDirection = new Vector3(0, 0, 1);
+			
+			if (Time.time - lureTimer > lureCD) {
+				float playerHeight = this.transform.localScale.z;
+				Vector3 aimDirection = characterMovement.getAimDirection();
+				if (aimDirection == new Vector3(0, 0, 0)) {
+					aimDirection = new Vector3(0, 0, 1);
+				}
+				
+				currentLure = Instantiate(lureSkillPrefab) as GameObject;
+				currentLure.GetComponent<Lure>().setLureOwner(gameObject);
+				currentLure.GetComponent<Lure>().setPullToLocation(transform.position);
+				currentLure.transform.position = this.transform.position;
+				currentLure.transform.position += aimDirection * playerHeight;
+				
+				currentLure.transform.forward = characterMovement.getAimDirection();
+			
+				lureTimer = Time.time;
+			
 			}
-			
-			currentLure = Instantiate(lureSkillPrefab) as GameObject;
-			currentLure.GetComponent<Lure>().setLureOwner(gameObject);
-			currentLure.GetComponent<Lure>().setPullToLocation(transform.position);
-			currentLure.transform.position = this.transform.position;
-			currentLure.transform.position += aimDirection * playerHeight;
-			
-			currentLure.transform.forward = characterMovement.getAimDirection();
 		}
 	}
 	

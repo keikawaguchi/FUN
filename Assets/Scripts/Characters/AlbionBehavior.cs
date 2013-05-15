@@ -11,6 +11,13 @@ public class AlbionBehavior : MonoBehaviour {
 	private GameObject blinkPrefab;
 	private GameObject blink;
 	
+	// skill cooldown times
+	private const float blinkCD = 10f;
+	private const float trapCD = 10f;
+	
+	// skill timers
+	private float blinkTimer = 0f;
+	private float trapTimer = 0f;
 	
 	void Start () {
 		LoadSkills();
@@ -33,15 +40,23 @@ public class AlbionBehavior : MonoBehaviour {
 	
 	private void StunButtonPress() {
 		if (Input.GetButtonDown (controller.getButton ("Skill1"))) {
-			stun = Instantiate (stunPrefab) as GameObject;
-			stun.GetComponent<Stun>().SetStunOwner (gameObject);
+			if (Time.time - trapTimer > trapCD) {
+				stun = Instantiate (stunPrefab) as GameObject;
+				stun.GetComponent<Stun>().SetStunOwner (gameObject);
+				
+				trapTimer = Time.time;
+			}
 		}
 	}
 	
 	private void BlinkButtonPress() {
 		if (Input.GetButtonDown (controller.getButton ("Skill2"))) {
-			blink = Instantiate (blinkPrefab) as GameObject;
-			blink.GetComponent<Blink>().SetGameObject (gameObject);
+			if (Time.time - blinkTimer > blinkCD) {
+				blink = Instantiate (blinkPrefab) as GameObject;
+				blink.GetComponent<Blink>().SetGameObject (gameObject);
+			
+				blinkTimer = Time.time;
+			}
 		}
 	}
 }
