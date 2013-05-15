@@ -5,7 +5,8 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public enum MovementState {
 		CanMove,
-		CannotMove
+		CannotMove,
+		Stunned
 	}
 	
 	private const float MAX_STUN_TIME = 4f;
@@ -38,7 +39,7 @@ public class CharacterMovement : MonoBehaviour {
 			updateAimDirection();
 			stunInterval = 0f;  // reset timer
 			break;
-		case MovementState.CannotMove:
+		case MovementState.Stunned:
 			stunInterval += Time.smoothDeltaTime;
 			if (stunInterval >= 2f)
 				currentMovementState = MovementState.CanMove;
