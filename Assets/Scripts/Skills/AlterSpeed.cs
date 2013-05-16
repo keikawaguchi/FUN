@@ -5,6 +5,7 @@ public class AlterSpeed : MonoBehaviour {
 	
 	CharacterMovement characterMovement;
 	
+	public bool isActive = false;
 	private float duration;
 	private float speedMultiplier;
 	private float startTime;
@@ -12,10 +13,13 @@ public class AlterSpeed : MonoBehaviour {
 	void Start () {
 		loadScripts();
 		startTime = Time.time;
-		setSpeed();
 	}
 	
 	void Update () {
+		Debug.Log("AlterSpeed attached to: " + gameObject.name);
+		if (!isActive) {
+			return;
+		}
 		if (isComplete ()) {
 			unsetSpeed();
 			Destroy(this);
@@ -31,8 +35,16 @@ public class AlterSpeed : MonoBehaviour {
 		speedMultiplier = multiplier;
 	}
 	
+	public void activate() {
+		isActive = true;
+		setSpeed();
+	}
+	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
+		if (characterMovement == null) {
+			Debug.LogError ("AlterSpeed: No hero to attach!");
+		}
 	}
 	
 	private void setSpeed() {
