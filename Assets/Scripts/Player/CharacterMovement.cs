@@ -45,14 +45,15 @@ public class CharacterMovement : MonoBehaviour {
 				currentMovementState = MovementState.CanMove;
 			break;
 		}
-		if(gameObject.name == "Temptress")
-		{
+		
+		/*
+		if (gameObject.name == "Temptress")
 			GameObject.Find("TemptressSpeed").GetComponent<GUIText>().text = "Temptress Speed: " + (speed * (speedModifierPercentage/100));
-		}
-			if(gameObject.name == "Albion")
-		{
+		
+		if (gameObject.name == "Albion")
 			GameObject.Find("AlbionSpeed").GetComponent<GUIText>().text = "Albion Speed: " + (speed * (speedModifierPercentage/100));
-		}
+		 */
+		
 	}
 
 	#region Public Methods
