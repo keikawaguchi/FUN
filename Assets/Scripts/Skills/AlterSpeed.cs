@@ -6,7 +6,8 @@ public class AlterSpeed : MonoBehaviour {
 	private float duration;
 	private float speedMultiplier;
 	private float startTime;
-
+	
+	
 	void Start () {
 		startTime = Time.time;
 	}

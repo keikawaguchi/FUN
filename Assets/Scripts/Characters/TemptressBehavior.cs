@@ -83,6 +83,7 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	private void LoveStruckButtonPress() {
+		/*
 		Debug.Log ("LoveStruck skill used");
 		Map map = GameObject.Find ("Map").GetComponent<Map>();
 		GridSystem GS = GameObject.Find("Map").GetComponent<GridSystem>();
@@ -123,5 +124,7 @@ public class TemptressBehavior : MonoBehaviour {
 		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-2);
 		if(temp != null && temp != gameObject && temp.tag == "Player")
 			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(20);	
+			
+		*/
 	}
 }

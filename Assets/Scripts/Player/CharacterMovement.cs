@@ -11,8 +11,8 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private const float MAX_STUN_TIME = 4f;
 	
-	public float speed = 100f;
-	private float speedModifierPercentage = 100f;
+	public float speed = 50f;
+	private float speedMultiplier = 1.0f;
 	private Vector3 aimDirection;
 	private Vector3 movement;
 	private MovementState currentMovementState;
@@ -45,15 +45,6 @@ public class CharacterMovement : MonoBehaviour {
 				currentMovementState = MovementState.CanMove;
 			break;
 		}
-		
-		/*
-		if (gameObject.name == "Temptress")
-			GameObject.Find("TemptressSpeed").GetComponent<GUIText>().text = "Temptress Speed: " + (speed * (speedModifierPercentage/100));
-		
-		if (gameObject.name == "Albion")
-			GameObject.Find("AlbionSpeed").GetComponent<GUIText>().text = "Albion Speed: " + (speed * (speedModifierPercentage/100));
-		 */
-		
 	}
 
 	#region Public Methods
@@ -68,17 +59,16 @@ public class CharacterMovement : MonoBehaviour {
 		return aimDirection;
 	}
 	
-	public void increaseSpeedByPercentage(float percentage) {
-		speedModifierPercentage += percentage;
+	public void setSpeedMultiplier(float multiplier) {
+		speedMultiplier = multiplier;
 	}
 	
-	public void decreaseSpeedByPercentage(float percentage) {
-		speedModifierPercentage -= percentage;
+	public void getSpeedMultiplier(float multiplier) {
+		speedMultiplier = multiplier;
 	}
 	#endregion
 	
-	public void OnTriggerEnter(Collider collision) 
-	{
+	public void OnTriggerEnter(Collider collision) {
 		if(collision.name == "SpeedUpgrade" && speed < 200) {
 			speed += 15;
 		}
@@ -110,8 +100,7 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	private float calculateSpeed() {
-		float scaleSpeed = speedModifierPercentage / 100f;
-		return speed * scaleSpeed * Time.smoothDeltaTime;
+		return speed * speedMultiplier * Time.smoothDeltaTime;
 	}
 	
 	private void stopMovementOnCollision() {
