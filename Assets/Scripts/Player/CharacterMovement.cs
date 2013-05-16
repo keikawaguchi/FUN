@@ -63,8 +63,8 @@ public class CharacterMovement : MonoBehaviour {
 		speedMultiplier = multiplier;
 	}
 	
-	public void getSpeedMultiplier(float multiplier) {
-		speedMultiplier = multiplier;
+	public float getSpeedMultiplier() {
+		return speedMultiplier;
 	}
 	#endregion
 	
