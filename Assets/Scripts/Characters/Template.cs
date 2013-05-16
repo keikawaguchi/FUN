@@ -4,7 +4,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class MerliniBehavior : MonoBehaviour {
+public class Template : MonoBehaviour {
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
