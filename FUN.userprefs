@@ -1,18 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MerliniBehavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Champions\FanndisBehavior.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Scripts\Champions\FanndisBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Champions\Template.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skills\Blink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Controller\Controller.cs" Line="1" Column="1" />
-=======
-      <File FileName="Assets\MerliniBehavior.cs" Line="75" Column="31" />
-      <File FileName="Assets\Resources\Maps\map2.txt" Line="7" Column="18" />
-      <File FileName="Assets\Scripts\Skills\Blink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Upgrades\UpgradePickUp.cs" Line="1" Column="1" />
->>>>>>> parent of f2409f7... Added FanndisBehavior and cleaned up a little
+      <File FileName="Assets\Scripts\Champions\FanndisBehavior.cs" Line="22" Column="16" />
+      <File FileName="Assets\Scripts\Champions\Template.cs" Line="11" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
