@@ -44,21 +44,20 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\MerliniBehavior.cs" />
      <Compile Include="Assets\Scripts\Bomb\BombBehavior.cs" />
      <Compile Include="Assets\Scripts\Bomb\Explosion.cs" />
      <Compile Include="Assets\Scripts\Bomb\FireBehavior.cs" />
-     <Compile Include="Assets\Scripts\Characters\AlbionBehavior.cs" />
-     <Compile Include="Assets\Scripts\Characters\Template.cs" />
-     <Compile Include="Assets\Scripts\Characters\TemptressBehavior.cs" />
+     <Compile Include="Assets\Scripts\Champions\AlbionBehavior.cs" />
+     <Compile Include="Assets\Scripts\Champions\FanndisBehavior.cs" />
+     <Compile Include="Assets\Scripts\Champions\MerliniBehavior.cs" />
+     <Compile Include="Assets\Scripts\Champions\Template.cs" />
+     <Compile Include="Assets\Scripts\Champions\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\Controller\Controller.cs" />
-     <Compile Include="Assets\Scripts\Enemy.cs" />
-     <Compile Include="Assets\Scripts\EnemyTemp.cs" />
-     <Compile Include="Assets\Scripts\GlobalBehavior.cs" />
-     <Compile Include="Assets\Scripts\GridMove.cs" />
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
+     <Compile Include="Assets\Scripts\NotNeeded\GlobalBehavior.cs" />
+     <Compile Include="Assets\Scripts\NotNeeded\GridMove.cs" />
      <Compile Include="Assets\Scripts\Player\AI.cs" />
      <Compile Include="Assets\Scripts\Player\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
