@@ -2,16 +2,20 @@ using UnityEngine;
 using System.Collections;
 
 public class MerliniBehavior : MonoBehaviour {
+	private const string HAMMERTIME_PREFAB_PATH = "Prefabs/Skills/HammerTime";
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
 	
+	private GameObject hammerPrefab;
+	private GameObject hammer;
+	
 	// skill cooldown times
-	private const float skillOneCD = 1f;
+	private const float hammerTimeCD = 1f;
 	private const float skillTwoCD = 1f;
 	
 	// skill timers
-	private float skillOneTimer = -99f;
+	private float hammerTimeTimer = -99f;
 	private float skillTwoTimer = -99f;
 	
 
@@ -26,7 +30,7 @@ public class MerliniBehavior : MonoBehaviour {
 		}
 		
 		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
-			checkSkillOneButtonPress();
+			hammerTimeButtonPress();
 		}
 		
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
@@ -36,7 +40,7 @@ public class MerliniBehavior : MonoBehaviour {
 	
 	#region Initialization Methods
 	private void loadSkills() {
-		// lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
+		hammerPrefab = Resources.Load (HAMMERTIME_PREFAB_PATH) as GameObject;
 	}
 	
 	private void loadScripts() {
@@ -50,17 +54,19 @@ public class MerliniBehavior : MonoBehaviour {
 	}
 	
 	#region Merlini Skills
-	private void checkSkillOneButtonPress() {
+	private void hammerTimeButtonPress() {
 		
-		if (Input.GetButtonDown(controller.getButton("Skill1"))) {
+		// check if cooldown expired
+		if (Time.time - hammerTimeTimer > hammerTimeCD) {
+
+			Debug.Log("It's hammer time!!");
+			hammer = Instantiate (hammerPrefab) as GameObject;
+			hammer.GetComponent<HammerTime>().SetStunOwner (gameObject);
+			hammer.transform.position = transform.position;
+			hammer.transform.forward = characterMovement.getAimDirection();
 			
-			if (Time.time - skillOneTimer > skillOneCD) {
-				// skill 1 here
-				Debug.Log("Skill One Triggered!");
-				
-				skillOneTimer = Time.time;
-			
-			}
+			// keep track of cooldown timer
+			hammerTimeTimer = Time.time;
 		}
 	}
 	
