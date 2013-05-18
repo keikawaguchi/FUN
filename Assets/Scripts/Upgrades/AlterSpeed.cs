@@ -5,8 +5,9 @@ public class AlterSpeed : MonoBehaviour {
 	
 	CharacterMovement characterMovement;
 	
-	private float duration;
-	private float speedMultiplier;
+	private float duration = 1.0f;
+	private float speedMultiplier = 1.0f;
+	private float originalSpeedMultiplier;
 	private float startTime;
 	
 	void Start () {
@@ -23,6 +24,7 @@ public class AlterSpeed : MonoBehaviour {
 		}
 	}
 	
+	#region Public Methods
 	public void setDurationInSeconds(float seconds) {
 		duration = seconds;
 	}
@@ -30,19 +32,21 @@ public class AlterSpeed : MonoBehaviour {
 	public void setSpeedMultiplier(float multiplier) {
 		speedMultiplier = multiplier;
 	}
+	#endregion
 	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
 	}
 	
 	private void setSpeed() {
-		float currentSpeedMultiplier = characterMovement.getSpeedMultiplier();
-		characterMovement.setSpeedMultiplier(currentSpeedMultiplier + speedMultiplier);
+		Debug.Log("AlterSpeed set speed!");
+		originalSpeedMultiplier = characterMovement.getSpeedMultiplier();
+		characterMovement.setSpeedMultiplier(speedMultiplier);
 	}
 	
 	private void unsetSpeed() {
-		float currentSpeedMultiplier = characterMovement.getSpeedMultiplier();
-		characterMovement.setSpeedMultiplier(currentSpeedMultiplier - speedMultiplier);
+		Debug.Log("AlterSpeed unset speed!");
+		characterMovement.setSpeedMultiplier(originalSpeedMultiplier);
 	}
 	
 	private bool isComplete() {

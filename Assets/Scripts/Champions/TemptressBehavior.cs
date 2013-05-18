@@ -94,46 +94,75 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	private void LoveStruckButtonPress() {
 
-	/*	Debug.Log ("LoveStruck skill used");
+		Debug.Log ("LoveStruck skill used");
 		Map map = GameObject.Find ("Map").GetComponent<Map>();
 		GridSystem GS = GameObject.Find("Map").GetComponent<GridSystem>();
-		GameObject temp;
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z));
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		GameObject otherPlayer;
+		AlterSpeed alterSpeed;
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+1, GS.getYPos(transform.position.z));
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z));
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}		
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+2, GS.getYPos(transform.position.z));
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+1, GS.getYPos(transform.position.z));
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-1, GS.getYPos(transform.position.z));
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+2, GS.getYPos(transform.position.z));
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-2, GS.getYPos(transform.position.z));
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-1, GS.getYPos(transform.position.z));
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+1);
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-2, GS.getYPos(transform.position.z));
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+2);
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+1);
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-1);
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(10);
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+2);
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
 		
-		temp = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-2);
-		if(temp != null && temp != gameObject && temp.tag == "Player")
-			temp.GetComponent<CharacterMovement>().decreaseSpeedByPercentage(20);	
-		*/
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-1);
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
+		
+		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-2);
+		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
+			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setDurationInSeconds (3.0f);
+		}	
+		
 	}
 }
