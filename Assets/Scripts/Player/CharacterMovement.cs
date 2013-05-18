@@ -173,19 +173,26 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	void OnGUI()
 	{
+		GUIStyle timeStyle = new GUIStyle();
+		timeStyle.fontSize = 30;
+		timeStyle.normal.textColor = Color.white;
 		float guiTime = Time.time - startTime;
 		restSeconds = countDownSeconds - (guiTime);
 		roundedRestSeconds = Mathf.CeilToInt(restSeconds);
 		displaySeconds = roundedRestSeconds % 60;
 		displayMinutes = roundedRestSeconds / 60;
-		string text = string.Format("{0:00}:{1:00}",displayMinutes,displaySeconds);
-		GUI.Label(new Rect(300,5,100,20),text);
+		string text = string.Format("{0:00}:{1:00}",displayMinutes,displaySeconds);		
+		if(restSeconds <= 10)
+		{
+			timeStyle.normal.textColor = Color.red;
+		}
+		GUI.Label(new Rect(390,10,100,20),text,timeStyle);
 		
 		if(gameObject.name == "Temptress")
 		{
 			GUI.Box(new Rect(5,5,200,50),"Temptress");
 			GUI.Label(new Rect(5,15,100,20),"Lives: " + gameObject.GetComponent<Hero>().lives.ToString());
-			GUI.Label (new Rect(5,35,100,20),"Lure Cool Down: " + gameObject.GetComponent<TemptressBehavior>().lureTimer.ToString());
+			GUI.Label (new Rect(5,35,120,50),"Lure Cool Down: " + gameObject.GetComponent<TemptressBehavior>().getCoolDown().ToString());
 		}
 		else if(gameObject.name == "Albion")
 		{
