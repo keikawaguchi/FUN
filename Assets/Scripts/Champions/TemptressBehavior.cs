@@ -43,6 +43,16 @@ public class TemptressBehavior : MonoBehaviour {
 		}
 	}
 	
+	public int getCoolDown()
+	{
+		if(Time.time - lureTimer > lureCD)
+		{
+			return 0;
+		}
+		else
+			return (int)((lureCD+1) - (Time.time - lureTimer));
+	}
+	
 	#region Initialization Methods
 	private void loadSkills() {
 		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
