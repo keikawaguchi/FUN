@@ -7,6 +7,7 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	private GameObject lureSkillPrefab;
 	private GameObject currentLure;
+	private LoveStruck loveStruck;
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
@@ -56,6 +57,7 @@ public class TemptressBehavior : MonoBehaviour {
 	#region Initialization Methods
 	private void loadSkills() {
 		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
+		loveStruck = gameObject.AddComponent<LoveStruck>();
 	}
 	
 	private void loadScripts() {
@@ -93,76 +95,7 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	private void LoveStruckButtonPress() {
-
 		Debug.Log ("LoveStruck skill used");
-		Map map = GameObject.Find ("Map").GetComponent<Map>();
-		GridSystem GS = GameObject.Find("Map").GetComponent<GridSystem>();
-		
-		GameObject otherPlayer;
-		AlterSpeed alterSpeed;
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z));
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}		
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+1, GS.getYPos(transform.position.z));
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+2, GS.getYPos(transform.position.z));
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-1, GS.getYPos(transform.position.z));
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-2, GS.getYPos(transform.position.z));
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+1);
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+2);
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-1);
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
-		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-2);
-		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.5f);
-			alterSpeed.setDurationInSeconds (3.0f);
-		}	
-		
+		loveStruck.execute();	
 	}
 }

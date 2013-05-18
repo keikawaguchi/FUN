@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
      <Compile Include="Assets\Scripts\Player\Respawn.cs" />
      <Compile Include="Assets\Scripts\Skills\Blink.cs" />
+     <Compile Include="Assets\Scripts\Skills\LoveStruck.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
      <Compile Include="Assets\Scripts\Skills\Stun.cs" />

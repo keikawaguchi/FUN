@@ -7,7 +7,6 @@ public class AlterSpeed : MonoBehaviour {
 	
 	private float duration = 1.0f;
 	private float speedMultiplier = 1.0f;
-	private float originalSpeedMultiplier;
 	private float startTime;
 	
 	void Start () {
@@ -40,13 +39,12 @@ public class AlterSpeed : MonoBehaviour {
 	
 	private void setSpeed() {
 		Debug.Log("AlterSpeed set speed!");
-		originalSpeedMultiplier = characterMovement.getSpeedMultiplier();
 		characterMovement.setSpeedMultiplier(speedMultiplier);
 	}
 	
 	private void unsetSpeed() {
 		Debug.Log("AlterSpeed unset speed!");
-		characterMovement.setSpeedMultiplier(originalSpeedMultiplier);
+		characterMovement.setSpeedMultiplier(1.0f);
 	}
 	
 	private bool isComplete() {
