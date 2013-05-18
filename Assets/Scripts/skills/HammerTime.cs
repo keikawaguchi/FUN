@@ -7,6 +7,7 @@ public class HammerTime : MonoBehaviour {
 	private const float HAMMER_SPEED = 150f;
 	private const float HAMMER_TRAVEL_DISTANCE = 100f;
 	private const float HAMMER_AOE_EFFECT = 20f;
+	private const float HAMMER_STUN_DURATION = 2f;
 	
 	private GameObject hammerAOEPrefab;
 	private GameObject hammerAOE;
@@ -61,7 +62,7 @@ public class HammerTime : MonoBehaviour {
 			AlterSpeed alterSpeed;
 			alterSpeed = collision.gameObject.AddComponent<AlterSpeed>();
 			alterSpeed.setSpeedMultiplier(0f);
-			alterSpeed.setDurationInSeconds (1.5f);
+			alterSpeed.setDurationInSeconds (HAMMER_STUN_DURATION);
 			
 			Destroy (gameObject);
 			
@@ -94,6 +95,6 @@ public class HammerTime : MonoBehaviour {
 		AlterSpeed alterSpeed;
 		alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
 		alterSpeed.setSpeedMultiplier(0f);
-		alterSpeed.setDurationInSeconds(1.5f);
+		alterSpeed.setDurationInSeconds(HAMMER_STUN_DURATION);
 	}
 }
