@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Champions\FanndisBehavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\CharacterMovement.cs">
     <Files>
-      <File FileName="Assets\Scripts\Champions\FanndisBehavior.cs" Line="22" Column="16" />
-      <File FileName="Assets\Scripts\Champions\Template.cs" Line="11" Column="2" />
+      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="70" Column="13" />
+      <File FileName="Assets\Scripts\Player\Hero.cs" Line="44" Column="20" />
+      <File FileName="Assets\Scripts\GridSystem\Map.cs" Line="35" Column="3" />
+      <File FileName="Assets\Scripts\Player\Respawn.cs" Line="14" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

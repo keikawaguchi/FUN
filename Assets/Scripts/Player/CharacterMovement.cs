@@ -45,6 +45,14 @@ public class CharacterMovement : MonoBehaviour {
 				currentMovementState = MovementState.CanMove;
 			break;
 		}
+		if(gameObject.name == "Temptress")
+		{
+			GameObject.Find("Temptress Speed").GetComponent<GUIText>().text = "Temptress Speed: " + speed.ToString();
+		}
+		else if(gameObject.name == "Albion")
+		{
+			GameObject.Find("Albion Speed").GetComponent<GUIText>().text = "Albion Speed: " + speed.ToString();
+		}
 	}
 
 	#region Public Methods

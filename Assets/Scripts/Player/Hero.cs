@@ -48,6 +48,14 @@ public class Hero : MonoBehaviour {
 				transform.position = new Vector3(-112.3f, 0f, -79f);
 			}
 		}
+		if(gameObject.name == "Temptress")
+		{
+			GameObject.Find("Temptress Lives").GetComponent<GUIText>().text = "Lives: " + lives.ToString();
+		}
+		else if(gameObject.name == "Albion")
+		{
+			GameObject.Find("Albion Lives").GetComponent<GUIText>().text = "Lives: " + lives.ToString();
+		}
 	}
 	
 	public void OnTriggerEnter(Collider collider) {
