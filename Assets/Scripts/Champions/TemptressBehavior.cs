@@ -104,63 +104,63 @@ public class TemptressBehavior : MonoBehaviour {
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z));
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}		
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+1, GS.getYPos(transform.position.z));
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)+2, GS.getYPos(transform.position.z));
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-1, GS.getYPos(transform.position.z));
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x)-2, GS.getYPos(transform.position.z));
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+1);
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)+2);
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-1);
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
 		otherPlayer = map.getObjectAtGridLocation(GS.getXPos(transform.position.x), GS.getYPos(transform.position.z)-2);
 		if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
 			alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0.1f);
+			alterSpeed.setSpeedMultiplier(0.5f);
 			alterSpeed.setDurationInSeconds (3.0f);
 		}	
 		
