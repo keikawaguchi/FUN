@@ -4,17 +4,15 @@ using System.Collections;
 public class Hero : MonoBehaviour {
 
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
-	
+
+	public float lives = 5;
 	public float dropBombCoolDownSeconds = 1.5f;
+	public float bombX = 4;
+	public float bombZ = 3;
 	
 	// timers
 	private float timeOfLastBombDrop;
 	private float deathTimer = 0f;
-	
-	public float lives = 5;
-	
-	public float bombX = 4;
-	public float bombZ = 3;
 	
 	private GameObject bomb;
 	private GridSystem gridSystem;
