@@ -11,13 +11,14 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
+	private Animation animation;
 	
 	private const float lureCD = 5f;
 	public float lureTimer = -99f;
 	
 
 	void Start () {
-		loadSkills();
+		loadResources();
 		loadScripts();
 	}
 	
@@ -44,25 +45,25 @@ public class TemptressBehavior : MonoBehaviour {
 		}
 	}
 	
-	public int getCoolDown()
-	{
-		if(Time.time - lureTimer > lureCD)
-		{
+	public int getCoolDown() {
+		if(Time.time - lureTimer > lureCD) {
 			return 0;
 		}
-		else
+		else {
 			return (int)((lureCD+1) - (Time.time - lureTimer));
+		}
 	}
 	
 	#region Initialization Methods
-	private void loadSkills() {
+	private void loadResources() {
 		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
-		loveStruck = gameObject.AddComponent<LoveStruck>();
 	}
 	
 	private void loadScripts() {
+		loveStruck = gameObject.AddComponent<LoveStruck>();
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
+		animation = gameObject.AddComponent<Animation>();
 	}
 	#endregion
 	
