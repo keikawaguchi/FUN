@@ -21,6 +21,13 @@ public class CharacterMovement : MonoBehaviour {
 	private GridSystem gridSystem;
 	private Controller controller;
 	
+	private float startTime;
+	private float restSeconds;
+	private int roundedRestSeconds;
+	private int displaySeconds;
+	private int displayMinutes;
+	private float countDownSeconds;
+	
 	// effects from abilities
 	private float stunInterval;
 	
@@ -44,14 +51,6 @@ public class CharacterMovement : MonoBehaviour {
 			if (stunInterval >= 2f)
 				currentMovementState = MovementState.CanMove;
 			break;
-		}
-		if(gameObject.name == "Temptress")
-		{
-			GameObject.Find("Temptress Speed").GetComponent<GUIText>().text = "Temptress Speed: " + speed.ToString();
-		}
-		else if(gameObject.name == "Albion")
-		{
-			GameObject.Find("Albion Speed").GetComponent<GUIText>().text = "Albion Speed: " + speed.ToString();
 		}
 	}
 
@@ -167,5 +166,31 @@ public class CharacterMovement : MonoBehaviour {
 			}
 			
 		
+	}
+	void Awake()
+	{
+		startTime = 300f;
+	}
+	void OnGUI()
+	{
+		float guiTime = Time.time - startTime;
+		restSeconds = countDownSeconds - (guiTime);
+		roundedRestSeconds = Mathf.CeilToInt(restSeconds);
+		displaySeconds = roundedRestSeconds % 60;
+		displayMinutes = roundedRestSeconds / 60;
+		string text = string.Format("{0:00}:{1:00}",displayMinutes,displaySeconds);
+		GUI.Label(new Rect(300,5,100,20),text);
+		
+		if(gameObject.name == "Temptress")
+		{
+			GUI.Box(new Rect(5,5,200,50),"Temptress");
+			GUI.Label(new Rect(5,15,100,20),"Lives: " + gameObject.GetComponent<Hero>().lives.ToString());
+			GUI.Label (new Rect(5,35,100,20),"Lure Cool Down: " + gameObject.GetComponent<TemptressBehavior>().lureTimer.ToString());
+		}
+		else if(gameObject.name == "Albion")
+		{
+			GUI.Box(new Rect(653,5,200,50),"Albion");
+			GUI.Label(new Rect(653,25,100,20),"Lives: " + gameObject.GetComponent<Hero>().lives.ToString());
+		}
 	}
 }

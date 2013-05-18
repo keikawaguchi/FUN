@@ -11,7 +11,7 @@ public class Hero : MonoBehaviour {
 	private float timeOfLastBombDrop;
 	private float deathTimer = 0f;
 	
-	private float lives = 5;
+	public float lives = 5;
 	
 	public float bombX = 4;
 	public float bombZ = 3;
@@ -47,14 +47,6 @@ public class Hero : MonoBehaviour {
 				// call gridsystem to get a respawn point
 				transform.position = new Vector3(-112.3f, 0f, -79f);
 			}
-		}
-		if(gameObject.name == "Temptress")
-		{
-			GameObject.Find("Temptress Lives").GetComponent<GUIText>().text = "Lives: " + lives.ToString();
-		}
-		else if(gameObject.name == "Albion")
-		{
-			GameObject.Find("Albion Lives").GetComponent<GUIText>().text = "Lives: " + lives.ToString();
 		}
 	}
 	
