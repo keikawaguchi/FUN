@@ -18,7 +18,6 @@ public class HammerTimeAOE : MonoBehaviour {
 		
 		if (Time.time - startTime > EXPLOSION_TIME) {
 			Destroy (gameObject);
-			Debug.Log ("DESTROY");
 		}
 	}
 }
