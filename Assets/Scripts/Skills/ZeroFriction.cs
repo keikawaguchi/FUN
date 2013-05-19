@@ -19,7 +19,6 @@ public class ZeroFriction : MonoBehaviour {
 	public void triggerZeroFriction(GameObject champion) {
 		AlterSpeed alterSpeed;
 		alterSpeed = champion.AddComponent<AlterSpeed>();
-		alterSpeed.setSpeedMultiplier(SPEED_MULTIPLIER);
-		alterSpeed.setDurationInSeconds(DURATION);
+		alterSpeed.Start(SPEED_MULTIPLIER, DURATION);
 	}
 }

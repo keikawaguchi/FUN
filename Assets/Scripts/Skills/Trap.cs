@@ -31,8 +31,7 @@ public class Trap : MonoBehaviour {
 		if (collision.tag == PLAYER_TAG && collision.gameObject.name != "Albion") {
 			GameObject enemyObj = GameObject.FindGameObjectWithTag (PLAYER_TAG);
 			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0);
-			alterSpeed.setDurationInSeconds(2);
+			alterSpeed.Start (0f, 2f);
 			Destroy (gameObject);
 		}
 	}
