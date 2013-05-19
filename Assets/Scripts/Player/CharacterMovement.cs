@@ -56,6 +56,13 @@ public class CharacterMovement : MonoBehaviour {
 
 	#region Public Methods
 	public void setMovementState(MovementState newState) {
+		if (newState == MovementState.Stunned) {
+			GameObject t = GameObject.Instantiate(Resources.Load("Prefabs/Text/PopupText") as GameObject) as GameObject;
+			PopupText popupText = t.GetComponent<PopupText>();
+			popupText.initialize();
+			popupText.setPredefinedText("Stun");
+			popupText.setPosition (transform.position.x, transform.position.z + 10);
+		}
 		currentMovementState = newState;
 	}
 	public MovementState getMovementState() {
@@ -167,8 +174,7 @@ public class CharacterMovement : MonoBehaviour {
 			
 		
 	}
-	void Awake()
-	{
+	void Awake() {
 		startTime = 300f;
 	}
 	void OnGUI()

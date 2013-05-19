@@ -11,7 +11,7 @@ public class PopupText : MonoBehaviour {
 	const string MINUS_BOMBS_TEXTURES = "Textures/Text/minusBombs";
 	const string PLUS_EXPLOSION_TEXTURE = "Textures/Text/plusExplosion";
 	const string MINUS_EXPLOSION_TEXTURE = "Textures/Text/minusExplosion";
-	const string STUN_TEXTURE = "";
+	const string STUN_TEXTURE = "Textures/Text/stun";
 	
 	// Texture factory
 	OrderedDictionary textureFactory;
