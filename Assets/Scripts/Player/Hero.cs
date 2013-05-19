@@ -21,14 +21,12 @@ public class Hero : MonoBehaviour {
 	private Map map;
 	private Controller controller;
 	
-	private Vector3[] spawnPoints;
 
 	void Start () {
 		loadResources();
 		loadScripts();
 		initialize();
-		timeOfLastBombDrop = -999f;
-		
+		timeOfLastBombDrop = -999f;	
 		spawnHero();
 	}
 	
@@ -121,8 +119,12 @@ public class Hero : MonoBehaviour {
 	}
 	
 	#region Player spawn and respawn locations
-	private void spawnHero() { transform.position = map.getSpawnLoc(playerNumber); }
+	private void spawnHero() { 
+		transform.position = map.getSpawnLoc(playerNumber); 
+	}
 	
-	private void respawnHero() { transform.position = map.getRespawnLoc(); }
+	private void respawnHero() { 
+		transform.position = map.getRespawnLoc(); 
+	}
 	#endregion
 }

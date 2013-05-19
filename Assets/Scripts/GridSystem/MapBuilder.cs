@@ -8,6 +8,11 @@ public class MapBuilder : MonoBehaviour {
 	private const char DESTRUCTABLE_WALL = '+';
 	private const char UPGRADE = 'u';
 	
+	private const char SPAWN1 = '1';
+	private const char SPAWN2 = '2';
+	private const char SPAWN3 = '3';
+	private const char SPAWN4 = '4';
+	
 	const string INDESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Indestructuble Wall";
 	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Destructuble Wall";
 	const string UPGRADE_PREFAB_PATH = "Prefabs/Upgrade";
@@ -30,7 +35,11 @@ public class MapBuilder : MonoBehaviour {
 	}
 	
 	#region Public Methods
-	public void buildMap (GameObject[,] indestructable, GameObject[,] destructable, int mapID) {
+	public void buildMap (int mapID, 
+		GameObject[,] indestructable, 
+		GameObject[,] destructable, 
+		Vector3[] spawnPoints) 
+	{
 		TextAsset mapFile;
 		StringReader mapReader;
 		
@@ -56,6 +65,10 @@ public class MapBuilder : MonoBehaviour {
 				}
 				if (mapUnit == UPGRADE) {
 					spawnUpgrade(gridX, gridY);
+				}
+				if (mapUnit == SPAWN1 || mapUnit == SPAWN2 || mapUnit == SPAWN3 || mapUnit == SPAWN4) {
+					Debug.Log ("Respawn " + mapUnit + " added at index " + (mapUnit - 48));
+					spawnPoints[mapUnit - 48] = new Vector3(gridSystem.getXCoord(gridX), 0, gridSystem.getYCoord(gridY));
 				}
 				gridX++;
 			}
@@ -103,22 +116,4 @@ public class MapBuilder : MonoBehaviour {
 		}	
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
 	}
-	
-	#region Player spawn and respawn
-	public Vector3[] getSpawnPoints() {
-		
-		/*
-		 * Get spawnpoints when map builds, not here.
-		 */
-		spawnPoints = new Vector3[5];
-		spawnPoints[0] = new Vector3(0, 0, 0);
-		spawnPoints[1] = new Vector3(-112f, 0, 61);
-		spawnPoints[2] = new Vector3(112f, 0, -79);
-		spawnPoints[3] = new Vector3(112f, 0, 61);
-		spawnPoints[4] = new Vector3(-112f, 0, -79);
-
-		return spawnPoints;
-	}
-	#endregion
-
 }

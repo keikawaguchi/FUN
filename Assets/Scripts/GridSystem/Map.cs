@@ -8,18 +8,16 @@ public class Map : MonoBehaviour {
 	public GameObject[,] grid;
 	public GameObject[,] destructibleWallGrid;
 	private GameObject[,] impassableObjects;
-	
+	private Vector3[] spawnPoints;
+
 	GridSystem gridSystem;
 	MapBuilder mapBuilder;
-	
-	private Vector3[] spawnPoint;
 	
 	private int lastRespawnPoint = 0;	// keep track of last respawn index location
 	
 	void Start () {
 		loadScripts();
 		buildMap();
-		getSpawnPoints();
 	}
 	
 	#region Public Methods
@@ -107,6 +105,21 @@ public class Map : MonoBehaviour {
 		impassableObjects[x, y] = obj;
 		return true;
 	}
+	
+	public Vector3 getSpawnLoc(int playerNumber) { 
+		return spawnPoints[playerNumber]; 
+	}
+	
+	public Vector3 getRespawnLoc() {
+		int respawnIndex = Random.Range(1,4);
+		
+		while (respawnIndex == lastRespawnPoint)
+			respawnIndex = Random.Range(1,4);
+		
+		lastRespawnPoint = respawnIndex;
+		
+		return spawnPoints[respawnIndex];
+	}
 	#endregion
 	
 	#region Initialize Methods
@@ -121,7 +134,7 @@ public class Map : MonoBehaviour {
 		int gridHeight = gridSystem.getGridHeight();
 			
 		initializeGrids();
-		mapBuilder.buildMap (grid, destructibleWallGrid, mapID);
+		mapBuilder.buildMap (mapID, grid, destructibleWallGrid, spawnPoints);
 	}
 	
 	private void initializeGrids() {
@@ -131,35 +144,11 @@ public class Map : MonoBehaviour {
 		grid = new GameObject[gridWidth, gridHeight];
 		destructibleWallGrid = new GameObject[gridWidth, gridHeight];
 		impassableObjects = new GameObject[gridWidth, gridHeight];
-
-		for (int x = 0; x < gridWidth; x++) {
-			for (int y = 0; y < gridHeight; y++) {
-				grid[x,y] = null;
-				destructibleWallGrid[x,y] = null;
-				impassableObjects[x, y] = null;
-			}
-		}
+		spawnPoints = new Vector3[5];
 	}
 	
 	private bool isOutOfBounds(int x, int y) {
 		return (x < 0 && x >= gridSystem.getGridWidth())
 			&& (y < 0 && y >= gridSystem.getGridHeight());
 	}
-	
-	#region player spawn and respawn
-	private void getSpawnPoints() { spawnPoint = mapBuilder.getSpawnPoints(); }
-	
-	public Vector3 getSpawnLoc(int playerNumber) { return spawnPoint[playerNumber]; }
-	
-	public Vector3 getRespawnLoc() {
-		int respawnIndex = Random.Range(1,4);
-		
-		while (respawnIndex == lastRespawnPoint)
-			respawnIndex = Random.Range(1,4);
-		
-		lastRespawnPoint = respawnIndex;
-		
-		return spawnPoint[respawnIndex];
-	}
-	#endregion
 }
