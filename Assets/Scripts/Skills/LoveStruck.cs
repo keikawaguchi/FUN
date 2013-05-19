@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LoveStruck : MonoBehaviour {
 	
-	public int effectRadius = 3;
+	public float effectRadius = 35.0f;
 	public float speedMultiplier = 0.5f;
 	public float duration = 3.0f;
 	
@@ -15,7 +15,7 @@ public class LoveStruck : MonoBehaviour {
 	}
 	
 	public void execute() {
-		checkForPlayer();
+		checkForPlayersInRadius();
 	}
 	
 	private void loadScripts() {
@@ -23,26 +23,17 @@ public class LoveStruck : MonoBehaviour {
 		map = GameObject.Find("Map").GetComponent<Map>();
 	}
 	
-	private void checkForPlayer() {
-		GameObject otherPlayer;
-		int gridPosX = gridSystem.getXPos(transform.position.x);
-		int gridPosY = gridSystem.getYPos(transform.position.z);
+	private void checkForPlayersInRadius() {	
+		GameObject[] players;
+		players = GameObject.FindGameObjectsWithTag("Player");	
 		
-		// X direction
-		for (int i = 0; i < effectRadius; i++) {
-			otherPlayer = map.getObjectAtGridLocation(gridPosX + i, gridPosY);
-			if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-				setSlowOnPlayer(otherPlayer);
-				return;
-			}	
-		}
-		// Y direction
-		for (int i = 0; i < effectRadius; i++) {
-			otherPlayer = map.getObjectAtGridLocation(gridPosX, gridPosY + i);
-			if(otherPlayer != null && otherPlayer != gameObject && otherPlayer.tag == "Player") {
-				setSlowOnPlayer(otherPlayer);
-				return;
-			}	
+		float distance;
+		foreach(GameObject player in players) {
+			distance = Vector3.Distance (transform.position, player.transform.position);
+			if (player != gameObject && distance < effectRadius) {
+				setSlowOnPlayer(player);
+				showPopupText(player.transform.position);
+			}
 		}
 	}
 	
@@ -51,5 +42,14 @@ public class LoveStruck : MonoBehaviour {
 		alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
 		alterSpeed.setSpeedMultiplier(speedMultiplier);
 		alterSpeed.setDurationInSeconds(duration);
+	}
+	
+	private void showPopupText(Vector3 position) {
+		GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
+		GameObject text = Instantiate(t) as GameObject;		
+		PopupText popupText = text.GetComponent<PopupText>();
+		popupText.initialize();
+		popupText.setPosition(position.x, position.z + 7);
+		popupText.setPredefinedText("MinusSpeed");
 	}
 }
