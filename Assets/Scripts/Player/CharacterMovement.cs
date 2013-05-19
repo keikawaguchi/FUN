@@ -20,14 +20,7 @@ public class CharacterMovement : MonoBehaviour {
 	private Map map;
 	private GridSystem gridSystem;
 	private Controller controller;
-	
-	private float startTime;
-	private float restSeconds;
-	private int roundedRestSeconds;
-	private int displaySeconds;
-	private int displayMinutes;
-	private float countDownSeconds;
-	
+
 	// effects from abilities
 	private float stunInterval;
 	
@@ -174,26 +167,8 @@ public class CharacterMovement : MonoBehaviour {
 			
 		
 	}
-	void Awake() {
-		startTime = 300f;
-	}
 	void OnGUI()
 	{
-		GUIStyle timeStyle = new GUIStyle();
-		timeStyle.fontSize = 30;
-		timeStyle.normal.textColor = Color.white;
-		float guiTime = Time.time - startTime;
-		restSeconds = countDownSeconds - (guiTime);
-		roundedRestSeconds = Mathf.CeilToInt(restSeconds);
-		displaySeconds = roundedRestSeconds % 60;
-		displayMinutes = roundedRestSeconds / 60;
-		string text = string.Format("{0:00}:{1:00}",displayMinutes,displaySeconds);		
-		if(restSeconds <= 10)
-		{
-			timeStyle.normal.textColor = Color.red;
-		}
-		GUI.Label(new Rect(390,10,100,20),text,timeStyle);
-		
 		if(gameObject.name == "Temptress")
 		{
 			GUI.Box(new Rect(5,5,200,50),"Temptress");

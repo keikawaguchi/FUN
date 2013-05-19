@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
+     <Compile Include="Assets\Scripts\GridSystem\TimerCS.cs" />
      <Compile Include="Assets\Scripts\Menu\ComboBox.cs" />
      <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\TextControl.cs" />
