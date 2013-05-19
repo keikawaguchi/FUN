@@ -5,7 +5,7 @@
       <File FileName="Assets/Scripts/Skills/HammerTime.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Upgrades/UpgradePickUp.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Player/Hero.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GridSystem/Map.cs" Line="16" Column="17" />
+      <File FileName="Assets/Scripts/GridSystem/Map.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GridSystem/MapBuilder.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Controller/Controller.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Player/Respawn.cs" Line="1" Column="1" />
