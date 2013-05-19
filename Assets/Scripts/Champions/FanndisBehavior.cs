@@ -10,12 +10,12 @@ public class FanndisBehavior : MonoBehaviour {
 	private Controller controller;
 	
 	// skill cooldown times
-	private const float skillOneCD = 1f;  // ZeroFriction
-	private const float skillTwoCD = 1f;  // IceAge
+	private const float zeroFrictionCD = 1f;  // ZeroFriction
+	private const float iceAgeCD = 1f;  // IceAge
 	
 	// skill timers
-	private float skillOneTimer = -99f;
-	private float skillTwoTimer = -99f;
+	private float zeroFrictionTimer = -99f;
+	private float iceAgeTimer = -99f;
 	
 
 	void Start () {
@@ -29,11 +29,11 @@ public class FanndisBehavior : MonoBehaviour {
 		}
 		
 		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
-			checkSkillOneButtonPress();
+			zeroFictionTriggered();
 		}
 		
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
-			checkSkillTwoButtonPress();
+			iceAgeTriggered();
 		}
 	}
 	
@@ -53,29 +53,29 @@ public class FanndisBehavior : MonoBehaviour {
 	}
 	
 	#region Character Skills
-	private void checkSkillOneButtonPress() {
+	private void zeroFictionTriggered() {
 		
 		if (Input.GetButtonDown(controller.getButton("Skill1"))) {
 			
-			if (Time.time - skillOneTimer > skillOneCD) {
+			if (Time.time - zeroFrictionTimer > zeroFrictionCD) {
 				// skill 1 here
 				Debug.Log("Skill One Triggered!");
 				
-				skillOneTimer = Time.time;
+				zeroFrictionTimer = Time.time;
 			
 			}
 		}
 	}
 	
-	private void checkSkillTwoButtonPress() {
+	private void iceAgeTriggered() {
 		
 		if (Input.GetButtonDown(controller.getButton("Skill2"))) {
 			
-			if (Time.time - skillTwoTimer > skillTwoCD) {
+			if (Time.time - iceAgeTimer > iceAgeCD) {
 				// skill 1 here
 				Debug.Log("Skill Two Triggered!");
 				
-				skillTwoTimer = Time.time;
+				iceAgeTimer = Time.time;
 			
 			}
 		}
