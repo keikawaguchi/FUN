@@ -54,30 +54,24 @@ public class Template : MonoBehaviour {
 	
 	#region Character Skills
 	private void checkSkillOneButtonPress() {
-		
-		if (Input.GetButtonDown(controller.getButton("Skill1"))) {
+		// check if cooldown expired
+		if (Time.time - skillOneTimer > skillOneCD) {
+			// skill 1 here
+			Debug.Log("Skill One Triggered!");
 			
-			if (Time.time - skillOneTimer > skillOneCD) {
-				// skill 1 here
-				Debug.Log("Skill One Triggered!");
-				
-				skillOneTimer = Time.time;
-			
-			}
+			// keep track of cooldown timer
+			skillOneTimer = Time.time;
 		}
 	}
 	
 	private void checkSkillTwoButtonPress() {
-		
-		if (Input.GetButtonDown(controller.getButton("Skill2"))) {
+		// check if cooldown expired
+		if (Time.time - skillTwoTimer > skillTwoCD) {
+			// skill 1 here
+			Debug.Log("Skill Two Triggered!");
 			
-			if (Time.time - skillTwoTimer > skillTwoCD) {
-				// skill 1 here
-				Debug.Log("Skill Two Triggered!");
-				
-				skillTwoTimer = Time.time;
-			
-			}
+			// keep track of cooldown timer
+			skillTwoTimer = Time.time;
 		}
 	}
 	#endregion
