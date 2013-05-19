@@ -148,7 +148,7 @@ public class Map : MonoBehaviour {
 	}
 	
 	private bool isOutOfBounds(int x, int y) {
-		return (x < 0 && x >= gridSystem.getGridWidth())
-			&& (y < 0 && y >= gridSystem.getGridHeight());
+		return (x < 0 || x >= gridSystem.getGridWidth())
+			|| (y < 0 || y >= gridSystem.getGridHeight());
 	}
 }
