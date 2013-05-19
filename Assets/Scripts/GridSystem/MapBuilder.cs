@@ -17,9 +17,10 @@ public class MapBuilder : MonoBehaviour {
 	GameObject upgradePrefab;
 	
 	private string[] maps;
+	private Vector3[] spawnPoints;
 	
 	GridSystem gridSystem;
-
+	
 	void Start () {
 		maps = new string[10];
 		maps [1] = "Maps/map1";
@@ -102,5 +103,22 @@ public class MapBuilder : MonoBehaviour {
 		}	
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
 	}
+	
+	#region Player spawn and respawn
+	public Vector3[] getSpawnPoints() {
+		
+		/*
+		 * Get spawnpoints when map builds, not here.
+		 */
+		spawnPoints = new Vector3[5];
+		spawnPoints[0] = new Vector3(0, 0, 0);
+		spawnPoints[1] = new Vector3(-112f, 0, 61);
+		spawnPoints[2] = new Vector3(112f, 0, -79);
+		spawnPoints[3] = new Vector3(112f, 0, 61);
+		spawnPoints[4] = new Vector3(-112f, 0, -79);
+
+		return spawnPoints;
+	}
+	#endregion
 
 }

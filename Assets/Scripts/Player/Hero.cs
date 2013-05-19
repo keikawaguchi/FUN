@@ -4,6 +4,8 @@ using System.Collections;
 public class Hero : MonoBehaviour {
 
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
+	
+	public int playerNumber;
 
 	public float lives = 5;
 	public float dropBombCoolDownSeconds = 1.5f;
@@ -27,7 +29,7 @@ public class Hero : MonoBehaviour {
 		initialize();
 		timeOfLastBombDrop = -999f;
 		
-		spawn();
+		spawnHero();
 	}
 	
 	void Update () {	
@@ -46,8 +48,7 @@ public class Hero : MonoBehaviour {
 				deathTimer = 0;
 				GetComponent<MeshRenderer>().enabled = true;
 				
-				// call gridsystem to get a respawn point
-				respawn ();
+				respawnHero();
 			}
 		}
 	}
@@ -87,17 +88,7 @@ public class Hero : MonoBehaviour {
 	
 	private void initialize() {
 		collider.isTrigger = true;
-		
-		/*
-		 * Place this somewhere else and generate spawn points based on grid dimensions
-		 */
-		spawnPoints = new Vector3[4];
-		
-		// should grab spaw
-		spawnPoints[0] = new Vector3(-112f, 0, 61);
-		spawnPoints[1] = new Vector3(112f, 0, -79);
-		spawnPoints[2] = new Vector3(112f, 0, 61);
-		spawnPoints[3] = new Vector3(-112f, 0, -79);
+		playerNumber = controller.controllerNumber;
 	}
 	#endregion
 	
@@ -125,17 +116,9 @@ public class Hero : MonoBehaviour {
 		timeOfLastBombDrop = Time.time;
 	}
 	
-	#region re/spawn PLACE SOMEWHERE ELSE
-	private void spawn() {
-		int playerNum = controller.controllerNumber;
-		transform.position = spawnPoints[playerNum - 1];
-		Debug.Log (transform.position);
-	}
+	#region Player spawn and respawn locations
+	private void spawnHero() { transform.position = map.getSpawnLoc(playerNumber); }
 	
-	private void respawn() {
-		int rand = Random.Range(0,3);
-		
-		transform.position = spawnPoints[rand];
-	}
+	private void respawnHero() { transform.position = map.getRespawnLoc(); }
 	#endregion
 }

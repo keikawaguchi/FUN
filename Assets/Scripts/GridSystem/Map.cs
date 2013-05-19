@@ -11,10 +11,15 @@ public class Map : MonoBehaviour {
 	
 	GridSystem gridSystem;
 	MapBuilder mapBuilder;
-
+	
+	private Vector3[] spawnPoint;
+	
+	private int lastRespawnPoint = 0;	// keep track of last respawn index location
+	
 	void Start () {
 		loadScripts();
 		buildMap();
+		getSpawnPoints();
 	}
 	
 	#region Public Methods
@@ -140,4 +145,21 @@ public class Map : MonoBehaviour {
 		return (x < 0 && x >= gridSystem.getGridWidth())
 			&& (y < 0 && y >= gridSystem.getGridHeight());
 	}
+	
+	#region player spawn and respawn
+	private void getSpawnPoints() { spawnPoint = mapBuilder.getSpawnPoints(); }
+	
+	public Vector3 getSpawnLoc(int playerNumber) { return spawnPoint[playerNumber]; }
+	
+	public Vector3 getRespawnLoc() {
+		int respawnIndex = Random.Range(1,4);
+		
+		while (respawnIndex == lastRespawnPoint)
+			respawnIndex = Random.Range(1,4);
+		
+		lastRespawnPoint = respawnIndex;
+		
+		return spawnPoint[respawnIndex];
+	}
+	#endregion
 }
