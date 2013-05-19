@@ -25,10 +25,10 @@ public class MainMenu : MonoBehaviour {
 		listStyle.padding.top =
 		listStyle.padding.bottom = 4;
  
-		Player1 = new ComboBox(new Rect(10, 130, 150, 20), comboBoxList[0], comboBoxList, "button", "box", listStyle);
-		Player2 = new ComboBox(new Rect(10, 405, 150, 20), comboBoxList[1], comboBoxList, "button", "box", listStyle);
-		Player3 = new ComboBox(new Rect(575, 130, 150, 20), comboBoxList[2], comboBoxList, "button", "box", listStyle);
-		Player4 = new ComboBox(new Rect(575, 405, 150, 20), comboBoxList[3], comboBoxList, "button", "box", listStyle);
+		Player1 = new ComboBox(new Rect(Screen.height/35, (int)(Screen.width/5.6), 130, 20), comboBoxList[0], comboBoxList, "button", "box", listStyle);
+		Player2 = new ComboBox(new Rect(Screen.height/35, (int)(Screen.width/1.9), 130, 20), comboBoxList[1], comboBoxList, "button", "box", listStyle);
+		Player3 = new ComboBox(new Rect(Screen.height + 22, (int)(Screen.width/5.6), 130, 20), comboBoxList[2], comboBoxList, "button", "box", listStyle);
+		Player4 = new ComboBox(new Rect(Screen.height + 22, (int)(Screen.width/1.9), 130, 20), comboBoxList[3], comboBoxList, "button", "box", listStyle);
 	}
 	
 	// Update is called once per frame
@@ -37,12 +37,12 @@ public class MainMenu : MonoBehaviour {
 	}
 	void OnGUI()
 	{
-		GUI.Box(new Rect(10,25,150,100),"Player 1");
-		GUI.Box(new Rect(10,300,150,100),"Player 2");
-		GUI.Box(new Rect(575,25,150,100),"Player 3");
-		GUI.Box(new Rect(575,300,150,100),"Player 4");
+		GUI.Box(new Rect(Screen.height/35,Screen.width/50,130,100),"Player 1");
+		GUI.Box(new Rect(Screen.height/35,(int)(Screen.width/2.7),130,100),"Player 2");
+		GUI.Box(new Rect(Screen.height + 22,Screen.width/50,130,100),"Player 3");
+		GUI.Box(new Rect(Screen.height + 22,(int)(Screen.width/2.7),130,100),"Player 4");
 		
-		GUI.Box(new Rect(170,70,400,400),"Champions");
+		GUI.Box(new Rect((int)(Screen.height/3.3),Screen.width/50,360,200),"Champions");
 		Player1.Show();
 		Player2.Show();
 		Player3.Show();
