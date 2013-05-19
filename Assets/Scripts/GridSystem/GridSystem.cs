@@ -53,6 +53,15 @@ public class GridSystem : MonoBehaviour {
 	// converts y-position to grid y-coord
 	public int getYPos(float y) { return Mathf.RoundToInt( (y - yMin - (singleGridSize / 2) ) / singleGridSize); }
 	
+	public Vector3 gridToVector(int x, int y) {
+		Vector3 toReturn = new Vector3(0, 0, 0);
+		
+		toReturn.x = getXCoord(x);
+		toReturn.z = getYCoord(y);
+		
+		return toReturn;
+	}
+	
 	// returns true if coordinate is an edge of the map
 	public bool isEdge(int x, int y) {
 		
