@@ -7,7 +7,7 @@ public class HammerTime : MonoBehaviour {
 	private const float HAMMER_SPEED = 150f;
 	private const float HAMMER_TRAVEL_DISTANCE = 100f;
 	private const float HAMMER_AOE_EFFECT = 20f;
-	private const float HAMMER_STUN_DURATION = 2f;
+	private const float HAMMER_STUN_DURATION = 1f;
 	
 	private GameObject hammerAOEPrefab;
 	private GameObject hammerAOE;

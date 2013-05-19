@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Walls\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Walls\IndestructubleWall.cs" />
      <Compile Include="Assets\Scripts\skills\Blink.cs" />
+     <Compile Include="Assets\Scripts\skills\BombVoyage.cs" />
      <Compile Include="Assets\Scripts\skills\HammerTime.cs" />
      <Compile Include="Assets\Scripts\skills\HammerTimeAOE.cs" />
      <Compile Include="Assets\Scripts\skills\LoveStruck.cs" />
