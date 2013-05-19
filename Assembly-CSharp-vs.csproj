@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +57,9 @@
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
+     <Compile Include="Assets\Scripts\Menu\ComboBox.cs" />
+     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\TextControl.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\Enemy.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\EnemyTemp.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\GlobalBehavior.cs" />
@@ -67,9 +70,6 @@
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
      <Compile Include="Assets\Scripts\Player\Respawn.cs" />
      <Compile Include="Assets\Scripts\Skills\Blink.cs" />
-     <Compile Include="Assets\Scripts\Skills\BombVoyage.cs" />
-     <Compile Include="Assets\Scripts\Skills\HammerTime.cs" />
-     <Compile Include="Assets\Scripts\Skills\HammerTimeAOE.cs" />
      <Compile Include="Assets\Scripts\Skills\LoveStruck.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
