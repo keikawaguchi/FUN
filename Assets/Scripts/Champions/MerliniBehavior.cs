@@ -53,7 +53,7 @@ public class MerliniBehavior : MonoBehaviour {
 	#endregion
 	
 	private bool isStunned() {
-		return characterMovement.getMovementState() == CharacterMovement.MovementState.Stunned;
+		return characterMovement.isStunned();
 	}
 	
 	#region Merlini Skills

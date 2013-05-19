@@ -59,7 +59,6 @@ public class HammerTime : MonoBehaviour {
 		if (collision.tag == PLAYER_TAG && collision.gameObject != owner) {
 			
 			triggerStun(collision.gameObject);
-			popupStunText(collision.gameObject.transform.position);
 		
 			Destroy (gameObject);
 			
@@ -82,7 +81,6 @@ public class HammerTime : MonoBehaviour {
 				float distance = Vector3.Distance(collisionPos, player.transform.position);
 				if (distance < HAMMER_AOE_EFFECT) {
 					triggerStun(player);
-					popupStunText(player.transform.position);
 				}
 			}
 			
@@ -92,19 +90,6 @@ public class HammerTime : MonoBehaviour {
 	private void triggerStun(GameObject otherPlayer) {
 		AlterSpeed alterSpeed;
 		alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-		alterSpeed.setSpeedMultiplier(0f);
-		alterSpeed.setDurationInSeconds(HAMMER_STUN_DURATION);
-	}
-	
-	private void popupStunText(Vector3 textPos) {
-		// add stun gametext
-		GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
-		GameObject text = Instantiate(t) as GameObject;	
-		
-		PopupText popupText = text.GetComponent<PopupText>();
-		popupText.initialize();
-		popupText.setDuration(HAMMER_STUN_DURATION);
-		popupText.setPosition(textPos.x, textPos.z + 7);
-		popupText.setPredefinedText("Stun");
+		alterSpeed.Start(0f, HAMMER_STUN_DURATION);
 	}
 }

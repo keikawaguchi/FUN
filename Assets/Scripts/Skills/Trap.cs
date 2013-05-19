@@ -30,8 +30,9 @@ public class Trap : MonoBehaviour {
 		// check the collision with tag and exlude the trap owner
 		if (collision.tag == PLAYER_TAG && collision.gameObject.name != "Albion") {
 			GameObject enemyObj = GameObject.FindGameObjectWithTag (PLAYER_TAG);
-			CharacterMovement characterMove = enemyObj.GetComponent<CharacterMovement>();
-			characterMove.setMovementState (CharacterMovement.MovementState.Stunned);
+			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.setSpeedMultiplier(0);
+			alterSpeed.setDurationInSeconds(2);
 			Destroy (gameObject);
 		}
 	}
