@@ -57,6 +57,10 @@ public class Hero : MonoBehaviour {
 		if (collider.gameObject.tag == "KillsPlayer") {
 			
 			GetComponent<MeshRenderer>().enabled = false;
+			
+			// quick fix so heroes can't do anything when dead
+			transform.position = new Vector3(-9999, 0, 0);
+			
 			deathTimer = Time.time;
 		}
 		
