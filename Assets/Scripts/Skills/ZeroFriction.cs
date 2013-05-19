@@ -13,8 +13,12 @@ public class ZeroFriction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+	}
+	
+	public void triggerZeroFriction(GameObject champion) {
 		AlterSpeed alterSpeed;
-		alterSpeed = gameObject.AddComponent<AlterSpeed>();
+		alterSpeed = champion.AddComponent<AlterSpeed>();
 		alterSpeed.setSpeedMultiplier(SPEED_MULTIPLIER);
 		alterSpeed.setDurationInSeconds(DURATION);
 	}

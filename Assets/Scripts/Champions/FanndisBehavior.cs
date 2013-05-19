@@ -5,10 +5,6 @@ using UnityEngine;
 using System.Collections;
 
 public class FanndisBehavior : MonoBehaviour {
-	
-	private CharacterMovement characterMovement;
-	private Controller controller;
-	
 	// skill cooldown times
 	private const float zeroFrictionCD = 1f;  // ZeroFriction
 	private const float iceAgeCD = 1f;  // IceAge
@@ -16,7 +12,9 @@ public class FanndisBehavior : MonoBehaviour {
 	// skill timers
 	private float zeroFrictionTimer = -99f;
 	private float iceAgeTimer = -99f;
-	
+		
+	private CharacterMovement characterMovement;
+	private Controller controller;
 
 	void Start () {
 		loadSkills();
@@ -60,6 +58,7 @@ public class FanndisBehavior : MonoBehaviour {
 			if (Time.time - zeroFrictionTimer > zeroFrictionCD) {
 				// skill 1 here
 				Debug.Log("Skill One Triggered!");
+				
 				
 				zeroFrictionTimer = Time.time;
 			

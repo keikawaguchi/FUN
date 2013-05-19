@@ -5,10 +5,6 @@ using UnityEngine;
 using System.Collections;
 
 public class Template : MonoBehaviour {
-	
-	private CharacterMovement characterMovement;
-	private Controller controller;
-	
 	// skill cooldown times
 	private const float skillOneCD = 1f;
 	private const float skillTwoCD = 1f;
@@ -17,7 +13,9 @@ public class Template : MonoBehaviour {
 	private float skillOneTimer = -99f;
 	private float skillTwoTimer = -99f;
 	
-
+	private CharacterMovement characterMovement;
+	private Controller controller;
+	
 	void Start () {
 		loadSkills();
 		loadScripts();
@@ -59,6 +57,7 @@ public class Template : MonoBehaviour {
 			// skill 1 here
 			Debug.Log("Skill One Triggered!");
 			
+			
 			// keep track of cooldown timer
 			skillOneTimer = Time.time;
 		}
@@ -69,6 +68,7 @@ public class Template : MonoBehaviour {
 		if (Time.time - skillTwoTimer > skillTwoCD) {
 			// skill 1 here
 			Debug.Log("Skill Two Triggered!");
+			
 			
 			// keep track of cooldown timer
 			skillTwoTimer = Time.time;
