@@ -58,22 +58,9 @@ public class HammerTime : MonoBehaviour {
 	void OnTriggerEnter(Collider collision) {
 		if (collision.tag == PLAYER_TAG && collision.gameObject != owner) {
 			
-			// add stun gametext
-			GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
-			GameObject text = Instantiate(t) as GameObject;	
-			
-			PopupText popupText = text.GetComponent<PopupText>();
-			popupText.initialize();
-			popupText.setDuration(HAMMER_STUN_DURATION);
-			popupText.setPosition(collision.gameObject.transform.position.x, collision.gameObject.transform.position.z + 7);
-			popupText.setPredefinedText("Stun");
-			
-			// stun hero
-			AlterSpeed alterSpeed;
-			alterSpeed = collision.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.setSpeedMultiplier(0f);
-			alterSpeed.setDurationInSeconds (HAMMER_STUN_DURATION);
-			
+			triggerStun(collision.gameObject);
+			popupStunText(collision.gameObject.transform.position);
+		
 			Destroy (gameObject);
 			
 			// Create AOE effect
@@ -94,27 +81,30 @@ public class HammerTime : MonoBehaviour {
 				
 				float distance = Vector3.Distance(collisionPos, player.transform.position);
 				if (distance < HAMMER_AOE_EFFECT) {
-					setSlowOnPlayer(player);
-					
-					// add stun gametext
-					GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
-					GameObject text = Instantiate(t) as GameObject;	
-					
-					PopupText popupText = text.GetComponent<PopupText>();
-					popupText.initialize();
-					popupText.setDuration(HAMMER_STUN_DURATION);
-					popupText.setPosition(player.transform.position.x, player.transform.position.z + 7);
-					popupText.setPredefinedText("Stun");
+					triggerStun(player);
+					popupStunText(player.transform.position);
 				}
 			}
 			
 		}
 	}
 
-	private void setSlowOnPlayer(GameObject otherPlayer) {
+	private void triggerStun(GameObject otherPlayer) {
 		AlterSpeed alterSpeed;
 		alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
 		alterSpeed.setSpeedMultiplier(0f);
 		alterSpeed.setDurationInSeconds(HAMMER_STUN_DURATION);
+	}
+	
+	private void popupStunText(Vector3 textPos) {
+		// add stun gametext
+		GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
+		GameObject text = Instantiate(t) as GameObject;	
+		
+		PopupText popupText = text.GetComponent<PopupText>();
+		popupText.initialize();
+		popupText.setDuration(HAMMER_STUN_DURATION);
+		popupText.setPosition(textPos.x, textPos.z + 7);
+		popupText.setPredefinedText("Stun");
 	}
 }
