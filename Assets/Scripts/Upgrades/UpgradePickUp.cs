@@ -33,18 +33,28 @@ public class UpgradePickUp : MonoBehaviour {
 	}
 	
 	private IEnumerator upgradePickedUp() {
-		if(renderer.name == "SpeedUpgrade")
-			GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "Speed Upgrade";
-		if(renderer.name == "ExplosionUpgrade")
-			GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "Explosion Upgrade";
-		if(renderer.name == "BombUpgrade")
-			GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "Bomb Upgrade";
+		GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
+		GameObject text = Instantiate(t) as GameObject;	
+		
+		PopupText popupText = text.GetComponent<PopupText>();
+		popupText.initialize();
+		popupText.setDuration(3.0f);
+		popupText.setPosition(transform.position.x, transform.position.z + 5);
+		
+		if(renderer.name == "SpeedUpgrade") {		
+			popupText.setPredefinedText("PlusSpeed");	
+		}
+		if(renderer.name == "ExplosionUpgrade") {
+			popupText.setPredefinedText("PlusExplosion");
+		}
+		if(renderer.name == "BombUpgrade") {
+			popupText.setPredefinedText("PlusBombs");
+		}
 		
 		renderer.enabled = false;
 		gameObject.collider.enabled = false;
 		
 		yield return new WaitForSeconds(3);
-		GameObject.Find("Upgrade Text").GetComponent<GUIText>().text = "";
 	}
 	
 	private void spawnRandomUpgrade() {

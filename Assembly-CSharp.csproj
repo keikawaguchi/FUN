@@ -75,6 +75,7 @@
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
      <Compile Include="Assets\Scripts\Skills\Stun.cs" />
      <Compile Include="Assets\Scripts\Skills\Trap.cs" />
+     <Compile Include="Assets\Scripts\Text\PopupText.cs" />
      <Compile Include="Assets\Scripts\Upgrades\AlterSpeed.cs" />
      <Compile Include="Assets\Scripts\Upgrades\UpgradePickUp.cs" />
      <Compile Include="Assets\Scripts\Walls\DestructibleWall.cs" />
