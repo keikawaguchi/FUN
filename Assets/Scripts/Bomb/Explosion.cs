@@ -7,9 +7,9 @@ public class Explosion : MonoBehaviour {
 	
 	const string FIRE_UNIT_PREFAB_PATH = "Prefabs/Bomb/Fire";
 	
-	public float explosionDistanceX = 4.0f;
-	public float explosionDistanceZ = 3.0f;
-	public float secondsBetweenFireSpawns = 0.5f;
+	public float explosionDistanceX = 2.0f;
+	public float explosionDistanceZ = 2.0f;
+	public float secondsBetweenFireSpawns = 0.1f;
 	public float scale = 14.0f;
 	
 	float timeOfLastFireSpawn;
@@ -25,12 +25,7 @@ public class Explosion : MonoBehaviour {
 	
 	private GridSystem gridSystem;
 	private Map map;
-	
-	public void setter(float x, float z)
-	{
-		explosionDistanceX = x;
-		explosionDistanceZ = z;
-	}
+
 
 	void Start() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
@@ -56,6 +51,11 @@ public class Explosion : MonoBehaviour {
 		if (isTimeToSpawnFireUnit()) {
 			spawnNewFireUnits();
 		}
+	}
+	
+	public void setExplosionDistance(float x, float z) {
+		explosionDistanceX = x;
+		explosionDistanceZ = z;
 	}
 	
 	private bool isTimeToSpawnFireUnit() {
