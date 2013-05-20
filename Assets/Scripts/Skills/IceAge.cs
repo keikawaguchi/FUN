@@ -56,6 +56,7 @@ public class IceAge : MonoBehaviour {
 		int iceAgePosX = gridSystem.getXPos(iceAgePos.x);
 		int iceAgePosY = gridSystem.getYPos(iceAgePos.z);
 		
+		map.addImpassableObject (iceAgePosX, iceAgePosY, iceAgeObj);
 		iceAgeObj.GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
 	}
 	

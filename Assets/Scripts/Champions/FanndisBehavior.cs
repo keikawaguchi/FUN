@@ -35,12 +35,7 @@ public class FanndisBehavior : MonoBehaviour {
 		
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
 			iceAgeTriggered();
-//			iceAgeDestroyTimer += Time.smoothDeltaTime;
-//			Debug.Log ("Timer: " + iceAgeDestroyTimer);
-//			if (iceAgeDestroyTimer >= iceAge.getIceAgeDuration ()) {
-//				Destroy(iceAge.gameObject);
-//				Debug.Log ("Destroy!");
-//			}
+			
 			Destroy (GetComponent<IceAge>(), 0.01f);  // remove the script so it won't keep adding
 		}
 	}
