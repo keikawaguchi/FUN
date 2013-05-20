@@ -76,16 +76,16 @@ public class FanndisBehavior : MonoBehaviour {
 	
 	public float getzeroFrictionCD()
 	{
-		if(zeroFrictionTimer < 0)
+		if(Time.time - zeroFrictionTimer > zeroFrictionCD)
 			return 0;
 		else
-			return zeroFrictionTimer;
+			return (int)((zeroFrictionCD+1) - (Time.time - zeroFrictionTimer));;
 	}
 	public float geticeAgeCD()
 	{
-		if(iceAgeTimer < 0)
+		if(Time.time - iceAgeTimer > iceAgeCD)
 			return 0;
 		else
-			return iceAgeTimer;
+			return (int)((iceAgeCD+1) - (Time.time - iceAgeTimer));
 	}
 }

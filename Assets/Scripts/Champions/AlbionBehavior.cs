@@ -31,7 +31,7 @@ public class AlbionBehavior : MonoBehaviour {
 		if (Input.GetButtonDown (controller.getButton ("Skill1"))) {
 			if (Time.time - holyTrapTimer > holyTrapCD) {
 				holyTrap = gameObject.AddComponent<HolyTrap>();
-				holyTrap.SetTrapOwner (gameObject);
+				holyTrap.SetTrapOwner(gameObject);
 				
 				holyTrapTimer = Time.time;
 			}
@@ -49,19 +49,19 @@ public class AlbionBehavior : MonoBehaviour {
 		}
 	}
 	
-	public float gettrapCD()
+	public int gettrapCD()
 	{
-		if(holyTrapTimer < 0)
+		if(Time.time - holyTrapTimer > holyTrapCD)
 			return 0;
 		else
-			return holyTrapTimer;
+			return (int)((holyTrapCD+1) - (Time.time - holyTrapTimer));
 	}
 	
-	public float getblinkCD()
+	public int getblinkCD()
 	{
-		if(holyBlinkTimer < 0)
+		if(Time.time - holyTrapTimer > holyTrapCD)
 			return 0;
 		else
-			return holyBlinkTimer;
+			return (int)((holyTrapCD+1) - (Time.time - holyTrapTimer));
 	}
 }
