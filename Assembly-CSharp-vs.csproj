@@ -81,8 +81,6 @@
      <Compile Include="Assets\Scripts\Skills\LoveStruck.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
-     <Compile Include="Assets\Scripts\Skills\Stun.cs" />
-     <Compile Include="Assets\Scripts\Skills\Trap.cs" />
      <Compile Include="Assets\Scripts\Skills\ZeroFriction.cs" />
      <Compile Include="Assets\Scripts\Text\PopupText.cs" />
      <Compile Include="Assets\Scripts\Upgrades\AlterSpeed.cs" />

@@ -23,9 +23,8 @@ public class HolyTrapUnit : MonoBehaviour {
 		GameObject enemyObj = collision.gameObject;
 		if (collision.tag == PLAYER_TAG && enemyObj.name != "Albion") {
 			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
-			alterSpeed.Start (0f, 2.5f);
+			alterSpeed.Start (0f, 2f);
 			Destroy (this.gameObject);
-			Debug.Log ("Triggered");
 		}
 	}
 	
