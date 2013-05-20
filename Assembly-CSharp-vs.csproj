@@ -41,6 +41,10 @@
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -71,16 +75,16 @@
      <Compile Include="Assets\Scripts\Player\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
      <Compile Include="Assets\Scripts\Player\Respawn.cs" />
-     <Compile Include="Assets\Scripts\Skills\Blink.cs" />
      <Compile Include="Assets\Scripts\Skills\BombVoyage.cs" />
      <Compile Include="Assets\Scripts\Skills\HammerTime.cs" />
      <Compile Include="Assets\Scripts\Skills\HammerTimeAOE.cs" />
+     <Compile Include="Assets\Scripts\Skills\HolyBlink.cs" />
+     <Compile Include="Assets\Scripts\Skills\HolyTrap.cs" />
+     <Compile Include="Assets\Scripts\Skills\HolyTrapUnit.cs" />
      <Compile Include="Assets\Scripts\Skills\IceAge.cs" />
      <Compile Include="Assets\Scripts\Skills\LoveStruck.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
-     <Compile Include="Assets\Scripts\Skills\Stun.cs" />
-     <Compile Include="Assets\Scripts\Skills\Trap.cs" />
      <Compile Include="Assets\Scripts\Skills\ZeroFriction.cs" />
      <Compile Include="Assets\Scripts\Text\PopupText.cs" />
      <Compile Include="Assets\Scripts\Upgrades\AlterSpeed.cs" />

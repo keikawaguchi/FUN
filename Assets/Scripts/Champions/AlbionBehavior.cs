@@ -2,77 +2,66 @@ using UnityEngine;
 using System.Collections;
 
 public class AlbionBehavior : MonoBehaviour {
-	private const string STUN_PREFAB_PATH = "Prefabs/Skills/Stun";
-	private const string BLINK_PREFAB_PATH = "Prefabs/Skills/Blink";
-	
 	private Controller controller;
-	private GameObject stunPrefab;
-	private GameObject stun;
-	private GameObject blinkPrefab;
-	private GameObject blink;
+	private HolyTrap holyTrap;
+	private HolyBlink holyBlink;
 	
 	// skill cooldown times
-	private const float blinkCD = 10f;
-	private const float trapCD = 10f;
+	private const float holyTrapCD = 10f;
+	private const float holyBlinkCD = 10f;
 	
 	// skill timers
-	private float blinkTimer = -99f;
-	private float trapTimer = -99f;
+	private float holyTrapTimer = -99f;
+	private float holyBlinkTimer = -99f;
 	
 	void Start () {
-		LoadSkills();
 		LoadScripts();
 	}
 	
 	void Update () {
-		StunButtonPress ();
-		BlinkButtonPress ();
-	}
-	
-	private void LoadSkills() {
-		stunPrefab = Resources.Load (STUN_PREFAB_PATH) as GameObject;
-		blinkPrefab = Resources.Load (BLINK_PREFAB_PATH) as GameObject;
+		HolyTrapTriggered ();
+		HolyBlinkTriggered ();
 	}
 	
 	private void LoadScripts() {
 		controller = GetComponent<Controller>();
 	}
 	
-	private void StunButtonPress() {
+	private void HolyTrapTriggered() {
 		if (Input.GetButtonDown (controller.getButton ("Skill1"))) {
-			if (Time.time - trapTimer > trapCD) {
-				stun = Instantiate (stunPrefab) as GameObject;
-				stun.GetComponent<Stun>().SetStunOwner (gameObject);
+			if (Time.time - holyTrapTimer > holyTrapCD) {
+				holyTrap = gameObject.AddComponent<HolyTrap>();
+				holyTrap.SetTrapOwner(gameObject);
 				
-				trapTimer = Time.time;
+				holyTrapTimer = Time.time;
 			}
 		}
 	}
 	
-	private void BlinkButtonPress() {
+	private void HolyBlinkTriggered() {
 		if (Input.GetButtonDown (controller.getButton ("Skill2"))) {
-			if (Time.time - blinkTimer > blinkCD) {
-				blink = Instantiate (blinkPrefab) as GameObject;
-				blink.GetComponent<Blink>().SetOwner (gameObject);
+			if (Time.time - holyBlinkTimer > holyBlinkCD) {
+				holyBlink = gameObject.AddComponent<HolyBlink>();
+				holyBlink.SetOwner(gameObject);
 			
-				blinkTimer = Time.time;
+				holyBlinkTimer = Time.time;
 			}
 		}
-	}
-	
-	public int getblinkCD()
-	{
-		if(Time.time - blinkTimer > blinkCD)
-			return 0;
-		else
-			return (int)((blinkCD+1) - (Time.time - blinkTimer));
 	}
 	
 	public int gettrapCD()
 	{
-		if(Time.time - trapTimer > trapCD)
+		if(Time.time - holyTrapTimer > holyTrapCD)
 			return 0;
 		else
-			return (int)((trapCD+1) - (Time.time - trapTimer));
+			return (int)((holyTrapCD+1) - (Time.time - holyTrapTimer));
+	}
+	
+	public int getblinkCD()
+	{
+		if(Time.time - holyTrapTimer > holyTrapCD)
+			return 0;
+		else
+			return (int)((holyTrapCD+1) - (Time.time - holyTrapTimer));
 	}
 }
