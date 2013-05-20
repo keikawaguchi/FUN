@@ -14,12 +14,14 @@ public class IceAge : MonoBehaviour {
 	private CharacterMovement characterMovement;
 	private Controller controller;
 	private float singleGridSize;
+	private bool skillTriggered;
 	
 	// Use this for initialization
 	void Start () {
 		loadScripts ();
 		
 		singleGridSize = gridSystem.getSingleGridWidth();
+		skillTriggered = true;
 	}
 	
 	// Update is called once per frame
@@ -27,10 +29,12 @@ public class IceAge : MonoBehaviour {
 		iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
 		iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
 		
-		if(Input.GetButtonDown(controller.getButton("Skill2")))
+		//if(Input.GetButtonDown(controller.getButton("Skill2")))
+		if (skillTriggered)
 			constructIceAge();
 		
 		Destroy (iceAgeObj, 2f);  // destroy the ice wall after 2 seconds
+		skillTriggered = false;
 	}
 	
 	private void loadScripts() {
