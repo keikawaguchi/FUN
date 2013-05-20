@@ -20,7 +20,6 @@ public class FanndisBehavior : MonoBehaviour {
 	private float iceAgeDestroyTimer;
 
 	void Start () {
-//		loadSkills();
 		loadScripts();
 	}
 	
@@ -35,16 +34,10 @@ public class FanndisBehavior : MonoBehaviour {
 		
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
 			iceAgeTriggered();
-			
-			Destroy (GetComponent<IceAge>(), 0.01f);  // remove the script so it won't keep adding
 		}
 	}
 	
 	#region Initialization Methods
-	private void loadSkills() {
-		// lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
-	}
-	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
