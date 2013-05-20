@@ -73,4 +73,19 @@ public class FanndisBehavior : MonoBehaviour {
 		}
 	}
 	#endregion
+	
+	public float getzeroFrictionCD()
+	{
+		if(zeroFrictionTimer < 0)
+			return 0;
+		else
+			return zeroFrictionTimer;
+	}
+	public float geticeAgeCD()
+	{
+		if(iceAgeTimer < 0)
+			return 0;
+		else
+			return iceAgeTimer;
+	}
 }

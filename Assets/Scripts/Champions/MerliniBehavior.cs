@@ -92,4 +92,19 @@ public class MerliniBehavior : MonoBehaviour {
 		}
 	}
 	#endregion
+	
+	public float getHammerTimeCD()
+	{
+		if(hammerTimeTimer < 0)
+			return 0;
+		else
+			return hammerTimeTimer;
+	}
+	public float getBombVoyageCD()
+	{
+		if(bombVoyageTimer < 0)
+			return 0;
+		else
+			return bombVoyageTimer;
+	}
 }
