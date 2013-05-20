@@ -81,6 +81,6 @@ public class TimerCS : MonoBehaviour {
 	
 	void OnGUI () {
 		FormatTimer();	
-		GUI.Label(new Rect(300,50,100,20),min + ":" + sec, timerStyle);
+		GUI.Label(new Rect((int)(Screen.height/1.57),Screen.width/13,100,20),min + ":" + sec, timerStyle);
 	}
 }
