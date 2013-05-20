@@ -4,10 +4,10 @@ using System.Collections;
 public class InGameUI : MonoBehaviour {
 	
 	public int controller;
-	string MerliniPath = "Textures/Items/merlini";
-	string TemptressPath = "Textures/Items/temptress";
-	string AlbionPath = "Textures/Items/albion";
-	string FanndisPath = "";
+	string MerliniPath = "Textures/Champions/Merlini";
+	string TemptressPath = "Textures/Champions/Temptress";
+	string AlbionPath = "Textures/Champions/Albion";
+	string FanndisPath = "Textures/Champions/Fanndis";
 	Texture icon;
 	// Use this for initialization
 	void Start () {
