@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Champions\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\Controller\Controller.cs" />
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
+     <Compile Include="Assets\Scripts\GridSystem\InGameUI.cs" />
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
      <Compile Include="Assets\Scripts\GridSystem\TimerCS.cs" />
@@ -70,10 +71,12 @@
      <Compile Include="Assets\Scripts\Player\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Player\Hero.cs" />
      <Compile Include="Assets\Scripts\Player\Respawn.cs" />
-     <Compile Include="Assets\Scripts\Skills\Blink.cs" />
      <Compile Include="Assets\Scripts\Skills\BombVoyage.cs" />
      <Compile Include="Assets\Scripts\Skills\HammerTime.cs" />
      <Compile Include="Assets\Scripts\Skills\HammerTimeAOE.cs" />
+     <Compile Include="Assets\Scripts\Skills\HolyBlink.cs" />
+     <Compile Include="Assets\Scripts\Skills\HolyTrap.cs" />
+     <Compile Include="Assets\Scripts\Skills\HolyTrapUnit.cs" />
      <Compile Include="Assets\Scripts\Skills\IceAge.cs" />
      <Compile Include="Assets\Scripts\Skills\LoveStruck.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />

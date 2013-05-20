@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class Trap : MonoBehaviour {
+public class HolyTrapUnit : MonoBehaviour {
 	private const string PLAYER_TAG = "Player";
 	
-	private GameObject trapOwner;
+	private GameObject owner;
 	private bool trapPlaced;
 	
 	// Use this for initialization
@@ -19,10 +19,17 @@ public class Trap : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider collision) {
-		
+		// check the collision with tag and exlude the trap owner
+		GameObject enemyObj = collision.gameObject;
+		if (collision.tag == PLAYER_TAG && enemyObj.name != "Albion") {
+			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.Start (0f, 2.5f);
+			Destroy (this.gameObject);
+			Debug.Log ("Triggered");
+		}
 	}
 	
 	public void SetTrapOwner(GameObject owner) {
-		trapOwner = owner;
+		this.owner = owner;
 	}
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Blink : MonoBehaviour {
+public class HolyBlink : MonoBehaviour {
 	private const string BLINK_BUTTON = "Jump";
 	private const int BLINK_UNITS = 3;
 	private const int GRID_MIN_COORD = 0;
