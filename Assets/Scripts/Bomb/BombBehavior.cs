@@ -6,8 +6,8 @@ public class BombBehavior : MonoBehaviour {
 	const string EXPLOSION_PREFAB_PATH = "Prefabs/Bomb/Explosion";
 	
 	public float explosionPrefabDelayInSeconds = 1.5f;
-	public float bombX = 4;
-	public float bombZ = 3;
+	public float bombX = 2;
+	public float bombZ = 2;
 	private float spawnTime;
 	
 	private GameObject explosionPrefab;
@@ -20,7 +20,7 @@ public class BombBehavior : MonoBehaviour {
 		spawnTime = Time.time;
 	}
 	
-	public void setter(float x, float z) {
+	public void setExplosionDistance(float x, float z) {
 		bombX = x;
 		bombZ = z;
 	}
@@ -71,7 +71,7 @@ public class BombBehavior : MonoBehaviour {
 		Debug.Log("Bomb Exploded...");
 		GameObject explosion = Instantiate(explosionPrefab) as GameObject;
 		boom = explosion.GetComponent<Explosion>();
-		boom.setter(bombX,bombZ);
+		boom.setExplosionDistance(bombX,bombZ);
 		explosion.transform.position = this.transform.position;
 		Destroy(gameObject);
 	}

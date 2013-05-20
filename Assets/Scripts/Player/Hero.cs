@@ -113,7 +113,7 @@ public class Hero : MonoBehaviour {
 		Vector3 bombLocation = new Vector3(gridSystem.getXCoord(xCoord), 0f, gridSystem.getYCoord(yCoord));
 		instantiateBomb.transform.position = bombLocation;
 		BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();
-		boom.setter(bombX,bombZ);
+		boom.setExplosionDistance(bombX,bombZ);
 		
 		timeOfLastBombDrop = Time.time;
 	}
