@@ -53,7 +53,7 @@ public class AlbionBehavior : MonoBehaviour {
 		if (Input.GetButtonDown (controller.getButton ("Skill2"))) {
 			if (Time.time - blinkTimer > blinkCD) {
 				blink = Instantiate (blinkPrefab) as GameObject;
-				blink.GetComponent<Blink>().SetGameObject (gameObject);
+				blink.GetComponent<Blink>().SetOwner (gameObject);
 			
 				blinkTimer = Time.time;
 			}

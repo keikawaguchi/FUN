@@ -39,10 +39,9 @@ public class Blink : MonoBehaviour {
 		if (!blinked) {  // same here, why do i need this??????
 			blinked = true;
 			Vector3 newPos = heroObj.transform.position;
-			Vector3 lastPos = heroObj.transform.position;
 			Vector3 blinkDirection = characterMovement.getAimDirection();
 			
-			// makes the 
+			// make the 
 			if (blinkDirection.x > 0)
 				blinkDirection.x = 1;
 			if (blinkDirection.x < 0)
@@ -68,7 +67,7 @@ public class Blink : MonoBehaviour {
 		}
 	}
 	
-	public void SetGameObject(GameObject obj) {
-		heroObj = obj;
+	public void SetOwner(GameObject owner) {
+		heroObj = owner;
 	}
 }

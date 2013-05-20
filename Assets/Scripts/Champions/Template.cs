@@ -66,7 +66,7 @@ public class Template : MonoBehaviour {
 	private void checkSkillTwoButtonPress() {
 		// check if cooldown expired
 		if (Time.time - skillTwoTimer > skillTwoCD) {
-			// skill 1 here
+			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
 			
 			
