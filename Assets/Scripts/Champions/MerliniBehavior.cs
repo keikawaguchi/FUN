@@ -95,16 +95,16 @@ public class MerliniBehavior : MonoBehaviour {
 	
 	public float getHammerTimeCD()
 	{
-		if(hammerTimeTimer < 0)
+		if(Time.time - hammerTimeTimer > hammerTimeCD)
 			return 0;
 		else
-			return hammerTimeTimer;
+			return (int)((hammerTimeCD+1) - (Time.time - hammerTimeTimer));;
 	}
 	public float getBombVoyageCD()
 	{
-		if(bombVoyageTimer < 0)
+		if(Time.time - bombVoyageTimer > bombVoyageCD)
 			return 0;
 		else
-			return bombVoyageTimer;
+			return (int)((bombVoyageCD+1) - (Time.time - bombVoyageTimer));
 	}
 }

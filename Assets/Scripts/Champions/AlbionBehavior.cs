@@ -60,19 +60,19 @@ public class AlbionBehavior : MonoBehaviour {
 		}
 	}
 	
-	public float getblinkCD()
+	public int getblinkCD()
 	{
-		if(blinkTimer < 0)
+		if(Time.time - blinkTimer > blinkCD)
 			return 0;
 		else
-			return blinkTimer;
+			return (int)((blinkCD+1) - (Time.time - blinkTimer));
 	}
 	
-	public float gettrapCD()
+	public int gettrapCD()
 	{
-		if(trapTimer < 0)
+		if(Time.time - trapTimer > trapCD)
 			return 0;
 		else
-			return trapTimer;
+			return (int)((trapCD+1) - (Time.time - trapTimer));
 	}
 }
