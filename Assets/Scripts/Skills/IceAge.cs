@@ -5,13 +5,9 @@ public class IceAge : MonoBehaviour {
 	private const string ICEAGE_PREFAB_PATH = "Prefabs/Skills/IceAge";
 	private const float ICE_AGE_DURATION = 3f;
 	
-<<<<<<< HEAD
 	private GameObject owner;
-=======
 	private GameObject iceAgePrefab;
->>>>>>> 1208997d4835d98a7d984da0b930cbc34f0928b7
 	private GameObject iceAgeObj;
-	private GameObject iceAgePrefab;
 	private IndestructubleWall iceAge;
 	private Map map;
 	private GridSystem gridSystem;
@@ -20,23 +16,18 @@ public class IceAge : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-<<<<<<< HEAD
 		loadScripts ();
 		
 		singleGridSize = gridSystem.getSingleGridWidth();
-=======
-		iceAgePrefab =  Resources.Load(ICEAGE_PREGAB_PATH) as GameObject;
->>>>>>> 1208997d4835d98a7d984da0b930cbc34f0928b7
 	}
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
 		iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
 		iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
 		
 		constructIceAge();
-		Destroy (iceAgeObj, 2f);
+		Destroy (iceAgeObj, 2f);  // 
 	}
 	
 	private void loadScripts() {
@@ -74,8 +65,5 @@ public class IceAge : MonoBehaviour {
 	
 	public float getIceAgeDuration() {
 		return ICE_AGE_DURATION;
-=======
-		iceAgeObj = Instantiate(iceAgePrefab) as GameObject;	
->>>>>>> 1208997d4835d98a7d984da0b930cbc34f0928b7
 	}
 }
