@@ -76,12 +76,11 @@ public class TimerCS : MonoBehaviour {
 			strMin = "0" + min.ToString();
 		} else {
 			strMin = min.ToString();
-		}//end if
+		}
 	}
 	
-	/* DISPLAY TIMER */
 	void OnGUI () {
 		FormatTimer();	
-		GUI.Label(new Rect(345,50,100,20),min + ":" + sec, timerStyle);
+		GUI.Label(new Rect(300,50,100,20),min + ":" + sec, timerStyle);
 	}
 }

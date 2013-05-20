@@ -153,18 +153,5 @@ public class CharacterMovement : MonoBehaviour {
 			
 		
 	}
-	void OnGUI()
-	{
-		if(gameObject.name == "Temptress")
-		{
-			GUI.Box(new Rect(5,5,200,50),"Temptress");
-			GUI.Label(new Rect(5,15,100,20),"Lives: " + gameObject.GetComponent<Hero>().lives.ToString());
-			GUI.Label (new Rect(5,35,120,50),"Lure Cool Down: " + gameObject.GetComponent<TemptressBehavior>().getCoolDown().ToString());
-		}
-		else if(gameObject.name == "Albion")
-		{
-			GUI.Box(new Rect(653,5,200,50),"Albion");
-			GUI.Label(new Rect(653,25,100,20),"Lives: " + gameObject.GetComponent<Hero>().lives.ToString());
-		}
-	}
+	
 }
