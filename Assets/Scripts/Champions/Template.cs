@@ -47,7 +47,7 @@ public class Template : MonoBehaviour {
 	#endregion
 	
 	private bool isStunned() {
-		return characterMovement.getMovementState() == CharacterMovement.MovementState.Stunned;
+		return characterMovement.isStunned();
 	}
 	
 	#region Character Skills

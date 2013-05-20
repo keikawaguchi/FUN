@@ -68,7 +68,7 @@ public class TemptressBehavior : MonoBehaviour {
 	#endregion
 	
 	private bool isStunned() {
-		return characterMovement.getMovementState() == CharacterMovement.MovementState.Stunned;
+		return characterMovement.isStunned();
 	}
 	
 	private void checkLureButtonPress() {

@@ -5,11 +5,8 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public enum MovementState {
 		CanMove,
-		CannotMove,
-		Stunned
+		CannotMove
 	}
-	
-	private const float MAX_STUN_TIME = 4f;
 	
 	public float speed = 50f;
 	private float speedMultiplier = 1.0f;
@@ -27,35 +24,20 @@ public class CharacterMovement : MonoBehaviour {
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
 		loadScripts();
-		stunInterval = 0f;
 	}
 	
 	public void Update() {
-		switch(currentMovementState) {
-		case MovementState.CanMove:
-			translateInputToMovement();
-			stopMovementOnCollision();
-			applyMovement();
-			updateAimDirection();
-			stunInterval = 0f;  // reset timer
-			break;
-		case MovementState.Stunned:
-			stunInterval += Time.smoothDeltaTime;
-			if (stunInterval >= 2f)
-				currentMovementState = MovementState.CanMove;
-			break;
+		if (currentMovementState == MovementState.CannotMove) {
+			return;
 		}
+		translateInputToMovement();
+		stopMovementOnCollision();
+		applyMovement();
+		updateAimDirection();
 	}
 
 	#region Public Methods
 	public void setMovementState(MovementState newState) {
-		if (newState == MovementState.Stunned) {
-			GameObject t = GameObject.Instantiate(Resources.Load("Prefabs/Text/PopupText") as GameObject) as GameObject;
-			PopupText popupText = t.GetComponent<PopupText>();
-			popupText.initialize();
-			popupText.setPredefinedText("Stun");
-			popupText.setPosition (transform.position.x, transform.position.z + 10);
-		}
 		currentMovementState = newState;
 	}
 	public MovementState getMovementState() {
@@ -72,6 +54,10 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public float getSpeedMultiplier() {
 		return speedMultiplier;
+	}
+	
+	public bool isStunned() {
+		return speedMultiplier == 0;
 	}
 	#endregion
 	

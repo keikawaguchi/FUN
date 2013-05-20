@@ -15,6 +15,7 @@ public class FanndisBehavior : MonoBehaviour {
 		
 	private CharacterMovement characterMovement;
 	private Controller controller;
+	private ZeroFriction zeroFriction;
 
 	void Start () {
 		loadSkills();
@@ -47,7 +48,7 @@ public class FanndisBehavior : MonoBehaviour {
 	#endregion
 	
 	private bool isStunned() {
-		return characterMovement.getMovementState() == CharacterMovement.MovementState.Stunned;
+		return characterMovement.isStunned();
 	}
 	
 	#region Character Skills
@@ -58,7 +59,8 @@ public class FanndisBehavior : MonoBehaviour {
 			if (Time.time - zeroFrictionTimer > zeroFrictionCD) {
 				// skill 1 here
 				Debug.Log("Skill One Triggered!");
-				
+				zeroFriction = gameObject.AddComponent<ZeroFriction>();
+				zeroFriction.triggerZeroFriction(gameObject);
 				
 				zeroFrictionTimer = Time.time;
 			
