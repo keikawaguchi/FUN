@@ -37,8 +37,9 @@ public class TimerCS : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {		
-		timerStyle.fontSize = 30;
+		timerStyle.fontSize = 45;
 		timerStyle.normal.textColor = Color.white;
+		timerStyle.font = Resources.Load("Fonts/Ministry") as Font;
 	}	
 	// Update is called once per frame
     void Update()
@@ -81,6 +82,6 @@ public class TimerCS : MonoBehaviour {
 	
 	void OnGUI () {
 		FormatTimer();	
-		GUI.Label(new Rect((int)(Screen.height/1.57),Screen.width/13,100,20),min + ":" + sec, timerStyle);
+		GUI.Label(new Rect((int)(Screen.height/1.63),Screen.width/14,100,20),string.Format("{0:00}:{1:00}",min, sec), timerStyle);
 	}
 }

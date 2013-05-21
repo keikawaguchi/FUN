@@ -59,9 +59,9 @@ public class AlbionBehavior : MonoBehaviour {
 	
 	public int getblinkCD()
 	{
-		if(Time.time - holyTrapTimer > holyTrapCD)
+		if(Time.time - holyBlinkTimer > holyBlinkCD)
 			return 0;
 		else
-			return (int)((holyTrapCD+1) - (Time.time - holyTrapTimer));
+			return (int)((holyBlinkCD+1) - (Time.time - holyBlinkTimer));
 	}
 }
