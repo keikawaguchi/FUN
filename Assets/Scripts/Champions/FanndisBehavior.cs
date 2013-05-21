@@ -1,13 +1,10 @@
-// Character Template
-// Used to show basic character script logic
-
 using UnityEngine;
 using System.Collections;
 
 public class FanndisBehavior : MonoBehaviour {
 	// skill cooldown times
-	private const float zeroFrictionCD = 1f;  // ZeroFriction
-	private const float iceAgeCD = 1f;  // IceAge
+	private const float zeroFrictionCD = 1f;
+	private const float iceAgeCD = 1f;
 	
 	// skill timers
 	private float zeroFrictionTimer = -99f;

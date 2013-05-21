@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class IceAge : MonoBehaviour {
+	private const string PLAYER_TAG = "Player";
 	private const string ICEAGE_PREFAB_PATH = "Prefabs/Skills/IceAge";
 	private const float ICE_AGE_DURATION = 3f;
 	
@@ -64,8 +65,12 @@ public class IceAge : MonoBehaviour {
 		int iceAgePosY = gridSystem.getYPos(iceAgePos.z);
 		
 		if (!map.isGridFull (iceAgePosX, iceAgePosY)) {
-			map.addImpassableObject (iceAgePosX, iceAgePosY, iceAgeObj);
-			iceAgeObj.GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
+			if (map.getObjectAtGridLocation(iceAgePosX, iceAgePosY) == null) {  // check if there is a champ
+				map.addImpassableObject (iceAgePosX, iceAgePosY, iceAgeObj);
+				iceAgeObj.GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
+			}
+			else
+				Debug.Log ("Can't place ice wall.");
 		}
 	}
 	
