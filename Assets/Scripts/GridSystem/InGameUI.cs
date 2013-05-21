@@ -9,34 +9,34 @@ public class InGameUI : MonoBehaviour {
 	string AlbionPath = "Textures/Champions/Albion";
 	string FanndisPath = "Textures/Champions/Fanndis";
 	
-	GUISkin box;//not used currently
-	
 	GUIStyle LivesStyle; 
 	GUIStyle SkillsStyle;
 	GUIStyle WordLife;
 	Texture icon;
+	
+	float originalWidth = 800;
+	float originalHeight = 600;
+	Vector3 scale;
 	// Use this for initialization
 	void Start () {
 		controller = gameObject.GetComponent<Controller>().controllerNumber;
-		
-		box = new GUISkin();
 
 		LivesStyle = new GUIStyle();
 		LivesStyle.fontSize = 20;
 		LivesStyle.normal.textColor = Color.white;
-		LivesStyle.font = Resources.Load("Fonts/Ruda-Bold") as Font;
+		LivesStyle.font = Resources.Load("Fonts/Orbitron Medium") as Font;
 		
 		SkillsStyle = new GUIStyle();
-		SkillsStyle.fontSize = 12;
+		SkillsStyle.fontSize = 11;
 		SkillsStyle.richText = true;
 		SkillsStyle.normal.textColor = Color.white;
-		SkillsStyle.font = Resources.Load("Fonts/Ruda-Regular") as Font;
+		SkillsStyle.font = Resources.Load("Fonts/Orbitron Medium") as Font;
 		
 		WordLife = new GUIStyle();
-		WordLife.fontSize = 15;
+		WordLife.fontSize = 13;
 		WordLife.richText = true;
 		WordLife.normal.textColor = Color.white;
-		WordLife.font = Resources.Load("Fonts/Ruda-Bold") as Font;
+		WordLife.font = Resources.Load("Fonts/Orbitron Medium") as Font;
 	}
 	
 	// Update is called once per frame
@@ -46,28 +46,62 @@ public class InGameUI : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		scale.x = Screen.width/originalWidth; // calculate hor scale
+    	scale.y = Screen.height/originalHeight; // calculate vert scale
+    	scale.z = 1;
+    	var svMat = GUI.matrix; // save current matrix
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
+
+		if(controller == 1)
+		{
+			GUI.Box(new Rect(5,3,195,50),"");
+			GUI.Button(new Rect(15,8,40,40),icon);
+			GUI.Label(new Rect(55,8,100,40),"LIVES",WordLife);
+			GUI.Label(new Rect(70,25,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
+		}
+		else if(controller == 2)
+		{
+			GUI.Box(new Rect(205,3,195,50),"");
+			GUI.Button(new Rect(215,8,40,40),icon);
+			GUI.Label(new Rect(255,8,100,40),"LIVES",WordLife);
+			GUI.Label(new Rect(270,25,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
+		}
+		else if(controller == 3)
+		{
+			GUI.Box(new Rect(405,3,195,50),"");
+			GUI.Button(new Rect(415,8,40,40),icon);
+			GUI.Label(new Rect(455,8,100,40),"LIVES",WordLife);
+			GUI.Label(new Rect(470,25,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
+		}
+		else if(controller == 4)
+		{
+			GUI.Box(new Rect(605,3,195,50),"");
+			GUI.Button(new Rect(615,8,40,40),icon);
+			GUI.Label(new Rect(655,8,100,40),"LIVES",WordLife);
+			GUI.Label(new Rect(670,25,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
+		}
 		if(gameObject.name == "Albion")
 		{
 			icon = Resources.Load(AlbionPath) as Texture;
 			if(controller == 1)
 			{
-				GUI.Label(new Rect(Screen.height/6,Screen.width/50,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect(Screen.height/6,Screen.width/27,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(95,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 			else if(controller == 2)
 			{
-				GUI.Label(new Rect(Screen.height/2,Screen.width/50,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect(Screen.height/2,Screen.width/27,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(295,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 			else if(controller == 3)
 			{
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/50,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/27,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(495,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 			else if(controller == 4)
 			{
-				GUI.Label(new Rect((int)(Screen.height/0.88),Screen.width/50,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/0.88),Screen.width/27,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(695,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 		}
 		if(gameObject.name == "Fanndis")
@@ -75,23 +109,23 @@ public class InGameUI : MonoBehaviour {
 			icon = Resources.Load(FanndisPath) as Texture;
 			if(controller == 1)
 			{
-				GUI.Label(new Rect(Screen.height/6,Screen.width/50,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect(Screen.height/6,Screen.width/27,100,40),"Zero Friction:"+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(95,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"Zero Friction:"+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 			else if(controller == 2)
 			{
-				GUI.Label(new Rect(Screen.height/2,Screen.width/50,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect(Screen.height/2,Screen.width/27,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(295,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 			else if(controller == 3)
 			{
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/50,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/27,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(495,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 			else if(controller == 4)
 			{
-				GUI.Label(new Rect((int)(Screen.height/0.86),Screen.width/50,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/0.86),Screen.width/27,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(695,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 		}
 		if(gameObject.name == "Merlini")
@@ -99,23 +133,23 @@ public class InGameUI : MonoBehaviour {
 			icon = Resources.Load(MerliniPath) as Texture;
 			if(controller == 1)
 			{
-				GUI.Label(new Rect(Screen.height/6,Screen.width/50,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
-				GUI.Label(new Rect(Screen.height/6,Screen.width/27,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
+				GUI.Label(new Rect(95,20,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
 			}
 			else if(controller == 2)
 			{
-				GUI.Label(new Rect((int)(Screen.height/2),Screen.width/50,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/2),Screen.width/27,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
+				GUI.Label(new Rect(295,20,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
 			}
 			else if(controller == 3)
 			{
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/50,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/27,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
+				GUI.Label(new Rect(495,20,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
 			}
 			else if(controller == 4)
 			{
-				GUI.Label(new Rect((int)(Screen.height/0.88),Screen.width/50,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/0.88),Screen.width/27,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
+				GUI.Label(new Rect(695,20,100,40),"Hammer Time: "+ gameObject.GetComponent<MerliniBehavior>().getHammerTimeCD(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"Bomb Voyage: "+ gameObject.GetComponent<MerliniBehavior>().getBombVoyageCD(), SkillsStyle);
 			}
 		}
 		if(gameObject.name == "Temptress")
@@ -123,53 +157,25 @@ public class InGameUI : MonoBehaviour {
 			icon = Resources.Load(TemptressPath) as Texture;
 			if(controller == 1)
 			{
-				GUI.Label(new Rect(Screen.height/6,Screen.width/50,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect(Screen.height/6,Screen.width/27,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(95,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"LoveStruck: ",SkillsStyle);
 			}
 			else if(controller == 2)
 			{
-				GUI.Label(new Rect((int)(Screen.height/3),Screen.width/50,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/3),Screen.width/27,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(295,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"LoveStruck: ",SkillsStyle);
 			}
 			else if(controller == 3)
 			{
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/50,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/1.2),Screen.width/27,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(495,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"LoveStruck: ",SkillsStyle);
 			}
 			else if(controller == 4)
 			{
-				GUI.Label(new Rect((int)(Screen.height/0.88),Screen.width/50,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect((int)(Screen.height/0.88),Screen.width/27,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(695,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"LoveStruck: ",SkillsStyle);
 			}
 		}
-		
-		if(controller == 1)
-		{
-			GUI.Button(new Rect(Screen.height/40,Screen.width/100,40,40),icon);
-			GUI.Box(new Rect(Screen.height/150,Screen.width/190,200,50),"");
-			GUI.Label(new Rect(Screen.height/10,Screen.width/150,100,40),"Lives",WordLife);
-			GUI.Label(new Rect((int)(Screen.height/8.2),Screen.width/35,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
-		}
-		else if(controller == 2)
-		{
-			GUI.Button(new Rect((int)(Screen.height/2.8),Screen.width/100,40,40),icon);
-			GUI.Box(new Rect((int)(Screen.height/2.96),Screen.width/190,200,50),"");
-			GUI.Label(new Rect((int)(Screen.height/2.3),Screen.width/150,100,40),"Lives",WordLife);
-			GUI.Label(new Rect((int)(Screen.height/2.2),Screen.width/35,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
-		}
-		else if(controller == 3)
-		{
-			GUI.Button(new Rect((int)(Screen.height/1.45),Screen.width/100,40,40),icon);
-			GUI.Box(new Rect((int)(Screen.height/1.49),Screen.width/190,200,50),"");
-			GUI.Label(new Rect((int)(Screen.height/1.3),Screen.width/150,100,40),"Lives",WordLife);
-			GUI.Label(new Rect((int)(Screen.height/1.26),Screen.width/35,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
-		}
-		else if(controller == 4)
-		{
-			GUI.Button(new Rect((int)(Screen.height/0.98),Screen.width/100,40,40),icon);
-			GUI.Box(new Rect(Screen.height/1,Screen.width/190,200,50),"");
-			GUI.Label(new Rect((int)(Screen.height/0.91),Screen.width/150,100,40),"Lives",WordLife);
-			GUI.Label(new Rect((int)(Screen.height/0.89),Screen.width/35,50,40),""+gameObject.GetComponent<Hero>().lives, LivesStyle);
-		}
+		 GUI.matrix = svMat;
 	}
 }

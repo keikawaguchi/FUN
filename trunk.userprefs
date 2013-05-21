@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GridSystem\TimerCS.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GridSystem\InGameUI.cs">
     <Files>
-      <File FileName="Assets\Scripts\GridSystem\InGameUI.cs" Line="31" Column="31" />
-      <File FileName="Assets\Scripts\GridSystem\TimerCS.cs" Line="57" Column="3" />
+      <File FileName="Assets\Scripts\GridSystem\InGameUI.cs" Line="159" Column="5" />
+      <File FileName="Assets\Scripts\GridSystem\TimerCS.cs" Line="93" Column="28" />
       <File FileName="Assets\Scripts\Champions\AlbionBehavior.cs" Line="59" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>

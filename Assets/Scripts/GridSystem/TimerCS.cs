@@ -35,6 +35,9 @@ public class TimerCS : MonoBehaviour {
 	private string strMin = "00";
 	private string strSec = "00";
 	
+	float originalWidth = 800;
+	float originalHeight = 600;
+	Vector3 scale;
 	// Use this for initialization
 	void Start () {		
 		timerStyle.fontSize = 45;
@@ -82,6 +85,12 @@ public class TimerCS : MonoBehaviour {
 	
 	void OnGUI () {
 		FormatTimer();	
-		GUI.Label(new Rect((int)(Screen.height/1.63),Screen.width/14,100,20),string.Format("{0:00}:{1:00}",min, sec), timerStyle);
+		scale.x = Screen.width/originalWidth; // calculate hor scale
+    	scale.y = Screen.height/originalHeight; // calculate vert scale
+    	scale.z = 1;
+    	var svMat = GUI.matrix; // save current matrix
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
+		GUI.Label(new Rect(370,59,100,20),string.Format("{0:00}:{1:00}",min, sec), timerStyle);
+		GUI.matrix = svMat;
 	}
 }
