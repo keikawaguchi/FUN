@@ -6,13 +6,17 @@ public class UpgradePickUp : MonoBehaviour {
 	const string SPEED_UPGRADE_PREFAB = "Materials/SpeedUpgrade";
 	const string EXPLOSION_UPGRADE_PREFAB = "Materials/ExplosionUpgrade";
 	const string BOMB_UPGRADE_PREFAB = "Materials/BombUpgrade";
+	const string ITEM_PICKUP_SFX_PATH = "Audio/SFX/powerUp";
 	
 	public float upgradeRespawnTime = 30.0f;
 	private int upgradeType;
 	private float timeOfLastSpawn;
 	
+	private AudioClip itemPickupSFX;
+	
 	void Start ()  {
 		spawnRandomUpgrade();
+		itemPickupSFX = Resources.Load (ITEM_PICKUP_SFX_PATH) as AudioClip;
 	}
 	
 	void Update() {
@@ -23,6 +27,7 @@ public class UpgradePickUp : MonoBehaviour {
 	
 	public void OnTriggerEnter(Collider player) {
 		if (player.tag == "Player") {
+			AudioSource.PlayClipAtPoint (itemPickupSFX, transform.position, 1.0f);
 			StartCoroutine(upgradePickedUp());
 		}
 	}
