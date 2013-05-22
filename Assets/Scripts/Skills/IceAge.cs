@@ -30,12 +30,14 @@ public class IceAge : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
-		iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
 		
 		//if(Input.GetButtonDown(controller.getButton("Skill2")))
-		if (skillTriggered)
+		if (skillTriggered) {
+			iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
+			iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
+		
 			constructIceAge();
+		}
 		
 		Destroy (iceAgeObj, 2f);  // destroy the ice wall after 2 seconds
 		skillTriggered = false;
