@@ -47,12 +47,22 @@ public class TemptressBehavior : MonoBehaviour {
 		}
 	}
 	
-	public int getCoolDown() {
+	public int getLureCD() {
 		if(Time.time - lureTimer > lureCD) {
 			return 0;
 		}
 		else {
 			return (int)((lureCD+1) - (Time.time - lureTimer));
+		}
+	}
+	
+	public int getLSCD()
+	{
+		if(Time.time - loveStruckTimer > loveStruckCD) {
+			return 0;
+		}
+		else {
+			return (int)((loveStruckCD+1) - (Time.time - loveStruckTimer));
 		}
 	}
 	

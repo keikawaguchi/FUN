@@ -85,23 +85,23 @@ public class InGameUI : MonoBehaviour {
 			icon = Resources.Load(AlbionPath) as Texture;
 			if(controller == 1)
 			{
-				GUI.Label(new Rect(95,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect(95,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"Holy Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(95,20,100,40),"Holy Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 			else if(controller == 2)
 			{
-				GUI.Label(new Rect(295,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect(295,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"Holy Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(295,20,100,40),"Holy Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 			else if(controller == 3)
 			{
-				GUI.Label(new Rect(495,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect(495,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"Holy Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(495,20,100,40),"Holy Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 			else if(controller == 4)
 			{
-				GUI.Label(new Rect(695,20,100,40),"Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
-				GUI.Label(new Rect(695,30,100,40),"Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"Holy Blink: "+ gameObject.GetComponent<AlbionBehavior>().getblinkCD(), SkillsStyle);
+				GUI.Label(new Rect(695,20,100,40),"Holy Trap: "+ gameObject.GetComponent<AlbionBehavior>().gettrapCD(), SkillsStyle);
 			}
 		}
 		if(gameObject.name == "Fanndis")
@@ -109,23 +109,23 @@ public class InGameUI : MonoBehaviour {
 			icon = Resources.Load(FanndisPath) as Texture;
 			if(controller == 1)
 			{
-				GUI.Label(new Rect(95,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect(95,30,100,40),"Zero Friction:"+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(95,20,100,40),"Zero Friction:"+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 			else if(controller == 2)
 			{
-				GUI.Label(new Rect(295,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect(295,30,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(295,20,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 			else if(controller == 3)
 			{
-				GUI.Label(new Rect(495,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect(495,30,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(495,20,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 			else if(controller == 4)
 			{
-				GUI.Label(new Rect(695,20,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
-				GUI.Label(new Rect(695,30,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"Ice Age: "+ gameObject.GetComponent<FanndisBehavior>().geticeAgeCD(), SkillsStyle);
+				GUI.Label(new Rect(695,20,100,40),"Zero Friction: "+ gameObject.GetComponent<FanndisBehavior>().getzeroFrictionCD(), SkillsStyle);
 			}
 		}
 		if(gameObject.name == "Merlini")
@@ -157,23 +157,23 @@ public class InGameUI : MonoBehaviour {
 			icon = Resources.Load(TemptressPath) as Texture;
 			if(controller == 1)
 			{
-				GUI.Label(new Rect(95,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect(95,30,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(95,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getLureCD(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"LoveStruck: "+gameObject.GetComponent<TemptressBehavior>().getLSCD(),SkillsStyle);
 			}
 			else if(controller == 2)
 			{
-				GUI.Label(new Rect(295,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect(295,30,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(295,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getLureCD(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"LoveStruck: "+gameObject.GetComponent<TemptressBehavior>().getLSCD(),SkillsStyle);
 			}
 			else if(controller == 3)
 			{
-				GUI.Label(new Rect(495,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect(495,30,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(495,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getLureCD(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"LoveStruck: "+gameObject.GetComponent<TemptressBehavior>().getLSCD(),SkillsStyle);
 			}
 			else if(controller == 4)
 			{
-				GUI.Label(new Rect(695,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getCoolDown(), SkillsStyle);
-				GUI.Label(new Rect(695,30,100,40),"LoveStruck: ",SkillsStyle);
+				GUI.Label(new Rect(695,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getLureCD(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"LoveStruck: "+gameObject.GetComponent<TemptressBehavior>().getLSCD(),SkillsStyle);
 			}
 		}
 		 GUI.matrix = svMat;
