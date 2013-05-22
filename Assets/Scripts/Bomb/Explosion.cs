@@ -6,12 +6,14 @@ using System.Linq;
 public class Explosion : MonoBehaviour {
 	
 	const string FIRE_UNIT_PREFAB_PATH = "Prefabs/Bomb/Fire";
+	const string DESTORY_WALL_SFX_PATH = "Audio/SFX/breakingWood";
 	
 	public float explosionDistanceX = 2.0f;
 	public float explosionDistanceZ = 2.0f;
 	public float secondsBetweenFireSpawns = 0.1f;
 	public float scale = 14.0f;
 	public AudioClip explosionSFX;
+	public AudioClip destoryWallSFX;
 	
 	private float timeOfLastFireSpawn;
 	private int numberOfFireUnitsCreatedX;
@@ -23,19 +25,16 @@ public class Explosion : MonoBehaviour {
 	private bool spawnDown;
 	
 	GameObject fireUnit;
-	
+
 	private GridSystem gridSystem;
 	private Map map;
 
 
 	void Start() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
-		map = GameObject.Find("Map").GetComponent<Map>();
-		
+		map = GameObject.Find("Map").GetComponent<Map>();	
 		fireUnit = Resources.Load(FIRE_UNIT_PREFAB_PATH) as GameObject;
-		if (fireUnit == null) {
-			Debug.Log ("Fire is NULL");
-		}
+		
 		numberOfFireUnitsCreatedX = 0;
 		numberOfFireUnitsCreatedZ = 0;
 		timeOfLastFireSpawn = -100.0f;	// explode on first update
@@ -165,6 +164,7 @@ public class Explosion : MonoBehaviour {
 			if (x == gridSystem.getXPos(wall.transform.position.x) && y == gridSystem.getYPos(wall.transform.position.z)) {
 				map.removeWall(x, y);
 				Destroy(wall.gameObject);
+				AudioSource.PlayClipAtPoint(destoryWallSFX, transform.position, 0.4f);
 				break;
 			}
         }
