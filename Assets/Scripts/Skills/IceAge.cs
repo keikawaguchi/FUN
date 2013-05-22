@@ -5,22 +5,25 @@ public class IceAge : MonoBehaviour {
 	private const string PLAYER_TAG = "Player";
 	private const string ICEAGE_PREFAB_PATH = "Prefabs/Skills/IceAge";
 	private const float ICE_AGE_DURATION = 3f;
+	private const string ICEAGE_SFX_PATH = "Audio/SFX/iceCracking";
 	
 	private GameObject owner;
 	private GameObject iceAgePrefab;
 	private GameObject iceAgeObj;
 	private IndestructubleWall iceAge;
+	private float singleGridSize;
+	private bool skillTriggered;
+	private AudioClip iceAgeSFX;
+	
 	private Map map;
 	private GridSystem gridSystem;
 	private CharacterMovement characterMovement;
 	private Controller controller;
-	private float singleGridSize;
-	private bool skillTriggered;
+	
 	
 	// Use this for initialization
 	void Start () {
-		loadScripts ();
-		
+		loadScripts ();	
 		singleGridSize = gridSystem.getSingleGridWidth();
 		skillTriggered = true;
 	}
@@ -39,12 +42,12 @@ public class IceAge : MonoBehaviour {
 	}
 	
 	private void loadScripts() {
-		GameObject mapObj = GameObject.Find ("Map");
-		
+		GameObject mapObj = GameObject.Find ("Map");	
 		map = mapObj.GetComponent<Map>();
 		gridSystem = mapObj.GetComponent<GridSystem>();
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
+		iceAgeSFX = Resources.Load (ICEAGE_SFX_PATH)as AudioClip;
 	}
 	
 	private void constructIceAge() {
@@ -68,6 +71,7 @@ public class IceAge : MonoBehaviour {
 			if (map.getObjectAtGridLocation(iceAgePosX, iceAgePosY) == null) {  // check if there is a champ
 				map.addImpassableObject (iceAgePosX, iceAgePosY, iceAgeObj);
 				iceAgeObj.GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
+				AudioSource.PlayClipAtPoint(iceAgeSFX, transform.position, 0.6f);
 			}
 			else
 				Debug.Log ("Can't place ice wall.");
