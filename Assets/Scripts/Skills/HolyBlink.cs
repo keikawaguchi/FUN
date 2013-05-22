@@ -5,15 +5,19 @@ public class HolyBlink : MonoBehaviour {
 	private const string BLINK_BUTTON = "Jump";
 	private const int BLINK_UNITS = 3;
 	private const int GRID_MIN_COORD = 0;
+	private const string BLINK_SFX_PATH = "Audio/SFX/teleport";
 	
-	private GameObject heroObj;
-	private Map map;
-	private GridSystem gridSystem;
-	private CharacterMovement characterMovement;
 	private float singleGridSize;
 	private float blinkDistance;
 	private Vector3 blinkPos;
 	private bool blinked;
+	private GameObject heroObj;
+	private AudioClip blinkSFX;
+	
+	private Map map;
+	private GridSystem gridSystem;
+	private CharacterMovement characterMovement;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +25,7 @@ public class HolyBlink : MonoBehaviour {
 		map = mapObj.GetComponent<Map>();
 		gridSystem = mapObj.GetComponent<GridSystem>();
 		characterMovement = heroObj.GetComponent<CharacterMovement>();
+		blinkSFX = Resources.Load(BLINK_SFX_PATH) as AudioClip;
 		
 		singleGridSize = gridSystem.getSingleGridWidth();
 		blinkDistance = singleGridSize * BLINK_UNITS;
@@ -64,6 +69,7 @@ public class HolyBlink : MonoBehaviour {
 			newPos.z = gridSystem.getYCoord(blinkToGridY);
 			
 			heroObj.transform.position = newPos;  // teleport to facing direction
+			AudioSource.PlayClipAtPoint(blinkSFX, transform.position, 1.0f);
 		}
 	}
 	
