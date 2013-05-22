@@ -15,10 +15,12 @@ public class MapBuilder : MonoBehaviour {
 	
 	const string INDESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Indestructuble Wall";
 	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Destructuble Wall";
+	const string GRASS_FLOOR_PREFAB_PATH = "Prefabs/Floor/GrassFloor";
 	const string UPGRADE_PREFAB_PATH = "Prefabs/Upgrade";
 	
 	GameObject indestructableWallPrefab;
-	GameObject destructableWallPrefab;	
+	GameObject destructableWallPrefab;
+	GameObject grassFloorTilePrefab;
 	GameObject upgradePrefab;
 	
 	private string[] maps;
@@ -49,6 +51,8 @@ public class MapBuilder : MonoBehaviour {
 			Debug.Log ("Map not found or not readable");
 			return;
 		} 
+		
+		buildFloor(grassFloorTilePrefab);
 
 		string inputFileLine;
 		int gridY = 12;
@@ -101,6 +105,7 @@ public class MapBuilder : MonoBehaviour {
 	private void loadResources() {
 		indestructableWallPrefab = Resources.Load(INDESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;
 		destructableWallPrefab = Resources.Load(DESTRUCTABLE_BLOCK_PREFAB_PATH) as GameObject;	
+		grassFloorTilePrefab = Resources.Load(GRASS_FLOOR_PREFAB_PATH) as GameObject;
 		upgradePrefab = Resources.Load(UPGRADE_PREFAB_PATH) as GameObject;
 	}
 	
@@ -115,5 +120,18 @@ public class MapBuilder : MonoBehaviour {
 			Debug.Log ("MapID " + mapID + " does not exist.");
 		}	
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
+	}
+	
+	private void buildFloor(GameObject floorPrefab) {
+		int mapHeight = gridSystem.getGridHeight();
+		int mapWidth = gridSystem.getGridWidth();
+		
+		GameObject currentFloorTile;
+		for (int row = 0; row < mapWidth; row++) {
+			for (int column = 0; column < mapHeight; column++) {
+				currentFloorTile = Instantiate(floorPrefab) as GameObject;
+				currentFloorTile.transform.position = new Vector3(gridSystem.getXCoord(row), -1, gridSystem.getYCoord(column));
+			}
+		}
 	}
 }
