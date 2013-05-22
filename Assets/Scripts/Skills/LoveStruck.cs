@@ -32,7 +32,6 @@ public class LoveStruck : MonoBehaviour {
 			distance = Vector3.Distance (transform.position, player.transform.position);
 			if (player != gameObject && distance < effectRadius) {
 				setSlowOnPlayer(player);
-				showPopupText(player.transform.position);
 			}
 		}
 	}
@@ -40,16 +39,6 @@ public class LoveStruck : MonoBehaviour {
 	private void setSlowOnPlayer(GameObject otherPlayer) {
 		AlterSpeed alterSpeed;
 		alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
-		alterSpeed.setSpeedMultiplier(speedMultiplier);
-		alterSpeed.setDurationInSeconds(duration);
-	}
-	
-	private void showPopupText(Vector3 position) {
-		GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
-		GameObject text = Instantiate(t) as GameObject;		
-		PopupText popupText = text.GetComponent<PopupText>();
-		popupText.initialize();
-		popupText.setPosition(position.x, position.z + 7);
-		popupText.setPredefinedText("MinusSpeed");
+		alterSpeed.Start(speedMultiplier, duration);
 	}
 }

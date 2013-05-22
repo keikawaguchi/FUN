@@ -70,7 +70,7 @@ public class AlterSpeed : MonoBehaviour {
 			popupText.setPredefinedText("Stun");
 		}
 		else if (speedMultiplier < 1) {
-			popupText.setPredefinedText("MinusSpeed");
+			popupText.setPredefinedText("Slowed");
 		}
 		else if (speedMultiplier > 1) {
 			popupText.setPredefinedText("PlusSpeed");

@@ -12,6 +12,7 @@ public class PopupText : MonoBehaviour {
 	const string PLUS_EXPLOSION_TEXTURE = "Textures/Text/plusExplosion";
 	const string MINUS_EXPLOSION_TEXTURE = "Textures/Text/minusExplosion";
 	const string STUN_TEXTURE = "Textures/Text/stun";
+	const string SLOWED_TEXTURE = "Textures/Text/slowed";
 	
 	// Texture factory
 	OrderedDictionary textureFactory;
@@ -39,6 +40,7 @@ public class PopupText : MonoBehaviour {
 		textureFactory["PlusExplosion"] = PLUS_EXPLOSION_TEXTURE;
 		textureFactory["MinusExplosion"] = MINUS_EXPLOSION_TEXTURE;
 		textureFactory["Stun"] = STUN_TEXTURE;
+		textureFactory["Slowed"] = SLOWED_TEXTURE;
 	}
 	
 	public void setPredefinedText(string text) {
