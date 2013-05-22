@@ -23,6 +23,6 @@ public class ZeroFriction : MonoBehaviour {
 		AlterSpeed alterSpeed;
 		alterSpeed = champion.AddComponent<AlterSpeed>();
 		alterSpeed.Start(SPEED_MULTIPLIER, DURATION);
-		AudioSource.PlayClipAtPoint (zeroFrictionSFX, transform.position, 1.0f);
+		AudioSource.PlayClipAtPoint (zeroFrictionSFX, transform.position, 0.5f);
 	}
 }
