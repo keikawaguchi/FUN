@@ -11,27 +11,6 @@ public class DestructibleWall : MonoBehaviour {
 		loadScripts();
 	}
 	
-	void OnTriggerEnter(Collider collisionObject) {
-		if (collisionObject.gameObject.name == "Fire(Clone)") {
-			
-			// check if explosion came from same row or column
-			/*
-			if ((collisionObject.transform.position.x == transform.position.x) || (collisionObject.transform.position.z == transform.position.z)) {
-				
-				// destroy wall
-				Destroy(gameObject);
-				
-				// update grid array
-				int x = map.getXPos(transform.position.x);
-				int y = map.getYPos(transform.position.z);
-				
-				map.grid[x,y] = false;
-			}
-			*/
-		}
-
-	}
-	
 	private void loadScripts() {
 		map = GameObject.Find("Map").GetComponent<Map>();
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
