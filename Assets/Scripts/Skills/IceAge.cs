@@ -33,9 +33,6 @@ public class IceAge : MonoBehaviour {
 		
 		//if(Input.GetButtonDown(controller.getButton("Skill2")))
 		if (skillTriggered) {
-			iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
-			iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
-		
 			constructIceAge();
 		}
 		
@@ -71,6 +68,8 @@ public class IceAge : MonoBehaviour {
 		
 		if (!map.isGridFull (iceAgePosX, iceAgePosY)) {
 			if (map.getObjectAtGridLocation(iceAgePosX, iceAgePosY) == null) {  // check if there is a champ
+				iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
+				iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
 				map.addImpassableObject (iceAgePosX, iceAgePosY, iceAgeObj);
 				iceAgeObj.GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
 				AudioSource.PlayClipAtPoint(iceAgeSFX, transform.position, 0.6f);

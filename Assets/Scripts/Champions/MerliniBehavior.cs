@@ -13,8 +13,8 @@ public class MerliniBehavior : MonoBehaviour {
 	private GameObject bomb;
 	
 	// skill cooldown times
-	private const float hammerTimeCD = 1f;
-	private const float bombVoyageCD = 1f;
+	private const float hammerTimeCD = 10f;
+	private const float bombVoyageCD = 25f;
 	
 	// skill timers
 	private float hammerTimeTimer = -99f;

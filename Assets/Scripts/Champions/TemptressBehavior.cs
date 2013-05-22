@@ -14,8 +14,10 @@ public class TemptressBehavior : MonoBehaviour {
 	private Animation animation;
 	
 	private const float lureCD = 5f;
-	public float lureTimer = -99f;
+	private const float loveStruckCD = 10f;
 	
+	public float lureTimer = -99f;
+	public float loveStruckTimer = -99f;
 
 	void Start () {
 		loadResources();
@@ -96,7 +98,10 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	private void LoveStruckButtonPress() {
-		Debug.Log ("LoveStruck skill used");
-		loveStruck.execute();	
+		if (Time.time - loveStruckTimer > loveStruckCD) {
+			Debug.Log ("LoveStruck skill used");
+			loveStruck.execute();
+			loveStruckTimer = Time.time;
+		}
 	}
 }

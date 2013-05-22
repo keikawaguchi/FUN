@@ -3,8 +3,8 @@ using System.Collections;
 
 public class FanndisBehavior : MonoBehaviour {
 	// skill cooldown times
-	private const float zeroFrictionCD = 1f;
-	private const float iceAgeCD = 1f;
+	private const float zeroFrictionCD = 10f;
+	private const float iceAgeCD = 3f;
 	
 	// skill timers
 	private float zeroFrictionTimer = -99f;
