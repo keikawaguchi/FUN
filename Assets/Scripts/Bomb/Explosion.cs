@@ -11,10 +11,11 @@ public class Explosion : MonoBehaviour {
 	public float explosionDistanceZ = 2.0f;
 	public float secondsBetweenFireSpawns = 0.1f;
 	public float scale = 14.0f;
+	public AudioClip explosionSFX;
 	
-	float timeOfLastFireSpawn;
-	int numberOfFireUnitsCreatedX;
-	int numberOfFireUnitsCreatedZ;
+	private float timeOfLastFireSpawn;
+	private int numberOfFireUnitsCreatedX;
+	private int numberOfFireUnitsCreatedZ;
 	
 	private bool spawnRight;
 	private bool spawnLeft;
@@ -41,6 +42,8 @@ public class Explosion : MonoBehaviour {
 		
 		// attempt to spawn in all directions
 		spawnRight = spawnLeft = spawnUp = spawnDown = true;
+		
+		AudioSource.PlayClipAtPoint(explosionSFX, transform.position, 1.0f);
 	}
 	
 	void Update() {

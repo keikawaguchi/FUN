@@ -17,7 +17,7 @@ public class FanndisBehavior : MonoBehaviour {
 	private float iceAgeDestroyTimer;
 
 	void Start () {
-		loadScripts();
+		loadResources();
 	}
 	
 	void Update () {
@@ -35,7 +35,7 @@ public class FanndisBehavior : MonoBehaviour {
 	}
 	
 	#region Initialization Methods
-	private void loadScripts() {
+	private void loadResources() {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
 		zeroFriction = gameObject.AddComponent<ZeroFriction>();

@@ -4,6 +4,7 @@ using System.Collections;
 public class HammerTime : MonoBehaviour {
 	private const string PLAYER_TAG = "Player";
 	private const string HAMMERTIMEAOE_PREFAB_PATH = "Prefabs/Skills/HammerTimeAOE";
+	private const string HAMMERTIME_SFX_PATH = "Audio/SFX/lightningStrike";
 	private const float HAMMER_SPEED = 150f;
 	private const float HAMMER_TRAVEL_DISTANCE = 100f;
 	private const float HAMMER_AOE_EFFECT = 20f;
@@ -11,6 +12,7 @@ public class HammerTime : MonoBehaviour {
 	
 	private GameObject hammerAOEPrefab;
 	private GameObject hammerAOE;
+	private AudioClip hammerSFX;
 	
 	private GridSystem gridSystem;
 	
@@ -33,6 +35,8 @@ public class HammerTime : MonoBehaviour {
 		float travelDistance = Vector3.Distance(transform.position, startingPos);
 		if (travelDistance > HAMMER_TRAVEL_DISTANCE) {
 			
+			AudioSource.PlayClipAtPoint (hammerSFX, transform.position, 0.4f);
+			
 			// Create AOE effect
 			hammerAOE = Instantiate (hammerAOEPrefab) as GameObject;
 			hammerAOE.transform.position = transform.position;
@@ -45,6 +49,7 @@ public class HammerTime : MonoBehaviour {
 	
 	private void loadSkills() {
 		hammerAOEPrefab = Resources.Load (HAMMERTIMEAOE_PREFAB_PATH) as GameObject;
+		hammerSFX = Resources.Load (HAMMERTIME_SFX_PATH) as AudioClip;
 	}
 	
 	private void loadScripts() {
@@ -59,6 +64,7 @@ public class HammerTime : MonoBehaviour {
 		if (collision.tag == PLAYER_TAG && collision.gameObject != owner) {
 			
 			triggerStun(collision.gameObject);
+			AudioSource.PlayClipAtPoint (hammerSFX, transform.position, 0.4f);
 		
 			Destroy (gameObject);
 			
