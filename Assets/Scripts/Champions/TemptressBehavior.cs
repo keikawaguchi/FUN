@@ -11,7 +11,6 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
-	private Animation animation;
 	
 	private const float lureCD = 5f;
 	private const float loveStruckCD = 10f;
@@ -56,8 +55,7 @@ public class TemptressBehavior : MonoBehaviour {
 		}
 	}
 	
-	public int getLSCD()
-	{
+	public int getLSCD() {
 		if(Time.time - loveStruckTimer > loveStruckCD) {
 			return 0;
 		}
@@ -75,7 +73,6 @@ public class TemptressBehavior : MonoBehaviour {
 		loveStruck = gameObject.AddComponent<LoveStruck>();
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
-		animation = gameObject.AddComponent<Animation>();
 	}
 	#endregion
 	

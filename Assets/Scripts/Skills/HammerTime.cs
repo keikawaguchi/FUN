@@ -12,6 +12,7 @@ public class HammerTime : MonoBehaviour {
 	
 	private GameObject hammerAOEPrefab;
 	private GameObject hammerAOE;
+	private GameObject animation;
 	private AudioClip hammerSFX;
 	
 	private GridSystem gridSystem;
@@ -50,6 +51,9 @@ public class HammerTime : MonoBehaviour {
 	private void loadSkills() {
 		hammerAOEPrefab = Resources.Load (HAMMERTIMEAOE_PREFAB_PATH) as GameObject;
 		hammerSFX = Resources.Load (HAMMERTIME_SFX_PATH) as AudioClip;
+		animation = Resources.Load ("Prefabs/Animations/Electric-Hammer-Animation") as GameObject;
+		animation = Instantiate (animation) as GameObject;
+		animation.GetComponent<Animation>().attachToObject (gameObject);
 	}
 	
 	private void loadScripts() {

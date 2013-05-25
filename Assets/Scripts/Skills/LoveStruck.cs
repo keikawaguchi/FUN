@@ -7,6 +7,7 @@ public class LoveStruck : MonoBehaviour {
 	public float speedMultiplier = 0.5f;
 	public float duration = 3.0f;
 	
+	private GameObject animation;
 	private GridSystem gridSystem;
 	private Map map;
 
@@ -15,12 +16,15 @@ public class LoveStruck : MonoBehaviour {
 	}
 	
 	public void execute() {
+		GameObject animationInstance = Instantiate (animation) as GameObject;
+		animationInstance.GetComponent<Animation>().attachToObject(gameObject);
 		checkForPlayersInRadius();
 	}
 	
 	private void loadScripts() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>(); 
 		map = GameObject.Find("Map").GetComponent<Map>();
+		animation = Resources.Load ("Prefabs/Animations/LoveStruck-Animation") as GameObject;
 	}
 	
 	private void checkForPlayersInRadius() {	

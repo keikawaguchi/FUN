@@ -89,6 +89,7 @@
      <Compile Include="Assets\Scripts\Walls\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Walls\IndestructubleWall.cs" />
      <None Include="Assets\Resources\Maps\map1.txt" />
+     <None Include="Assets\Resources\Maps\map3.txt" />
      <None Include="Assets\Resources\Maps\map2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
