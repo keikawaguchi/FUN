@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour {
 	float originalHeight = 600;
 	Vector3 scale;
 	
+	Vector2 scrollPosition;
 	string selectedChamp;
 	string Description;
 	string SkillOne;
@@ -91,7 +92,12 @@ public class MainMenu : MonoBehaviour {
 				"the land of White peacefully. They draw their life and power from the coldness and the pureness of the ice. Until one day," +
 				 "the sky became so dark that the whole land was cover by endless darkness. All of a sudden, it started to rain. People realized that" +
 				  "what dropped from the sky was not rain or white snow but black ashes. Then the ice started to melt. The people of the Ice Tribe" +
-				   "sensed that their power was growing weaker.";
+				   "sensed that their power was growing weaker." +
+				   "The war launched by Marbas was approaching. In order to clear the barrier of his army’s advance, he ordered his evil army to " +
+				   "burn down the whole sacred forest. And the giant fire had been lasting for months. The temperature of the world increased " +
+				   "sharply within months. Fanndis realized that the only way for her tribe to survive was to master the power of space manipulation," +
+				    "and move the water in Black ocean to extinguish this forest fire. Only then, she can not only save her tribe but also stop the " +
+				    "advance of the evil army. Heading to the North became her only choice.";
 			SkillOne = "Zero Friction";
 			SkillTwo = "Ice Age";
 			SkillOneDisc = "Fanndis increases her speed for 5 seconds. Cooldown: 10 seconds";
@@ -105,7 +111,15 @@ public class MainMenu : MonoBehaviour {
 			 	"He had parents claiming to be his biological parents early in life, but soon was adopted by another couple who " +
 			 	"claimed that he is an orphan in the first place. His origin remains a mystery for him and his friends. He doesn't" +
 			 	 "even know where his magical power come from - his supposedly biological parents said he was possessed " +
-			 	 "thus gave him away to other parents.";
+			 	 "thus gave him away to other parents. His latter parents, however, said he had anomalies in his body not quite " +
+			 	 "detectable by current technology. Some other sources told him he had an accident early in life, causing it to be " +
+			 	 "hard for him to remember things but altering his mind to be so powerful such that it can affect reality. Regardless, " +
+			 	 "this lost mysterious soul is magical." +
+			 	 "Despite of this, Merlini can't use and practice his magic skills freely in his home town." +
+			 	  "With his passion and desire to improve and advance his skills, he decided to board to a place that his magical" +
+			 	   "mind seems to be telling him to go to for some reason. Maybe he's needed in that place, or maybe that place has" +
+			 	    "something to do with his origin, aside from he can practice his skills freely. Thus, he departed for this place " +
+			 	    "called FUN for fun with no pun intended.";
 			SkillOne = "Hammer Time";
 			SkillTwo = "Bomb Voyage";
 			SkillOneDisc = "Merlini sends a hammer in the direction he's facing and stuns" +
@@ -117,14 +131,27 @@ public class MainMenu : MonoBehaviour {
 			selectedChamp = "Temptress-The Misguided";
 			Description = "Integration of the embodiment of evil and elegant, Temptress playing with " +
 				"her enchanting grace to lure the innocent and greedy adventures strayed into her zone of " +
-				"darkness. In the dark secrets of the enigmatic under the guise, no one has ever escaped from her clutches.";
+				"darkness. In the dark secrets of the enigmatic under the guise, no one has ever escaped from her clutches." +
+				"Temptress was born in a peaceful village. One day, the mysterious man claiming to be the demon, Marbas, " +
+				"destroyed entire village, with the exception of Temptress. She was taken to his kingdom that mutated her" +
+				 "original innocence mind into a devil mind. Temptress struggled to escape from the kingdom. She had heard " +
+				 "that Forsaken Universe of the North is filled with a variety of similar to her life exists that is not " +
+				 "subject to any implication. Thus, she escaped from the kingdom and embarks on a journey to Forsaken Universe of the North.";
 			SkillOne = "Lure";
 			SkillTwo = "Love Struck";
 			SkillOneDisc = "Temptress pulls an opponent within 5 units to your current location. Cooldown: 30 seconds";
 			SkillTwoDisc = "Temptress applies slow-down for 2 seconds to nearest enemy in 3 squares. Cooldown: 45 seconds";
 		}
 		GUI.Label(new Rect(190,250,200,100),selectedChamp);
-		GUI.Label(new Rect(190,270,425,125),Description);
+		
+		GUILayout.BeginArea(new Rect(190,270,425,125));
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition,GUILayout.Width(425),GUILayout.Height(125));
+		GUI.skin.box.wordWrap = true;
+		GUILayout.Box(Description);
+		GUILayout.EndScrollView();
+		GUILayout.EndArea();
+		
+		//GUI.Label(new Rect(190,270,425,125),Description);
 		GUI.Label(new Rect(190,400,200,100),SkillOne);
 		GUI.Label(new Rect(400,400,200,100),SkillTwo);
 		GUI.Label(new Rect(190,420,200,100),SkillOneDisc);
