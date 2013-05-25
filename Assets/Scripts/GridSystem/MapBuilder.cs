@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.IO;
+using System.Text.RegularExpressions;
 
 public class MapBuilder : MonoBehaviour {
 	
@@ -12,6 +13,10 @@ public class MapBuilder : MonoBehaviour {
 	private const char SPAWN2 = '2';
 	private const char SPAWN3 = '3';
 	private const char SPAWN4 = '4';
+	
+	private Texture indestructableWallTexture;
+	private Texture destructableWallTexture;
+	private Texture floorTexture;
 	
 	const string INDESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Indestructuble Wall";
 	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Destructuble Wall";
@@ -53,12 +58,14 @@ public class MapBuilder : MonoBehaviour {
 			return;
 		} 
 		
+		loadTextures(mapFile);
 		buildFloor(grassFloorTilePrefab);
-
+		moveToMapSectionOfMapFile(mapReader);
+		
 		string inputFileLine;
 		int gridY = 12;
 		int gridX = 0;
-		
+
 		while ((inputFileLine = mapReader.ReadLine()) != null) {
 			gridX = 0;
 			foreach (char mapUnit in inputFileLine) {
@@ -83,11 +90,13 @@ public class MapBuilder : MonoBehaviour {
 	
 	public void spawnIndestructableWall(int gridX, int gridY, GameObject[,] indestructable) {
 		indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
+		indestructable[gridX, gridY].renderer.material.mainTexture = indestructableWallTexture;
 		indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
 	}
 	
 	public void spawnDestructableWall(int gridX, int gridY, GameObject[,] destructable) {
 		destructable[gridX, gridY] = Instantiate(destructableWallPrefab) as GameObject;
+		destructable[gridX, gridY].renderer.material.mainTexture = destructableWallTexture;
 		destructable[gridX, gridY].GetComponent<DestructibleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
 	}
 	
@@ -123,6 +132,39 @@ public class MapBuilder : MonoBehaviour {
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
 	}
 	
+	private void loadTextures(TextAsset mapFile) {
+		Match match;
+	
+		match = Regex.Match(mapFile.text, @"Indestructable:(.*)");
+		if (match.Success) {
+			indestructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
+		}
+		
+		match = Regex.Match(mapFile.text, @"Destructable:(.*)");
+		if (match.Success) {
+			destructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
+		}
+		
+		match = Regex.Match(mapFile.text, @"Floor:(.*)");
+		if (match.Success) {
+			floorTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
+		}
+	}
+	
+	private void moveToMapSectionOfMapFile(StringReader mapReader) {
+		string inputFileLine;
+		bool atStartingPositionInFile = false;
+		Match match;
+		
+		while (!atStartingPositionInFile) {
+			inputFileLine = mapReader.ReadLine();
+			match = Regex.Match (inputFileLine, @"StartMap");
+			if (match.Success) {
+				atStartingPositionInFile = true;
+			}
+		}
+	}
+	
 	private void buildFloor(GameObject floorPrefab) {
 		int mapHeight = gridSystem.getGridHeight();
 		int mapWidth = gridSystem.getGridWidth();
@@ -131,6 +173,7 @@ public class MapBuilder : MonoBehaviour {
 		for (int row = 0; row < mapWidth; row++) {
 			for (int column = 0; column < mapHeight; column++) {
 				currentFloorTile = Instantiate(floorPrefab) as GameObject;
+				currentFloorTile.renderer.material.mainTexture = floorTexture;
 				currentFloorTile.transform.position = new Vector3(gridSystem.getXCoord(row), -1, gridSystem.getYCoord(column));
 			}
 		}

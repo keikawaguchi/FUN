@@ -1,3 +1,8 @@
+Indestructable:Textures/Tiles/BrickWall
+Destructable:Textures/Tiles/WoodenWall
+Floor:Textures/Tiles/GrassTile
+
+StartMap
 ###################
 #1       #       3#
 # ++#+   #   +#++ #
