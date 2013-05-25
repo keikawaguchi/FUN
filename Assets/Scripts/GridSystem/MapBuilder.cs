@@ -32,6 +32,7 @@ public class MapBuilder : MonoBehaviour {
 		maps = new string[10];
 		maps [1] = "Maps/map1";
 		maps [2] = "Maps/map2";
+		maps [3] = "Maps/map3";
 		loadResources();
 		loadScripts();
 	}
