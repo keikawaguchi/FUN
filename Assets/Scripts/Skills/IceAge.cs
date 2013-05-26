@@ -10,7 +10,7 @@ public class IceAge : MonoBehaviour {
 	private GameObject owner;
 	private GameObject iceAgePrefab;
 	private GameObject iceAgeObj;
-	private IndestructubleWall iceAge;
+//	private IndestructubleWall iceAge;
 	private float singleGridSize;
 	private bool skillTriggered;
 	private AudioClip iceAgeSFX;
@@ -36,7 +36,7 @@ public class IceAge : MonoBehaviour {
 			constructIceAge();
 		}
 		
-		Destroy (iceAgeObj, 2f);  // destroy the ice wall after 2 seconds
+		
 		skillTriggered = false;
 	}
 	
@@ -50,7 +50,8 @@ public class IceAge : MonoBehaviour {
 	}
 	
 	private void constructIceAge() {
-		Vector3 iceAgePos = owner.transform.position;
+		Vector3[] iceAge = new Vector3[3];
+//		Vector3 iceAgePos = owner.transform.position;
 		Vector3 aimDirection = characterMovement.getAimDirection ();
 		
 		if (aimDirection.x > 0)
@@ -62,20 +63,41 @@ public class IceAge : MonoBehaviour {
 		if (aimDirection.z  < 0)
 			aimDirection.z = -1;
 		
-		iceAgePos += aimDirection * singleGridSize;
-		int iceAgePosX = gridSystem.getXPos(iceAgePos.x);
-		int iceAgePosY = gridSystem.getYPos(iceAgePos.z);
+//		iceAgePos += aimDirection * singleGridSize;
+//		int iceAgePosX = gridSystem.getXPos(iceAgePos.x);
+//		int iceAgePosY = gridSystem.getYPos(iceAgePos.z);
+//		
+//		if (!map.isGridFull (iceAgePosX, iceAgePosY)) {
+//			if (map.getObjectAtGridLocation(iceAgePosX, iceAgePosY) == null) {  // check if there is a champ
+//				iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
+//				iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
+//				map.addImpassableObject (iceAgePosX, iceAgePosY, iceAgeObj);
+//				iceAgeObj.GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
+//				AudioSource.PlayClipAtPoint(iceAgeSFX, transform.position, 0.6f);
+//			}
+//			else
+//				Debug.Log ("Can't place ice wall.");
+//		}
 		
-		if (!map.isGridFull (iceAgePosX, iceAgePosY)) {
-			if (map.getObjectAtGridLocation(iceAgePosX, iceAgePosY) == null) {  // check if there is a champ
-				iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
-				iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
-				map.addImpassableObject (iceAgePosX, iceAgePosY, iceAgeObj);
-				iceAgeObj.GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
-				AudioSource.PlayClipAtPoint(iceAgeSFX, transform.position, 0.6f);
+		for (int i = 0; i < iceAge.Length; i++) {
+			iceAge[i] = owner.transform.position;
+			iceAge[i] += aimDirection * (singleGridSize * (i + 1));
+			if (!map.isGridFull(iceAge[i].x, iceAge[i].z)) {
+				if (map.getObjectAtGridLocation (iceAge[i].x, iceAge[i].z) == null) {
+					iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
+					iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
+					
+					map.addImpassableObject (iceAge[i].x, iceAge[i].z, iceAgeObj);
+					iceAgeObj.GetComponent<IndestructubleWall>().initialize (iceAge[i].x, iceAge[i].z);
+					AudioSource.PlayClipAtPoint(iceAgeSFX, transform.position, 0.6f);
+				}
+				else
+					Debug.Log ("Can't place ice wall.");
 			}
 			else
 				Debug.Log ("Can't place ice wall.");
+			
+			Destroy (iceAgeObj, 3f);  // destroy the ice wall after 2 seconds
 		}
 	}
 	

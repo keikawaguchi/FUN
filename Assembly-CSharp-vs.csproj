@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{C9C5ACED-AF37-B251-9AC8-2374AADD4A08}</ProjectGuid>
+	<ProjectGuid>{3E5CA467-EA5F-D7CA-3F18-DF1AFA5E4DA1}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -51,12 +51,13 @@
      <Compile Include="Assets\Scripts\Bomb\FireBehavior.cs" />
      <Compile Include="Assets\Scripts\Champions\AlbionBehavior.cs" />
      <Compile Include="Assets\Scripts\Champions\FanndisBehavior.cs" />
+     <Compile Include="Assets\Scripts\Champions\KiritoBehavior.cs" />
      <Compile Include="Assets\Scripts\Champions\MerliniBehavior.cs" />
      <Compile Include="Assets\Scripts\Champions\Template.cs" />
      <Compile Include="Assets\Scripts\Champions\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\Controller\Controller.cs" />
+     <Compile Include="Assets\Scripts\Controller\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
-     <Compile Include="AssetController\PlayerControls\GridSystem.cs" />
      <Compile Include="Assets\Scripts\GridSystem\InGameUI.cs" />
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\Scripts\Skills\HolyTrap.cs" />
      <Compile Include="Assets\Scripts\Skills\HolyTrapUnit.cs" />
      <Compile Include="Assets\Scripts\Skills\IceAge.cs" />
+     <Compile Include="Assets\Scripts\Skills\IceAgeUnit.cs" />
      <Compile Include="Assets\Scripts\Skills\LoveStruck.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
