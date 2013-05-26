@@ -4,10 +4,10 @@ using System.Collections;
 public class MainMenu : MonoBehaviour {
 	
 	GUIContent[] comboBoxList;
-	private ComboBox Player1;// = new ComboBox();
-	private ComboBox Player2;
-	private ComboBox Player3;
-	private ComboBox Player4;
+	public ComboBox Player1;// = new ComboBox();
+	public ComboBox Player2;
+	public ComboBox Player3;
+	public ComboBox Player4;
 	private GUIStyle listStyle = new GUIStyle();
 	
 	float originalWidth = 800;
@@ -45,6 +45,11 @@ public class MainMenu : MonoBehaviour {
 		Player2 = new ComboBox(new Rect(15,470,150, 20), comboBoxList[1], comboBoxList, "button", "box", listStyle);
 		Player3 = new ComboBox(new Rect(635,170,150, 20), comboBoxList[2], comboBoxList, "button", "box", listStyle);
 		Player4 = new ComboBox(new Rect(635,470,150, 20), comboBoxList[3], comboBoxList, "button", "box", listStyle);
+		
+		Player1.setIndex(0);
+		Player2.setIndex(1);
+		Player3.setIndex(2);
+		Player4.setIndex(3);
 		GUI.matrix = svMat;
 	}
 	

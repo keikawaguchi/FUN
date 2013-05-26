@@ -99,4 +99,9 @@ public class ComboBox
 			selectedItemIndex = value;
 		}
     }
+	
+	public void setIndex(int x)
+	{
+		selectedItemIndex = x;
+	}
 }
