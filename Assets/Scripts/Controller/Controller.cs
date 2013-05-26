@@ -7,10 +7,56 @@ public class Controller : MonoBehaviour {
 	public int controllerNumber;
 	
 	OrderedDictionary buttons;
-	
+	PlayerControls Champs;
 	
 	void Start() {
 		buttons = new OrderedDictionary();
+		calculateKeyBindings();
+		Champs = GameObject.Find("Controls").GetComponent<PlayerControls>();
+		if(gameObject.name == "Albion")
+		{
+			if(Champs.player1 == 0)
+				controllerNumber = 1;
+			else if(Champs.player2 == 0)
+				controllerNumber = 2;
+			else if(Champs.player3 == 0)
+				controllerNumber = 3;
+			else if(Champs.player4 == 0)
+				controllerNumber = 4;
+		}
+		if(gameObject.name == "Fanndis")
+		{
+			if(Champs.player1 == 1)
+				controllerNumber = 1;
+			else if(Champs.player2 == 1)
+				controllerNumber = 2;
+			else if(Champs.player3 == 1)
+				controllerNumber = 3;
+			else if(Champs.player4 == 1)
+				controllerNumber = 4;
+		}
+		if(gameObject.name == "Merlini")
+		{
+			if(Champs.player1 == 2)
+				controllerNumber = 1;
+			else if(Champs.player2 == 2)
+				controllerNumber = 2;
+			else if(Champs.player3 == 2)
+				controllerNumber = 3;
+			else if(Champs.player4 == 2)
+				controllerNumber = 4;
+		}
+		if(gameObject.name == "Temptress")
+		{
+			if(Champs.player1 == 3)
+				controllerNumber = 1;
+			else if(Champs.player2 == 3)
+				controllerNumber = 2;
+			else if(Champs.player3 == 3)
+				controllerNumber = 3;
+			else if(Champs.player4 == 3)
+				controllerNumber = 4;
+		}
 		calculateKeyBindings();
 	}
 	

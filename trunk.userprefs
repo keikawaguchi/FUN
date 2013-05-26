@@ -1,15 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu\TextControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MeController\Controller.cs">
     <Files>
-      <File FileName="Assets\Scripts\Menu\TextControl.cs" Line="48" Column="8" />
-      <File FileName="Assets\Scripts\Controller\Controller.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Menu\MainMenu.cs" Line="60" Column="12" />
-      <File FileName="Assets\Scripts\Menu\ComboBox.cs" Line="60" Column="29" />
+      <File FileName="Assets\Scripts\Menu\TextControl.cs" Line="47" Column="5" />
+      <File FileName="Assets\Scripts\Menu\MainMenu.cs" Line="56" Column="33     <File FileName="Assets\Scripts\Menu\ComboBox.cs" Line="60" Column="29" />
       <File FileName="Assets\Scripts\GridSystem\InGameUI.cs" Line="28" Column="3" />
-      <File FileName="Assets\Scripts\Champions\FanndisBehavior.cs" Line="18" Column="2" />
-      <File FileName="Assets\Scripts\Champions\MerliniBehavior.cs" Line="1" Column="1" />
-    </Files>
+      <File FileName="Assets\Scripts\Champions\ontroller\Controller.cs" Line="21" Column="17" />
+      <File FileName="Assets\Scripts\Controller\PlayerControls.cs" Line="12" Column="3/Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

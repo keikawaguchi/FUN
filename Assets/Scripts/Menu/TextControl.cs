@@ -11,6 +11,7 @@ public class TextControl : MonoBehaviour {
 	int player3;
 	int player4;
 	MainMenu listOfChamps;
+	PlayerControls controlSave; 
 	float originalWidth = 800;
 	float originalHeight = 600;
 	Vector3 scale;
@@ -37,6 +38,7 @@ public class TextControl : MonoBehaviour {
 		else if(isNextButton == true)
 		{
 			listOfChamps = GameObject.Find("Manager").GetComponent<MainMenu>();
+			controlSave = GameObject.Find("Controls").GetComponent<PlayerControls>();
 			player1 = listOfChamps.Player1.SelectedItemIndex;
 			player2 = listOfChamps.Player2.SelectedItemIndex;
 			player3 = listOfChamps.Player3.SelectedItemIndex;
@@ -46,7 +48,13 @@ public class TextControl : MonoBehaviour {
 				timeSinceStart = Time.time;
 			}
 			else
+			{
+				controlSave.player1 = player1;
+				controlSave.player2 = player2;
+				controlSave.player3 = player3;
+				controlSave.player4 = player4;
 				Application.LoadLevel(1);
+			}
 		}
 	}
 	
