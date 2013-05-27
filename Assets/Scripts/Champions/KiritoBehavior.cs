@@ -10,8 +10,8 @@ public class KiritoBehavior : MonoBehaviour {
 	private GameObject suterusuPrefab;
 	
 	// skill cooldown times
-	private const float suterusuCD = 5f;
-	private const float chinmokuCD = 10f;
+	private const float suterusuCD = 10f;
+	private const float chinmokuCD = 15f;
 	
 	// skill timers
 	private float suterusuTimer = -99f;
