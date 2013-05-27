@@ -9,6 +9,8 @@ public class HolyTrap : MonoBehaviour {
 	private GridSystem gridSystem;
 	private Vector3 trapPostion;
 	private bool isStun;
+	
+	private float trapDuration = 15f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +32,8 @@ public class HolyTrap : MonoBehaviour {
 			instantiateTrap.transform.position = trapPos;
 			instantiateTrap.GetComponent<HolyTrapUnit>().SetTrapOwner(owner);
 			isStun = true;
+			
+			Destroy (instantiateTrap, trapDuration);
 		}
 	}
 	
