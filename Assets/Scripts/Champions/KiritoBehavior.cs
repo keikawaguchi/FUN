@@ -18,6 +18,7 @@ public class KiritoBehavior : MonoBehaviour {
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
+	private Hero hero;
 	
 	void Start () {
 		loadSkills();
@@ -45,6 +46,7 @@ public class KiritoBehavior : MonoBehaviour {
 			gameObject.renderer.enabled = true;
 			suterusuDuration = 0f;
 			suterusuUsed = false;
+			hero.setInvincible (false);
 		}
 	}
 	
@@ -56,6 +58,7 @@ public class KiritoBehavior : MonoBehaviour {
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
+		hero = GetComponent<Hero>();
 	}
 	#endregion
 	
@@ -70,6 +73,7 @@ public class KiritoBehavior : MonoBehaviour {
 			// skill 1 here
 			Debug.Log("Skill One Triggered!");
 			gameObject.renderer.enabled = false;
+			hero.setInvincible (true);
 			
 			// keep track of cooldown timer
 			suterusuTimer = Time.time;

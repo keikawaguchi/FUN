@@ -24,6 +24,7 @@ public class Hero : MonoBehaviour {
 	private GridSystem gridSystem;
 	private Map map;
 	private Controller controller;
+	private bool isInvincible = false;
 	
 
 	void Start () {
@@ -62,7 +63,7 @@ public class Hero : MonoBehaviour {
 	}
 	
 	public void OnTriggerEnter(Collider collider) {
-		if (collider.gameObject.tag == "KillsPlayer") {
+		if (collider.gameObject.tag == "KillsPlayer" && !isInvincible) {
 			
 			Hero bombOwner =  collider.gameObject.GetComponent<FireBehavior>().owner;
 			updatePlayerScore(bombOwner);
@@ -155,5 +156,9 @@ public class Hero : MonoBehaviour {
 			bombOwner.numOfKills--;
 		else
 			bombOwner.numOfKills++;
+	}
+	
+	public void setInvincible(bool isInvincible) {
+		this.isInvincible = isInvincible;
 	}
 }
