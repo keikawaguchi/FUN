@@ -12,6 +12,8 @@ public class BombBehavior : MonoBehaviour {
 	
 	private GameObject explosionPrefab;
 	
+	private Hero owner;
+	
 	private Map map;
 
 	void Start() {
@@ -23,6 +25,12 @@ public class BombBehavior : MonoBehaviour {
 	public void setExplosionDistance(float x, float z) {
 		bombX = x;
 		bombZ = z;
+	}
+	
+	public void setHero(Hero owner) {
+		this.owner = owner;	
+		
+		Debug.Log ("Controller Num: " + owner.playerNumber);
 	}
 	
 	void Update() {
@@ -72,6 +80,7 @@ public class BombBehavior : MonoBehaviour {
 		GameObject explosion = Instantiate(explosionPrefab) as GameObject;
 		boom = explosion.GetComponent<Explosion>();
 		boom.setExplosionDistance(bombX,bombZ);
+		boom.setHero(owner);
 		explosion.transform.position = this.transform.position;
 		Destroy(gameObject);
 	}

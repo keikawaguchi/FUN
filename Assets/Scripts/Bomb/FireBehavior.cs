@@ -5,6 +5,8 @@ public class FireBehavior : MonoBehaviour {
 	
 	float lifeSpanInSeconds = 0.1f;
 	float spawnTime;
+	
+	public Hero owner;
 
 	// Use this for initialization
 	void Start () {
@@ -16,5 +18,9 @@ public class FireBehavior : MonoBehaviour {
 		if (Time.time - spawnTime > lifeSpanInSeconds) {
 			Destroy (gameObject);
 		}
+	}
+	
+	public void setHero(Hero owner) {
+		this.owner = owner;	
 	}
 }
