@@ -20,6 +20,7 @@ public class HammerTime : MonoBehaviour {
 	private Vector3 startingPos;
 	
 	private GameObject owner;
+	private int teamNum;
 	private bool isStun;
 
 	// Use this for initialization
@@ -64,8 +65,18 @@ public class HammerTime : MonoBehaviour {
 		this.owner = owner;
 	}
 	
+	public void SetTeamNum(int teamNum) {
+		this.teamNum = teamNum;
+	}
+
+	
 	void OnTriggerEnter(Collider collision) {
+		
+		// int teamNumber = owner.
+		
 		if (collision.tag == PLAYER_TAG && collision.gameObject != owner) {
+			
+			Debug.Log (collision.gameObject.GetComponent<Hero>().getTeamNumber());
 			
 			triggerStun(collision.gameObject);
 			AudioSource.PlayClipAtPoint (hammerSFX, transform.position, 0.4f);

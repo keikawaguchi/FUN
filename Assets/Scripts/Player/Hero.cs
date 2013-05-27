@@ -6,6 +6,7 @@ public class Hero : MonoBehaviour {
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
 	
 	public int playerNumber;
+	public int teamNumber;
 
 	public float lives = 5;
 	public float dropBombCoolDownSeconds = 1.5f;
@@ -28,6 +29,9 @@ public class Hero : MonoBehaviour {
 		initialize();
 		timeOfLastBombDrop = -999f;	
 		spawnHero();
+		
+		// DELETE ME
+		teamNumber = 1;
 	}
 	
 	void Update () {	
@@ -127,4 +131,8 @@ public class Hero : MonoBehaviour {
 		transform.position = map.getRespawnLoc(); 
 	}
 	#endregion
+	
+	public int getTeamNumber() {
+		return teamNumber;	
+	}
 }
