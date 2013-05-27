@@ -33,10 +33,6 @@ public class HolyTrap : MonoBehaviour {
 		}
 	}
 	
-//	void OnTriggerEnter(Collider collision) {
-//		
-//	}
-//	
 	public void SetTrapOwner(GameObject owner) {
 		this.owner = owner;
 		trapPostion = owner.transform.position;

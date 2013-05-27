@@ -5,6 +5,10 @@ using UnityEngine;
 using System.Collections;
 
 public class KiritoBehavior : MonoBehaviour {
+	private const string SUTERUSU_PREFAB_PATH = "Prefabs/Skills/Suterusu";
+	
+	private GameObject suterusuPrefab;
+	
 	// skill cooldown times
 	private const float suterusuCD = 5f;
 	private const float chinmokuCD = 10f;
@@ -38,21 +42,21 @@ public class KiritoBehavior : MonoBehaviour {
 			chinmokuTriggered();
 		}
 		
-		if (suterusuUsed)  // keep a timer for invisible duration
-			suterusuDuration += Time.smoothDeltaTime;
-		
-		if (suterusuDuration >= 3f) {  // visible after 3 sec
-			Debug.Log("Visible!");
-			gameObject.renderer.enabled = true;
-			suterusuDuration = 0f;
-			suterusuUsed = false;
-			hero.setInvincible (false);
-		}
+//		if (suterusuUsed)  // keep a timer for invisible duration
+//			suterusuDuration += Time.smoothDeltaTime;
+//		
+//		if (suterusuDuration >= 3f) {  // visible after 3 sec
+//			Debug.Log("Visible!");
+//			gameObject.renderer.enabled = true;
+//			suterusuDuration = 0f;
+//			suterusuUsed = false;
+//			hero.setInvincible (false);
+//		}
 	}
 	
 	#region Initialization Methods
 	private void loadSkills() {
-		// lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
+		suterusuPrefab = Resources.Load (SUTERUSU_PREFAB_PATH) as GameObject;
 	}
 	
 	private void loadScripts() {
@@ -72,13 +76,15 @@ public class KiritoBehavior : MonoBehaviour {
 		if (Time.time - suterusuTimer > suterusuCD) {
 			// skill 1 here
 			Debug.Log("Skill One Triggered!");
-			gameObject.renderer.enabled = false;
-			hero.setInvincible (true);
+			GameObject suterusuObj = Instantiate (suterusuPrefab) as GameObject;
+			suterusuObj.GetComponent<Suterusu>().setOwner (gameObject);
+//			gameObject.renderer.enabled = false;
+//			hero.setInvincible (true);
 			
 			// keep track of cooldown timer
 			suterusuTimer = Time.time;
 			
-			suterusuUsed = true;
+//			suterusuUsed = true;
 		}
 	}
 	
