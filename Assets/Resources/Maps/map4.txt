@@ -1,6 +1,6 @@
 Indestructable:Textures/Tiles/IceCubeTile
 Destructable:Textures/Tiles/CrackedIceCubeTile
-Floor:Textures/Tiles/BlackAsphaltTile
+Floor:Textures/Tiles/SnowTile
 
 StartMap
 ###################
