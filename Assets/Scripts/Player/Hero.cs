@@ -11,7 +11,7 @@ public class Hero : MonoBehaviour {
 	public int numOfKills;
 	public int numOfDeaths;
 
-	public float lives = 5;
+	public int lives = 5;
 	public float dropBombCoolDownSeconds = 1.5f;
 	public float bombX = 4;
 	public float bombZ = 3;
@@ -42,6 +42,7 @@ public class Hero : MonoBehaviour {
 		
 		// DELETE ME
 		teamNumber = 1;
+		
 		isAlive = true;
 	}
 	
@@ -53,10 +54,8 @@ public class Hero : MonoBehaviour {
 				
 			// how long a hero is dead should be grabbed from another script
 			if (lives == 0) {
-				Debug.Log ("Game Over");
+				// Debug.Log ("Game Over");
 			} else if (deathTimer != 0 && Time.time - deathTimer > 2.0f) {
-				lives--;
-				
 				deathTimer = 0;
 				GetComponent<MeshRenderer>().enabled = true;
 				
@@ -69,9 +68,12 @@ public class Hero : MonoBehaviour {
 
 		if (collider.gameObject.tag == "KillsPlayer" && isAlive && !isInvincible) {
 			isAlive = false;
+			lives--;
+			numOfDeaths++;
 			
 			Hero bombOwner =  collider.gameObject.GetComponent<FireBehavior>().owner;
 			updatePlayerScore(bombOwner);
+			checkGameOver(bombOwner);
 			
 			GetComponent<MeshRenderer>().enabled = false;
 			
@@ -79,7 +81,6 @@ public class Hero : MonoBehaviour {
 			transform.position = new Vector3(-9999, 0, 0);
 			
 			deathTimer = Time.time;
-			numOfDeaths++;
 		}
 		
 		if(collider.name == "BombUpgrade")
@@ -166,5 +167,11 @@ public class Hero : MonoBehaviour {
 	
 	public void setInvincible(bool isInvincible) {
 		this.isInvincible = isInvincible;
+	}
+	
+	private void checkGameOver(Hero hero) {
+		GameManager manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+		
+		manager.checkForWinner(hero);
 	}
 }
