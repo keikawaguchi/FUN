@@ -12,11 +12,15 @@ public class UpgradePickUp : MonoBehaviour {
 	private int upgradeType;
 	private float timeOfLastSpawn;
 	
+	TimerCS gameTime;
+	
+	
 	private AudioClip itemPickupSFX;
 	
 	void Start ()  {
 		spawnRandomUpgrade();
 		itemPickupSFX = Resources.Load (ITEM_PICKUP_SFX_PATH) as AudioClip;
+		gameTime = GameObject.Find("Map").GetComponent<TimerCS>();
 	}
 	
 	void Update() {
@@ -33,8 +37,7 @@ public class UpgradePickUp : MonoBehaviour {
 	}
 	
 	private bool shouldSpawnNewUpgrade() {
-		return (Time.time - timeOfLastSpawn > upgradeRespawnTime)
-			&& (renderer.enabled == false);
+		return (renderer.enabled == false) && (gameTime.timeForUpgrade() == true);
 	}
 	
 	private IEnumerator upgradePickedUp() {
