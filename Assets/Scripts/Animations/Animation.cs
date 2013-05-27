@@ -14,7 +14,7 @@ public class Animation : MonoBehaviour {
 
 	void Update () {
 		if (objectToFollow == null) {
-			Destroy(this);
+			Destroy(gameObject);
 			return;
 		}
 		transform.position = objectToFollow.transform.position;
