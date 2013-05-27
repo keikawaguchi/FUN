@@ -21,7 +21,11 @@ public class HolyTrapUnit : MonoBehaviour {
 	void OnTriggerEnter(Collider collision) {
 		// check the collision with tag and exlude the trap owner
 		GameObject enemyObj = collision.gameObject;
-		if (collision.tag == PLAYER_TAG && enemyObj.name != "Albion") {
+		
+		int collisionTeamNum = enemyObj.GetComponent<Hero>().getTeamNumber();
+		int ownerTeamNum = owner.GetComponent<Hero>().getTeamNumber();
+		
+		if (collision.tag == PLAYER_TAG && collisionTeamNum != ownerTeamNum) {
 			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
 			alterSpeed.Start (0f, 2f);
 			Destroy (this.gameObject);

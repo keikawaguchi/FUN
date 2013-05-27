@@ -28,6 +28,7 @@ public class HolyTrap : MonoBehaviour {
 			int yCoord = gridSystem.getYPos(trapPostion.z);
 			Vector3 trapPos = new Vector3(gridSystem.getXCoord(xCoord), 0, gridSystem.getYCoord(yCoord));
 			instantiateTrap.transform.position = trapPos;
+			instantiateTrap.GetComponent<HolyTrapUnit>().SetTrapOwner(owner);
 			isStun = true;
 		}
 	}
