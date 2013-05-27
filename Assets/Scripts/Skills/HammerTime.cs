@@ -72,22 +72,21 @@ public class HammerTime : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider collision) {
 		
-		// int teamNumber = owner.
-		
-		if (collision.tag == PLAYER_TAG && collision.gameObject != owner) {
+		if (collision.tag == PLAYER_TAG) {
 			
-			Debug.Log (collision.gameObject.GetComponent<Hero>().getTeamNumber());
+			if (teamNum != collision.gameObject.GetComponent<Hero>().getTeamNumber()) {
 			
-			triggerStun(collision.gameObject);
-			AudioSource.PlayClipAtPoint (hammerSFX, transform.position, 0.4f);
-		
-			Destroy (gameObject);
+				triggerStun(collision.gameObject);
+				AudioSource.PlayClipAtPoint (hammerSFX, transform.position, 0.4f);
 			
-			// Create AOE effect
-			hammerAOE = Instantiate (hammerAOEPrefab) as GameObject;
-			hammerAOE.transform.position = collision.gameObject.transform.position;
-			
-			checkAreaForEnemies(collision.gameObject.transform.position);
+				Destroy (gameObject);
+				
+				// Create AOE effect
+				hammerAOE = Instantiate (hammerAOEPrefab) as GameObject;
+				hammerAOE.transform.position = collision.gameObject.transform.position;
+				
+				checkAreaForEnemies(collision.gameObject.transform.position);
+			}
 		}
 	}
 	

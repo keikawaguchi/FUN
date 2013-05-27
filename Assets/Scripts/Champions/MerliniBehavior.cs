@@ -68,6 +68,9 @@ public class MerliniBehavior : MonoBehaviour {
 			hammer.transform.position = transform.position;
 			hammer.transform.forward = characterMovement.getAimDirection();
 			
+			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
+			hammer.GetComponent<HammerTime>().SetTeamNum(teamNum);
+			
 			// keep track of cooldown timer
 			hammerTimeTimer = Time.time;
 		}
