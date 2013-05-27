@@ -1,11 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Skills\IceAge.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Champions\KiritoBehavior.cs">
     <Files>
-      <File FileName="Assets\Scripts\Skills\IceAge.cs" Line="62" Column="23" />
-      <File FileName="Assets\Scripts\Champions\KiritoBehavior.cs" Line="13" Column="37" />
-      <File FileName="Assets\Scripts\Champions\FanndisBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GridSystem\MapBuilder.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Champions\KiritoBehavior.cs" Line="7" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

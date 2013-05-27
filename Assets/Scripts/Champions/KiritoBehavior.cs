@@ -4,7 +4,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Kirito : MonoBehaviour {
+public class KiritoBehavior : MonoBehaviour {
 	// skill cooldown times
 	private const float suterusuCD = 5f;
 	private const float skillTwoCD = 10f;
@@ -51,7 +51,7 @@ public class Kirito : MonoBehaviour {
 	}
 	
 	#region Character Skills
-	private void checkSkillOneButtonPress() {
+	private void suterusuTriggered() {
 		// check if cooldown expired
 		if (Time.time - suterusuTimer > suterusuCD) {
 			// skill 1 here
@@ -75,4 +75,20 @@ public class Kirito : MonoBehaviour {
 		}
 	}
 	#endregion
+	
+	public int getSuterusuCD()
+	{
+		if(Time.time - suterusuTimer > suterusuCD)
+			return 0;
+		else
+			return (int)((suterusuCD + 1) - (Time.time - suterusuTimer));
+	}
+	
+	public int getSkillTwoCD()
+	{
+		if(Time.time - skillOneTimer > skillTwoCD)
+			return 0;
+		else
+			return (int)((skillTwoCD + 1) - (Time.time - skillOneTimer));
+	}
 }

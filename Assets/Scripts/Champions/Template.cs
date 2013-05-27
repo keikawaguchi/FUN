@@ -75,4 +75,20 @@ public class Template : MonoBehaviour {
 		}
 	}
 	#endregion
+	
+	public int getSkillOneCD()
+	{
+		if(Time.time - skillOneTimer > skillOneCD)
+			return 0;
+		else
+			return (int)((skillOneCD + 1) - (Time.time - skillOneTimer));
+	}
+	
+	public int getSkillTwoCD()
+	{
+		if(Time.time - skillOneTimer > skillTwoCD)
+			return 0;
+		else
+			return (int)((skillTwoCD + 1) - (Time.time - skillOneTimer));
+	}
 }
