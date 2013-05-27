@@ -1,5 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Skills/HammerTime.cs">
     <Files>
       <File FileName="Assets/Scripts/Player/Hero.cs" Line="1" Column="1" />
@@ -9,6 +10,14 @@
       <File FileName="Assets/Scripts/Champions/MerliniBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Upgrades/AlterSpeed.cs" Line="1" Column="19" />
       <File FileName="Assets/Scripts/Animations/Animation.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\Hero.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Champions\KiritoBehavior.cs" Line="45" Column="39" />
+      <File FileName="Assets\Scripts\Champions\AlbionBehavior.cs" Line="50" Column="3" />
+      <File FileName="Assets\Scripts\Player\Hero.cs" Line="117" Column="3" />
+      <File FileName="Assets\Scripts\Bomb\Explosion.cs" Line="89" Column="15" />
+>>>>>>> Updated Kirito first skill
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

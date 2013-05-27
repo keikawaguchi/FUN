@@ -13,6 +13,9 @@ public class KiritoBehavior : MonoBehaviour {
 	private float suterusuTimer = -99f;
 	private float chinmokuTimer = -99f;
 	
+	private bool suterusuUsed = false;
+	private float suterusuDuration = 0f;
+	
 	private CharacterMovement characterMovement;
 	private Controller controller;
 	
@@ -32,6 +35,16 @@ public class KiritoBehavior : MonoBehaviour {
 		
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
 			chinmokuTriggered();
+		}
+		
+		if (suterusuUsed)  // keep a timer for invisible duration
+			suterusuDuration += Time.smoothDeltaTime;
+		
+		if (suterusuDuration >= 3f) {  // visible after 3 sec
+			Debug.Log("Visible!");
+			gameObject.renderer.enabled = true;
+			suterusuDuration = 0f;
+			suterusuUsed = false;
 		}
 	}
 	
@@ -56,10 +69,12 @@ public class KiritoBehavior : MonoBehaviour {
 		if (Time.time - suterusuTimer > suterusuCD) {
 			// skill 1 here
 			Debug.Log("Skill One Triggered!");
-			
+			gameObject.renderer.enabled = false;
 			
 			// keep track of cooldown timer
 			suterusuTimer = Time.time;
+			
+			suterusuUsed = true;
 		}
 	}
 	
@@ -68,7 +83,6 @@ public class KiritoBehavior : MonoBehaviour {
 		if (Time.time - chinmokuTimer > chinmokuCD) {
 			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
-			
 			
 			// keep track of cooldown timer
 			chinmokuTimer = Time.time;
@@ -84,7 +98,7 @@ public class KiritoBehavior : MonoBehaviour {
 			return (int)((suterusuCD + 1) - (Time.time - suterusuTimer));
 	}
 	
-	public int getSkillTwoCD()
+	public int getChinmokuCD()
 	{
 		if(Time.time - chinmokuTimer > chinmokuCD)
 			return 0;
