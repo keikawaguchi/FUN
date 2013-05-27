@@ -25,8 +25,9 @@ public class Hero : MonoBehaviour {
 	private Map map;
 	private Controller controller;
 	private bool isInvincible = false;
-	
+
 	public bool isAlive;
+
 	
 
 	void Start () {
@@ -68,7 +69,6 @@ public class Hero : MonoBehaviour {
 
 		if (collider.gameObject.tag == "KillsPlayer" && isAlive && !isInvincible) {
 			isAlive = false;
-
 			
 			Hero bombOwner =  collider.gameObject.GetComponent<FireBehavior>().owner;
 			updatePlayerScore(bombOwner);

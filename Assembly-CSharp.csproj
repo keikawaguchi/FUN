@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +85,7 @@
      <Compile Include="Assets\Scripts\Skills\LoveStruck.cs" />
      <Compile Include="Assets\Scripts\Skills\Lure.cs" />
      <Compile Include="Assets\Scripts\Skills\LureUnit.cs" />
+     <Compile Include="Assets\Scripts\Skills\Suterusu.cs" />
      <Compile Include="Assets\Scripts\Skills\ZeroFriction.cs" />
      <Compile Include="Assets\Scripts\Text\PopupText.cs" />
      <Compile Include="Assets\Scripts\Upgrades\AlterSpeed.cs" />
@@ -92,6 +93,7 @@
      <Compile Include="Assets\Scripts\Walls\DestructibleWall.cs" />
      <Compile Include="Assets\Scripts\Walls\IndestructubleWall.cs" />
      <None Include="Assets\Resources\Maps\map1.txt" />
+     <None Include="Assets\Resources\Maps\map4.txt" />
      <None Include="Assets\Resources\Maps\map3.txt" />
      <None Include="Assets\Resources\Maps\map2.txt" />
   </ItemGroup>
