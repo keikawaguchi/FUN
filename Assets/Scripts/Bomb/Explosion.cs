@@ -28,6 +28,8 @@ public class Explosion : MonoBehaviour {
 
 	private GridSystem gridSystem;
 	private Map map;
+	
+	private Hero owner;
 
 
 	void Start() {
@@ -58,6 +60,10 @@ public class Explosion : MonoBehaviour {
 	public void setExplosionDistance(float x, float z) {
 		explosionDistanceX = x;
 		explosionDistanceZ = z;
+	}
+	
+	public void setHero(Hero owner) {
+		this.owner = owner;
 	}
 	
 	private bool isTimeToSpawnFireUnit() {
@@ -136,6 +142,8 @@ public class Explosion : MonoBehaviour {
 	
 	private void spawnFireUnit(Vector3 position) {
 		GameObject newFireUnit = Instantiate(fireUnit) as GameObject;
+		
+		newFireUnit.GetComponent<FireBehavior>().setHero(owner);
 		
 		int x = gridSystem.getXPos(position.x);
 		int y = gridSystem.getYPos(position.z);

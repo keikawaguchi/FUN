@@ -7,6 +7,9 @@ public class Hero : MonoBehaviour {
 	
 	public int playerNumber;
 	public int teamNumber;
+	
+	public int numOfKills;
+	public int numOfDeaths;
 
 	public float lives = 5;
 	public float dropBombCoolDownSeconds = 1.5f;
@@ -29,6 +32,9 @@ public class Hero : MonoBehaviour {
 		initialize();
 		timeOfLastBombDrop = -999f;	
 		spawnHero();
+		
+		numOfKills = 0;
+		numOfDeaths = 0;
 		
 		// DELETE ME
 		teamNumber = 1;
@@ -58,12 +64,16 @@ public class Hero : MonoBehaviour {
 	public void OnTriggerEnter(Collider collider) {
 		if (collider.gameObject.tag == "KillsPlayer") {
 			
+			Hero bombOwner =  collider.gameObject.GetComponent<FireBehavior>().owner;
+			updatePlayerScore(bombOwner);
+			
 			GetComponent<MeshRenderer>().enabled = false;
 			
 			// quick fix so heroes can't do anything when dead
 			transform.position = new Vector3(-9999, 0, 0);
 			
 			deathTimer = Time.time;
+			numOfDeaths++;
 		}
 		
 		if(collider.name == "BombUpgrade")
@@ -118,6 +128,7 @@ public class Hero : MonoBehaviour {
 		instantiateBomb.transform.position = bombLocation;
 		BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();
 		boom.setExplosionDistance(bombX,bombZ);
+		boom.setHero(gameObject.GetComponent<Hero>());
 		
 		timeOfLastBombDrop = Time.time;
 	}
@@ -134,5 +145,15 @@ public class Hero : MonoBehaviour {
 	
 	public int getTeamNumber() {
 		return teamNumber;	
+	}
+	
+	private void updatePlayerScore(Hero bombOwner) {
+		
+		int killerTeamNum = bombOwner.getTeamNumber();
+		
+		if (teamNumber == killerTeamNum)
+			bombOwner.numOfKills--;
+		else
+			bombOwner.numOfKills++;
 	}
 }
