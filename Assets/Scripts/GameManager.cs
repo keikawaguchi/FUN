@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour {
 	public bool checkForWinner(Hero hero) {
 		
 		int teamNum = hero.getTeamNumber();
+		int numOfPlayers = 0;
+		
 		bool won = true;
 		
 		GameObject[] players;
@@ -25,23 +27,26 @@ public class GameManager : MonoBehaviour {
 			
 			int playerTeamNum = player.GetComponent<Hero>().getTeamNumber();
 			
-			Debug.Log (teamNum + " " + playerTeamNum);
-			
-			
 			if (playerTeamNum != teamNum) {
-				
 				int playerLives = player.GetComponent<Hero>().lives;
 				
 				if (playerLives > 0) {
 					won = false;
 					break;
 				}
+				
+			} else {
+				numOfPlayers++;	
 			}
 		}
 		
+		Debug.Log (numOfPlayers);
+		
 		if (won) {
-			// DO SOMETHING HERE LIKE CHANGE SCENES
-			Debug.Log ("Team " + teamNum + " WON!");
+			if (numOfPlayers > 1) 		// team won
+				Debug.Log ("Team " + teamNum + " WON!");
+			else						// player won
+				Debug.Log ("Player " + hero.playerNumber + " WON!");	
 		}
 		
 		return won;
