@@ -8,7 +8,7 @@ public class AlbionBehavior : MonoBehaviour {
 	
 	// skill cooldown times
 	private const float holyTrapCD = 10f;
-	private const float holyBlinkCD = 10f;
+	private const float holyBlinkCD = 15f;
 	
 	// skill timers
 	private float holyTrapTimer = -99f;

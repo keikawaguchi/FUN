@@ -60,7 +60,8 @@ public class HolyBlink : MonoBehaviour {
 			int blinkToGridX = gridSystem.getXPos(newPos.x);
 			int blinkToGridY = gridSystem.getYPos(newPos.z);
 			
-			while (map.isGridFull(blinkToGridX,blinkToGridY) && blinkToGridX != 0) {
+			while (map.isGridFull(blinkToGridX,blinkToGridY) || isOutOfBounds(blinkToGridX, blinkToGridY)) {
+				Debug.Log ("RAWR");
 				blinkToGridX -= (int)blinkDirection.x;
 				blinkToGridY -= (int)blinkDirection.z;
 			}
@@ -75,5 +76,13 @@ public class HolyBlink : MonoBehaviour {
 	
 	public void SetOwner(GameObject owner) {
 		heroObj = owner;
+	}
+	
+	public bool isOutOfBounds(int xCoord, int yCoord) {
+		
+		if (xCoord < 0 || yCoord < 0)
+			return true;
+		
+		return false;
 	}
 }
