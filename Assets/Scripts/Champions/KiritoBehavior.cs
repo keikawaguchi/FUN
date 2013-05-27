@@ -41,17 +41,6 @@ public class KiritoBehavior : MonoBehaviour {
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
 			chinmokuTriggered();
 		}
-		
-//		if (suterusuUsed)  // keep a timer for invisible duration
-//			suterusuDuration += Time.smoothDeltaTime;
-//		
-//		if (suterusuDuration >= 3f) {  // visible after 3 sec
-//			Debug.Log("Visible!");
-//			gameObject.renderer.enabled = true;
-//			suterusuDuration = 0f;
-//			suterusuUsed = false;
-//			hero.setInvincible (false);
-//		}
 	}
 	
 	#region Initialization Methods
@@ -78,13 +67,9 @@ public class KiritoBehavior : MonoBehaviour {
 			Debug.Log("Skill One Triggered!");
 			GameObject suterusuObj = Instantiate (suterusuPrefab) as GameObject;
 			suterusuObj.GetComponent<Suterusu>().setOwner (gameObject);
-//			gameObject.renderer.enabled = false;
-//			hero.setInvincible (true);
 			
 			// keep track of cooldown timer
 			suterusuTimer = Time.time;
-			
-//			suterusuUsed = true;
 		}
 	}
 	
