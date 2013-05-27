@@ -1,5 +1,5 @@
-Indestructable:Textures/Tiles/RedAsphaltTile
-Destructable:Textures/Tiles/BlueBlackWoodTile
+Indestructable:Textures/Tiles/IceCubeTile
+Destructable:Textures/Tiles/CrackedIceCubeTile
 Floor:Textures/Tiles/BlackAsphaltTile
 
 StartMap
