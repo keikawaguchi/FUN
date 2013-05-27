@@ -4,14 +4,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class Kirito : MonoBehaviour {
+public class KiritoBehavior : MonoBehaviour {
 	// skill cooldown times
 	private const float suterusuCD = 5f;
-	private const float skillTwoCD = 10f;
+	private const float chinmokuCD = 10f;
 	
 	// skill timers
 	private float suterusuTimer = -99f;
-	private float skillTwoTimer = -99f;
+	private float chinmokuTimer = -99f;
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
@@ -27,11 +27,11 @@ public class Kirito : MonoBehaviour {
 		}
 		
 		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
-			checkSkillOneButtonPress();
+			suterusuTriggered();
 		}
 		
 		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
-			checkSkillTwoButtonPress();
+			chinmokuTriggered();
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class Kirito : MonoBehaviour {
 	}
 	
 	#region Character Skills
-	private void checkSkillOneButtonPress() {
+	private void suterusuTriggered() {
 		// check if cooldown expired
 		if (Time.time - suterusuTimer > suterusuCD) {
 			// skill 1 here
@@ -63,16 +63,32 @@ public class Kirito : MonoBehaviour {
 		}
 	}
 	
-	private void checkSkillTwoButtonPress() {
+	private void chinmokuTriggered() {
 		// check if cooldown expired
-		if (Time.time - skillTwoTimer > skillTwoCD) {
+		if (Time.time - chinmokuTimer > chinmokuCD) {
 			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
 			
 			
 			// keep track of cooldown timer
-			skillTwoTimer = Time.time;
+			chinmokuTimer = Time.time;
 		}
 	}
 	#endregion
+	
+	public int getSuterusuCD()
+	{
+		if(Time.time - suterusuTimer > suterusuCD)
+			return 0;
+		else
+			return (int)((suterusuCD + 1) - (Time.time - suterusuTimer));
+	}
+	
+	public int getSkillTwoCD()
+	{
+		if(Time.time - chinmokuTimer > chinmokuCD)
+			return 0;
+		else
+			return (int)((chinmokuCD + 1) - (Time.time - chinmokuTimer));
+	}
 }
