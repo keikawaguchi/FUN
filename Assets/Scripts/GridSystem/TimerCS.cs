@@ -93,4 +93,12 @@ public class TimerCS : MonoBehaviour {
 		GUI.Label(new Rect(370,59,100,20),string.Format("{0:00}:{1:00}",min, sec), timerStyle);
 		GUI.matrix = svMat;
 	}
+	
+	public bool timeForUpgrade()
+	{
+		if(sec == 0 || sec == 00 || sec == 30)
+			return true;
+		else
+			return false;
+	}
 }
