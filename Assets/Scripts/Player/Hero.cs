@@ -24,6 +24,9 @@ public class Hero : MonoBehaviour {
 	private GridSystem gridSystem;
 	private Map map;
 	private Controller controller;
+	private bool isInvincible = false;
+	
+	public bool isAlive;
 	
 
 	void Start () {
@@ -38,6 +41,7 @@ public class Hero : MonoBehaviour {
 		
 		// DELETE ME
 		teamNumber = 1;
+		isAlive = true;
 	}
 	
 	void Update () {	
@@ -52,7 +56,6 @@ public class Hero : MonoBehaviour {
 			} else if (deathTimer != 0 && Time.time - deathTimer > 2.0f) {
 				lives--;
 				
-				Debug.Log ("Lives Left: " + lives);
 				deathTimer = 0;
 				GetComponent<MeshRenderer>().enabled = true;
 				
@@ -62,7 +65,10 @@ public class Hero : MonoBehaviour {
 	}
 	
 	public void OnTriggerEnter(Collider collider) {
-		if (collider.gameObject.tag == "KillsPlayer") {
+
+		if (collider.gameObject.tag == "KillsPlayer" && isAlive && !isInvincible) {
+			isAlive = false;
+
 			
 			Hero bombOwner =  collider.gameObject.GetComponent<FireBehavior>().owner;
 			updatePlayerScore(bombOwner);
@@ -140,6 +146,7 @@ public class Hero : MonoBehaviour {
 	
 	private void respawnHero() { 
 		transform.position = map.getRespawnLoc(); 
+		isAlive = true;
 	}
 	#endregion
 	
@@ -155,5 +162,9 @@ public class Hero : MonoBehaviour {
 			bombOwner.numOfKills--;
 		else
 			bombOwner.numOfKills++;
+	}
+	
+	public void setInvincible(bool isInvincible) {
+		this.isInvincible = isInvincible;
 	}
 }

@@ -77,37 +77,37 @@ public class MainMenu : MonoBehaviour {
 			selectedChamp = "Albion-The Hunter";
 			Description = "In a big city which still held by the ordinary men, a scientist, though mutation of the his brain and mind,"+
 				" tried to create a man who has the ability to master the two powers, "+
-					"time and space, to face and defeat the fearful man – Marbas someday. Albion, "+
+					"time and space, to face and defeat the fearful man - Marbas someday. Albion, "+
 					"who was growing up without realizing that he was different from the other kids, " +
-					"lived happily with his father – the scientist until the evil army attacked. His father hid him inside a " +
+					"lived happily with his father - the scientist until the evil army attacked. His father hid him inside a " +
 					"secret dungeon while his father with other ordinary men in the city facing the enemy bravely. The city fell. " +
-					"Albion climbed out the dungeon and found out his father’s body along with a letter clung tightly in his fist. " +
+					"Albion climbed out the dungeon and found out his father's body along with a letter clung tightly in his fist. " +
 					"Albion discovered the secret. He is the one who is destined to save the world. So he decided to head to the north " +
-					"– The Forsaken Universe of the North. The journey of unknown and danger begins! ";
+					"- The Forsaken Universe of the North. The journey of unknown and danger begins! ";
 			SkillOne = "Holy Trap";
 			SkillTwo = "Holy Blink";
 			SkillOneDisc = "Albion places a trap on the map that lasts until another champion gets caught in it." +
-				"the champion gets stuned for 3 seconds. Cooldown: 50 seconds";
-			SkillTwoDisc = "Albion teleports 3 squares to the front direction of the hero. Cooldown: 30 seconds";
+				"the champion gets stuned for 3 seconds. \nCooldown: 10 seconds";
+			SkillTwoDisc = "Albion teleports 3 squares to the front direction of the hero. \nCooldown: 10 seconds";
 		}
 		if(GUI.Button(new Rect(296,60,100,100),"Fanndis"))
 		{
 			selectedChamp = "Fanndis-The Ice Queen";
-			Description = "For thousand years, the Ice Tribe which was ruled by the beautiful queen – Fanndis. The ice queen lived on " +
+			Description = "For thousand years, the Ice Tribe which was ruled by the beautiful queen - Fanndis. The ice queen lived on " +
 				"the land of White peacefully. They draw their life and power from the coldness and the pureness of the ice. Until one day," +
 				 "the sky became so dark that the whole land was cover by endless darkness. All of a sudden, it started to rain. People realized that" +
 				  "what dropped from the sky was not rain or white snow but black ashes. Then the ice started to melt. The people of the Ice Tribe" +
 				   "sensed that their power was growing weaker." +
-				   "The war launched by Marbas was approaching. In order to clear the barrier of his army’s advance, he ordered his evil army to " +
+				   "The war launched by Marbas was approaching. In order to clear the barrier of his army's advance, he ordered his evil army to " +
 				   "burn down the whole sacred forest. And the giant fire had been lasting for months. The temperature of the world increased " +
 				   "sharply within months. Fanndis realized that the only way for her tribe to survive was to master the power of space manipulation," +
 				    "and move the water in Black ocean to extinguish this forest fire. Only then, she can not only save her tribe but also stop the " +
 				    "advance of the evil army. Heading to the North became her only choice.";
 			SkillOne = "Zero Friction";
 			SkillTwo = "Ice Age";
-			SkillOneDisc = "Fanndis increases her speed for 5 seconds. Cooldown: 10 seconds";
+			SkillOneDisc = "Fanndis increases her speed for 5 seconds. \nCooldown: 10 seconds";
 			SkillTwoDisc = "Fanndis compresses the water vapor in the air to an impassible wall of ice to block all movement and explosion." +
-				"Cooldown: 10 seconds";
+				"\nCooldown: 3 seconds";
 		}
 		if(GUI.Button(new Rect(403,60,100,100),"Merlini"))
 		{
@@ -128,8 +128,8 @@ public class MainMenu : MonoBehaviour {
 			SkillOne = "Hammer Time";
 			SkillTwo = "Bomb Voyage";
 			SkillOneDisc = "Merlini sends a hammer in the direction he's facing and stuns" +
-			 	"any nearby opponent for 2 seconds. Cooldown: 10 seconds";
-			SkillTwoDisc = "Merlini places a standard bomb below every player of the map. Cooldown: 25 seconds";
+			 	"any nearby opponent for 2 seconds. \nCooldown: 10 seconds";
+			SkillTwoDisc = "Merlini places a standard bomb below every player of the map. \nCooldown: 25 seconds";
 		}
 		if(GUI.Button(new Rect(509,60,100,100),"Temptress"))
 		{
@@ -144,8 +144,8 @@ public class MainMenu : MonoBehaviour {
 				 "subject to any implication. Thus, she escaped from the kingdom and embarks on a journey to Forsaken Universe of the North.";
 			SkillOne = "Lure";
 			SkillTwo = "Love Struck";
-			SkillOneDisc = "Temptress pulls an opponent within 5 units to your current location. Cooldown: 30 seconds";
-			SkillTwoDisc = "Temptress applies slow-down for 2 seconds to nearest enemy in 3 squares. Cooldown: 45 seconds";
+			SkillOneDisc = "Temptress pulls an opponent within 5 units to your current location. \nCooldown: 5 seconds";
+			SkillTwoDisc = "Temptress applies slow-down for 2 seconds to nearest enemy in 3 squares. \nCooldown: 10 seconds";
 		}
 		GUI.Label(new Rect(190,250,200,100),selectedChamp);
 		

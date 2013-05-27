@@ -5,16 +5,24 @@ using UnityEngine;
 using System.Collections;
 
 public class KiritoBehavior : MonoBehaviour {
+	private const string SUTERUSU_PREFAB_PATH = "Prefabs/Skills/Suterusu";
+	
+	private GameObject suterusuPrefab;
+	
 	// skill cooldown times
-	private const float suterusuCD = 5f;
-	private const float chinmokuCD = 10f;
+	private const float suterusuCD = 10f;
+	private const float chinmokuCD = 15f;
 	
 	// skill timers
 	private float suterusuTimer = -99f;
 	private float chinmokuTimer = -99f;
 	
+	private bool suterusuUsed = false;
+	private float suterusuDuration = 0f;
+	
 	private CharacterMovement characterMovement;
 	private Controller controller;
+	private Hero hero;
 	
 	void Start () {
 		loadSkills();
@@ -37,12 +45,13 @@ public class KiritoBehavior : MonoBehaviour {
 	
 	#region Initialization Methods
 	private void loadSkills() {
-		// lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
+		suterusuPrefab = Resources.Load (SUTERUSU_PREFAB_PATH) as GameObject;
 	}
 	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
+		hero = GetComponent<Hero>();
 	}
 	#endregion
 	
@@ -56,7 +65,8 @@ public class KiritoBehavior : MonoBehaviour {
 		if (Time.time - suterusuTimer > suterusuCD) {
 			// skill 1 here
 			Debug.Log("Skill One Triggered!");
-			
+			GameObject suterusuObj = Instantiate (suterusuPrefab) as GameObject;
+			suterusuObj.GetComponent<Suterusu>().setOwner (gameObject);
 			
 			// keep track of cooldown timer
 			suterusuTimer = Time.time;
@@ -68,7 +78,6 @@ public class KiritoBehavior : MonoBehaviour {
 		if (Time.time - chinmokuTimer > chinmokuCD) {
 			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
-			
 			
 			// keep track of cooldown timer
 			chinmokuTimer = Time.time;
@@ -84,7 +93,7 @@ public class KiritoBehavior : MonoBehaviour {
 			return (int)((suterusuCD + 1) - (Time.time - suterusuTimer));
 	}
 	
-	public int getSkillTwoCD()
+	public int getChinmokuCD()
 	{
 		if(Time.time - chinmokuTimer > chinmokuCD)
 			return 0;

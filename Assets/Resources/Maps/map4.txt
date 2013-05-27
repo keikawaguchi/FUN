@@ -1,0 +1,19 @@
+Indestructable:Textures/Tiles/RedAsphaltTile
+Destructable:Textures/Tiles/BlueBlackWoodTile
+Floor:Textures/Tiles/BlackAsphaltTile
+
+StartMap
+###################
+#1 # 2 # u # 3 # 4#
+#  #   #   #   #  #
+# ####+## ##+#### #
+#      #   #      #
+#   #    #    #   #
+##### # ### # #####
+#   #    +    #   #
+#   #   ###   #   #
+#  ##++## ##++##  #
+#   #  # + #  #   #
+#        #        #
+###################
+EndMap
