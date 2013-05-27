@@ -34,9 +34,12 @@ public class LoveStruck : MonoBehaviour {
 		float distance;
 		foreach(GameObject player in players) {
 			distance = Vector3.Distance (transform.position, player.transform.position);
-			if (player != gameObject && distance < effectRadius) {
-				setSlowOnPlayer(player);
-			}
+			
+			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
+			
+			if (player != gameObject && distance < effectRadius)
+				if (teamNum != player.GetComponent<Hero>().getTeamNumber())
+					setSlowOnPlayer(player);
 		}
 	}
 	
