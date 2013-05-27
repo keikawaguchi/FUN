@@ -8,9 +8,12 @@ public class UpgradePickUp : MonoBehaviour {
 	const string BOMB_UPGRADE_PREFAB = "Materials/BombUpgrade";
 	const string ITEM_PICKUP_SFX_PATH = "Audio/SFX/powerUp";
 	
-	public float upgradeRespawnTime = 30.0f;
 	private int upgradeType;
-	private float timeOfLastSpawn;
+	
+	float timeSinceLastSpawn;
+	float spawnWaitTime = 5f;
+	
+	bool upgradeTaken = false;
 	
 	TimerCS gameTime;
 	
@@ -37,9 +40,16 @@ public class UpgradePickUp : MonoBehaviour {
 	}
 	
 	private bool shouldSpawnNewUpgrade() {
-		return (renderer.enabled == false) && (gameTime.timeForUpgrade() == true);
+		return (renderer.enabled == false) && isTheTimeRight() && (upgradeTaken == true);
 	}
 	
+	private bool isTheTimeRight()
+	{
+		if(gameTime.timeForUpgrade() == true && Time.time - timeSinceLastSpawn > spawnWaitTime)
+			return true;
+		else
+			return false;
+	}
 	private IEnumerator upgradePickedUp() {
 		GameObject t = Resources.Load ("Prefabs/Text/PopupText") as GameObject;
 		GameObject text = Instantiate(t) as GameObject;	
@@ -61,12 +71,13 @@ public class UpgradePickUp : MonoBehaviour {
 		
 		renderer.enabled = false;
 		gameObject.collider.enabled = false;
+		upgradeTaken = true;
 		
 		yield return new WaitForSeconds(3);
 	}
 	
 	private void spawnRandomUpgrade() {
-		timeOfLastSpawn = Time.time;
+		timeSinceLastSpawn = Time.time;
 		upgradeType = Random.Range(1,4);
 		
 		if( upgradeType == 1) {
@@ -86,5 +97,6 @@ public class UpgradePickUp : MonoBehaviour {
 		
 		renderer.enabled = true;
 		gameObject.collider.enabled = true;
+		upgradeTaken = false;
 	}
 }
