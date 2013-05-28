@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviour {
 		int champTeamNum = 0;
 		int numOfPlayers = 0;
 		
-		bool won = true;
-		bool winnerFound = false;
+		bool winnerFound = true;
 		
 		GameObject[] players;
 		players = GameObject.FindGameObjectsWithTag("Player");
@@ -28,13 +27,14 @@ public class GameManager : MonoBehaviour {
 		foreach (GameObject player in players) {
 			
 			Hero champ = player.GetComponent<Hero>();
-			
+		
 			// check if this champ won
 			if (champ.lives > 0) {
 				
 				champTeamNum = champ.getTeamNumber();
 				champPlayerNum = champ.playerNumber;
 				numOfPlayers = 0;
+				winnerFound = true;
 				
 				foreach (GameObject currPlayer in players) {
 					int playerTeamNum = currPlayer.GetComponent<Hero>().getTeamNumber();
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 						int playerLives = currPlayer.GetComponent<Hero>().lives;
 					
 						if (playerLives > 0) {
-							won = false;
+							winnerFound = false;
 							break;
 						}
 					
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 						numOfPlayers++;	
 				}
 				
-				if (won)
+				if (winnerFound)
 					break;
 			}
 		}
@@ -63,6 +63,6 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("Player " + champPlayerNum + " WON!");	
 		}
 		
-		return won;
+		return winnerFound;
 	}
 }
