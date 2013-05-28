@@ -71,11 +71,11 @@ public class HammerTime : MonoBehaviour {
 
 	
 	void OnTriggerEnter(Collider collision) {
-		
+
 		if (collision.tag == PLAYER_TAG) {
 			
 			if (teamNum != collision.gameObject.GetComponent<Hero>().getTeamNumber()) {
-			
+
 				triggerStun(collision.gameObject);
 				AudioSource.PlayClipAtPoint (hammerSFX, transform.position, 0.4f);
 			

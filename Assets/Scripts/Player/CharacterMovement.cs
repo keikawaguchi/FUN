@@ -13,6 +13,7 @@ public class CharacterMovement : MonoBehaviour {
 	private Vector3 aimDirection;
 	private Vector3 movement;
 	private MovementState currentMovementState;
+	private Animation animation;
 	
 	private Map map;
 	private GridSystem gridSystem;
@@ -37,6 +38,10 @@ public class CharacterMovement : MonoBehaviour {
 	}
 
 	#region Public Methods
+	public void setAnimationScript(Animation animation) {
+		this.animation = animation;
+	}
+	
 	public void setMovementState(MovementState newState) {
 		currentMovementState = newState;
 	}
@@ -90,6 +95,18 @@ public class CharacterMovement : MonoBehaviour {
 		}
 		aimDirection.x = controller.getAxis("Horizontal");
 		aimDirection.z = controller.getAxis("Vertical");
+	}
+	
+	private void updateAnimationDirection() {
+		if (controller.getAxis("Horizontal") == 0 && controller.getAxis("Vertical") == 0) {
+			return;
+		}
+		if (aimDirection.x > 0) {
+			animation.setMirrored (false);
+		}
+		else {
+			animation.setMirrored (true);
+		}
 	}
 	
 	private float calculateSpeed() {

@@ -21,7 +21,8 @@ public class Animation : MonoBehaviour {
 			destroyAnimation();
 		}
 		else {
-			updatePosition();	
+			updatePosition();
+			updateAnimationDirection();
 		}
 	}
 	
@@ -41,7 +42,6 @@ public class Animation : MonoBehaviour {
 				return;
 			}
 			newScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
-			return;
 		}
 		else {
 			if (transform.localScale.x > 0) {
@@ -49,6 +49,8 @@ public class Animation : MonoBehaviour {
 			}
 			newScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
 		}
+		
+		transform.localScale = newScale;
 	}
 	
 	public void destroyAnimation() {
@@ -65,5 +67,26 @@ public class Animation : MonoBehaviour {
 		// Apply position offsets
 		transform.position = objectToFollow.transform.position;
 		transform.position += new Vector3(0, 0, zOffset) + customAnimationOffset;	
+	}
+	
+	private void updateAnimationDirection() {
+		Vector3 aimDirection;
+		CharacterMovement characterMovement;
+		
+		characterMovement = objectToFollow.GetComponent<CharacterMovement>();
+		if (characterMovement == null) {
+			return;
+		}
+		
+		aimDirection = characterMovement.getAimDirection();
+		if (aimDirection.x == 0) {
+			return;
+		}
+		if (aimDirection.x > 0) {
+			setMirrored(false);
+		}
+		else {
+			setMirrored(true);
+		}
 	}
 }
