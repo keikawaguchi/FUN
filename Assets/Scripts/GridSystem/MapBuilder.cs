@@ -139,16 +139,19 @@ public class MapBuilder : MonoBehaviour {
 		match = Regex.Match(mapFile.text, @"Indestructable:(.*)");
 		if (match.Success) {
 			indestructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
+			Debug.Log("Indest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Destructable:(.*)");
 		if (match.Success) {
 			destructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
+			Debug.Log("Dest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Floor:(.*)");
 		if (match.Success) {
 			floorTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
+			Debug.Log("Floor Wall Texture: " + match.Groups[1].ToString ());
 		}
 	}
 	
