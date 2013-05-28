@@ -101,6 +101,9 @@ public class CharacterMovement : MonoBehaviour {
 		if (controller.getAxis("Horizontal") == 0 && controller.getAxis("Vertical") == 0) {
 			return;
 		}
+		if (aimDirection.x == 0) {
+			return;
+		}
 		if (aimDirection.x > 0) {
 			animation.setMirrored (false);
 		}
