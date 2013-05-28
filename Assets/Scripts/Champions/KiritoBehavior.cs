@@ -28,6 +28,7 @@ public class KiritoBehavior : MonoBehaviour {
 	void Start () {
 		loadSkills();
 		loadScripts();
+		loadAnimation();
 	}
 	
 	void Update () {
@@ -53,7 +54,9 @@ public class KiritoBehavior : MonoBehaviour {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
 		hero = GetComponent<Hero>();
-		
+	}
+	
+	 private void loadAnimation() {	
 		animation = Resources.Load ("Prefabs/Animations/Characters/Ninja") as GameObject;
 		animation = Instantiate (animation) as GameObject;
 		animation.GetComponent<Animation>().attachToObject (gameObject);

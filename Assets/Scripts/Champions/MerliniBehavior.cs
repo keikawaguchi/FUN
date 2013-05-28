@@ -8,6 +8,7 @@ public class MerliniBehavior : MonoBehaviour {
 	private CharacterMovement characterMovement;
 	private Controller controller;
 	
+	private GameObject animation;
 	private GameObject hammerPrefab;
 	private GameObject hammer;
 	private GameObject bomb;
@@ -24,6 +25,7 @@ public class MerliniBehavior : MonoBehaviour {
 	void Start () {
 		loadSkills();
 		loadScripts();
+		loadAnimation();
 	}
 	
 	void Update () {
@@ -49,6 +51,12 @@ public class MerliniBehavior : MonoBehaviour {
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
+	}
+	
+	private void loadAnimation() {
+		animation = Resources.Load ("Prefabs/Animations/Characters/Wizard") as GameObject;
+		animation = Instantiate (animation) as GameObject;
+		animation.GetComponent<Animation>().attachToObject (gameObject);
 	}
 	#endregion
 	
