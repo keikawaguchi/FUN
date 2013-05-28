@@ -25,6 +25,7 @@ public class Hero : MonoBehaviour {
 	private Map map;
 	private Controller controller;
 	private bool isInvincible = false;
+	private bool canDropBomb = false;
 
 	public bool isAlive;
 
@@ -115,7 +116,7 @@ public class Hero : MonoBehaviour {
 	#endregion
 	
 	private void handleControllerInput() {
-		if (Input.GetButtonDown(controller.getButton("DropBomb"))) {
+		if (Input.GetButtonDown(controller.getButton("DropBomb")) && canDropBomb) {
 			dropBomb();
 		}
 	}
@@ -166,6 +167,10 @@ public class Hero : MonoBehaviour {
 	
 	public void setInvincible(bool isInvincible) {
 		this.isInvincible = isInvincible;
+	}
+	
+	public void setCanDropBomb(bool canDropBomb) {
+		this.canDropBomb = canDropBomb;
 	}
 	
 	private void checkGameOver() {
