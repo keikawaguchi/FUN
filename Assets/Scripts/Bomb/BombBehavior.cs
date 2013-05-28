@@ -5,7 +5,7 @@ public class BombBehavior : MonoBehaviour {
 	
 	const string EXPLOSION_PREFAB_PATH = "Prefabs/Bomb/Explosion";
 	
-	public float explosionPrefabDelayInSeconds = 1.5f;
+	public float explosionPrefabDelayInSeconds = 5f;
 	public float bombX = 2;
 	public float bombZ = 2;
 	private float spawnTime;
@@ -82,6 +82,7 @@ public class BombBehavior : MonoBehaviour {
 		boom.setExplosionDistance(bombX,bombZ);
 		boom.setHero(owner);
 		explosion.transform.position = this.transform.position;
+		owner.decreaseBombCounter ();
 		Destroy(gameObject);
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections;
 public class Hero : MonoBehaviour {
 
 	const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
+	private const int MAX_NUM_0F_BOMBS = 5;
 	
 	public int playerNumber;
 	public int teamNumber;
@@ -12,7 +13,7 @@ public class Hero : MonoBehaviour {
 	public int numOfDeaths;
 
 	public int lives = 5;
-	public float dropBombCoolDownSeconds = 1.5f;
+	public int numOfBombs;
 	public float bombX = 4;
 	public float bombZ = 3;
 	
@@ -26,6 +27,7 @@ public class Hero : MonoBehaviour {
 	private Controller controller;
 	private bool isInvincible = false;
 	private bool canDropBomb = true;
+	private int bombCounter;
 
 	public bool isAlive;
 
@@ -40,6 +42,9 @@ public class Hero : MonoBehaviour {
 		
 		numOfKills = 0;
 		numOfDeaths = 0;
+		
+		numOfBombs = 1;
+		bombCounter = 0;
 		
 		isAlive = true;
 	}
@@ -82,8 +87,8 @@ public class Hero : MonoBehaviour {
 		
 		if(collider.name == "BombUpgrade")
 		{
-			if(dropBombCoolDownSeconds > 0)
-				dropBombCoolDownSeconds-=.5f;
+			if (numOfBombs <= MAX_NUM_0F_BOMBS)
+				numOfBombs++;
 		}
 		if(collider.name == "ExplosionUpgrade")
 		{
@@ -119,9 +124,9 @@ public class Hero : MonoBehaviour {
 	}
 	
 	private void dropBomb() {
-		if (Time.time - timeOfLastBombDrop < dropBombCoolDownSeconds) {
+		if (bombCounter >= numOfBombs)
 			return;
-		}
+		
 		GameObject instantiateBomb = Instantiate(bomb) as GameObject;
 
 		// place bomb in closest grid position
@@ -133,6 +138,7 @@ public class Hero : MonoBehaviour {
 		BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();
 		boom.setExplosionDistance(bombX,bombZ);
 		boom.setHero(gameObject.GetComponent<Hero>());
+		bombCounter++;
 		
 		timeOfLastBombDrop = Time.time;
 	}
@@ -162,6 +168,12 @@ public class Hero : MonoBehaviour {
 			bombOwner.numOfKills++;
 	}
 	
+	private void checkGameOver() {
+		GameManager manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+		
+		manager.checkForWinner();
+	}
+	
 	public void setInvincible(bool isInvincible) {
 		this.isInvincible = isInvincible;
 	}
@@ -170,9 +182,10 @@ public class Hero : MonoBehaviour {
 		this.canDropBomb = canDropBomb;
 	}
 	
-	private void checkGameOver() {
-		GameManager manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-		
-		manager.checkForWinner();
+	public void decreaseBombCounter() {
+		if (bombCounter != 0)
+			bombCounter--;
+		if (bombCounter == 0)
+			bombCounter = 0;
 	}
 }
