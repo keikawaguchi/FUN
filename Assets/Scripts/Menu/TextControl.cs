@@ -10,7 +10,7 @@ public class TextControl : MonoBehaviour {
 	int player2;
 	int player3;
 	int player4;
-	MainMenu listOfChamps;
+	PlayerSelectionMenu listOfChamps;
 	PlayerControls controlSave; 
 	float originalWidth = 800;
 	float originalHeight = 600;
@@ -37,7 +37,7 @@ public class TextControl : MonoBehaviour {
 		}
 		else if(isNextButton == true)
 		{
-			listOfChamps = GameObject.Find("Manager").GetComponent<MainMenu>();
+			listOfChamps = GameObject.Find("Manager").GetComponent<PlayerSelectionMenu>();
 			controlSave = GameObject.Find("Controls").GetComponent<PlayerControls>();
 			player1 = listOfChamps.Player1.SelectedItemIndex;
 			player2 = listOfChamps.Player2.SelectedItemIndex;

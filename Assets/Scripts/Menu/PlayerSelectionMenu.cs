@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class MainMenu : MonoBehaviour {
+public class PlayerSelectionMenu : MonoBehaviour {
 	
 	GUIContent[] comboBoxList;
 	public ComboBox Player1;// = new ComboBox();
@@ -128,8 +128,8 @@ public class MainMenu : MonoBehaviour {
 					"- The Forsaken Universe of the North. The journey of unknown and danger begins! ";
 			SkillOne = "Holy Trap";
 			SkillTwo = "Holy Blink";
-			SkillOneDisc = "Albion places a trap on the map that lasts until another champion gets caught in it." +
-				"the champion gets stuned for 3 seconds. \nCooldown: 10 seconds";
+			SkillOneDisc = "Albion places a trap that lasts until another champion gets caught in it." +
+				"The prey gets stuned for 3 seconds. \nCooldown: 10 seconds";
 			SkillTwoDisc = "Albion teleports 3 squares to the front direction of the hero. \nCooldown: 10 seconds";
 		}
 		if(GUI.Button(new Rect(60,300,50,50),"Fanndis"))
@@ -148,10 +148,20 @@ public class MainMenu : MonoBehaviour {
 			SkillOne = "Zero Friction";
 			SkillTwo = "Ice Age";
 			SkillOneDisc = "Fanndis increases her speed for 5 seconds. \nCooldown: 10 seconds";
-			SkillTwoDisc = "Fanndis compresses the water vapor in the air to an impassible wall of ice to block all movement and explosion." +
+			SkillTwoDisc = "Fanndis compresses the water vapor in the air to a wall of ice to block all movement and explosion." +
 				"\nCooldown: 3 seconds";
 		}
-		if(GUI.Button(new Rect(5,355,50,50),"Merlini"))
+		if(GUI.Button(new Rect(5,355,50,50),"Kirito"))
+		{
+			selectedChamp = "Kirito-The Ninja Assassin";
+			Description = "None yet";
+			SkillOne = "Suterusu";
+			SkillTwo = "Chinmoku";
+			SkillOneDisc = "Kirito becomes invisible and invincible for 3 seconds. \nCooldown: 10 seconds";
+			SkillTwoDisc = "Kirito silenced all the opponents within 5 units of his current " +
+			 	"location. The effect lasts 2 seconds. \nCooldown: 10 seconds";
+		}
+		if(GUI.Button(new Rect(60,355,50,50),"Merlini"))
 		{
 			selectedChamp = "Merlini-The Magician";
 			Description = "Merlini, although he is completely aware of his magical power, isn't quite sure where he came from." +
@@ -173,7 +183,7 @@ public class MainMenu : MonoBehaviour {
 			 	"any nearby opponent for 2 seconds. \nCooldown: 10 seconds";
 			SkillTwoDisc = "Merlini places a standard bomb below every player of the map. \nCooldown: 25 seconds";
 		}
-		if(GUI.Button(new Rect(60,355,50,50),"Temptress"))
+		if(GUI.Button(new Rect(5,410,50,50),"Temptress"))
 		{
 			selectedChamp = "Temptress-The Misguided";
 			Description = "Integration of the embodiment of evil and elegant, Temptress playing with " +
@@ -198,10 +208,13 @@ public class MainMenu : MonoBehaviour {
 		GUILayout.EndArea();
 		
 		GUI.Label(new Rect(128,300,200,100),selectedChamp);
-		GUI.Label(new Rect(600,300,200,100),SkillOne);
-		//GUI.Label(new Rect(400,400,200,100),SkillTwo);
-		//GUI.Label(new Rect(190,420,200,100),SkillOneDisc);
-		//GUI.Label(new Rect(400,420,200,100),SkillTwoDisc);
+		GUI.Box (new Rect(625,325,170,125),"Skill 1");
+		GUI.Label(new Rect(630,340,169,125),SkillOne);
+		GUI.Label(new Rect(630,360,169,125),SkillOneDisc);
+		
+		GUI.Box (new Rect(625,465,170,125),"Skill 2");
+		GUI.Label(new Rect(630,485,169,125),SkillTwo);
+		GUI.Label(new Rect(630,505,169,125),SkillTwoDisc);
 	}
 	
 	private void PlayerSelections()
