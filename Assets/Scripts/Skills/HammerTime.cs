@@ -74,7 +74,7 @@ public class HammerTime : MonoBehaviour {
 
 		if (collision.tag == PLAYER_TAG) {
 			
-			if (teamNum != collision.gameObject.GetComponent<Hero>().getTeamNumber()) {
+			if (collision.gameObject != owner && (teamNum == 0 || teamNum != collision.gameObject.GetComponent<Hero>().getTeamNumber())) {
 
 				triggerStun(collision.gameObject);
 				AudioSource.PlayClipAtPoint (hammerSFX, transform.position, 0.4f);
@@ -98,8 +98,10 @@ public class HammerTime : MonoBehaviour {
 		foreach(GameObject player in players) {
 			if (player != owner) {
 				
+				int teamNum = player.GetComponent<Hero>().getTeamNumber();
+				
 				float distance = Vector3.Distance(collisionPos, player.transform.position);
-				if (distance < HAMMER_AOE_EFFECT) {
+				if (distance < HAMMER_AOE_EFFECT && (teamNum == 0 || teamNum != owner.GetComponent<Hero>().getTeamNumber())) {
 					triggerStun(player);
 				}
 			}
