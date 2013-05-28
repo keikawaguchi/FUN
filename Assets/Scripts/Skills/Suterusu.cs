@@ -5,6 +5,7 @@ public class Suterusu : MonoBehaviour {
 	private float SUTERUSU_DURATION = 1.5f;
 	
 	private GameObject owner;
+	private KiritoBehavior kirito;
 	private Hero hero;
 	private CharacterMovement characterMovement;
 	private Animation ownerAnimation;
@@ -25,6 +26,7 @@ public class Suterusu : MonoBehaviour {
 		hero.setInvincible (true);  // the champ is invincible
 		hero.setCanDropBomb (false);
 		characterMovement.setMovementState (CharacterMovement.MovementState.CannotMove);
+		kirito.setViewerVisibility (false);
 		
 		suterusuTime += Time.smoothDeltaTime;  // keep a timer for invisible duration
 		
@@ -34,6 +36,7 @@ public class Suterusu : MonoBehaviour {
 			hero.setInvincible (false);
 			hero.setCanDropBomb (true);
 			characterMovement.setMovementState (CharacterMovement.MovementState.CanMove);
+			kirito.setViewerVisibility (true);
 			Destroy (gameObject);
 		}
 	}
@@ -45,6 +48,7 @@ public class Suterusu : MonoBehaviour {
 	
 	public void setOwner(GameObject owner) {
 		this.owner = owner;
+		kirito = owner.GetComponent<KiritoBehavior>();
 	}
 	
 	public void setAnimationScript(Animation animation) {

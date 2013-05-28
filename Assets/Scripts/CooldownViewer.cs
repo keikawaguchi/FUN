@@ -35,4 +35,11 @@ public class CooldownViewer : MonoBehaviour {
 		else
 			renderer.material.color = Color.green;
 	}
+	
+	public void setVisibility(bool isVisible) {
+		if (isVisible)
+			renderer.enabled = true;
+		else
+			renderer.enabled = false;
+	}
 }

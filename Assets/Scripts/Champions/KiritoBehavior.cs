@@ -33,6 +33,7 @@ public class KiritoBehavior : MonoBehaviour {
 	private GameObject skillOneCDViewer;
 	private GameObject skillTwoCD;
 	private GameObject skillTwoCDViewer;
+	private bool viewerVisible = true;
 	
 	
 	void Start () {
@@ -47,6 +48,7 @@ public class KiritoBehavior : MonoBehaviour {
 	void Update () {
 		updateCDViewerPos();
 		updateCDViewerColor();
+		updateViewerVisibility();
 		
 		if (isStunned()) {
 			return;
@@ -162,6 +164,27 @@ public class KiritoBehavior : MonoBehaviour {
 			
 		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
 		viewer.updateCDViewerColor( (getChinmokuCD() != 0) );
+	}
+	
+	private void updateViewerVisibility() {
+		if (viewerVisible) {
+			CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+			viewer.setVisibility (true);
+			
+			viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+			viewer.setVisibility (true);
+		}
+		else {
+			CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+			viewer.setVisibility (false);
+			
+			viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+			viewer.setVisibility (false);
+		}
+	}
+	
+	public void setViewerVisibility(bool visible) {
+		viewerVisible = visible;
 	}
 	#endregion
 }
