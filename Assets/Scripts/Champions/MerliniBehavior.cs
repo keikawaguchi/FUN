@@ -96,6 +96,8 @@ public class MerliniBehavior : MonoBehaviour {
 				foreach(GameObject player in players) {
 					GameObject instantiateBomb = Instantiate(bomb) as GameObject;
 					instantiateBomb.transform.position = player.transform.position;
+					BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();
+					boom.setHero(gameObject.GetComponent<Hero>());
 				}
 				
 				bombVoyageTimer = Time.time;
