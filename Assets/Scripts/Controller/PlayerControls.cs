@@ -7,6 +7,11 @@ public class PlayerControls : MonoBehaviour {
 	public int player2;
 	public int player3;
 	public int player4;
+	
+	public int player1TEAM;
+	public int player2TEAM;
+	public int player3TEAM;
+	public int player4TEAM;
 	// Use this for initialization
 	void Start () {
 		
