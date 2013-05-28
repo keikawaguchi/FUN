@@ -41,9 +41,6 @@ public class Hero : MonoBehaviour {
 		numOfKills = 0;
 		numOfDeaths = 0;
 		
-		// DELETE ME
-//		teamNumber = 1;
-		
 		isAlive = true;
 	}
 	

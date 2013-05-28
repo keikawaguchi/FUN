@@ -5,12 +5,37 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		SetTeams();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	
+	public void SetTeams() {
+		
+		// get team settings
+		PlayerControls playerControls = GameObject.Find("Controls").GetComponent<PlayerControls>();
+
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in players) {
+			
+			Hero hero = player.GetComponent<Hero>();
+			
+			Debug.Log (hero + " " + hero.playerNumber);
+			Debug.Log (playerControls.player1TEAM);
+			
+			if (hero.playerNumber == 1)
+				hero.teamNumber = playerControls.player1TEAM;
+			else if (hero.playerNumber == 2)
+				hero.teamNumber = playerControls.player2TEAM;
+			else if (hero.playerNumber == 3)
+				hero.teamNumber = playerControls.player3TEAM;
+			else 
+				hero.teamNumber = playerControls.player4TEAM;
+			
+		}
 	}
 	
 	public bool checkForWinner() {

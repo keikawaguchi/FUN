@@ -9,7 +9,7 @@ public class Controller : MonoBehaviour {
 	OrderedDictionary buttons;
 	PlayerControls Champs;
 	
-	void Start() {
+	void Awake() {
 		buttons = new OrderedDictionary();
 		calculateKeyBindings();
 		Champs = GameObject.Find("Controls").GetComponent<PlayerControls>();
