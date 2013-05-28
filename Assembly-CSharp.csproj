@@ -77,7 +77,7 @@
      <Compile Include="Assets\Scripts\Player\Respawn.cs" />
      <Compile Include="Assets\Scripts\Skills\BombVoyage.cs" />
      <Compile Include="Assets\Scripts\Skills\HammerTime.cs" />
-     <Compile Include="Assets\Scripts\Skills\HammerTimeAOE.cs" />
+     <Compile Include="Assets\Scripts\Skills\HammerTimeAOE.cChinmokuCompile Include="Assets\Scripts\Skills\HammerTimeAOE.cs" />
      <Compile Include="Assets\Scripts\Skills\HolyBlink.cs" />
      <Compile Include="Assets\Scripts\Skills\HolyTrap.cs" />
      <Compile Include="Assets\Scripts\Skills\HolyTrapUnit.cs" />

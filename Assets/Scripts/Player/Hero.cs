@@ -25,7 +25,7 @@ public class Hero : MonoBehaviour {
 	private Map map;
 	private Controller controller;
 	private bool isInvincible = false;
-	private bool canDropBomb = false;
+	private bool canDropBomb = true;
 
 	public bool isAlive;
 
