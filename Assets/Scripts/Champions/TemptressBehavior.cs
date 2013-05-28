@@ -8,6 +8,7 @@ public class TemptressBehavior : MonoBehaviour {
 	private GameObject lureSkillPrefab;
 	private GameObject currentLure;
 	private LoveStruck loveStruck;
+	private GameObject animation;
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
@@ -21,6 +22,7 @@ public class TemptressBehavior : MonoBehaviour {
 	void Start () {
 		loadResources();
 		loadScripts();
+		loadAnimation();
 	}
 	
 	void Update () {
@@ -73,6 +75,12 @@ public class TemptressBehavior : MonoBehaviour {
 		loveStruck = gameObject.AddComponent<LoveStruck>();
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
+	}
+	
+	private void loadAnimation() {	
+		animation = Resources.Load ("Prefabs/Animations/Characters/Temptress") as GameObject;
+		animation = Instantiate (animation) as GameObject;
+		animation.GetComponent<Animation>().attachToObject (gameObject);
 	}
 	#endregion
 	
