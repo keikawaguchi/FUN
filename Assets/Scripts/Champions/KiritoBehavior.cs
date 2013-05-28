@@ -20,6 +20,7 @@ public class KiritoBehavior : MonoBehaviour {
 	private bool suterusuUsed = false;
 	private float suterusuDuration = 0f;
 	
+	private GameObject animation;
 	private CharacterMovement characterMovement;
 	private Controller controller;
 	private Hero hero;
@@ -52,6 +53,10 @@ public class KiritoBehavior : MonoBehaviour {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
 		hero = GetComponent<Hero>();
+		
+		animation = Resources.Load ("Prefabs/Animations/Characters/Ninja") as GameObject;
+		animation = Instantiate (animation) as GameObject;
+		animation.GetComponent<Animation>().attachToObject (gameObject);
 	}
 	#endregion
 	
