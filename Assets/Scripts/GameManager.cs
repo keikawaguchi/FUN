@@ -23,9 +23,6 @@ public class GameManager : MonoBehaviour {
 			
 			Hero hero = player.GetComponent<Hero>();
 			
-			Debug.Log (hero + " " + hero.playerNumber);
-			Debug.Log (playerControls.player1TEAM);
-			
 			if (hero.playerNumber == 1)
 				hero.teamNumber = playerControls.player1TEAM;
 			else if (hero.playerNumber == 2)
@@ -61,19 +58,32 @@ public class GameManager : MonoBehaviour {
 				numOfPlayers = 0;
 				winnerFound = true;
 				
-				foreach (GameObject currPlayer in players) {
-					int playerTeamNum = currPlayer.GetComponent<Hero>().getTeamNumber();
-				
-					if (playerTeamNum != champTeamNum) {
+				// solo player
+				if (champTeamNum == 0) {
+					foreach (GameObject currPlayer in players) {
 						int playerLives = currPlayer.GetComponent<Hero>().lives;
 					
-						if (playerLives > 0) {
+						if (champPlayerNum != currPlayer.GetComponent<Hero>().playerNumber && playerLives > 0) {
 							winnerFound = false;
 							break;
 						}
-					
-					} else
-						numOfPlayers++;	
+					}
+				} else {
+					foreach (GameObject currPlayer in players) {
+						int playerTeamNum = currPlayer.GetComponent<Hero>().getTeamNumber();
+						
+						// check for same teams
+						if (playerTeamNum != champTeamNum) {
+							int playerLives = currPlayer.GetComponent<Hero>().lives;
+						
+							if (playerLives > 0) {
+								winnerFound = false;
+								break;
+							}
+						
+						} else
+							numOfPlayers++;	
+					}
 				}
 				
 				if (winnerFound)
