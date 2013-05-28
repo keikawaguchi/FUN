@@ -5,7 +5,7 @@ public class BombBehavior : MonoBehaviour {
 	
 	const string EXPLOSION_PREFAB_PATH = "Prefabs/Bomb/Explosion";
 	
-	public float explosionPrefabDelayInSeconds = 5f;
+	private float explosionPrefabDelayInSeconds = 2f;
 	public float bombX = 2;
 	public float bombZ = 2;
 	private float spawnTime;
@@ -71,6 +71,7 @@ public class BombBehavior : MonoBehaviour {
 	#endregion
 	
 	private bool isTimeToExplode() {
+		Debug.Log ("Explosion Time: " + explosionPrefabDelayInSeconds);
 		return (Time.time - spawnTime) > explosionPrefabDelayInSeconds;
 	}
 	
