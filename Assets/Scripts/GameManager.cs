@@ -13,40 +13,54 @@ public class GameManager : MonoBehaviour {
 	
 	}
 	
-	public bool checkForWinner(Hero hero) {
-		
-		int teamNum = hero.getTeamNumber();
+	public bool checkForWinner() {
+	
+		int champPlayerNum = 0;	
+		int champTeamNum = 0;
 		int numOfPlayers = 0;
 		
 		bool won = true;
+		bool winnerFound = false;
 		
 		GameObject[] players;
 		players = GameObject.FindGameObjectsWithTag("Player");
 		
-		foreach(GameObject player in players) {
+		foreach (GameObject player in players) {
 			
-			int playerTeamNum = player.GetComponent<Hero>().getTeamNumber();
+			Hero champ = player.GetComponent<Hero>();
 			
-			if (playerTeamNum != teamNum) {
-				int playerLives = player.GetComponent<Hero>().lives;
+			// check if this champ won
+			if (champ.lives > 0) {
 				
-				if (playerLives > 0) {
-					won = false;
-					break;
+				champTeamNum = champ.getTeamNumber();
+				champPlayerNum = champ.playerNumber;
+				numOfPlayers = 0;
+				
+				foreach (GameObject currPlayer in players) {
+					int playerTeamNum = currPlayer.GetComponent<Hero>().getTeamNumber();
+				
+					if (playerTeamNum != champTeamNum) {
+						int playerLives = currPlayer.GetComponent<Hero>().lives;
+					
+						if (playerLives > 0) {
+							won = false;
+							break;
+						}
+					
+					} else
+						numOfPlayers++;	
 				}
 				
-			} else {
-				numOfPlayers++;	
+				if (won)
+					break;
 			}
 		}
 		
-		Debug.Log (numOfPlayers);
-		
-		if (won) {
+		if (winnerFound) {
 			if (numOfPlayers > 1) 		// team won
-				Debug.Log ("Team " + teamNum + " WON!");
+				Debug.Log ("Team " + champTeamNum + " WON!");
 			else						// player won
-				Debug.Log ("Player " + hero.playerNumber + " WON!");	
+				Debug.Log ("Player " + champPlayerNum + " WON!");	
 		}
 		
 		return won;

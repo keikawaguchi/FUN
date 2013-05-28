@@ -54,7 +54,7 @@ public class Hero : MonoBehaviour {
 				
 			// how long a hero is dead should be grabbed from another script
 			if (lives == 0) {
-				// Debug.Log ("Game Over");
+				checkGameOver();
 			} else if (deathTimer != 0 && Time.time - deathTimer > 2.0f) {
 				deathTimer = 0;
 				GetComponent<MeshRenderer>().enabled = true;
@@ -73,7 +73,6 @@ public class Hero : MonoBehaviour {
 			
 			Hero bombOwner =  collider.gameObject.GetComponent<FireBehavior>().owner;
 			updatePlayerScore(bombOwner);
-			checkGameOver(bombOwner);
 			
 			GetComponent<MeshRenderer>().enabled = false;
 			
@@ -169,9 +168,9 @@ public class Hero : MonoBehaviour {
 		this.isInvincible = isInvincible;
 	}
 	
-	private void checkGameOver(Hero hero) {
+	private void checkGameOver() {
 		GameManager manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 		
-		manager.checkForWinner(hero);
+		manager.checkForWinner();
 	}
 }
