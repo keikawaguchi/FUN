@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections;
 
 public class KiritoBehavior : MonoBehaviour {
+	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
 	private const string SUTERUSU_PREFAB_PATH = "Prefabs/Skills/Suterusu";
 	
 	private GameObject suterusuPrefab;
@@ -25,13 +26,26 @@ public class KiritoBehavior : MonoBehaviour {
 	private Controller controller;
 	private Hero hero;
 	
+	// view cooldown
+	private GameObject skillOneCD;
+	private GameObject skillOneCDViewer;
+	private GameObject skillTwoCD;
+	private GameObject skillTwoCDViewer;
+	
+	
 	void Start () {
 		loadSkills();
 		loadScripts();
 		loadAnimation();
+		
+		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
 	}
 	
 	void Update () {
+		updateCDViewerPos();
+		updateCDViewerColor();
+		
 		if (isStunned()) {
 			return;
 		}
@@ -48,6 +62,8 @@ public class KiritoBehavior : MonoBehaviour {
 	#region Initialization Methods
 	private void loadSkills() {
 		suterusuPrefab = Resources.Load (SUTERUSU_PREFAB_PATH) as GameObject;
+		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;
 	}
 	
 	private void loadScripts() {
@@ -113,4 +129,22 @@ public class KiritoBehavior : MonoBehaviour {
 	public GameObject getAnimationObject() {
 		return animation;
 	}
+	
+	#region Cooldown Viewer Methods
+	private void updateCDViewerPos() {
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, true);
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, false);
+	}
+	
+	private void updateCDViewerColor() {
+		
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getSuterusuCD() != 0) );
+			
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getChinmokuCD() != 0) );
+	}
+	#endregion
 }
