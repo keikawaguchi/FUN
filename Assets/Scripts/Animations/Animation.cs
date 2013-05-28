@@ -29,6 +29,10 @@ public class Animation : MonoBehaviour {
 		objectToFollow = obj;
 	}
 	
+	public void setVisibility(bool isVisible) {
+		renderer.renderer.isVisible = isVisible;
+	}
+	
 	private void destroyAnimation() {
 		Destroy(gameObject);
 	}
