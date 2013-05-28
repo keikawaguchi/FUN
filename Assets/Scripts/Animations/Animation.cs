@@ -4,7 +4,7 @@ using System.Collections;
 public class Animation : MonoBehaviour {
 	
 	public GameObject objectToFollow;
-	
+	private string alignment;
 	private Vector3 customAnimationOffset;
 	
 	
@@ -13,7 +13,10 @@ public class Animation : MonoBehaviour {
 			return;
 		}
 		transform.forward = objectToFollow.transform.forward;
-		customAnimationOffset = new Vector3(0, 20, 0);
+		customAnimationOffset = new Vector3(0, 0, 0);
+		if (alignment == null) {
+			alignment = "bottom";
+		}
 	}
 
 	void Update () {
@@ -28,6 +31,20 @@ public class Animation : MonoBehaviour {
 	
 	public void attachToObject(GameObject obj) {
 		objectToFollow = obj;
+	}
+	
+	public bool setAlignment(string alignment) {
+		alignment = alignment.ToLower();
+		if (alignment == "center" ||
+			alignment == "top" ||
+			alignment == "bottom" ||
+			alignment == "left" ||
+			alignment == "right") {
+			this.alignment = alignment;
+			return true;
+		}
+
+		return false;
 	}
 	
 	public void setVisibility(bool isVisible) {
@@ -58,15 +75,21 @@ public class Animation : MonoBehaviour {
 	}
 	
 	private void updatePosition() {
+		float xOffset = 0f;
+		float yOffset = 20f;
+		float zOffset = 0f;
 		float halfAnimationHeight = transform.localScale.z / 2.0f;
 		float halfFollowingHeight = objectToFollow.transform.localScale.z / 2.0f;
 		
-		// Position so that animation bottom lines up with objects bottom
-		float zOffset = halfAnimationHeight - halfFollowingHeight;
+		if (alignment == "top") {
+			zOffset = halfAnimationHeight - halfFollowingHeight;
+		}
+		if (alignment == "bottom") {
+			zOffset = halfAnimationHeight - halfFollowingHeight;
+		}
 		
-		// Apply position offsets
 		transform.position = objectToFollow.transform.position;
-		transform.position += new Vector3(0, 0, zOffset) + customAnimationOffset;	
+		transform.position += new Vector3(xOffset, yOffset, zOffset) + customAnimationOffset;	
 	}
 	
 	private void updateAnimationDirection() {

@@ -18,6 +18,7 @@ public class LoveStruck : MonoBehaviour {
 	public void execute() {
 		GameObject animationInstance = Instantiate (animation) as GameObject;
 		animationInstance.GetComponent<Animation>().attachToObject(gameObject);
+		animationInstance.GetComponent<Animation>().setAlignment("center");
 		checkForPlayersInRadius();
 	}
 	
