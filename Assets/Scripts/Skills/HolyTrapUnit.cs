@@ -25,7 +25,11 @@ public class HolyTrapUnit : MonoBehaviour {
 		int collisionTeamNum = enemyObj.GetComponent<Hero>().getTeamNumber();
 		int ownerTeamNum = owner.GetComponent<Hero>().getTeamNumber();
 		
-		if (collision.tag == PLAYER_TAG && collisionTeamNum != ownerTeamNum) {
+		if (ownerTeamNum == 0 && collision.gameObject != owner && collision.tag == PLAYER_TAG) {
+			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
+			alterSpeed.Start (0f, 2f);
+			Destroy (this.gameObject);
+		} else if (collision.tag == PLAYER_TAG && collisionTeamNum != ownerTeamNum && ownerTeamNum != 0) {
 			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
 			alterSpeed.Start (0f, 2f);
 			Destroy (this.gameObject);
