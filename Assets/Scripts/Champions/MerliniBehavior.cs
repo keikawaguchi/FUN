@@ -46,6 +46,10 @@ public class MerliniBehavior : MonoBehaviour {
 			return;
 		}
 		
+		if (isSilence ()) {
+			return;
+		}
+		
 		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
 			hammerTimeButtonPress();
 		}
@@ -78,6 +82,10 @@ public class MerliniBehavior : MonoBehaviour {
 	
 	private bool isStunned() {
 		return characterMovement.isStunned();
+	}
+	
+	private bool isSilence() {
+		return characterMovement.getIsSilence ();
 	}
 	
 	#region Merlini Skills

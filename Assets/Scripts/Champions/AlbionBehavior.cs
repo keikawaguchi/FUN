@@ -4,6 +4,7 @@ using System.Collections;
 public class AlbionBehavior : MonoBehaviour {
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
 	
+	private CharacterMovement characterMovement;
 	private Controller controller;
 	private HolyTrap holyTrap;
 	private HolyBlink holyBlink;
@@ -36,11 +37,16 @@ public class AlbionBehavior : MonoBehaviour {
 		updateCDViewerPos();
 		updateCDViewerColor();
 		
+		if (isSilence ()) {
+			return;
+		}
+		
 		HolyTrapTriggered ();
 		HolyBlinkTriggered ();
 	}
 	
 	private void LoadScripts() {
+		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
 	}
 	
@@ -75,6 +81,10 @@ public class AlbionBehavior : MonoBehaviour {
 				holyBlinkTimer = Time.time;
 			}
 		}
+	}
+	
+	private bool isSilence() {
+		return characterMovement.getIsSilence ();
 	}
 	
 	public int gettrapCD()

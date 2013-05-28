@@ -9,11 +9,12 @@ public class Chinmoku : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		loadScripts();
-		effectRadius = gridSystem.getSingleGridHeight() * 5;  // 5 units of effect radius
+		
 	}
 	
 	public void execute() {
+		loadScripts();
+		effectRadius = gridSystem.getSingleGridHeight() * 5;  // 5 units of effect radius
 		checkForPlayersInRadius();
 	}
 	
@@ -22,7 +23,7 @@ public class Chinmoku : MonoBehaviour {
 		map = GameObject.Find("Map").GetComponent<Map>();
 	}
 	
-	private void checkForPlayersInRadius() {	
+	private void checkForPlayersInRadius() {
 		GameObject[] players;
 		players = GameObject.FindGameObjectsWithTag("Player");	
 		
@@ -31,14 +32,16 @@ public class Chinmoku : MonoBehaviour {
 			distance = Vector3.Distance (transform.position, player.transform.position);
 			
 			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
-			
+			Debug.Log("Radius: " + effectRadius);
 			if (player != gameObject && distance < effectRadius)
 				if (teamNum != player.GetComponent<Hero>().getTeamNumber())
 					setSilenceOnPlayer(player);
 		}
 	}
 	
-	private void setSilenceOnPlayer(GameObject player) {
-		
+	private void setSilenceOnPlayer(GameObject otherPlayer) {
+		AlterSilence alterSilence;
+		alterSilence = otherPlayer.AddComponent<AlterSilence>();
+		alterSilence.Start (true, 3f);
 	}
 }

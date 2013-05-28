@@ -50,6 +50,10 @@ public class KiritoBehavior : MonoBehaviour {
 			return;
 		}
 		
+		if (isSilence ()) {
+			return;
+		}
+		
 		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
 			suterusuTriggered();
 		}
@@ -83,6 +87,10 @@ public class KiritoBehavior : MonoBehaviour {
 		return characterMovement.isStunned();
 	}
 	
+	private bool isSilence() {
+		return characterMovement.getIsSilence ();
+	}
+	
 	#region Character Skills
 	private void suterusuTriggered() {
 		// check if cooldown expired
@@ -99,10 +107,13 @@ public class KiritoBehavior : MonoBehaviour {
 	}
 	
 	private void chinmokuTriggered() {
+		Chinmoku chinmoku;
 		// check if cooldown expired
 		if (Time.time - chinmokuTimer > chinmokuCD) {
 			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
+			chinmoku = gameObject.AddComponent<Chinmoku>();
+			chinmoku.execute ();
 			
 			// keep track of cooldown timer
 			chinmokuTimer = Time.time;

@@ -21,6 +21,7 @@ public class CharacterMovement : MonoBehaviour {
 
 	// effects from abilities
 	private float stunInterval;
+	private bool isSilenced;
 	
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
@@ -63,6 +64,14 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public bool isStunned() {
 		return speedMultiplier == 0;
+	}
+	
+	public bool getIsSilence() {
+		return isSilenced;
+	}
+	
+	public void setSilenced(bool isSilenced) {
+		this.isSilenced = isSilenced;
 	}
 	#endregion
 	

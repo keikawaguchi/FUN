@@ -39,6 +39,10 @@ public class FanndisBehavior : MonoBehaviour {
 			return;
 		}
 		
+		if (isSilence ()) {
+			return;
+		}
+		
 		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
 			zeroFictionTriggered();
 		}
@@ -61,6 +65,10 @@ public class FanndisBehavior : MonoBehaviour {
 	
 	private bool isStunned() {
 		return characterMovement.isStunned();
+	}
+	
+	private bool isSilence() {
+		return characterMovement.getIsSilence ();
 	}
 	
 	#region Character Skills

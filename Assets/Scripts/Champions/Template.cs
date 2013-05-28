@@ -26,6 +26,10 @@ public class Template : MonoBehaviour {
 			return;
 		}
 		
+		if (isSilence ()) {
+			return;
+		}
+		
 		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
 			checkSkillOneButtonPress();
 		}
@@ -48,6 +52,10 @@ public class Template : MonoBehaviour {
 	
 	private bool isStunned() {
 		return characterMovement.isStunned();
+	}
+	
+	private bool isSilence() {
+		return characterMovement.getIsSilence ();
 	}
 	
 	#region Character Skills
