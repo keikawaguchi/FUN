@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class TemptressBehavior : MonoBehaviour {
+	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
 	
 	const string LURE_PREFAB_PATH = "Prefabs/Skills/Lure";
 	
@@ -18,14 +19,26 @@ public class TemptressBehavior : MonoBehaviour {
 	
 	public float lureTimer = -99f;
 	public float loveStruckTimer = -99f;
-
+	
+	// view cooldown
+	private GameObject skillOneCD;
+	private GameObject skillOneCDViewer;
+	private GameObject skillTwoCD;
+	private GameObject skillTwoCDViewer;
+	
 	void Start () {
 		loadResources();
 		loadScripts();
 		loadAnimation();
+		
+		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
 	}
 	
 	void Update () {
+		updateCDViewerPos();
+		updateCDViewerColor();
+		
 		if (isStunned()) {
 			return;
 		}
@@ -69,6 +82,9 @@ public class TemptressBehavior : MonoBehaviour {
 	#region Initialization Methods
 	private void loadResources() {
 		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
+		
+		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	
 	private void loadScripts() {
@@ -119,4 +135,22 @@ public class TemptressBehavior : MonoBehaviour {
 			loveStruckTimer = Time.time;
 		}
 	}
+	
+	#region Cooldown Viewer Methods
+	private void updateCDViewerPos() {
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, true);
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, false);
+	}
+	
+	private void updateCDViewerColor() {
+		
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getLureCD() != 0) );
+			
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getLSCD() != 0) );
+	}
+	#endregion
 }

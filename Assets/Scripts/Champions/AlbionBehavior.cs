@@ -20,7 +20,6 @@ public class AlbionBehavior : MonoBehaviour {
 	// view cooldown
 	private GameObject skillOneCD;
 	private GameObject skillOneCDViewer;
-	
 	private GameObject skillTwoCD;
 	private GameObject skillTwoCDViewer;
 	
@@ -98,6 +97,7 @@ public class AlbionBehavior : MonoBehaviour {
 		return animation;
 	}
 	
+	#region Cooldown Viewer Methods
 	private void updateCDViewerPos() {
 		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
 		viewer.updateCDViewerPosition(transform.position, true);
@@ -113,4 +113,5 @@ public class AlbionBehavior : MonoBehaviour {
 		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
 		viewer.updateCDViewerColor( (getblinkCD() != 0) );
 	}
+	#endregion
 }

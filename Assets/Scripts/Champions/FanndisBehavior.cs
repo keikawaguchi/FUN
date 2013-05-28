@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class FanndisBehavior : MonoBehaviour {
+	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
+	
 	// skill cooldown times
 	private const float zeroFrictionCD = 10f;
 	private const float iceAgeCD = 3f;
@@ -15,12 +17,24 @@ public class FanndisBehavior : MonoBehaviour {
 	private ZeroFriction zeroFriction;
 	private IceAge iceAge;
 	private float iceAgeDestroyTimer;
+	
+	// view cooldown
+	private GameObject skillOneCD;
+	private GameObject skillOneCDViewer;
+	private GameObject skillTwoCD;
+	private GameObject skillTwoCDViewer;
 
 	void Start () {
 		loadResources();
+		
+		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
 	}
 	
 	void Update () {
+		updateCDViewerPos();
+		updateCDViewerColor();		
+
 		if (isStunned()) {
 			return;
 		}
@@ -39,6 +53,9 @@ public class FanndisBehavior : MonoBehaviour {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<Controller>();
 		zeroFriction = gameObject.AddComponent<ZeroFriction>();
+		
+		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	#endregion
 	
@@ -85,4 +102,22 @@ public class FanndisBehavior : MonoBehaviour {
 		else
 			return (int)((iceAgeCD+1) - (Time.time - iceAgeTimer));
 	}
+	
+	#region Cooldown Viewer Methods
+	private void updateCDViewerPos() {
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, true);
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, false);
+	}
+	
+	private void updateCDViewerColor() {
+		
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getzeroFrictionCD() != 0) );
+			
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (geticeAgeCD() != 0) );
+	}
+	#endregion
 }

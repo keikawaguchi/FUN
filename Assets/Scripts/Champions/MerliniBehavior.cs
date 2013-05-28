@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class MerliniBehavior : MonoBehaviour {
+	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
+	
 	private const string HAMMERTIME_PREFAB_PATH = "Prefabs/Skills/HammerTime";
 	private const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
 	
@@ -21,14 +23,25 @@ public class MerliniBehavior : MonoBehaviour {
 	private float hammerTimeTimer = -99f;
 	private float bombVoyageTimer = -99f;
 	
+	// view cooldown
+	private GameObject skillOneCD;
+	private GameObject skillOneCDViewer;
+	private GameObject skillTwoCD;
+	private GameObject skillTwoCDViewer;
 
 	void Start () {
 		loadSkills();
 		loadScripts();
 		loadAnimation();
+		
+		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
 	}
 	
 	void Update () {
+		updateCDViewerPos();
+		updateCDViewerColor();		
+
 		if (isStunned()) {
 			return;
 		}
@@ -46,6 +59,9 @@ public class MerliniBehavior : MonoBehaviour {
 	private void loadSkills() {
 		hammerPrefab = Resources.Load (HAMMERTIME_PREFAB_PATH) as GameObject;
 		bomb = Resources.Load (BOMB_PREFAB_PATH) as GameObject;
+		
+		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	
 	private void loadScripts() {
@@ -124,4 +140,22 @@ public class MerliniBehavior : MonoBehaviour {
 	public GameObject getAnimationObject() {
 		return animation;
 	}
+	
+	#region Cooldown Viewer Methods
+	private void updateCDViewerPos() {
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, true);
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, false);
+	}
+	
+	private void updateCDViewerColor() {
+		
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getHammerTimeCD() != 0) );
+			
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getBombVoyageCD() != 0) );
+	}
+	#endregion
 }
