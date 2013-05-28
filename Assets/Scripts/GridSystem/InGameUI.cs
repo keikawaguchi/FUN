@@ -4,10 +4,11 @@ using System.Collections;
 public class InGameUI : MonoBehaviour {
 	
 	public int controller;
-	string MerliniPath = "Textures/Champions/Merlini";
+	string MerliniPath = "Textures/Champions/MerliniIcon";
 	string TemptressPath = "Textures/Champions/Temptress";
-	string AlbionPath = "Textures/Champions/Albion";
+	string AlbionPath = "Textures/Champions/AlbionIcon";
 	string FanndisPath = "Textures/Champions/Fanndis";
+	string KiritoPath = "Textures/Champions/KiritoIcon";
 	
 	GUIStyle LivesStyle; 
 	GUIStyle SkillsStyle;
@@ -174,6 +175,30 @@ public class InGameUI : MonoBehaviour {
 			{
 				GUI.Label(new Rect(695,20,100,40),"Lure: "+ gameObject.GetComponent<TemptressBehavior>().getLureCD(), SkillsStyle);
 				GUI.Label(new Rect(695,30,100,40),"LoveStruck: "+gameObject.GetComponent<TemptressBehavior>().getLSCD(),SkillsStyle);
+			}
+		}
+		if(gameObject.name == "Kirito")
+		{
+			icon = Resources.Load(KiritoPath) as Texture;
+			if(controller == 1)
+			{
+				GUI.Label(new Rect(95,20,100,40),"Suterusu: "+ gameObject.GetComponent<KiritoBehavior>().getSuterusuCD(), SkillsStyle);
+				GUI.Label(new Rect(95,30,100,40),"Chinmoku: "+gameObject.GetComponent<KiritoBehavior>().getChinmokuCD(),SkillsStyle);
+			}
+			else if(controller == 2)
+			{
+				GUI.Label(new Rect(295,20,100,40),"Suterusu: "+ gameObject.GetComponent<KiritoBehavior>().getSuterusuCD(), SkillsStyle);
+				GUI.Label(new Rect(295,30,100,40),"Chinmoku: "+gameObject.GetComponent<KiritoBehavior>().getChinmokuCD(),SkillsStyle);
+			}
+			else if(controller == 3)
+			{
+				GUI.Label(new Rect(495,20,100,40),"Suterusu: "+ gameObject.GetComponent<KiritoBehavior>().getSuterusuCD(), SkillsStyle);
+				GUI.Label(new Rect(495,30,100,40),"Chinmoku: "+gameObject.GetComponent<KiritoBehavior>().getChinmokuCD(),SkillsStyle);
+			}
+			else if(controller == 4)
+			{
+				GUI.Label(new Rect(695,20,100,40),"Suterusu: "+ gameObject.GetComponent<KiritoBehavior>().getSuterusuCD(), SkillsStyle);
+				GUI.Label(new Rect(695,30,100,40),"Chinmoku: "+gameObject.GetComponent<KiritoBehavior>().getChinmokuCD(),SkillsStyle);
 			}
 		}
 		 GUI.matrix = svMat;
