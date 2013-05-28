@@ -16,7 +16,10 @@ public class IceAgeUnit : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider collision) {
 		// check the collision with tag and exlude the trap owner
+		Debug.Log ("Trigger enter!");
 		GameObject enemyObj = collision.gameObject;
+		Debug.Log ("Collision Tag: " + collision.tag);
+		Debug.Log ("Enemy name: " + enemyObj.name);
 		if (collision.tag == PLAYER_TAG && enemyObj.name != "Fanndis") {
 			AlterSpeed alterSpeed = enemyObj.gameObject.AddComponent<AlterSpeed>();
 			alterSpeed.Start (0.5f, 2f);

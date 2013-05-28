@@ -1,12 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Upgrades\UpgradePickUp.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Skills\HolyTrapUnit.cs">
     <Files>
       <File FileName="Assets\Scripts\GridSystem\TimerCS.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="23" Column="3" />
-      <File FileName="Assets\Scripts\Controller\Controller.cs" Line="50" Column="4" />
-      <File FileName="Assets\Scripts\Upgrades\UpgradePickUp.cs" Line="27" Column="3" />
       <File FileName="Assets\Scripts\Player\Hero.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skills\IceAge.cs" Line="85" Column="4" />
+      <File FileName="Assets\Scripts\Skills\IceAgeUnit.cs" Line="26" Column="4" />
+      <File FileName="Assets\Scripts\Skills\HolyTrapUnit.cs" Line="21" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

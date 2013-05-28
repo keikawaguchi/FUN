@@ -82,13 +82,17 @@ public class IceAge : MonoBehaviour {
 		for (int i = 0; i < iceAge.Length; i++) {
 			iceAge[i] = owner.transform.position;
 			iceAge[i] += aimDirection * (singleGridSize * (i + 1));
+			
+			int iceAgePosX = gridSystem.getXPos(iceAge[i].x);
+			int iceAgePosY = gridSystem.getYPos(iceAge[i].z);
+			
 			if (!map.isGridFull(iceAge[i].x, iceAge[i].z)) {
 				if (map.getObjectAtGridLocation (iceAge[i].x, iceAge[i].z) == null) {
 					iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
 					iceAgeObj = Instantiate (iceAgePrefab) as GameObject;
 					
 					map.addImpassableObject (iceAge[i].x, iceAge[i].z, iceAgeObj);
-					iceAgeObj.GetComponent<IndestructubleWall>().initialize (iceAge[i].x, iceAge[i].z);
+					iceAgeObj.GetComponent<IndestructubleWall>().initialize (gridSystem.getXCoord(iceAgePosX), gridSystem.getYCoord(iceAgePosY));
 					AudioSource.PlayClipAtPoint(iceAgeSFX, transform.position, 0.6f);
 				}
 				else
@@ -97,7 +101,7 @@ public class IceAge : MonoBehaviour {
 			else
 				Debug.Log ("Can't place ice wall.");
 			
-			Destroy (iceAgeObj, 3f);  // destroy the ice wall after 2 seconds
+			Destroy (iceAgeObj, 3f);  // destroy the ice wall after 3 seconds
 		}
 	}
 	
