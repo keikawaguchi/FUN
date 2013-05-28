@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LoveStruck : MonoBehaviour {
 	
-	public float effectRadius = 35.0f;
+	public float effectRadius = 42.0f;
 	public float speedMultiplier = 0.5f;
 	public float duration = 3.0f;
 	

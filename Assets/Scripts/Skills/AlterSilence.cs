@@ -6,12 +6,10 @@ public class AlterSilence : MonoBehaviour {
 	
 	private float startTime;
 	private float duration;
-//	private bool isSilenced;
 	
 	// Use this for initialization
 	void Start () {
 		startTime = Time.time;
-//		setSilenced (false);
 	}
 	
 	// Update is called once per frame

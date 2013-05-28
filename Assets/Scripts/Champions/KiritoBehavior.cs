@@ -7,8 +7,10 @@ using System.Collections;
 public class KiritoBehavior : MonoBehaviour {
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
 	private const string SUTERUSU_PREFAB_PATH = "Prefabs/Skills/Suterusu";
+	private const string CHINMOKU_PREFAB_PATH = "Prefabs/Skills/Chinmoku";
 	
 	private GameObject suterusuPrefab;
+	private GameObject chinmokuPrefab;
 	
 	// skill cooldown times
 	private const float suterusuCD = 10f;
@@ -66,6 +68,7 @@ public class KiritoBehavior : MonoBehaviour {
 	#region Initialization Methods
 	private void loadSkills() {
 		suterusuPrefab = Resources.Load (SUTERUSU_PREFAB_PATH) as GameObject;
+		chinmokuPrefab = Resources.Load (CHINMOKU_PREFAB_PATH) as GameObject;
 		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;
 	}
@@ -112,6 +115,9 @@ public class KiritoBehavior : MonoBehaviour {
 		if (Time.time - chinmokuTimer > chinmokuCD) {
 			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
+//			GameObject chinmokuObj = Instantiate (chinmokuPrefab) as GameObject;
+//			chinmokuObj.GetComponent<Chinmoku>().setOwner (gameObject);
+//			chinmokuObj.GetComponent<Chinmoku>().execute ();
 			chinmoku = gameObject.AddComponent<Chinmoku>();
 			chinmoku.execute ();
 			
