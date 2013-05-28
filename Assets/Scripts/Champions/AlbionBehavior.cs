@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class AlbionBehavior : MonoBehaviour {
+	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
+	
 	private Controller controller;
 	private HolyTrap holyTrap;
 	private HolyBlink holyBlink;
@@ -15,18 +17,37 @@ public class AlbionBehavior : MonoBehaviour {
 	private float holyTrapTimer = -99f;
 	private float holyBlinkTimer = -99f;
 	
+	// view cooldown
+	private GameObject skillOneCD;
+	private GameObject skillOneCDViewer;
+	
+	private GameObject skillTwoCD;
+	private GameObject skillTwoCDViewer;
+	
 	void Start () {
 		LoadScripts();
+		loadSkills();
 		loadAnimation();
+		
+		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
 	}
 	
 	void Update () {
+		updateCDViewerPos();
+		updateCDViewerColor();
+		
 		HolyTrapTriggered ();
 		HolyBlinkTriggered ();
 	}
 	
 	private void LoadScripts() {
 		controller = GetComponent<Controller>();
+	}
+	
+	private void loadSkills() {
+		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	
 	private void loadAnimation() {	
@@ -75,5 +96,21 @@ public class AlbionBehavior : MonoBehaviour {
 	
 	public GameObject getAnimationObject() {
 		return animation;
+	}
+	
+	private void updateCDViewerPos() {
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, true);
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerPosition(transform.position, false);
+	}
+	
+	private void updateCDViewerColor() {
+		
+		CooldownViewer viewer = skillOneCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (gettrapCD() != 0) );
+			
+		viewer = skillTwoCDViewer.GetComponent<CooldownViewer>();
+		viewer.updateCDViewerColor( (getblinkCD() != 0) );
 	}
 }
