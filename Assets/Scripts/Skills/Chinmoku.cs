@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class Chinmoku : MonoBehaviour {
+	private float CHINMOKU_EFFECT_DURATION = 5F;
+	
 	private float effectRadius;
 	
 	private GridSystem gridSystem;
@@ -53,6 +55,6 @@ public class Chinmoku : MonoBehaviour {
 	private void setSilenceOnPlayer(GameObject otherPlayer) {
 		AlterSilence alterSilence;
 		alterSilence = otherPlayer.AddComponent<AlterSilence>();
-		alterSilence.Start (true, 3f);
+		alterSilence.Start (true, CHINMOKU_EFFECT_DURATION);
 	}
 }

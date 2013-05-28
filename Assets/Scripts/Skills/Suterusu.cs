@@ -2,18 +2,20 @@ using UnityEngine;
 using System.Collections;
 
 public class Suterusu : MonoBehaviour {
+	private float SUTERUSU_DURATION = 1.5f;
+	
 	private GameObject owner;
 	private Hero hero;
 	private CharacterMovement characterMovement;
 	private Animation ownerAnimation;
 	private bool suterusuUsed;
-	private float suterusuDuration;
+	private float suterusuTime;
 
 	// Use this for initialization
 	void Start () {
 		transform.position = owner.transform.position;  // set the particle system position
 		suterusuUsed = false;
-		suterusuDuration = 0f;
+		suterusuTime = 0f;
 		loadScripts();
 	}
 	
@@ -24,9 +26,9 @@ public class Suterusu : MonoBehaviour {
 		hero.setCanDropBomb (false);
 		characterMovement.setMovementState (CharacterMovement.MovementState.CannotMove);
 		
-		suterusuDuration += Time.smoothDeltaTime;  // keep a timer for invisible duration
+		suterusuTime += Time.smoothDeltaTime;  // keep a timer for invisible duration
 		
-		if (suterusuDuration >= 3f) {  // visible after 3 sec
+		if (suterusuTime >= SUTERUSU_DURATION) {
 			Debug.Log("Visible!");
 			ownerAnimation.setVisibility(true);
 			hero.setInvincible (false);
