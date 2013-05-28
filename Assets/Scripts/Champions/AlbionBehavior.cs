@@ -5,6 +5,7 @@ public class AlbionBehavior : MonoBehaviour {
 	private Controller controller;
 	private HolyTrap holyTrap;
 	private HolyBlink holyBlink;
+	private GameObject animation;
 	
 	// skill cooldown times
 	private const float holyTrapCD = 10f;
@@ -16,6 +17,7 @@ public class AlbionBehavior : MonoBehaviour {
 	
 	void Start () {
 		LoadScripts();
+		loadAnimation();
 	}
 	
 	void Update () {
@@ -25,6 +27,12 @@ public class AlbionBehavior : MonoBehaviour {
 	
 	private void LoadScripts() {
 		controller = GetComponent<Controller>();
+	}
+	
+	private void loadAnimation() {	
+		animation = Resources.Load ("Prefabs/Animations/Characters/Hunter") as GameObject;
+		animation = Instantiate (animation) as GameObject;
+		animation.GetComponent<Animation>().attachToObject (gameObject);
 	}
 	
 	private void HolyTrapTriggered() {
