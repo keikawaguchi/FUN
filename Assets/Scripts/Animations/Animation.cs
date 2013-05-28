@@ -30,10 +30,28 @@ public class Animation : MonoBehaviour {
 	}
 	
 	public void setVisibility(bool isVisible) {
-		renderer.renderer.isVisible = isVisible;
+		renderer.enabled = isVisible;
 	}
 	
-	private void destroyAnimation() {
+	public void setMirrored(bool isMirrored) {
+		Vector3 newScale;
+		
+		if (isMirrored) {
+			if (transform.localScale.x < 0) {
+				return;
+			}
+			newScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
+			return;
+		}
+		else {
+			if (transform.localScale.x > 0) {
+				return;
+			}
+			newScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
+		}
+	}
+	
+	public void destroyAnimation() {
 		Destroy(gameObject);
 	}
 	

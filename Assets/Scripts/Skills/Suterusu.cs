@@ -4,6 +4,7 @@ using System.Collections;
 public class Suterusu : MonoBehaviour {
 	private GameObject owner;
 	private Hero hero;
+	private Animation ownerAnimation;
 	private bool suterusuUsed;
 	private float suterusuDuration;
 
@@ -17,14 +18,14 @@ public class Suterusu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		owner.gameObject.renderer.enabled = false;  // the champ is invisible
+		ownerAnimation.setVisibility(false);  // the champ is invisible
 		hero.setInvincible (true);  // the champ is invincible
 		
 		suterusuDuration += Time.smoothDeltaTime;  // keep a timer for invisible duration
 		
 		if (suterusuDuration >= 3f) {  // visible after 3 sec
 			Debug.Log("Visible!");
-			owner.gameObject.renderer.enabled = true;
+			ownerAnimation.setVisibility(true);
 			hero.setInvincible (false);
 			Destroy (gameObject);
 		}
@@ -36,5 +37,9 @@ public class Suterusu : MonoBehaviour {
 	
 	public void setOwner(GameObject owner) {
 		this.owner = owner;
+	}
+	
+	public void setAnimationScript(Animation animation) {
+		ownerAnimation = animation;
 	}
 }

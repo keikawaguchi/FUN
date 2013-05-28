@@ -75,6 +75,7 @@ public class KiritoBehavior : MonoBehaviour {
 			Debug.Log("Skill One Triggered!");
 			GameObject suterusuObj = Instantiate (suterusuPrefab) as GameObject;
 			suterusuObj.GetComponent<Suterusu>().setOwner (gameObject);
+			suterusuObj.GetComponent<Suterusu>().setAnimationScript(animation.GetComponent<Animation>());
 			
 			// keep track of cooldown timer
 			suterusuTimer = Time.time;
@@ -107,5 +108,9 @@ public class KiritoBehavior : MonoBehaviour {
 			return 0;
 		else
 			return (int)((chinmokuCD + 1) - (Time.time - chinmokuTimer));
+	}
+	
+	public GameObject getAnimationObject() {
+		return animation;
 	}
 }

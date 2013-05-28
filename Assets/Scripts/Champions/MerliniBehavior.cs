@@ -120,4 +120,8 @@ public class MerliniBehavior : MonoBehaviour {
 		else
 			return (int)((bombVoyageCD+1) - (Time.time - bombVoyageTimer));
 	}
+	
+	public GameObject getAnimationObject() {
+		return animation;
+	}
 }

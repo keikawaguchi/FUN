@@ -72,4 +72,8 @@ public class AlbionBehavior : MonoBehaviour {
 		else
 			return (int)((holyBlinkCD+1) - (Time.time - holyBlinkTimer));
 	}
+	
+	public GameObject getAnimationObject() {
+		return animation;
+	}
 }
