@@ -91,6 +91,9 @@ public class MapBuilder : MonoBehaviour {
 	
 	public void spawnIndestructableWall(int gridX, int gridY, GameObject[,] indestructable) {
 		indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
+		if (indestructableWallTexture == null) {
+			Debug.Log ("Indest Texture NULL");
+		}
 		indestructable[gridX, gridY].renderer.material.mainTexture = indestructableWallTexture;
 		indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
 	}
@@ -138,18 +141,21 @@ public class MapBuilder : MonoBehaviour {
 	
 		match = Regex.Match(mapFile.text, @"Indestructable:(.*)");
 		if (match.Success) {
+			Debug.Log ("Indest. Texture: " + match.Groups[1]);
 			indestructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
 			Debug.Log("Indest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Destructable:(.*)");
 		if (match.Success) {
+			Debug.Log ("Dest. Texture: " + match.Groups[1]);
 			destructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
 			Debug.Log("Dest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Floor:(.*)");
 		if (match.Success) {
+			Debug.Log ("Floor. Texture: " + match.Groups[1]);
 			floorTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
 			Debug.Log("Floor Wall Texture: " + match.Groups[1].ToString ());
 		}

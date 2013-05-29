@@ -68,7 +68,6 @@ public class Animation : MonoBehaviour {
 
 	public void startIdleAnimation() {
 		if (idleTexture == null) {
-			Debug.LogError ("Idle texture NULL");
 			return;
 		}
 		renderer.material.mainTexture = idleTexture;
@@ -76,7 +75,6 @@ public class Animation : MonoBehaviour {
 	
 	public void startRunningAnimation() {
 		if (runningTexture == null) {
-			Debug.LogError ("Run texture NULL");
 			return;
 		}
 		renderer.material.mainTexture = runningTexture;
