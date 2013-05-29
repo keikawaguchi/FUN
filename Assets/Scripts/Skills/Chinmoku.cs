@@ -46,9 +46,12 @@ public class Chinmoku : MonoBehaviour {
 			distance = Vector3.Distance (transform.position, player.transform.position);
 			
 			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
-			if (player != gameObject && distance < effectRadius)
-				if (teamNum != player.GetComponent<Hero>().getTeamNumber())
+			if (player != gameObject && distance < effectRadius) {
+				if (teamNum == 0)
 					setSilenceOnPlayer(player);
+				else if (teamNum != player.GetComponent<Hero>().getTeamNumber())
+					setSilenceOnPlayer(player);
+			}
 		}
 	}
 	
