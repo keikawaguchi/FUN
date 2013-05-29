@@ -2,15 +2,17 @@ using UnityEngine;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-
+	private string winner;
+	private bool foundWinner = false;
+	
 	// Use this for initialization
 	void Start () {
-		SetTeams();
+//		SetTeams();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 	
 	public void SetTeams() {
@@ -92,12 +94,27 @@ public class GameManager : MonoBehaviour {
 		}
 		
 		if (winnerFound) {
-			if (numOfPlayers > 1) 		// team won
+			if (numOfPlayers > 1) { 		// team won
+				winner = "Team " + champTeamNum;
 				Debug.Log ("Team " + champTeamNum + " WON!");
-			else						// player won
-				Debug.Log ("Player " + champPlayerNum + " WON!");	
+			}
+			else {						// player won
+				winner = "Player " + champPlayerNum;
+				Debug.Log ("Player " + champPlayerNum + " WON!");
+			}
+			
+			foundWinner = true;
+			return winnerFound;
 		}
 		
 		return winnerFound;
+	}
+	
+	public string getWinner() {
+		return winner;
+	}
+	
+	void Awake() {
+		DontDestroyOnLoad (this);
 	}
 }

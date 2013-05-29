@@ -73,6 +73,9 @@ public class TextControl : MonoBehaviour {
 				Application.LoadLevel(2);
 			}
 		}
+		else if (isBackButton) {
+			Application.LoadLevel(1);
+		}
 	}
 	
 	void OnGUI()

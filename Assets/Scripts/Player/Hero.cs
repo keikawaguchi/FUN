@@ -169,7 +169,8 @@ public class Hero : MonoBehaviour {
 	private void checkGameOver() {
 		GameManager manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 		
-		manager.checkForWinner();
+		if (manager.checkForWinner())
+			Application.LoadLevel (3);
 	}
 	
 	public void setInvincible(bool isInvincible) {
