@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-//		SetTeams();
+		SetTeams();
 	}
 	
 	// Update is called once per frame
@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
 		foreach (GameObject player in players) {
 			
 			Hero hero = player.GetComponent<Hero>();
+			
+			Debug.Log (hero + " " + hero.playerNumber);
 			
 			if (hero.playerNumber == 1)
 				hero.teamNumber = playerControls.player1TEAM;
@@ -97,8 +99,7 @@ public class GameManager : MonoBehaviour {
 			if (numOfPlayers > 1) { 		// team won
 				winner = "Team " + champTeamNum;
 				Debug.Log ("Team " + champTeamNum + " WON!");
-			}
-			else {						// player won
+			} else {						// player won
 				winner = "Player " + champPlayerNum;
 				Debug.Log ("Player " + champPlayerNum + " WON!");
 			}
