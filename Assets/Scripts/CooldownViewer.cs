@@ -17,11 +17,11 @@ public class CooldownViewer : MonoBehaviour {
 		Vector3 viewerPos = heroPosition;
 		
 		if (isLeftViewer) {
-			viewerPos.z -= 4;
+			viewerPos.z += 20;
 			viewerPos.x -= 2;
 			viewerPos.y += 25;
 		} else {	
-			viewerPos.z -= 4;
+			viewerPos.z += 20;
 			viewerPos.x += 2;
 			viewerPos.y += 25;
 		}
