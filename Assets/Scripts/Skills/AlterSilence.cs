@@ -6,6 +6,7 @@ public class AlterSilence : MonoBehaviour {
 	
 	private float startTime;
 	private float duration;
+	private GameObject silenceAnimation;
 	
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,7 @@ public class AlterSilence : MonoBehaviour {
 	void Update () {
 		if (isComplete ()) {
 			setSilenced (false);
+			silenceAnimation.GetComponent<Animation>().destroyAnimation();
 			Destroy(this);
 			return;
 		}
@@ -26,7 +28,7 @@ public class AlterSilence : MonoBehaviour {
 		loadScripts();
 		setSilenced (isSilenced);
 		this.duration = duration;
-//		showPopupText();
+		displaySilenceIcon ();
 	}
 	
 	public void setDurationInSeconds(float seconds) {
@@ -39,14 +41,22 @@ public class AlterSilence : MonoBehaviour {
 	}
 	
 	private void setSilenced(bool isSilenced) {
-		if (isSilenced) {  // true
+		if (isSilenced) {
 			Debug.Log ("AlterSilence set silenced");
 			characterMovement.setSilenced (isSilenced);
 		}
-		else {  // false
+		else { 
 			Debug.Log ("AlterSilence unset silenced");
 			characterMovement.setSilenced (isSilenced);
 		}
+	}
+	
+	private void displaySilenceIcon() {
+		silenceAnimation = Resources.Load ("Prefabs/Icons/SilencedIcon") as GameObject;
+		silenceAnimation = Instantiate (silenceAnimation) as GameObject;
+		silenceAnimation.GetComponent<Animation>().attachToObject(gameObject);
+		silenceAnimation.GetComponent<Animation>().setAlignment("top");
+		silenceAnimation.GetComponent<Animation>().setCustomOffset(new Vector3(0, 10, 10));
 	}
 	
 	private bool isComplete() {

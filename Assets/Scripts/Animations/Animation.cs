@@ -13,7 +13,9 @@ public class Animation : MonoBehaviour {
 			return;
 		}
 		transform.forward = objectToFollow.transform.forward;
-		customAnimationOffset = new Vector3(0, 0, 0);
+		if (customAnimationOffset == null) {
+			customAnimationOffset = new Vector3(0, 0, 0);
+		}
 		if (alignment == null) {
 			alignment = "bottom";
 		}
@@ -70,6 +72,10 @@ public class Animation : MonoBehaviour {
 		transform.localScale = newScale;
 	}
 	
+	public void setCustomOffset(Vector3 offset) {
+		customAnimationOffset = offset;
+	}
+	
 	public void destroyAnimation() {
 		Destroy(gameObject);
 	}
@@ -82,14 +88,15 @@ public class Animation : MonoBehaviour {
 		float halfFollowingHeight = objectToFollow.transform.localScale.z / 2.0f;
 		
 		if (alignment == "top") {
-			zOffset = halfAnimationHeight - halfFollowingHeight;
+			zOffset = halfAnimationHeight + halfFollowingHeight;
 		}
 		if (alignment == "bottom") {
 			zOffset = halfAnimationHeight - halfFollowingHeight;
 		}
 		
 		transform.position = objectToFollow.transform.position;
-		transform.position += new Vector3(xOffset, yOffset, zOffset) + customAnimationOffset;	
+		transform.position += new Vector3(xOffset, yOffset, zOffset);
+		transform.position += customAnimationOffset;	
 	}
 	
 	private void updateAnimationDirection() {
