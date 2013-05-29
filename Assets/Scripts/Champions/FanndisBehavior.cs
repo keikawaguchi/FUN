@@ -4,6 +4,9 @@ using System.Collections;
 public class FanndisBehavior : MonoBehaviour {
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
 	
+	private const string IDLE_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Fanndis/FanndisIdleSpritesheet";
+	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Fanndis/FanndisRunningSpritesheet";
+	
 	// skill cooldown times
 	private const float zeroFrictionCD = 10f;
 	private const float iceAgeCD = 3f;
@@ -17,6 +20,7 @@ public class FanndisBehavior : MonoBehaviour {
 	private ZeroFriction zeroFriction;
 	private IceAge iceAge;
 	private float iceAgeDestroyTimer;
+	private GameObject animation;
 	
 	// view cooldown
 	private GameObject skillOneCD;
@@ -26,6 +30,7 @@ public class FanndisBehavior : MonoBehaviour {
 
 	void Start () {
 		loadResources();
+		loadAnimation();
 		
 		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
 		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
@@ -60,6 +65,17 @@ public class FanndisBehavior : MonoBehaviour {
 		
 		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+	}
+	
+	private void loadAnimation() {
+		animation = Resources.Load ("Prefabs/Animations/Characters/Fanndis") as GameObject;
+		animation = Instantiate (animation) as GameObject;
+		animation.GetComponent<Animation>().attachToObject (gameObject);
+		
+		Texture idle = Resources.Load (IDLE_TEXTURE_PATH) as Texture;
+		Texture running = Resources.Load (RUNNING_TEXTURE_PATH) as Texture;
+		animation.GetComponent<Animation>().setIdleTexture(idle);
+		animation.GetComponent<Animation>().setRunningTexture(running);
 	}
 	#endregion
 	

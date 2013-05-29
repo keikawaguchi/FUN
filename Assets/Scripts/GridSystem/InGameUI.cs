@@ -5,7 +5,7 @@ public class InGameUI : MonoBehaviour {
 	
 	public int controller;
 	string MerliniPath = "Textures/Champions/MerliniIcon";
-	string TemptressPath = "Textures/Champions/Temptress";
+	string TemptressPath = "Textures/Champions/TemptressIcon";
 	string AlbionPath = "Textures/Champions/AlbionIcon";
 	string FanndisPath = "Textures/Champions/Fanndis";
 	string KiritoPath = "Textures/Champions/KiritoIcon";
