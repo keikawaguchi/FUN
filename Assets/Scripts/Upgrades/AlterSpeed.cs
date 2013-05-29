@@ -64,7 +64,7 @@ public class AlterSpeed : MonoBehaviour {
 		PopupText popupText = text.GetComponent<PopupText>();
 		popupText.initialize();
 		popupText.setDuration(duration);
-		popupText.setPosition(transform.position.x, transform.position.z + 7);
+		popupText.setPosition(transform.position.x, transform.position.z + 20);
 		
 		if (speedMultiplier == 0) {
 			popupText.setPredefinedText("Stun");
