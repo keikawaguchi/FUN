@@ -4,6 +4,9 @@ using System.Collections;
 public class AlbionBehavior : MonoBehaviour {
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
 	
+	private const string IDLE_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Albion/AlbionIdleSpritesheet";
+	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Albion/AlbionRunningSpriteSheet";
+	
 	private CharacterMovement characterMovement;
 	private Controller controller;
 	private HolyTrap holyTrap;
@@ -59,6 +62,11 @@ public class AlbionBehavior : MonoBehaviour {
 		animation = Resources.Load ("Prefabs/Animations/Characters/Hunter") as GameObject;
 		animation = Instantiate (animation) as GameObject;
 		animation.GetComponent<Animation>().attachToObject (gameObject);
+		
+		Texture idle = Resources.Load (IDLE_TEXTURE_PATH) as Texture;
+		Texture running = Resources.Load (RUNNING_TEXTURE_PATH) as Texture;
+		animation.GetComponent<Animation>().setIdleTexture(idle);
+		animation.GetComponent<Animation>().setRunningTexture(running);
 	}
 	
 	private void HolyTrapTriggered() {

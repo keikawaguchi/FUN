@@ -50,6 +50,10 @@ public class CharacterMovement : MonoBehaviour {
 		return currentMovementState;
 	}
 	
+	public Vector3 getMoveDirection() {
+		return movement;
+	}
+	
 	public Vector3 getAimDirection() {
 		return aimDirection;
 	}

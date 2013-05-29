@@ -9,6 +9,10 @@ public class KiritoBehavior : MonoBehaviour {
 	private const string SUTERUSU_PREFAB_PATH = "Prefabs/Skills/Suterusu";
 	private const string CHINMOKU_PREFAB_PATH = "Prefabs/Skills/Chinmoku";
 	
+	// animation sprite sheets
+	private const string IDLE_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Ninja/NinjaIdleSpritesheet";
+	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Ninja/NinjaRunningSpritesheet";
+	
 	private GameObject suterusuPrefab;
 	private GameObject chinmokuPrefab;
 	
@@ -85,6 +89,11 @@ public class KiritoBehavior : MonoBehaviour {
 		animation = Resources.Load ("Prefabs/Animations/Characters/Ninja") as GameObject;
 		animation = Instantiate (animation) as GameObject;
 		animation.GetComponent<Animation>().attachToObject (gameObject);
+		
+		Texture idle = Resources.Load (IDLE_TEXTURE_PATH) as Texture;
+		Texture running = Resources.Load (RUNNING_TEXTURE_PATH) as Texture;
+		animation.GetComponent<Animation>().setIdleTexture(idle);
+		animation.GetComponent<Animation>().setRunningTexture(running);
 	}
 	#endregion
 	

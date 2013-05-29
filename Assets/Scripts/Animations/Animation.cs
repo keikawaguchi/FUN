@@ -7,6 +7,11 @@ public class Animation : MonoBehaviour {
 	private string alignment;
 	private Vector3 customAnimationOffset;
 	
+	private Texture runningTexture;
+	private Texture idleTexture;
+	
+	CharacterMovement characterMovement;
+	
 	
 	void Start() {
 		if (objectToFollow == null) {
@@ -26,6 +31,7 @@ public class Animation : MonoBehaviour {
 			destroyAnimation();
 		}
 		else {
+			updateTexture();
 			updatePosition();
 			updateAnimationDirection();
 		}
@@ -33,6 +39,7 @@ public class Animation : MonoBehaviour {
 	
 	public void attachToObject(GameObject obj) {
 		objectToFollow = obj;
+		characterMovement = objectToFollow.GetComponent<CharacterMovement>();
 	}
 	
 	public bool setAlignment(string alignment) {
@@ -47,6 +54,32 @@ public class Animation : MonoBehaviour {
 		}
 
 		return false;
+	}
+	
+	public void setIdleTexture(Texture texture) {
+		Debug.Log ("Set Idle Texture");
+		idleTexture = texture;
+	}
+	
+	public void setRunningTexture(Texture texture) {
+		Debug.Log ("Set Running Texture");
+		runningTexture = texture;
+	}
+
+	public void startIdleAnimation() {
+		if (idleTexture == null) {
+			Debug.LogError ("Idle texture NULL");
+			return;
+		}
+		renderer.material.mainTexture = idleTexture;
+	}
+	
+	public void startRunningAnimation() {
+		if (runningTexture == null) {
+			Debug.LogError ("Run texture NULL");
+			return;
+		}
+		renderer.material.mainTexture = runningTexture;
 	}
 	
 	public void setVisibility(bool isVisible) {
@@ -100,15 +133,12 @@ public class Animation : MonoBehaviour {
 	}
 	
 	private void updateAnimationDirection() {
-		Vector3 aimDirection;
-		CharacterMovement characterMovement;
-		
-		characterMovement = objectToFollow.GetComponent<CharacterMovement>();
 		if (characterMovement == null) {
 			return;
 		}
 		
-		aimDirection = characterMovement.getAimDirection();
+		Vector3 aimDirection = characterMovement.getAimDirection();
+		
 		if (aimDirection.x == 0) {
 			return;
 		}
@@ -117,6 +147,27 @@ public class Animation : MonoBehaviour {
 		}
 		else {
 			setMirrored(true);
+		}
+	}
+	
+	private void updateTexture() {
+		if (characterMovement == null) {
+			return;
+		}
+		
+		Vector3 moveDirection = characterMovement.getMoveDirection();
+		
+		if (moveDirection.x == 0 && moveDirection.z == 0) {
+			if (renderer.material.mainTexture != idleTexture) {
+				startIdleAnimation();
+			}
+			return;
+		}
+		
+		else {
+			if (renderer.material.mainTexture != runningTexture) {
+				startRunningAnimation();
+			}
 		}
 	}
 }
