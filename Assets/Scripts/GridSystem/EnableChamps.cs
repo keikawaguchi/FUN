@@ -4,7 +4,7 @@ using System.Collections;
 public class EnableChamps : MonoBehaviour {
 	PlayerControls controlNums;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 	
 		controlNums = GameObject.Find("Controls").GetComponent<PlayerControls>();
 		
