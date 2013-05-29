@@ -3,9 +3,11 @@ using System.Collections;
 
 public class MerliniBehavior : MonoBehaviour {
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
-	
 	private const string HAMMERTIME_PREFAB_PATH = "Prefabs/Skills/HammerTime";
 	private const string BOMB_PREFAB_PATH = "Prefabs/Bomb/Bomb";
+	
+	private const string IDLE_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Merlini/MerliniIdleSpritesheet";
+	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Merlini/MerliniRunningSpritesheet";
 	
 	private CharacterMovement characterMovement;
 	private Controller controller;
@@ -77,6 +79,11 @@ public class MerliniBehavior : MonoBehaviour {
 		animation = Resources.Load ("Prefabs/Animations/Characters/Wizard") as GameObject;
 		animation = Instantiate (animation) as GameObject;
 		animation.GetComponent<Animation>().attachToObject (gameObject);
+		
+		Texture idle = Resources.Load (IDLE_TEXTURE_PATH) as Texture;
+		Texture running = Resources.Load (RUNNING_TEXTURE_PATH) as Texture;
+		animation.GetComponent<Animation>().setIdleTexture(idle);
+		animation.GetComponent<Animation>().setRunningTexture(running);
 	}
 	#endregion
 	

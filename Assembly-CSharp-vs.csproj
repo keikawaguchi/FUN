@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\GridSystem\TimerCS.cs" />
      <Compile Include="Assets\Scripts\Menu\ComboBox.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayerSelectionMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\SplashDelay.cs" />
      <Compile Include="Assets\Scripts\Menu\TextControl.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\Enemy.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\EnemyTemp.cs" />
