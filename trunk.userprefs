@@ -1,14 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ChSkills\LoveStruck.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Bomb\BombBehavior.cs">
     <Files>
-      <File FileName="Assets\Scripts\Player\CharacterMovement.cs" Line="24" Column="25" />
-      <File FileName="Assets\Scripts\Champions\KiritoBehavior.cs" Line="92" Column="3" />
-      <File FileName="Assets\Scripts\Champions\AlbionBehavior.cs" Line="40" Column="11" />
-      <File FileName="Assets\Scripts\Champions\Template.cs" Line="27" Column="4" />
-      <File FileName="Assets\Scripts\Skills\Chinmoku.cs" Line="42" Column="64" />
-      <File FileName="Assets\Scripts\Upgrades\AlterSpeed.cs" Line="56" Column="20" />
-      <File FileName="Assets\Scripts\Skills\LoveStruck.cs" Line="33" Column="58    </Files>
+      <File FileName="Assets\Scripts\Player\Hero.cs" Line="70" Column="25" />
+      <File FileName="Assets\Scripts\Bomb\BombBehavior.cs" Line="50" Column="38" />
+      <File FileName="Assets\Scripts\Bomb\Explosion.cs" Line="74" Column="35" />
+    </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

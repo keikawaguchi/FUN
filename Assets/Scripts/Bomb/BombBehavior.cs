@@ -40,7 +40,7 @@ public class BombBehavior : MonoBehaviour {
 	}
 	
 	public void OnTriggerEnter(Collider theCollision) {
-		if(theCollision.gameObject.name == "Explosion") {
+		if(theCollision.gameObject.name == "Explosion" || theCollision.gameObject.tag == "KillsPlayer") {
 			explode();
 		}
 	}
@@ -71,7 +71,6 @@ public class BombBehavior : MonoBehaviour {
 	#endregion
 	
 	private bool isTimeToExplode() {
-		Debug.Log ("Explosion Time: " + explosionPrefabDelayInSeconds);
 		return (Time.time - spawnTime) > explosionPrefabDelayInSeconds;
 	}
 	

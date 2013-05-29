@@ -31,8 +31,6 @@ public class Hero : MonoBehaviour {
 
 	public bool isAlive;
 
-	
-
 	void Start () {
 		loadResources();
 		loadScripts();

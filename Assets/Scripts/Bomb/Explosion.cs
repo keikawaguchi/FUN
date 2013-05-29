@@ -67,7 +67,6 @@ public class Explosion : MonoBehaviour {
 	}
 	
 	private bool isTimeToSpawnFireUnit() {
-		Debug.Log ("Fire Time: " + secondsBetweenFireSpawns);
 		return (Time.time - timeOfLastFireSpawn) > secondsBetweenFireSpawns;
 	}
 	
