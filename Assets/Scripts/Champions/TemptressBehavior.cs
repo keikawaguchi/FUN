@@ -3,8 +3,10 @@ using System.Collections;
 
 public class TemptressBehavior : MonoBehaviour {
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
-	
 	const string LURE_PREFAB_PATH = "Prefabs/Skills/Lure";
+	
+	private const string IDLE_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Temptress/TemptressIdleSpritesheet";
+	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Temptress/TemptressRunningSpritesheet";
 	
 	private GameObject lureSkillPrefab;
 	private GameObject currentLure;
@@ -101,6 +103,11 @@ public class TemptressBehavior : MonoBehaviour {
 		animation = Resources.Load ("Prefabs/Animations/Characters/Temptress") as GameObject;
 		animation = Instantiate (animation) as GameObject;
 		animation.GetComponent<Animation>().attachToObject (gameObject);
+		
+		Texture idle = Resources.Load (IDLE_TEXTURE_PATH) as Texture;
+		Texture running = Resources.Load (RUNNING_TEXTURE_PATH) as Texture;
+		animation.GetComponent<Animation>().setIdleTexture(idle);
+		animation.GetComponent<Animation>().setRunningTexture(running);
 	}
 	#endregion
 	
