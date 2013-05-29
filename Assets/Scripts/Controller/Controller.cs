@@ -35,7 +35,7 @@ public class Controller : MonoBehaviour {
 			else if(Champs.player4 == 1)
 				controllerNumber = 4;
 		}
-		if(gameObject.name == "Merlini")
+		if(gameObject.name == "Kirito")
 		{
 			if(Champs.player1 == 2)
 				controllerNumber = 1;
@@ -46,7 +46,7 @@ public class Controller : MonoBehaviour {
 			else if(Champs.player4 == 2)
 				controllerNumber = 4;
 		}
-		if(gameObject.name == "Temptress")
+		if(gameObject.name == "Merlini")
 		{
 			if(Champs.player1 == 3)
 				controllerNumber = 1;
@@ -55,6 +55,17 @@ public class Controller : MonoBehaviour {
 			else if(Champs.player3 == 3)
 				controllerNumber = 3;
 			else if(Champs.player4 == 3)
+				controllerNumber = 4;
+		}
+		if(gameObject.name == "Temptress")
+		{
+			if(Champs.player1 == 4)
+				controllerNumber = 1;
+			else if(Champs.player2 == 4)
+				controllerNumber = 2;
+			else if(Champs.player3 == 4)
+				controllerNumber = 3;
+			else if(Champs.player4 == 4)
 				controllerNumber = 4;
 		}
 		calculateKeyBindings();

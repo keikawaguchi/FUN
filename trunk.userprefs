@@ -1,10 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Bomb\BombBehavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GridSystem\EnableChamps.cs">
     <Files>
-      <File FileName="Assets\Scripts\Player\Hero.cs" Line="70" Column="25" />
-      <File FileName="Assets\Scripts\Bomb\BombBehavior.cs" Line="50" Column="38" />
-      <File FileName="Assets\Scripts\Bomb\Explosion.cs" Line="74" Column="35" />
+      <File FileName="Assets\Scripts\Menu\PlayerSelectionMenu.cs" Line="36" Column="34" />
+      <File FileName="Assets\Scripts\Controller\PlayerControls.cs" Line="22" Column="18" />
+      <File FileName="Assets\Scripts\Menu\TextControl.cs" Line="55" Column="48" />
+      <File FileName="Assets\Scripts\Controller\Controller.cs" Line="31" Column="32" />
+      <File FileName="Assets\Scripts\GridSystem\InGameUI.cs" Line="29" Column="3" />
+      <File FileName="Assets\Scripts\GridSystem\EnableChamps.cs" Line="16" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

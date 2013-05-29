@@ -70,7 +70,7 @@ public class TextControl : MonoBehaviour {
 				controlSave.player2TEAM = player2TEAM;
 				controlSave.player3TEAM = player3TEAM;
 				controlSave.player4TEAM = player4TEAM;
-				Application.LoadLevel(1);
+				Application.LoadLevel(2);
 			}
 		}
 	}

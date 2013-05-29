@@ -33,11 +33,12 @@ public class PlayerSelectionMenu : MonoBehaviour {
 		scale.x = Screen.width/originalWidth; // calculate hor scale
     	scale.y = Screen.height/originalHeight; // calculate vert scale
     	scale.z = 1;
-		comboBoxList = new GUIContent[4];
+		comboBoxList = new GUIContent[5];
 		comboBoxList[0] = new GUIContent("Albion");
 		comboBoxList[1] = new GUIContent("Fanndis");
-		comboBoxList[2] = new GUIContent("Merlini");
-		comboBoxList[3] = new GUIContent("Temptress");
+		comboBoxList[2] = new GUIContent("Kirito");
+		comboBoxList[3] = new GUIContent("Merlini");
+		comboBoxList[4] = new GUIContent("Temptress");
 		
 		teamList = new GUIContent[3];
 		teamList[0] = new GUIContent("Solo");
@@ -117,7 +118,7 @@ public class PlayerSelectionMenu : MonoBehaviour {
 		if(GUI.Button(new Rect(5,300,50,50),"Albion"))
 		{
 			selectedChamp = "Albion-The Hunter";
-			Description = "In a big city which still held by the ordinary men, a scientist, though mutation of the his brain and mind,"+
+			Description = "In a big city which still held by the ordinary men, a scientist, though mutation of the his brain and mind, "+
 				" tried to create a man who has the ability to master the two powers, "+
 					"time and space, to face and defeat the fearful man - Marbas someday. Albion, "+
 					"who was growing up without realizing that he was different from the other kids, " +
@@ -136,13 +137,13 @@ public class PlayerSelectionMenu : MonoBehaviour {
 		{
 			selectedChamp = "Fanndis-The Ice Queen";
 			Description = "For thousand years, the Ice Tribe which was ruled by the beautiful queen - Fanndis. The ice queen lived on " +
-				"the land of White peacefully. They draw their life and power from the coldness and the pureness of the ice. Until one day," +
-				 "the sky became so dark that the whole land was cover by endless darkness. All of a sudden, it started to rain. People realized that" +
-				  "what dropped from the sky was not rain or white snow but black ashes. Then the ice started to melt. The people of the Ice Tribe" +
-				   "sensed that their power was growing weaker." +
-				   "The war launched by Marbas was approaching. In order to clear the barrier of his army's advance, he ordered his evil army to " +
+				"the land of White peacefully. They draw their life and power from the coldness and the pureness of the ice. Until one day, " +
+				 "the sky became so dark that the whole land was cover by endless darkness. All of a sudden, it started to rain. People realized that " +
+				  "what dropped from the sky was not rain or white snow but black ashes. Then the ice started to melt. The people of the Ice Tribe " +
+				   "sensed that their power was growing weaker. " +
+				   "\n \nThe war launched by Marbas was approaching. In order to clear the barrier of his army's advance, he ordered his evil army to " +
 				   "burn down the whole sacred forest. And the giant fire had been lasting for months. The temperature of the world increased " +
-				   "sharply within months. Fanndis realized that the only way for her tribe to survive was to master the power of space manipulation," +
+				   "sharply within months. Fanndis realized that the only way for her tribe to survive was to master the power of space manipulation, " +
 				    "and move the water in Black ocean to extinguish this forest fire. Only then, she can not only save her tribe but also stop the " +
 				    "advance of the evil army. Heading to the North became her only choice.";
 			SkillOne = "Zero Friction";
@@ -154,7 +155,19 @@ public class PlayerSelectionMenu : MonoBehaviour {
 		if(GUI.Button(new Rect(5,355,50,50),"Kirito"))
 		{
 			selectedChamp = "Kirito-The Ninja Assassin";
-			Description = "None yet";
+			Description = "He knows that he has no choice. His path had been destined long before he was born. Generation after generation, " +
+			 	"his family produces the best and skillful Ninja in the world. They used this special skill to assassinate. Their family " +
+			 	 "business spread so fast, became so influential that on one can match. \n \nIt just liked many of the assassination tasks " +
+			 	  "before. But this time, something was different. He leaded the assassination team as usual. He killed without blinking " +
+			 	   "his eyes. Blood made him exciting. Years of killing had made his heart cold like ice. The killing was continuing " +
+			 	   "until the last member of this doomed family - the daughter who was at Kirito’s age. At the moment the sword thrust " +
+			 	   "into her heart, their eyes met. The feeling was so strange. It made his heartbeat quicken. She survived. \n \nThe next " +
+			 	    "morning, he dressed up like an ordinary guy and went back to the place where the killing happened. He found the girl. " +
+			 	    "They eloped. At the end, Kirito’s family found out what happened, and sent out a team to hunt them down. The girl fell " +
+			 	    "down right in his arm with the secret which he was the assassin who wiped out her family revealed. He was captured " +
+			 	    "and took back to his family. The remorse tortured him day and night. What if he never learn how to be a Ninja? What " +
+			 	    "if he was just a normal person? Would the ending be slightly different? Maybe he has choices if he can go back to " +
+			 	    "the day his father began to teach him the skill of Ninja. What if time can be reversed? ";
 			SkillOne = "Suterusu";
 			SkillTwo = "Chinmoku";
 			SkillOneDisc = "Kirito becomes invisible and invincible for 3 seconds. \nCooldown: 10 seconds";
@@ -164,17 +177,17 @@ public class PlayerSelectionMenu : MonoBehaviour {
 		if(GUI.Button(new Rect(60,355,50,50),"Merlini"))
 		{
 			selectedChamp = "Merlini-The Magician";
-			Description = "Merlini, although he is completely aware of his magical power, isn't quite sure where he came from." +
+			Description = "Merlini, although he is completely aware of his magical power, isn't quite sure where he came from. " +
 			 	"He had parents claiming to be his biological parents early in life, but soon was adopted by another couple who " +
-			 	"claimed that he is an orphan in the first place. His origin remains a mystery for him and his friends. He doesn't" +
+			 	"claimed that he is an orphan in the first place. His origin remains a mystery for him and his friends. He doesn't " +
 			 	 "even know where his magical power come from - his supposedly biological parents said he was possessed " +
 			 	 "thus gave him away to other parents. His latter parents, however, said he had anomalies in his body not quite " +
 			 	 "detectable by current technology. Some other sources told him he had an accident early in life, causing it to be " +
 			 	 "hard for him to remember things but altering his mind to be so powerful such that it can affect reality. Regardless, " +
-			 	 "this lost mysterious soul is magical." +
-			 	 "Despite of this, Merlini can't use and practice his magic skills freely in his home town." +
-			 	  "With his passion and desire to improve and advance his skills, he decided to board to a place that his magical" +
-			 	   "mind seems to be telling him to go to for some reason. Maybe he's needed in that place, or maybe that place has" +
+			 	 "this lost mysterious soul is magical. " +
+			 	 "\n \nDespite of this, Merlini can't use and practice his magic skills freely in his home town. " +
+			 	  "With his passion and desire to improve and advance his skills, he decided to board to a place that his magical " +
+			 	   "mind seems to be telling him to go to for some reason. Maybe he's needed in that place, or maybe that place has " +
 			 	    "something to do with his origin, aside from he can practice his skills freely. Thus, he departed for this place " +
 			 	    "called FUN for fun with no pun intended.";
 			SkillOne = "Hammer Time";
@@ -188,9 +201,9 @@ public class PlayerSelectionMenu : MonoBehaviour {
 			selectedChamp = "Temptress-The Misguided";
 			Description = "Integration of the embodiment of evil and elegant, Temptress playing with " +
 				"her enchanting grace to lure the innocent and greedy adventures strayed into her zone of " +
-				"darkness. In the dark secrets of the enigmatic under the guise, no one has ever escaped from her clutches." +
-				"Temptress was born in a peaceful village. One day, the mysterious man claiming to be the demon, Marbas, " +
-				"destroyed entire village, with the exception of Temptress. She was taken to his kingdom that mutated her" +
+				"darkness. In the dark secrets of the enigmatic under the guise, no one has ever escaped from her clutches. " +
+				"\n \nTemptress was born in a peaceful village. One day, the mysterious man claiming to be the demon, Marbas, " +
+				"destroyed entire village, with the exception of Temptress. She was taken to his kingdom that mutated her " +
 				 "original innocence mind into a devil mind. Temptress struggled to escape from the kingdom. She had heard " +
 				 "that Forsaken Universe of the North is filled with a variety of similar to her life exists that is not " +
 				 "subject to any implication. Thus, she escaped from the kingdom and embarks on a journey to Forsaken Universe of the North.";
@@ -200,8 +213,8 @@ public class PlayerSelectionMenu : MonoBehaviour {
 			SkillTwoDisc = "Temptress applies slow-down for 2 seconds to nearest enemy in 3 squares. \nCooldown: 10 seconds";
 		}
 		
-		GUILayout.BeginArea(new Rect(125,325,500,300));
-		scrollPosition = GUILayout.BeginScrollView(scrollPosition,GUILayout.Width(500),GUILayout.Height(300));
+		GUILayout.BeginArea(new Rect(125,325,500,260));
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition,GUILayout.Width(500),GUILayout.Height(260));
 		GUI.skin.box.wordWrap = true;
 		GUILayout.Box(Description);
 		GUILayout.EndScrollView();
