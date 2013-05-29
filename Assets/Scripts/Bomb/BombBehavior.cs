@@ -5,7 +5,7 @@ public class BombBehavior : MonoBehaviour {
 	
 	const string EXPLOSION_PREFAB_PATH = "Prefabs/Bomb/Explosion";
 	
-	private float explosionPrefabDelayInSeconds = 2f;
+	private float explosionPrefabDelayInSeconds = 1.5f;
 	public float bombX = 2;
 	public float bombZ = 2;
 	private float spawnTime;
