@@ -20,7 +20,7 @@ public class InGameUI : MonoBehaviour {
 	Vector3 scale;
 	// Use this for initialization
 	void Start () {
-		controller = gameObject.GetComponent<Controller>().controllerNumber;
+		controller = gameObject.GetComponent<XInputController>().GetControllerNumber();
 
 		LivesStyle = new GUIStyle();
 		LivesStyle.fontSize = 20;
