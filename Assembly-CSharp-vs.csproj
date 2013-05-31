@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Champions\TemptressBehavior.cs" />
      <Compile Include="Assets\Scripts\Controller\Controller.cs" />
      <Compile Include="Assets\Scripts\Controller\PlayerControls.cs" />
+     <Compile Include="Assets\Scripts\Controller\XInputController.cs" />
      <Compile Include="Assets\Scripts\CooldownViewer.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GridSystem\EnableChamps.cs" />
@@ -105,7 +106,7 @@
      <None Include="Assets\Resources\Maps\map3.txt" />
      <None Include="Assets\Resources\Maps\map2.txt" />
  <Reference Include="XInputDotNetPure">
- <HintPath>Assets\Plugins\XInputDotNetPure.dll</HintPath>
+ <HintPath>Assets\XInputDotNetPure.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
