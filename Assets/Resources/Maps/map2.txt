@@ -1,6 +1,7 @@
 Indestructable:Textures/Tiles/BrickWall
 Destructable:Textures/Tiles/WoodenWall
 Floor:Textures/Tiles/GrassTile
+Music:Audio/Songs/drums-and-harp
 
 StartMap
 ###################

@@ -1,6 +1,7 @@
 Indestructable:Textures/Tiles/RedAsphaltTile
 Destructable:Textures/Tiles/BlueBlackWoodTile
 Floor:Textures/Tiles/BlackAsphaltTile
+Music:Audio/Songs/guitar-ingame
 
 StartMap
 ###################

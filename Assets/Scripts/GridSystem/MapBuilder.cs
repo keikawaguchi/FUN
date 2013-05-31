@@ -17,6 +17,7 @@ public class MapBuilder : MonoBehaviour {
 	private Texture indestructableWallTexture;
 	private Texture destructableWallTexture;
 	private Texture floorTexture;
+	private AudioClip backgroundMusic;
 	
 	const string INDESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Indestructuble Wall";
 	const string DESTRUCTABLE_BLOCK_PREFAB_PATH = "Prefabs/Wall/Destructuble Wall";
@@ -60,6 +61,7 @@ public class MapBuilder : MonoBehaviour {
 		} 
 		
 		loadTextures(mapFile);
+		loadBackgroundMusic(mapFile);
 		buildFloor(grassFloorTilePrefab);
 		moveToMapSectionOfMapFile(mapReader);
 		
@@ -141,23 +143,38 @@ public class MapBuilder : MonoBehaviour {
 	
 		match = Regex.Match(mapFile.text, @"Indestructable:(.*)");
 		if (match.Success) {
-			Debug.Log ("Indest. Texture: " + match.Groups[1]);
 			indestructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
 			Debug.Log("Indest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Destructable:(.*)");
 		if (match.Success) {
-			Debug.Log ("Dest. Texture: " + match.Groups[1]);
 			destructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
 			Debug.Log("Dest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Floor:(.*)");
 		if (match.Success) {
-			Debug.Log ("Floor. Texture: " + match.Groups[1]);
 			floorTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
 			Debug.Log("Floor Wall Texture: " + match.Groups[1].ToString ());
+		}
+	}
+	
+	private void loadBackgroundMusic(TextAsset mapFile) {
+		Match match;
+	
+		match = Regex.Match(mapFile.text, @"Music:(.*)");
+		if (!match.Success) {
+			return;
+		}
+		
+		backgroundMusic = Resources.Load(match.Groups[1].ToString()) as AudioClip;
+		GameObject bgMusicObj = GameObject.Find("BGMusic") as GameObject;
+		
+		if (bgMusicObj != null) {
+			bgMusicObj.GetComponent<AudioSource>().clip = backgroundMusic;
+			bgMusicObj.GetComponent<AudioSource>().Play();
+			Debug.Log("Music: " + match.Groups[1].ToString ());
 		}
 	}
 	

@@ -18,7 +18,12 @@ public class GameManager : MonoBehaviour {
 	public void SetTeams() {
 		
 		// get team settings
-		PlayerControls playerControls = GameObject.Find("Controls").GetComponent<PlayerControls>();
+		GameObject controls = GameObject.Find("Controls") as GameObject;
+		if (controls == null) {
+			return;
+		}
+		
+		PlayerControls playerControls = controls.GetComponent<PlayerControls>();
 
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in players) {

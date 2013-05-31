@@ -1,6 +1,7 @@
 Indestructable:Textures/Tiles/IceCubeTile
 Destructable:Textures/Tiles/CrackedIceCubeTile
 Floor:Textures/Tiles/SnowTile
+Music:Audio/Songs/wobble-synth
 
 StartMap
 ###################
