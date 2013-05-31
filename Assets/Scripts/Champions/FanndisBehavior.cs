@@ -16,7 +16,7 @@ public class FanndisBehavior : MonoBehaviour {
 	private float iceAgeTimer = -99f;
 	
 	private CharacterMovement characterMovement;
-	private Controller controller;
+	private XInputController controller;
 	private ZeroFriction zeroFriction;
 	private IceAge iceAge;
 	private float iceAgeDestroyTimer;
@@ -48,11 +48,11 @@ public class FanndisBehavior : MonoBehaviour {
 			return;
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
+		if(controller.GetButtonPressed("Skill1")) {
 			zeroFictionTriggered();
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
+		if(controller.GetButtonPressed("Skill2")) {
 			iceAgeTriggered();
 		}
 	}
@@ -60,7 +60,7 @@ public class FanndisBehavior : MonoBehaviour {
 	#region Initialization Methods
 	private void loadResources() {
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 		zeroFriction = gameObject.AddComponent<ZeroFriction>();
 		
 		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	

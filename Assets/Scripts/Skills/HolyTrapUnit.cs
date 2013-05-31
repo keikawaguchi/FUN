@@ -22,6 +22,9 @@ public class HolyTrapUnit : MonoBehaviour {
 		// check the collision with tag and exlude the trap owner
 		GameObject enemyObj = collision.gameObject;
 		
+		if (enemyObj.GetComponent<Hero>() == null)
+			return;
+		
 		int collisionTeamNum = enemyObj.GetComponent<Hero>().getTeamNumber();
 		int ownerTeamNum = owner.GetComponent<Hero>().getTeamNumber();
 		

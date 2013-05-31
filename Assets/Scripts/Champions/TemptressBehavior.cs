@@ -14,7 +14,7 @@ public class TemptressBehavior : MonoBehaviour {
 	private GameObject animation;
 	
 	private CharacterMovement characterMovement;
-	private Controller controller;
+	private XInputController controller;
 	
 	private const float lureCD = 5f;
 	private const float loveStruckCD = 10f;
@@ -49,22 +49,15 @@ public class TemptressBehavior : MonoBehaviour {
 			return;
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
-			LoveStruckButtonPress();
-		}
-		if (currentLure == null) {
-			characterMovement.setMovementState(CharacterMovement.MovementState.CanMove);
+		if (controller.GetButtonPressed("Skill1")) {
 			checkLureButtonPress();
-			return;
-		}
-		else {
-			characterMovement.setMovementState(CharacterMovement.MovementState.CannotMove);
 		}
 		
-		if (currentLure.GetComponent<Lure>().isComplete ()) {
-			currentLure = null;
-			return;
+		if(controller.GetButtonPressed("Skill2")) {
+			LoveStruckButtonPress();
 		}
+		
+		updateLure();
 	}
 	
 	public int getLureCD() {
@@ -96,7 +89,7 @@ public class TemptressBehavior : MonoBehaviour {
 	private void loadScripts() {
 		loveStruck = gameObject.AddComponent<LoveStruck>();
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 	}
 	
 	private void loadAnimation() {	
@@ -120,26 +113,40 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	private void checkLureButtonPress() {
-		if (Input.GetButtonDown(controller.getButton("Skill1"))) {
-			
-			if (Time.time - lureTimer > lureCD) {
-				float playerHeight = this.transform.localScale.z;
-				Vector3 aimDirection = characterMovement.getAimDirection();
-				if (aimDirection == new Vector3(0, 0, 0)) {
-					aimDirection = new Vector3(0, 0, 1);
-				}
-				
-				currentLure = Instantiate(lureSkillPrefab) as GameObject;
-				currentLure.GetComponent<Lure>().setLureOwner(gameObject);
-				currentLure.GetComponent<Lure>().setPullToLocation(transform.position);
-				currentLure.transform.position = this.transform.position;
-				currentLure.transform.position += aimDirection * playerHeight;
-				
-				currentLure.transform.forward = characterMovement.getAimDirection();
-			
-				lureTimer = Time.time;
-			
-			}
+		if (currentLure != null) {
+			return;	
+		}
+		if (Time.time - lureTimer < lureCD) {
+			return;
+		}
+		
+		characterMovement.setMovementState(CharacterMovement.MovementState.CannotMove);
+		
+		float playerHeight = this.transform.localScale.z;
+		Vector3 aimDirection = characterMovement.getAimDirection();
+		if (aimDirection == new Vector3(0, 0, 0)) {
+			aimDirection = new Vector3(0, 0, 1);
+		}
+		
+		currentLure = Instantiate(lureSkillPrefab) as GameObject;
+		currentLure.GetComponent<Lure>().setLureOwner(gameObject);
+		currentLure.GetComponent<Lure>().setPullToLocation(transform.position);
+		currentLure.transform.position = this.transform.position;
+		currentLure.transform.position += aimDirection * playerHeight;
+		
+		currentLure.transform.forward = characterMovement.getAimDirection();
+	
+		lureTimer = Time.time;
+	}
+	
+	private void updateLure() {
+		if (currentLure == null) {
+			return;
+		}
+		
+		if (currentLure.GetComponent<Lure>().isComplete()) {
+			currentLure = null;
+			characterMovement.setMovementState (CharacterMovement.MovementState.CanMove);
 		}
 	}
 	

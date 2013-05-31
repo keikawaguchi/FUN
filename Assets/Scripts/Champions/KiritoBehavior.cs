@@ -29,7 +29,7 @@ public class KiritoBehavior : MonoBehaviour {
 	
 	private GameObject animation;
 	private CharacterMovement characterMovement;
-	private Controller controller;
+	private XInputController controller;
 	private Hero hero;
 	
 	// view cooldown
@@ -62,11 +62,11 @@ public class KiritoBehavior : MonoBehaviour {
 			return;
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
+		if(controller.GetButtonPressed("Skill1")) {
 			suterusuTriggered();
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
+		if(controller.GetButtonPressed("Skill2")) {
 			chinmokuTriggered();
 		}
 	}
@@ -81,7 +81,7 @@ public class KiritoBehavior : MonoBehaviour {
 	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 		hero = GetComponent<Hero>();
 	}
 	

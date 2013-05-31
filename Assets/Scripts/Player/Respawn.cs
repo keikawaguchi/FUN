@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Respawn : MonoBehaviour {
 	
-	private Controller controller;
+	private XInputController controller;
 
 	// Use this for initialization
 	void Start () {
@@ -12,12 +12,12 @@ public class Respawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown(controller.getButton("Skill3"))) {
+		if(controller.GetButtonPressed("Skill3")) {
 			transform.position = new Vector3(-112.3f, 0, -79f);
 		}
 	}
 	
 	private void loadScripts() {
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 	}
 }

@@ -17,7 +17,7 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private Map map;
 	private GridSystem gridSystem;
-	private Controller controller;
+	private XInputController controller;
 
 	// effects from abilities
 	private float stunInterval;
@@ -88,13 +88,13 @@ public class CharacterMovement : MonoBehaviour {
 	private void loadScripts() {
 		map = GameObject.Find("Map").GetComponent<Map>();
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 	}
 	
 	private void translateInputToMovement() {
 		movement.y = 0;
-		movement.x = controller.getAxis("Horizontal") * calculateSpeed();
-		movement.z = controller.getAxis("Vertical") * calculateSpeed();
+		movement.x = controller.GetThumbstick("left").x * calculateSpeed();
+		movement.z = controller.GetThumbstick("left").y * calculateSpeed();
 	}
 	
 	private void applyMovement() {
@@ -103,15 +103,15 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private void updateAimDirection() {
 		aimDirection.y = 0;
-		if (controller.getAxis("Horizontal") == 0 && controller.getAxis("Vertical") == 0) {
+		if (controller.GetThumbstick("right").x == 0 && controller.GetThumbstick("right").y == 0) {
 			return;
 		}
-		aimDirection.x = controller.getAxis("Horizontal");
-		aimDirection.z = controller.getAxis("Vertical");
+		aimDirection.x = controller.GetThumbstick("right").x;
+		aimDirection.z = controller.GetThumbstick("right").y;
 	}
 	
 	private void updateAnimationDirection() {
-		if (controller.getAxis("Horizontal") == 0 && controller.getAxis("Vertical") == 0) {
+		if (controller.GetThumbstick("right").x == 0 && controller.GetThumbstick("right").y == 0) {
 			return;
 		}
 		if (aimDirection.x == 0) {

@@ -24,7 +24,7 @@ public class Hero : MonoBehaviour {
 	private GameObject bomb;
 	private GridSystem gridSystem;
 	private Map map;
-	private Controller controller;
+	private XInputController controller;
 	private bool isInvincible = false;
 	private bool canDropBomb = true;
 	private int bombCounter;
@@ -98,25 +98,22 @@ public class Hero : MonoBehaviour {
 	#region Initialization Methods
 	private void loadResources() {
 		bomb = Resources.Load (BOMB_PREFAB_PATH) as GameObject;
-		if (bomb == null) {
-			Debug.Log("Bomb prefab is NULL");
-		}
 	}
 	
 	private void loadScripts() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
 		map = GameObject.Find("Map").GetComponent<Map>();
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 	} 
 	
 	private void initialize() {
 		collider.isTrigger = true;
-		playerNumber = controller.controllerNumber;
+		playerNumber = controller.GetControllerNumber();
 	}
 	#endregion
 	
 	private void handleControllerInput() {
-		if (Input.GetButtonDown(controller.getButton("DropBomb")) && canDropBomb) {
+		if (controller.GetButtonPressed("DropBomb") && canDropBomb) {
 			dropBomb();
 		}
 	}

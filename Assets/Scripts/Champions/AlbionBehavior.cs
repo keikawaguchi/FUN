@@ -8,7 +8,7 @@ public class AlbionBehavior : MonoBehaviour {
 	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Albion/AlbionRunningSpriteSheet";
 	
 	private CharacterMovement characterMovement;
-	private Controller controller;
+	private XInputController controller;
 	private HolyTrap holyTrap;
 	private HolyBlink holyBlink;
 	private GameObject animation;
@@ -44,13 +44,17 @@ public class AlbionBehavior : MonoBehaviour {
 			return;
 		}
 		
-		HolyTrapTriggered ();
-		HolyBlinkTriggered ();
+		if (controller.GetButtonPressed("Skill1")) {
+			HolyTrapTriggered ();
+		}
+		if (controller.GetButtonPressed("Skill2")) {
+			HolyBlinkTriggered ();
+		}
 	}
 	
 	private void LoadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 	}
 	
 	private void loadSkills() {
@@ -70,24 +74,20 @@ public class AlbionBehavior : MonoBehaviour {
 	}
 	
 	private void HolyTrapTriggered() {
-		if (Input.GetButtonDown (controller.getButton ("Skill1"))) {
-			if (Time.time - holyTrapTimer > holyTrapCD) {
-				holyTrap = gameObject.AddComponent<HolyTrap>();
-				holyTrap.SetTrapOwner(gameObject);
-				
-				holyTrapTimer = Time.time;
-			}
+		if (Time.time - holyTrapTimer > holyTrapCD) {
+			holyTrap = gameObject.AddComponent<HolyTrap>();
+			holyTrap.SetTrapOwner(gameObject);
+			
+			holyTrapTimer = Time.time;
 		}
 	}
 	
 	private void HolyBlinkTriggered() {
-		if (Input.GetButtonDown (controller.getButton ("Skill2"))) {
-			if (Time.time - holyBlinkTimer > holyBlinkCD) {
-				holyBlink = gameObject.AddComponent<HolyBlink>();
-				holyBlink.SetOwner(gameObject);
-			
-				holyBlinkTimer = Time.time;
-			}
+		if (Time.time - holyBlinkTimer > holyBlinkCD) {
+			holyBlink = gameObject.AddComponent<HolyBlink>();
+			holyBlink.SetOwner(gameObject);
+		
+			holyBlinkTimer = Time.time;
 		}
 	}
 	

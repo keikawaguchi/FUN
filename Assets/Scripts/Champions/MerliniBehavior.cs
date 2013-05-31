@@ -10,7 +10,7 @@ public class MerliniBehavior : MonoBehaviour {
 	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Merlini/MerliniRunningSpritesheet";
 	
 	private CharacterMovement characterMovement;
-	private Controller controller;
+	private XInputController controller;
 	
 	private GameObject animation;
 	private GameObject hammerPrefab;
@@ -52,11 +52,11 @@ public class MerliniBehavior : MonoBehaviour {
 			return;
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
+		if(controller.GetButtonPressed("Skill1")) {
 			hammerTimeButtonPress();
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
+		if(controller.GetButtonPressed("Skill2")) {
 			bombVoyageButtonPress();
 		}
 	}
@@ -72,7 +72,7 @@ public class MerliniBehavior : MonoBehaviour {
 	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Controller>();
+		controller = GetComponent<XInputController>();
 	}
 	
 	private void loadAnimation() {
@@ -115,25 +115,22 @@ public class MerliniBehavior : MonoBehaviour {
 		}
 	}
 	
-	private void bombVoyageButtonPress() {
-		
-		if (Input.GetButtonDown(controller.getButton("Skill2"))) {
-			
-			if (Time.time - bombVoyageTimer > bombVoyageCD) {
-				
-				GameObject[] players;
-				players = GameObject.FindGameObjectsWithTag("Player");
-		
-				foreach(GameObject player in players) {
-					GameObject instantiateBomb = Instantiate(bomb) as GameObject;
-					instantiateBomb.transform.position = player.transform.position;
-					BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();
-					boom.setHero(gameObject.GetComponent<Hero>());
-				}
-				
-				bombVoyageTimer = Time.time;
-			}
+	private void bombVoyageButtonPress() {		
+		if (Time.time - bombVoyageTimer < bombVoyageCD) {
+			return;
 		}
+			
+		GameObject[] players;
+		players = GameObject.FindGameObjectsWithTag("Player");
+
+		foreach(GameObject player in players) {
+			GameObject instantiateBomb = Instantiate(bomb) as GameObject;
+			instantiateBomb.transform.position = player.transform.position;
+			BombBehavior boom = instantiateBomb.GetComponent<BombBehavior>();
+			boom.setHero(gameObject.GetComponent<Hero>());
+		}
+		
+		bombVoyageTimer = Time.time;
 	}
 	#endregion
 	
