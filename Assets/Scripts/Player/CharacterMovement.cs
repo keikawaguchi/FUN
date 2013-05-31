@@ -103,15 +103,15 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private void updateAimDirection() {
 		aimDirection.y = 0;
-		if (controller.GetThumbstick("right").x == 0 && controller.GetThumbstick("right").y == 0) {
+		if (controller.GetThumbstick("left").x == 0 && controller.GetThumbstick("right").y == 0) {
 			return;
 		}
-		aimDirection.x = controller.GetThumbstick("right").x;
-		aimDirection.z = controller.GetThumbstick("right").y;
+		aimDirection.x = controller.GetThumbstick("left").x;
+		aimDirection.z = controller.GetThumbstick("left").y;
 	}
 	
 	private void updateAnimationDirection() {
-		if (controller.GetThumbstick("right").x == 0 && controller.GetThumbstick("right").y == 0) {
+		if (controller.GetThumbstick("left").x == 0 && controller.GetThumbstick("left").y == 0) {
 			return;
 		}
 		if (aimDirection.x == 0) {
