@@ -29,35 +29,16 @@ public class XInputController : MonoBehaviour {
 		currentGamePadState = GamePad.GetState (controllerNumber);
 	}
 	
+	public bool IsControllerConnected(int controllerNum) {
+		return GamePad.GetState(intToPlayerIndex(controllerNum)).IsConnected;
+	}
+	
 	public void SetControllerNumber(int num) {
-		switch (num) {
-		case 1:
-			controllerNumber = PlayerIndex.One;
-			break;
-		case 2:
-			controllerNumber = PlayerIndex.Two;
-			break;
-		case 3:
-			controllerNumber = PlayerIndex.Three;
-			break;
-		case 4:
-			controllerNumber = PlayerIndex.Four;
-			break;	
-		}
+		controllerNumber = intToPlayerIndex(num);
 	}
 	
 	public int GetControllerNumber() {
-		switch (controllerNumber) {
-		case PlayerIndex.One:
-			return 1;
-		case PlayerIndex.Two:
-			return 2;
-		case PlayerIndex.Three:
-			return 3;
-		case PlayerIndex.Four:
-			return 4;
-		}
-		return 0;
+		return playerIndexToInt(controllerNumber);
 	}
 	
 	public bool GetButtonPressed(string button) {
@@ -120,6 +101,30 @@ public class XInputController : MonoBehaviour {
 		}
 		
 		return thumbstickValue;
+	}
+		
+	private PlayerIndex intToPlayerIndex(int num) {
+		switch (num) {
+		case 1: return PlayerIndex.One;
+		case 2: return PlayerIndex.Two;
+		case 3: return PlayerIndex.Three;
+		case 4: return PlayerIndex.Four;
+		}
+		
+		Debug.LogError ("Controller number " + num + " invalid");
+		return PlayerIndex.One;
+	}
+	
+	private int playerIndexToInt(PlayerIndex index) {
+		switch (index) {
+		case PlayerIndex.One: return 1;
+		case PlayerIndex.Two: return 2;
+		case PlayerIndex.Three: return 3;
+		case PlayerIndex.Four: return 4;
+		}
+		
+		Debug.LogError ("Player Index invalid");
+		return 0;
 	}
 	
 	private void assignControllersToPlayers() {
