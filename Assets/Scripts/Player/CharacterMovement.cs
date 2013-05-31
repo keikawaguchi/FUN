@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour {
 		CannotMove
 	}
 	
-	public float speed = 50f;
+	public float speed = 55f;
 	private float speedMultiplier = 1.0f;
 	private Vector3 aimDirection;
 	private Vector3 movement;
