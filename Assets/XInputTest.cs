@@ -41,7 +41,9 @@ public class XInputTest : MonoBehaviour
             }
         }
 
-        state = GamePad.GetState(playerIndex);
+		state = GamePad.GetState(PlayerIndex.Two);
+		
+		GamePadButtons buttons;
 
         string text = "Use left stick to turn the cube\n";
         text += string.Format("IsConnected {0} Packet #{1}\n", state.IsConnected, state.PacketNumber);
