@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\CooldownViewer.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GridSystem\EnableChamps.cs" />
+     <Compile Include="Assets\Scripts\GridSystem\GridCollision.cs" />
      <Compile Include="Assets\Scripts\GridSystem\GridSystem.cs" />
      <Compile Include="Assets\Scripts\GridSystem\InGameUI.cs" />
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />

@@ -10,15 +10,12 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public float speed = 55f;
 	private float speedMultiplier = 1.0f;
-	private float playerHeight;
-	private float playerWidth;
 	private Vector3 aimDirection;
 	private Vector3 movement;
 	private MovementState currentMovementState;
 	private Animation animation;
-	
-	private Map map;
-	private GridSystem gridSystem;
+
+	private GridCollision gridCollision;
 	private XInputController controller;
 
 	// effects from abilities
@@ -27,8 +24,6 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
-		playerWidth = transform.localScale.x / 2f;
-		playerHeight = transform.localScale.z / 2f;
 		loadScripts();
 	}
 	
@@ -90,8 +85,7 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	private void loadScripts() {
-		map = GameObject.Find("Map").GetComponent<Map>();
-		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>();
+		gridCollision = GetComponent<GridCollision>();
 		controller = GetComponent<XInputController>();
 	}
 	
@@ -138,57 +132,13 @@ public class CharacterMovement : MonoBehaviour {
 			return;	// for performance
 		}
 			
-		if (isCollidingX()) {
+		if (gridCollision.isCollidingX(movement.x)) {
 			movement.x = 0;
 		}
 
-		if (isCollidingY()) {
+		if (gridCollision.isCollidingY(movement.z)) {
 			movement.z = 0;
 		}
-	}
-	
-	private bool isCollidingX() {
-		if (movement.x == 0) {
-			return false;
-		}
-
-		Vector2 gridLocation = new Vector2(0, 0);
-			
-		if (movement.x > 0) {			
-			gridLocation.x = transform.position.x + movement.x + playerWidth;	
-		}
-		if (movement.x < 0) {
-			gridLocation.x = transform.position.x + movement.x - playerWidth;
-		}
-
-		if (map.isGridFull(gridLocation.x, transform.position.z + (playerHeight - 0.1f))
-		|| map.isGridFull(gridLocation.x, transform.position.z - (playerHeight - 0.1f))
-		|| map.isGridFull(gridLocation.x, transform.position.z))
-			return true;
-		
-		return false;
-	}
-	
-	private bool isCollidingY() {
-		if (movement.z == 0) {
-			return false;
-		}
-
-		Vector2 gridLocation = new Vector2(0, 0);
-		
-		if (movement.z > 0) {
-			gridLocation.y = transform.position.z + movement.z + playerHeight;
-		}
-		if (movement.z < 0) {
-			gridLocation.y = transform.position.z + movement.z - playerHeight;
-		}
-		
-		if (map.isGridFull(transform.position.x + (playerWidth - 0.1f), gridLocation.y)
-		|| map.isGridFull(transform.position.x - (playerWidth - 0.1f), gridLocation.y)
-		|| map.isGridFull(transform.position.x, gridLocation.y))
-			return true;
-		
-		return false;
 	}
 	
 }
