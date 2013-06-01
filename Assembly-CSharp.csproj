@@ -71,11 +71,11 @@
      <Compile Include="Assets\Scripts\Menu\SplashDelay.cs" />
      <Compile Include="Assets\Scripts\Menu\TextControl.cs" />
      <Compile Include="Assets\Scripts\Menu\Victory.cs" />
-     <Compile Include="Assets\Scripts\NotNeeded\Controller.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\Enemy.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\EnemyTemp.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\GlobalBehavior.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\GridMove.cs" />
+     <Compile Include="Assets\Scripts\NotNeeded\KeyboardInput.cs" />
      <Compile Include="Assets\Scripts\NotNeeded\PlayerReferences.cs" />
      <Compile Include="Assets\Scripts\Player\AI.cs" />
      <Compile Include="Assets\Scripts\Player\CharacterMovement.cs" />

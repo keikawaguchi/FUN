@@ -28,9 +28,9 @@ public class Map : MonoBehaviour {
 		if (isOutOfBounds(x, y)) {
 			return true;
 		}	
-		return (grid[x, y] != null) 
-			|| (destructibleWallGrid[x, y] != null) 
-			|| (impassableObjects[x, y] != null);
+		return grid[x, y] != null
+			|| destructibleWallGrid[x, y] != null
+			|| impassableObjects[x, y] != null;
 	}
 	
 	public bool isPlayerAtGridLocation(float x, float y) {

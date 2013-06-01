@@ -18,7 +18,6 @@ public class IceAge : MonoBehaviour {
 	private Map map;
 	private GridSystem gridSystem;
 	private CharacterMovement characterMovement;
-	private Controller controller;
 	
 	
 	// Use this for initialization
@@ -45,7 +44,6 @@ public class IceAge : MonoBehaviour {
 		map = mapObj.GetComponent<Map>();
 		gridSystem = mapObj.GetComponent<GridSystem>();
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Controller>();
 		iceAgeSFX = Resources.Load (ICEAGE_SFX_PATH)as AudioClip;
 	}
 	

@@ -21,12 +21,14 @@ public class XInputController : MonoBehaviour {
 	
 	
 	void Awake() {
-		assignControllersToPlayers();
+		assignControllersToPlayers(); 
+		calculateKeyboardBindings();
+		Update();
 	}
 	
 	void Update() {
 		prevGamePadState = currentGamePadState;
-		currentGamePadState = GamePad.GetState (controllerNumber);
+		currentGamePadState = GamePad.GetState(controllerNumber);
 	}
 	
 	public bool IsControllerConnected(int controllerNum) {
@@ -44,6 +46,9 @@ public class XInputController : MonoBehaviour {
 	public bool GetButtonPressed(string button) {
 		button = button.ToLower();
 		bool buttonPressed = false;
+		
+		// Check keyboard
+		buttonPressed = Input.GetButtonDown((string)buttons[button]);
 		
 		switch (button) {
 		case BUTTON_BOMB:
@@ -88,6 +93,11 @@ public class XInputController : MonoBehaviour {
 	}
 	
 	public Vector2 GetThumbstick(string thumbstickSide) {
+		// keyboard
+		Vector2 keyboardInput = new Vector2(Input.GetAxis((string)buttons["HorizontalAxis"]), Input.GetAxis((string)buttons["VerticalAxis"]));
+		if (keyboardInput.x != 0 || keyboardInput.y != 0)
+			return keyboardInput;
+		
 		Vector2 thumbstickValue = new Vector2(0, 0);
 		
 		if (thumbstickSide == "left") {
@@ -185,4 +195,23 @@ public class XInputController : MonoBehaviour {
 				controllerNumber = PlayerIndex.Four;
 		}
 	}
+	
+	
+	//////////////////////////////////////////////////////////
+	/// TEMPORARY KEYBOARD INPUT FUNCTIONALITY
+	//////////////////////////////////////////////////////////
+	
+	OrderedDictionary buttons;
+	
+	private void calculateKeyboardBindings() {
+		int controllerNum = playerIndexToInt(controllerNumber);
+		buttons = new OrderedDictionary();
+		buttons["dropbomb"] = "ButtonAController" + controllerNum;
+		buttons["skill1"] = "ButtonXController" + controllerNum;
+		buttons["skill2"] = "ButtonBController" + controllerNum;
+		buttons["skill3"] = "ButtonYController" + controllerNum;
+		buttons["HorizontalAxis"] = "HorizontalController" + controllerNum;
+		buttons["VerticalAxis"] = "VerticalController" + controllerNum;
+	}
+	
 }

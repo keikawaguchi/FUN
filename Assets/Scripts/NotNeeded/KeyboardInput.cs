@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Specialized;
 
-public class Controller : MonoBehaviour {
+public class KeyboardInput : MonoBehaviour {
 	
 	public int controllerNumber;
 	

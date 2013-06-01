@@ -14,7 +14,8 @@ public class Template : MonoBehaviour {
 	private float skillTwoTimer = -99f;
 	
 	private CharacterMovement characterMovement;
-	private Controller controller;
+	private GridCollision gridCollision;
+	private XInputController controller;
 	
 	void Start () {
 		loadSkills();
@@ -30,11 +31,11 @@ public class Template : MonoBehaviour {
 			return;
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill1"))) {
+		if(controller.GetButtonPressed("Skill1")) {
 			checkSkillOneButtonPress();
 		}
 		
-		if(Input.GetButtonDown(controller.getButton("Skill2"))) {
+		if(controller.GetButtonPressed("Skill2")) {
 			checkSkillTwoButtonPress();
 		}
 	}
@@ -46,7 +47,8 @@ public class Template : MonoBehaviour {
 	
 	private void loadScripts() {
 		characterMovement = GetComponent<CharacterMovement>();
-		controller = GetComponent<Controller>();
+		gridCollision = GetComponent<GridCollision>();
+		controller = GetComponent<XInputController>();
 	}
 	#endregion
 	
