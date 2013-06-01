@@ -33,6 +33,43 @@ public class Map : MonoBehaviour {
 			|| (impassableObjects[x, y] != null);
 	}
 	
+	public bool isPlayerAtGridLocation(float x, float y) {
+		return isPlayerAtGridLocation(gridSystem.getXPos(x), gridSystem.getYPos(y));
+	}
+	public bool isPlayerAtGridLocation(int x, int y) {
+		if (isOutOfBounds(x, y)) {
+			return false;
+		}
+
+		if (getPlayerAtLocation(x, y) != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public GameObject getPlayerAtLocation(float x, float y) {
+		return getPlayerAtLocation(gridSystem.getXPos(x), gridSystem.getYPos(y));
+	}
+	public GameObject getPlayerAtLocation(int x, int y) {
+		if (isOutOfBounds(x, y)) {
+			return null;
+		}
+		
+		int playerPositionX = 0;
+		int playerPositionY = 0;
+		
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < players.Length; i++) {
+			playerPositionX = gridSystem.getXPos(players[i].transform.position.x);
+			playerPositionY = gridSystem.getYPos(players[i].transform.position.z);
+			if (playerPositionX == x && playerPositionY == y) {
+				return players[i];
+			}
+		}
+		
+		return null;
+	}
+	
 	public GameObject getObjectAtGridLocation(float x, float y) {
 		return getObjectAtGridLocation(gridSystem.getXPos(x), gridSystem.getYPos(y));
 	}
@@ -41,17 +78,10 @@ public class Map : MonoBehaviour {
 			return null;
 		}
 		
-		int playerPositionX = 0;
-		int playerPositionY = 0;
-		
-		// Check for players first
-		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-		for (int i = 0; i < players.Length; i++) {
-			playerPositionX = gridSystem.getXPos(players[i].transform.position.x);
-			playerPositionY = gridSystem.getYPos(players[i].transform.position.z);
-			if (playerPositionX == x && playerPositionY == y) {
-				return players[i];
-			}
+		GameObject objectAtLocation;
+		objectAtLocation = getPlayerAtLocation(x, y);
+		if (objectAtLocation != null) {
+			return objectAtLocation;
 		}
 		
 		// Check for impassable objects

@@ -10,6 +10,8 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public float speed = 55f;
 	private float speedMultiplier = 1.0f;
+	private float playerHeight;
+	private float playerWidth;
 	private Vector3 aimDirection;
 	private Vector3 movement;
 	private MovementState currentMovementState;
@@ -25,6 +27,8 @@ public class CharacterMovement : MonoBehaviour {
 	
 	public void Start() {
 		currentMovementState = MovementState.CanMove;
+		playerWidth = transform.localScale.x / 2f;
+		playerHeight = transform.localScale.z / 2f;
 		loadScripts();
 	}
 	
@@ -130,61 +134,61 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	private void stopMovementOnCollision() {
-		float playerWidth = transform.localScale.x / 2f;
-		float playerHeight = transform.localScale.z / 2f;
+		if (movement.x == 0 && movement.z == 0) {
+			return;	// for performance
+		}
 			
-			// traveling right
-			if (movement.x > 0) {
-			
-				if(map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z + (playerHeight - 0.1f)))
-					movement.x = 0;
-			
-				if(map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z - (playerHeight - 0.1f)))
-					movement.x = 0;
-				
-				if (map.isGridFull(transform.position.x + movement.x + playerWidth, transform.position.z))
- 					movement.x = 0;
-				
-			// traveling left
-			} else if (movement.x < 0) {
-				
-				if(map.isGridFull(transform.position.x + movement.x - playerWidth, transform.position.z + (playerHeight - 0.1f)))
-					movement.x = 0;
-			
-				if(map.isGridFull(transform.position.x + movement.x - playerWidth, transform.position.z - (playerHeight - 0.1f)))
-					movement.x = 0;
-				
-				if (map.isGridFull(transform.position.x + movement.x - playerWidth, transform.position.z))
- 					movement.x = 0;
-			}
+		if (isCollidingX()) {
+			movement.x = 0;
+		}
 
-			
-			// traveling up
-			if (movement.z > 0) {
-				
-				if (map.isGridFull(transform.position.x + (playerWidth - 0.1f), transform.position.z + movement.z + playerHeight))
-					movement.z = 0;
-				
-				if (map.isGridFull(transform.position.x - (playerWidth - 0.1f), transform.position.z + movement.z + playerHeight))
-					movement.z = 0;
+		if (isCollidingY()) {
+			movement.z = 0;
+		}
+	}
+	
+	private bool isCollidingX() {
+		if (movement.x == 0) {
+			return false;
+		}
 
-				if (map.isGridFull(transform.position.x, transform.position.z + movement.z + playerHeight))
- 					movement.z = 0;
-				
-			// traveling down
-			} else if (movement.z < 0) {
-				
-				if (map.isGridFull(transform.position.x + (playerWidth - 0.1f), transform.position.z + movement.z - playerHeight))
-					movement.z = 0;
-				
-				if (map.isGridFull(transform.position.x - (playerWidth - 0.1f), transform.position.z + movement.z - playerHeight))
-					movement.z = 0;
-				
-				if (map.isGridFull(transform.position.x, transform.position.z + movement.z - playerHeight))
- 					movement.z = 0;
-			}
+		Vector2 gridLocation = new Vector2(0, 0);
 			
+		if (movement.x > 0) {			
+			gridLocation.x = transform.position.x + movement.x + playerWidth;	
+		}
+		if (movement.x < 0) {
+			gridLocation.x = transform.position.x + movement.x - playerWidth;
+		}
+
+		if (map.isGridFull(gridLocation.x, transform.position.z + (playerHeight - 0.1f))
+		|| map.isGridFull(gridLocation.x, transform.position.z - (playerHeight - 0.1f))
+		|| map.isGridFull(gridLocation.x, transform.position.z))
+			return true;
 		
+		return false;
+	}
+	
+	private bool isCollidingY() {
+		if (movement.z == 0) {
+			return false;
+		}
+
+		Vector2 gridLocation = new Vector2(0, 0);
+		
+		if (movement.z > 0) {
+			gridLocation.y = transform.position.z + movement.z + playerHeight;
+		}
+		if (movement.z < 0) {
+			gridLocation.y = transform.position.z + movement.z - playerHeight;
+		}
+		
+		if (map.isGridFull(transform.position.x + (playerWidth - 0.1f), gridLocation.y)
+		|| map.isGridFull(transform.position.x - (playerWidth - 0.1f), gridLocation.y)
+		|| map.isGridFull(transform.position.x, gridLocation.y))
+			return true;
+		
+		return false;
 	}
 	
 }
