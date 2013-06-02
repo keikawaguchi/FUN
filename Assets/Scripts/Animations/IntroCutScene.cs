@@ -7,6 +7,8 @@ public class IntroCutScene : MonoBehaviour {
 	
 	// 0:Albion, 1:Fanndis, 2:Merlini, 3:Temptress, 4:Kirito
 	GameObject[] Characters;
+	GameObject Logo;
+	GameObject Menu;
 
 
 	void Start () {
@@ -30,11 +32,14 @@ public class IntroCutScene : MonoBehaviour {
 	}
 	
 	private void findAllGameObjects() {
-		Characters[0] = GameObject.Find ("Albion") as GameObject;
-		Characters[1] = GameObject.Find ("Fanndis") as GameObject;
-		Characters[2] = GameObject.Find ("Merlini") as GameObject;
-		Characters[3] = GameObject.Find ("Temptress") as GameObject;
-		Characters[4] = GameObject.Find ("Kirito") as GameObject;
+		Characters[0] = GameObject.Find ("Albion");
+		Characters[1] = GameObject.Find ("Fanndis");
+		Characters[2] = GameObject.Find ("Merlini");
+		Characters[3] = GameObject.Find ("Temptress");
+		Characters[4] = GameObject.Find ("Kirito");
+		
+		Logo = GameObject.Find("Logo");
+		Menu = GameObject.Find("MenuExample");
 	}
 	
 	private void loadSpritesheets() {
