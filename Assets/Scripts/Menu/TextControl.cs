@@ -25,6 +25,7 @@ public class TextControl : MonoBehaviour {
 	float timeSinceStart = -99;
 	float maxTime = 2f;
 	
+	
 	void OnMouseEnter()
 	{
 		renderer.material.color = Color.green;
@@ -37,6 +38,7 @@ public class TextControl : MonoBehaviour {
 	
 	void OnMouseUp()
 	{
+		int currentLevel = Application.loadedLevel;
 		if(isQuitButton == true)
 		{
 			Application.Quit();
@@ -70,11 +72,12 @@ public class TextControl : MonoBehaviour {
 				controlSave.player2TEAM = player2TEAM;
 				controlSave.player3TEAM = player3TEAM;
 				controlSave.player4TEAM = player4TEAM;
-				Application.LoadLevel(2);
+				
+				Application.LoadLevel(++currentLevel);
 			}
 		}
 		else if (isBackButton) {
-			Application.LoadLevel(1);
+			Application.LoadLevel(--currentLevel);
 		}
 	}
 	
