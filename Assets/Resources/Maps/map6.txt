@@ -1,0 +1,20 @@
+Indestructable:Textures/Tiles/SpaceFloorTile
+Destructable:Textures/Tiles/NeonPuzzleTile
+Floor:Textures/Tiles/NeonFloorTile
+Music:Audio/Songs/wobble-synth
+
+StartMap
+###################
+###1 ######### 2###
+####           ####
+###+ #### #### +###
+###  #       #  ###
+###+ # ##+## # +###
+###    # u #    ###
+###+ # ##+## # +###
+###  #       #  ###
+###+ #### #### +###
+####           ####
+###3 ######### 4###
+###################
+EndMap

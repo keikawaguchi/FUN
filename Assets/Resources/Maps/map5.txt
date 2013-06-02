@@ -3,7 +3,6 @@ Destructable:Textures/Tiles/ClockTile
 Floor:Textures/Tiles/BrownPavementTile2
 Music:Audio/Songs/wobble-synth
 
-
 StartMap
 ###################
 #1       +       3#
