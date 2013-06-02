@@ -40,6 +40,7 @@ public class MapBuilder : MonoBehaviour {
 		maps [2] = "Maps/map2";
 		maps [3] = "Maps/map3";
 		maps [4] = "Maps/map4";
+		maps [5] = "Maps/map5";
 		loadResources();
 		loadScripts();
 	}

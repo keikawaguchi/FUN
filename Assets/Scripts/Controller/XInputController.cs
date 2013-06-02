@@ -48,7 +48,7 @@ public class XInputController : MonoBehaviour {
 		bool buttonPressed = false;
 		
 		// Check keyboard
-		buttonPressed = Input.GetButtonDown((string)buttons[button]);
+		buttonPressed = GetButtonPressedKeyboard(button);
 		
 		switch (button) {
 		case BUTTON_BOMB:
@@ -94,7 +94,7 @@ public class XInputController : MonoBehaviour {
 	
 	public Vector2 GetThumbstick(string thumbstickSide) {
 		// keyboard
-		Vector2 keyboardInput = new Vector2(Input.GetAxis((string)buttons["HorizontalAxis"]), Input.GetAxis((string)buttons["VerticalAxis"]));
+		Vector2 keyboardInput = GetAxisKeyboard();
 		if (keyboardInput.x != 0 || keyboardInput.y != 0)
 			return keyboardInput;
 		
@@ -214,4 +214,17 @@ public class XInputController : MonoBehaviour {
 		buttons["VerticalAxis"] = "VerticalController" + controllerNum;
 	}
 	
+	public bool GetButtonPressedKeyboard(string button) {
+		if (buttons == null) {
+			calculateKeyboardBindings();
+		}
+		return Input.GetButtonDown((string)buttons[button]);
+	}
+	
+	public Vector2 GetAxisKeyboard() {
+		if (buttons == null) {
+			calculateKeyboardBindings();
+		}
+		return new Vector2(Input.GetAxis((string)buttons["HorizontalAxis"]), Input.GetAxis((string)buttons["VerticalAxis"]));
+	}
 }

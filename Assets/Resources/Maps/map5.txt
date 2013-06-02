@@ -1,0 +1,21 @@
+Indestructable:Textures/Tiles/RockWall
+Destructable:Textures/Tiles/ClockTile
+Floor:Textures/Tiles/BrownPavementTile2
+Music:Audio/Songs/wobble-synth
+
+
+StartMap
+###################
+#1       +       3#
+#   #    #    #   #
+# ####+#####+#### #
+#   #    #    #   #
+#     #  +  #     #
+####+###+u+###+####
+#     #  +  #     #
+# # #    #    # # #
+# #   #######   # #
+# ### ##   ## ### #
+#2      +++      4#
+###################
+EndMap
