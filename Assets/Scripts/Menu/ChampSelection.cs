@@ -6,14 +6,22 @@ public class ChampSelection : MonoBehaviour {
 //	private const string BUTTON_BACK_PREFAB_PATH = "Prefabs/Menu Buttons/Back";
 //	private const string XBOX_BUTTON_A_ICON_PREFAB_PATH = "Prefabs/Menu Buttons/Xbox360ButtonA";
 //	private const string XBOX_BUTTON_B_ICON_PREFAB_PATH = "Prefabs/Menu Buttons/Xbox360ButtonB";
+	private const string SOLO_IMAGE_PATH = "Textures/Menu/Solo";
+	private const string TEAM1_IMAGE_PATH = "Textures/Menu/Team1";
+	private const string TEAM2_IMAGE_PATH = "Textures/Menu/Team2";
 	
 	public Font titleFont;
 	public Font bodyFont;
 	public Texture2D champBox;
 	
 	private GUIStyle titleStyle;
-	private GUIStyle subtitleStyle;
+	private GUIStyle playerTabStyle;
 	private GUIStyle bodyStyle;
+	private GUIStyle teamTagStyle;
+	
+	private Texture2D solo;
+	private Texture2D team1;
+	private Texture2D team2;
 	
 	private Vector3 scale;
 	private float originalWidth = 800f;
@@ -22,7 +30,11 @@ public class ChampSelection : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		titleStyle = new GUIStyle();
+		playerTabStyle = new GUIStyle();
 		bodyStyle = new GUIStyle();
+		teamTagStyle = new GUIStyle();
+		loadTextures ();
+		
 //		loadButtons ();
 	}
 	
@@ -44,6 +56,10 @@ public class ChampSelection : MonoBehaviour {
 		}
 	}
 	
+	private void loadTextures() {
+		solo = Resources.Load (SOLO_IMAGE_PATH) as Texture2D;
+	}
+	
 //	private void loadButtons() {
 //		GameObject nextPrefab = Resources.Load (BUTTON_NEXT_PREFAB_PATH) as GameObject;
 //		GameObject backPrefab = Resources.Load (BUTTON_BACK_PREFAB_PATH) as GameObject;
@@ -62,29 +78,33 @@ public class ChampSelection : MonoBehaviour {
 	private void setGUIStyle() {
 		// font style
 		titleStyle.font = titleFont;
+		playerTabStyle.font = bodyFont;
 		bodyStyle.font = bodyFont;
+		teamTagStyle.font = bodyFont;
 		
 		// font size
 		titleStyle.fontSize = 50;
+		playerTabStyle.fontSize = 20;
 		bodyStyle.fontSize = 13;
+		teamTagStyle.fontSize = 15;
 		
 		// font color
 		titleStyle.normal.textColor = new Color(255f, 128f, 0f, 100f);
+		playerTabStyle.normal.textColor = Color.white;
 		bodyStyle.normal.textColor = Color.white;
-		
-		subtitleStyle = bodyStyle;
-		subtitleStyle.fontSize = 20;
+		teamTagStyle.normal.textColor = Color.cyan;
 	}
 	
 	private void displayContents() {
 		// title
 		string title = "Champions Selection";
-		GUI.Label (new Rect(100f, 0f, 0f, 0f), "Champions Selection", titleStyle);
+		GUI.Label (new Rect(150f, 0f, 0f, 0f), "Select Champions", titleStyle);
 		
 		// Player 1 group
 		GUI.BeginGroup (new Rect(50f, 80f, 300f, 500f));  // make a group
-		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player 1", subtitleStyle);  // player label
+		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player 1", playerTabStyle);  // player label
 		GUI.Box (new Rect (0, 30, 100, 100), champBox);
+		GUI.Label (new Rect(0f, 135f, 100f, 50f), solo);
 		GUI.EndGroup ();  // end the group
 	}
 }
