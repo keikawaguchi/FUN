@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\GridSystem\Map.cs" />
      <Compile Include="Assets\Scripts\GridSystem\MapBuilder.cs" />
      <Compile Include="Assets\Scripts\GridSystem\TimerCS.cs" />
+     <Compile Include="Assets\Scripts\Menu\ChampSelection.cs" />
      <Compile Include="Assets\Scripts\Menu\ComboBox.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayerSelectionMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\SplashDelay.cs" />

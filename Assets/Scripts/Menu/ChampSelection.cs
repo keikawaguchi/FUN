@@ -58,6 +58,8 @@ public class ChampSelection : MonoBehaviour {
 	
 	private void loadTextures() {
 		solo = Resources.Load (SOLO_IMAGE_PATH) as Texture2D;
+		team1 = Resources.Load (TEAM1_IMAGE_PATH) as Texture2D;
+		team2 = Resources.Load (TEAM2_IMAGE_PATH) as Texture2D;
 	}
 	
 //	private void loadButtons() {
@@ -104,7 +106,7 @@ public class ChampSelection : MonoBehaviour {
 		GUI.BeginGroup (new Rect(50f, 80f, 300f, 500f));  // make a group
 		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player 1", playerTabStyle);  // player label
 		GUI.Box (new Rect (0, 30, 100, 100), champBox);
-		GUI.Label (new Rect(0f, 135f, 100f, 50f), solo);
+		GUI.Label (new Rect(0f, 135f, 100f, 50f), team2);
 		GUI.EndGroup ();  // end the group
 	}
 }
