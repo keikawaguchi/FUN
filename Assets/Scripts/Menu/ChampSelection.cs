@@ -19,6 +19,10 @@ public class ChampSelection : MonoBehaviour {
 	private const string MERLINI_IMAGE_PATH = "Textures/Champions/MerliniIcon";
 	private const string TEMPTRESS_IMAGE_PATH = "Textures/Champions/TemptressIcon";
 	
+	// confirmation texture path
+	private const string CONFIRM_IMAGE_PATH = "Textures/Menu/Confirm";
+	private const string CONFIRMED_IMAGE_PATH = "Textures/Menu/Confirmed";
+	
 	private const int MAX_PLAYERS = 4;
 	
 	// Fonts
@@ -44,6 +48,9 @@ public class ChampSelection : MonoBehaviour {
 	private Texture2D merliniIcon;
 	private Texture2D temptressIcon;
 	
+	private Texture2D confirm;
+	private Texture2D confirmed;
+	
 	// scaling
 	private Vector3 scale;
 	private float originalWidth = 800f;
@@ -52,20 +59,16 @@ public class ChampSelection : MonoBehaviour {
 	// controllers
 	private XInputController[] controllers;
 	
-	// is the player in the room?
-	private bool[] isPlayerInRoom;
+	// player selection info
+	private bool[] isPlayerInRoom;  // is the player in the room?
+	private bool[] confirmSelection;  // player confirmed champion selection
+	private string[] playersSelectedChamps;  // the selected champion to be played
 	
-	private ChampInfo champInfo;
+//	private ChampInfo champInfo;
 	
 	// Use this for initialization
 	void Start () {
-		titleStyle = new GUIStyle();
-		playerTabStyle = new GUIStyle();
-		bodyStyle = new GUIStyle();
-		teamTagStyle = new GUIStyle();
-		
-		controllers = new XInputController[MAX_PLAYERS + 1];  // index 0 is not used
-		isPlayerInRoom = new bool[MAX_PLAYERS + 1];  // index 0 is not used
+		instantiateVariables ();
 		
 		loadScripts ();
 		loadTextures ();
@@ -75,7 +78,8 @@ public class ChampSelection : MonoBehaviour {
 	}
 	
 	void Update() {
-		playerJoined ();
+		setPlayerJoined ();
+		setSelectionConfirmed ();
 	}
 	
 	private void OnGUI() {
@@ -96,6 +100,18 @@ public class ChampSelection : MonoBehaviour {
 		}
 	}
 	
+	private void instantiateVariables() {
+		titleStyle = new GUIStyle();
+		playerTabStyle = new GUIStyle();
+		bodyStyle = new GUIStyle();
+		teamTagStyle = new GUIStyle();
+		
+		// index 0 is not used
+		controllers = new XInputController[MAX_PLAYERS + 1];
+		confirmSelection = new bool[MAX_PLAYERS + 1];
+		isPlayerInRoom = new bool[MAX_PLAYERS + 1];
+	}
+	
 	private void loadScripts() {
 		for (int i = 1; i <= MAX_PLAYERS; i++)
 			controllers[i] = gameObject.AddComponent<XInputController>();
@@ -112,6 +128,9 @@ public class ChampSelection : MonoBehaviour {
 		kiritoIcon = Resources.Load (KIRITO_IMAGE_PATH) as Texture2D;
 		merliniIcon = Resources.Load (MERLINI_IMAGE_PATH) as Texture2D;
 		temptressIcon = Resources.Load (TEMPTRESS_IMAGE_PATH) as Texture2D;
+		
+		confirm = Resources.Load (CONFIRM_IMAGE_PATH) as Texture2D;
+		confirmed = Resources.Load (CONFIRMED_IMAGE_PATH) as Texture2D;
 	}
 	
 	private void setControllers() {
@@ -163,34 +182,91 @@ public class ChampSelection : MonoBehaviour {
 		
 		// Player 1 group
 		GUI.BeginGroup (new Rect(50f, 80f, 300f, 500f));  // make a group
-		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player 1", playerTabStyle);  // player label
 		
-		showChampOptions (controllers[1]);
+		displayChampionContents (controllers[1], 1);
 		
-		GUI.Label (new Rect(0f, 135f, 100f, 50f), solo);
+		GUI.EndGroup ();  // end the group
+		
+		// Player 2 group
+		GUI.BeginGroup (new Rect(50f, 300f, 300f, 500f));  // make a group
+		
+		displayChampionContents (controllers[2], 2);
+		
+		GUI.EndGroup ();  // end the group
+		
+		// Player 3 group
+		GUI.BeginGroup (new Rect(400f, 80f, 300f, 500f));  // make a group
+		
+		displayChampionContents (controllers[3], 3);
+		
+		GUI.EndGroup ();  // end the group
+		
+		// Player 4 group
+		GUI.BeginGroup (new Rect(400f, 300f, 300f, 500f));  // make a group
+		
+		displayChampionContents (controllers[4], 4);
+		
 		GUI.EndGroup ();  // end the group
 	}
 	
-	private void showChampOptions(XInputController controller) {
+	private void displayChampionContents(XInputController controller, int playerNum) {
+		/*
+		 * Conditions:
+		 * 1. No duplicates allowed
+		 */
+		
+		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player " + playerNum, playerTabStyle);  // player label
+		
+		displayChampTexture (controller);
+		displayTeamInfo (controller);
+		displayConfirmationButton (controller);
+	}
+	
+	private void displayChampTexture(XInputController controller) {
 		Texture2D champBoxContent;
 		if (!isPlayerInRoom[controller.GetControllerNumber ()])
 			champBoxContent = champBox;
 		else {
 			champBoxContent = albionIcon;
-//			if (controller1.GetButtonPressed ()
+//			if (controller.GetThumbstick ("left").x > 0)
 		}
-		GUI.Box (new Rect (0, 30, 100, 100), champBoxContent);
+		GUI.Box (new Rect (0f, 30f, 100f, 100f), champBoxContent);
 	}
 	
-	private void playerJoined() {
+	private void displayTeamInfo(XInputController controller) {
+		GUI.Label (new Rect(0f, 125f, 100f, 50f), solo);
+	}
+	
+	private void displayConfirmationButton(XInputController controller) {
+		Texture2D confirmContent;
+		if (!confirmSelection[controller.GetControllerNumber ()])
+			confirmContent = confirm;
+		else
+			confirmContent = confirmed;
+		
+		GUI.Box (new Rect(0f, 150f, 100f, 25f), confirmContent);
+	}
+	
+	private void setPlayerJoined() {
 		// don't need a loop to set this to waste time complexity
-		if (controllers[1].GetButtonPressed ("skill1"))
+		if (controllers[1].GetButtonPressed ("skill3"))
 			isPlayerInRoom[1] = true;
-		if (controllers[2].GetButtonPressed ("skill1"))
+		if (controllers[2].GetButtonPressed ("skill3"))
 			isPlayerInRoom[2] = true;
-		if (controllers[3].GetButtonPressed ("skill1"))
+		if (controllers[3].GetButtonPressed ("skill3"))
 			isPlayerInRoom[3] = true;
-		if (controllers[4].GetButtonPressed ("skill1"))
+		if (controllers[4].GetButtonPressed ("skill3"))
 			isPlayerInRoom[4] = true;
+	}
+	
+	private void setSelectionConfirmed() {
+		if (controllers[1].GetButtonPressed ("skill1") && isPlayerInRoom[1])
+			confirmSelection[1] = true;
+		if (controllers[2].GetButtonPressed ("skill1") && isPlayerInRoom[2])
+			confirmSelection[2] = true;
+		if (controllers[3].GetButtonPressed ("skill1") && isPlayerInRoom[3])
+			confirmSelection[3] = true;
+		if (controllers[4].GetButtonPressed ("skill1") && isPlayerInRoom[4])
+			confirmSelection[4] = true;
 	}
 }

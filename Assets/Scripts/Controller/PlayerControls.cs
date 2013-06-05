@@ -8,6 +8,11 @@ public class PlayerControls : MonoBehaviour {
 	public int player3;
 	public int player4;
 	
+	public string player1SelectedChamps;
+	public string player2SelectedChamps;
+	public string player3SelectedChamps;
+	public string player4SelectedChamps;
+	
 	public int player1TEAM;
 	public int player2TEAM;
 	public int player3TEAM;
