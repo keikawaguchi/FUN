@@ -6,26 +6,56 @@ public class ChampSelection : MonoBehaviour {
 //	private const string BUTTON_BACK_PREFAB_PATH = "Prefabs/Menu Buttons/Back";
 //	private const string XBOX_BUTTON_A_ICON_PREFAB_PATH = "Prefabs/Menu Buttons/Xbox360ButtonA";
 //	private const string XBOX_BUTTON_B_ICON_PREFAB_PATH = "Prefabs/Menu Buttons/Xbox360ButtonB";
+	// team texture path
 	private const string SOLO_IMAGE_PATH = "Textures/Menu/Solo";
 	private const string TEAM1_IMAGE_PATH = "Textures/Menu/Team1";
 	private const string TEAM2_IMAGE_PATH = "Textures/Menu/Team2";
 	
+	// champion texture path
+	private const string CHAMP_BOX_IMAGE_PATH = "Textures/Menu/ChampBox";
+	private const string ALBION_IMAGE_PATH = "Textures/Champions/AlbionIcon";
+	private const string FANNDIS_IMAGE_PATH = "Textures/Champions/FanndisIcon";
+	private const string KIRITO_IMAGE_PATH = "Textures/Champions/KiritoIcon";
+	private const string MERLINI_IMAGE_PATH = "Textures/Champions/MerliniIcon";
+	private const string TEMPTRESS_IMAGE_PATH = "Textures/Champions/TemptressIcon";
+	
+	private const int MAX_PLAYERS = 4;
+	
+	// Fonts
 	public Font titleFont;
 	public Font bodyFont;
-	public Texture2D champBox;
 	
+	// GUIStyle
 	private GUIStyle titleStyle;
 	private GUIStyle playerTabStyle;
 	private GUIStyle bodyStyle;
 	private GUIStyle teamTagStyle;
 	
+	// texture
 	private Texture2D solo;
 	private Texture2D team1;
 	private Texture2D team2;
 	
+	// champion texture
+	private Texture2D champBox;
+	private Texture2D albionIcon;
+	private Texture2D fanndisIcon;
+	private Texture2D kiritoIcon;
+	private Texture2D merliniIcon;
+	private Texture2D temptressIcon;
+	
+	// scaling
 	private Vector3 scale;
 	private float originalWidth = 800f;
 	private float originalHeight = 600f;
+	
+	// controllers
+	private XInputController[] controllers;
+	
+	// is the player in the room?
+	private bool[] isPlayerInRoom;
+	
+	private ChampInfo champInfo;
 	
 	// Use this for initialization
 	void Start () {
@@ -33,9 +63,19 @@ public class ChampSelection : MonoBehaviour {
 		playerTabStyle = new GUIStyle();
 		bodyStyle = new GUIStyle();
 		teamTagStyle = new GUIStyle();
-		loadTextures ();
 		
+		controllers = new XInputController[MAX_PLAYERS + 1];  // index 0 is not used
+		isPlayerInRoom = new bool[MAX_PLAYERS + 1];  // index 0 is not used
+		
+		loadScripts ();
+		loadTextures ();
 //		loadButtons ();
+		
+		setControllers ();
+	}
+	
+	void Update() {
+		playerJoined ();
 	}
 	
 	private void OnGUI() {
@@ -56,10 +96,29 @@ public class ChampSelection : MonoBehaviour {
 		}
 	}
 	
+	private void loadScripts() {
+		for (int i = 1; i <= MAX_PLAYERS; i++)
+			controllers[i] = gameObject.AddComponent<XInputController>();
+	}
+	
 	private void loadTextures() {
 		solo = Resources.Load (SOLO_IMAGE_PATH) as Texture2D;
 		team1 = Resources.Load (TEAM1_IMAGE_PATH) as Texture2D;
 		team2 = Resources.Load (TEAM2_IMAGE_PATH) as Texture2D;
+		
+		champBox = Resources.Load (CHAMP_BOX_IMAGE_PATH) as Texture2D;
+		albionIcon = Resources.Load (ALBION_IMAGE_PATH) as Texture2D;
+		fanndisIcon = Resources.Load (FANNDIS_IMAGE_PATH) as Texture2D;
+		kiritoIcon = Resources.Load (KIRITO_IMAGE_PATH) as Texture2D;
+		merliniIcon = Resources.Load (MERLINI_IMAGE_PATH) as Texture2D;
+		temptressIcon = Resources.Load (TEMPTRESS_IMAGE_PATH) as Texture2D;
+	}
+	
+	private void setControllers() {
+		for (int i = 1; i <= MAX_PLAYERS; i++) {
+			controllers[i].SetControllerNumber (i);
+			Debug.Log ("Controller" + (i) + " #: " + controllers[i].GetControllerNumber ());
+		}
 	}
 	
 //	private void loadButtons() {
@@ -105,8 +164,33 @@ public class ChampSelection : MonoBehaviour {
 		// Player 1 group
 		GUI.BeginGroup (new Rect(50f, 80f, 300f, 500f));  // make a group
 		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player 1", playerTabStyle);  // player label
-		GUI.Box (new Rect (0, 30, 100, 100), champBox);
-		GUI.Label (new Rect(0f, 135f, 100f, 50f), team2);
+		
+		showChampOptions (controllers[1]);
+		
+		GUI.Label (new Rect(0f, 135f, 100f, 50f), solo);
 		GUI.EndGroup ();  // end the group
+	}
+	
+	private void showChampOptions(XInputController controller) {
+		Texture2D champBoxContent;
+		if (!isPlayerInRoom[controller.GetControllerNumber ()])
+			champBoxContent = champBox;
+		else {
+			champBoxContent = albionIcon;
+//			if (controller1.GetButtonPressed ()
+		}
+		GUI.Box (new Rect (0, 30, 100, 100), champBoxContent);
+	}
+	
+	private void playerJoined() {
+		// don't need a loop to set this to waste time complexity
+		if (controllers[1].GetButtonPressed ("skill1"))
+			isPlayerInRoom[1] = true;
+		if (controllers[2].GetButtonPressed ("skill1"))
+			isPlayerInRoom[2] = true;
+		if (controllers[3].GetButtonPressed ("skill1"))
+			isPlayerInRoom[3] = true;
+		if (controllers[4].GetButtonPressed ("skill1"))
+			isPlayerInRoom[4] = true;
 	}
 }

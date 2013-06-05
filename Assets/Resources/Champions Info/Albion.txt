@@ -1,0 +1,13 @@
+LOAD CHAMP ICONS PATH here
+
+Story
+In a big city which still held by the ordinary men, a scientist, though mutation of the his brain and mind, tried to create a man who has the ability to master the two powers, time and space, to face and defeat the fearful man - Marbas someday. Albion, who was growing up without realizing that he was different from the other kids, lived happily with his ¡§father¡¨ - the scientist until the evil army attacked. His father hid him inside a secret dungeon while his father with other ordinary men in the city facing the enemy bravely. The city fell. Albion climbed out the dungeon and found out his father¡¦s body along with a letter clung tightly in his fist. Albion discovered the secret. He is the one who is destined to save the world. So he decided to head to the north - The Forsaken Universe of the North. The journey of unknown and danger begins!
+
+Skills
+Holy Trap
+Albion places a trap on the map that is visible for 1 second by everyone, to stun whoever walks through it except the hero places the trap.
+Cooldown: 10 seconds
+
+Holy Blink: Albion teleports 3 squares to the front direction of the hero.
+Cooldown: 10 seconds
+
