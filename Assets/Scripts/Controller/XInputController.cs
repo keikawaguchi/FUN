@@ -92,6 +92,35 @@ public class XInputController : MonoBehaviour {
 		return buttonPressed;
 	}
 	
+	public bool GetThumbstickDirectionOnce(string direction) {
+		bool hasBeenPressed = false;
+		
+		switch (direction.ToLower()) {
+		case "up":
+			if (prevGamePadState.ThumbSticks.Left.Y <= 0) {
+				hasBeenPressed = true;
+			}
+			break;
+		case "down":
+			if (prevGamePadState.ThumbSticks.Left.Y >= 0) {
+				hasBeenPressed = true;
+			}
+			break;
+		case "left":
+			if (prevGamePadState.ThumbSticks.Left.X >= 0) {
+				hasBeenPressed = true;
+			}
+			break;
+		case "right":
+			if (prevGamePadState.ThumbSticks.Left.X <= 0) {
+				hasBeenPressed = true;
+			}
+			break;
+		}
+		
+		return hasBeenPressed;
+	}
+	
 	public Vector2 GetThumbstick(string thumbstickSide) {
 		// keyboard
 		Vector2 keyboardInput = GetAxisKeyboard();
