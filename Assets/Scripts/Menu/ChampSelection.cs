@@ -68,8 +68,9 @@ public class ChampSelection : MonoBehaviour {
 	
 	// current selected info
 	private int[] currentSelectedIndex;
-	private Texture2D[] defaultChampTextureDisplayed;
-	private string[] defaultChampNameDisplayed;
+	private Texture2D[] displayedChampTexture;
+	private string[] displayedChampName;
+	private string[] displayedChamSkillsDesctip;
 	
 	// Use this for initialization
 	void Start () {
@@ -107,7 +108,7 @@ public class ChampSelection : MonoBehaviour {
 	    	var saveMatrix = GUI.matrix;  // save current matrix
 			GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
 			
-			displayLayout ();
+			displayLayout ();  // display the whole champion selection layout
 			
 			GUI.matrix = saveMatrix;
 			// end scaling the contents
@@ -136,8 +137,9 @@ public class ChampSelection : MonoBehaviour {
 		champSkillsDescrip = new string[TOTAL_AVAILABLE_CHAMPS + 1];
 		
 		currentSelectedIndex = new int[MAX_PLAYERS + 1];
-		defaultChampTextureDisplayed = new Texture2D[MAX_PLAYERS + 1];
-		defaultChampNameDisplayed = new string[MAX_PLAYERS + 1];
+		displayedChampTexture = new Texture2D[MAX_PLAYERS + 1];
+		displayedChampName = new string[MAX_PLAYERS + 1];
+		displayedChamSkillsDesctip = new string[MAX_PLAYERS + 1];
 	}
 	
 	private void loadScripts() {
@@ -172,11 +174,33 @@ public class ChampSelection : MonoBehaviour {
 	}
 	
 	private void setSkillsDescrip() {
+		AlbionBehavior albion;
+		
 		champSkillsDescrip[1] = "Holy Trap - CD: 10 sec\n" +
 			"Albion places a trap on the map that is visible for 1 second " +
-			"by everyone, to stun whoever walks through it except the hero places the trap.\n" +
+			"by everyone, to stun whoever walks through it except the hero places the trap.\n\n" +
 			"Holy Blink - CD: 10 sec\n" +
 			"Albion teleports 3 squares to the front direction of the hero.";
+		champSkillsDescrip[2] = "Zero Friction - CD: 10 sec\n" +
+			"Fanndis sprints herself for 5 seconds.\n\n" +
+			"Ice Age - CD: 3 sec\n" +
+			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
+			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
+		champSkillsDescrip[3] = "Suterusu - CD: 10 sec\n" +
+			"Fanndis sprints herself for 5 seconds.\n\n" +
+			"Ice Age - CD: 15 sec\n" +
+			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
+			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
+		champSkillsDescrip[4] = "Zero Friction - CD: 10 sec\n" +
+			"Fanndis sprints herself for 5 seconds.\n\n" +
+			"Ice Age - CD: 3 sec\n" +
+			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
+			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
+		champSkillsDescrip[5] = "Zero Friction - CD: 10 sec\n" +
+			"Fanndis sprints herself for 5 seconds.\n\n" +
+			"Ice Age - CD: 3 sec\n" +
+			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
+			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
 	}
 	
 	private void setControllers() {
@@ -189,9 +213,10 @@ public class ChampSelection : MonoBehaviour {
 	private void setDefaultChampInfo() {
 		// the first champ to shown when join the room
 		for (int i = 0; i <= MAX_PLAYERS; i++) {
-			currentSelectedIndex[i] = 0;
-			defaultChampTextureDisplayed[i] = champTextures[1];
-			defaultChampNameDisplayed[i] = champNames[1];
+			currentSelectedIndex[i] = 1;
+			displayedChampTexture[i] = champTextures[1];
+			displayedChampName[i] = champNames[1];
+			displayedChamSkillsDesctip[i] = champSkillsDescrip[1];
 		}
 	}
 	
@@ -228,6 +253,9 @@ public class ChampSelection : MonoBehaviour {
 		playerTagStyle.normal.textColor = Color.white;
 		bodyStyle.normal.textColor = Color.white;
 		teamTagStyle.normal.textColor = Color.cyan;
+		
+		// wrap the text
+		bodyStyle.wordWrap = true;
 	}
 	
 	private void displayLayout() {
@@ -278,46 +306,69 @@ public class ChampSelection : MonoBehaviour {
 	}
 	
 	private void displayChampInfo(XInputController controller, int controllerNum) {
-		Texture2D champTextureBox = defaultChampTextureDisplayed[controllerNum];
-		string champNameLabel = defaultChampNameDisplayed[controllerNum];
-		string champSkillsBox;
+		Texture2D champTextureBox = displayedChampTexture[controllerNum];
+		string champNameLabel = displayedChampName[controllerNum];
+		string champSkillsBox = displayedChamSkillsDesctip[controllerNum];
 		
 		if (!isPlayerInRoom[controllerNum]) {
 			champTextureBox = champTextures[0];
 			champNameLabel = "";
+			champSkillsBox = "";
 		}
 		else {
+			int index = currentSelectedIndex[controllerNum];
+			
 			if (navigateLeft[controllerNum]) {
-				int index = currentSelectedIndex[controllerNum];
 				index--;
-				
 				if (index < 1)
 					index = TOTAL_AVAILABLE_CHAMPS;
 				
 				currentSelectedIndex[controllerNum] = index;
 				
 				// update champion texture
-				defaultChampTextureDisplayed[controllerNum] = champTextures[index];
-				champTextureBox = defaultChampTextureDisplayed[controllerNum];
+				displayedChampTexture[controllerNum] = champTextures[index];
+				champTextureBox = displayedChampTexture[controllerNum];
 				
-				defaultChampNameDisplayed[controllerNum] = champNames[index];
-				champNameLabel = defaultChampNameDisplayed[controllerNum];
+				// update champion name
+				displayedChampName[controllerNum] = champNames[index];
+				champNameLabel = displayedChampName[controllerNum];
+				
+				// update chamption skills description
+				displayedChamSkillsDesctip[controllerNum] = champSkillsDescrip[index];
+				champSkillsBox = displayedChamSkillsDesctip[controllerNum];
 				
 				navigateLeft[controllerNum] = false;
 			}
 			else if (navigateRight[controllerNum]) {
-				int index = currentSelectedIndex[controllerNum];
 				index++;
-				
 				index = index % TOTAL_AVAILABLE_CHAMPS;
+				if (index == 0)
+					index = TOTAL_AVAILABLE_CHAMPS;
 				
+				currentSelectedIndex[controllerNum] = index;
 				
+				// update champion texture
+				displayedChampTexture[controllerNum] = champTextures[index];
+				champTextureBox = displayedChampTexture[controllerNum];
+				
+				// update champion name
+				displayedChampName[controllerNum] = champNames[index];
+				champNameLabel = displayedChampName[controllerNum];
+				
+				// update chamption skills description
+				displayedChamSkillsDesctip[controllerNum] = champSkillsDescrip[index];
+				champSkillsBox = displayedChamSkillsDesctip[controllerNum];
+				
+				navigateRight[controllerNum] = false;
 			}
+			
+			Debug.Log ("Current Index: " + index);
 		}
 		
 		GUI.Box (new Rect (0f, 30f, 100f, 100f), champTextureBox);
 		GUI.Label (new Rect(110f, 0f, 0f, 0f), champNameLabel, playerTagStyle);
-//		GUI.Box (new Rect(110f, 30f, 200f, 200f));
+		GUI.skin.box.wordWrap = true;
+		GUI.Box (new Rect(110f, 30f, 200f, 200f), champSkillsBox, bodyStyle);
 	}
 	
 	private void displayTeamInfo(XInputController controller) {
@@ -342,14 +393,22 @@ public class ChampSelection : MonoBehaviour {
 	
 	private void setPlayerJoined() {
 		// don't need a loop to set this to waste time complexity
-		if (controllers[1].GetButtonPressed ("skill3"))
+		if (controllers[1].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[1] = true;
-		if (controllers[2].GetButtonPressed ("skill3"))
+			Debug.Log ("Player 1 joined");
+		}
+		if (controllers[2].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[2] = true;
-		if (controllers[3].GetButtonPressed ("skill3"))
+			Debug.Log ("Player 2 joined");
+		}
+		if (controllers[3].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[3] = true;
-		if (controllers[4].GetButtonPressed ("skill3"))
+			Debug.Log ("Player 3 joined");
+		}
+		if (controllers[4].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[4] = true;
+			Debug.Log ("Player 4 joined");
+		}
 	}
 	
 	private void setSelectionConfirmed() {
@@ -367,22 +426,22 @@ public class ChampSelection : MonoBehaviour {
 		// left
 		if (controllers[1].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[1])
 			navigateLeft[1] = true; 
-		if (controllers[2].GetThumbstick ("left").x < 0 && isPlayerInRoom[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[2])
 			navigateLeft[2] = true;
-		if (controllers[3].GetThumbstick ("left").x < 0 && isPlayerInRoom[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[3])
 			navigateLeft[3] = true;
-		if (controllers[4].GetThumbstick ("left").x < 0 && isPlayerInRoom[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[4])
 			navigateLeft[4] = true;
 		
 		// right
 		
-		if (controllers[1].GetThumbstick ("left").x > 0 && isPlayerInRoom[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[1])
 			navigateRight[1] = true;
-		if (controllers[2].GetThumbstick ("left").x > 0 && isPlayerInRoom[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[2])
 			navigateRight[2] = true;
-		if (controllers[3].GetThumbstick ("left").x > 0 && isPlayerInRoom[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[3])
 			navigateRight[3] = true;
-		if (controllers[4].GetThumbstick ("left").x > 0 && isPlayerInRoom[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[4])
 			navigateRight[4] = true;
 		
 		// up

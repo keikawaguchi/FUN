@@ -17,8 +17,8 @@ public class KiritoBehavior : MonoBehaviour {
 	private GameObject chinmokuPrefab;
 	
 	// skill cooldown times
-	private const float suterusuCD = 10f;
-	private const float chinmokuCD = 15f;
+	private const float skillOneCD = 10f;  // suterusu
+	private const float skillTwoCD = 15f;  // chinmoku
 	
 	// skill timers
 	private float suterusuTimer = -99f;
@@ -33,9 +33,9 @@ public class KiritoBehavior : MonoBehaviour {
 	private Hero hero;
 	
 	// view cooldown
-	private GameObject skillOneCD;
+	private GameObject skillOneCDPrefab;
 	private GameObject skillOneCDViewer;
-	private GameObject skillTwoCD;
+	private GameObject skillTwoCDPrefab;
 	private GameObject skillTwoCDViewer;
 	private bool viewerVisible = true;
 	
@@ -45,8 +45,8 @@ public class KiritoBehavior : MonoBehaviour {
 		loadScripts();
 		loadAnimation();
 		
-		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
-		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
+		skillOneCDViewer = Instantiate(skillOneCDPrefab) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCDPrefab) as GameObject;
 	}
 	
 	void Update () {
@@ -75,8 +75,8 @@ public class KiritoBehavior : MonoBehaviour {
 	private void loadSkills() {
 		suterusuPrefab = Resources.Load (SUTERUSU_PREFAB_PATH) as GameObject;
 		chinmokuPrefab = Resources.Load (CHINMOKU_PREFAB_PATH) as GameObject;
-		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
-		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;
+		skillOneCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;
 	}
 	
 	private void loadScripts() {
@@ -108,7 +108,7 @@ public class KiritoBehavior : MonoBehaviour {
 	#region Character Skills
 	private void suterusuTriggered() {
 		// check if cooldown expired
-		if (Time.time - suterusuTimer > suterusuCD) {
+		if (Time.time - suterusuTimer > skillOneCD) {
 			// skill 1 here
 			Debug.Log("Skill One Triggered!");
 			GameObject suterusuObj = Instantiate (suterusuPrefab) as GameObject;
@@ -123,7 +123,7 @@ public class KiritoBehavior : MonoBehaviour {
 	private void chinmokuTriggered() {
 		Chinmoku chinmoku;
 		// check if cooldown expired
-		if (Time.time - chinmokuTimer > chinmokuCD) {
+		if (Time.time - chinmokuTimer > skillTwoCD) {
 			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
 //			GameObject chinmokuObj = Instantiate (chinmokuPrefab) as GameObject;
@@ -140,22 +140,30 @@ public class KiritoBehavior : MonoBehaviour {
 	
 	public int getSuterusuCD()
 	{
-		if(Time.time - suterusuTimer > suterusuCD)
+		if(Time.time - suterusuTimer > skillOneCD)
 			return 0;
 		else
-			return (int)((suterusuCD + 1) - (Time.time - suterusuTimer));
+			return (int)((skillOneCD + 1) - (Time.time - suterusuTimer));
 	}
 	
 	public int getChinmokuCD()
 	{
-		if(Time.time - chinmokuTimer > chinmokuCD)
+		if(Time.time - chinmokuTimer > skillTwoCD)
 			return 0;
 		else
-			return (int)((chinmokuCD + 1) - (Time.time - chinmokuTimer));
+			return (int)((skillTwoCD + 1) - (Time.time - chinmokuTimer));
 	}
 	
 	public GameObject getAnimationObject() {
 		return animation;
+	}
+	
+	public float getSkillOneCD() {
+		return skillOneCD;
+	}
+	
+	public float getSkillTwoCD() {
+		return skillTwoCD;
 	}
 	
 	#region Cooldown Viewer Methods

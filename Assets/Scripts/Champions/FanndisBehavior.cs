@@ -8,8 +8,8 @@ public class FanndisBehavior : MonoBehaviour {
 	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Fanndis/FanndisRunningSpritesheet";
 	
 	// skill cooldown times
-	private const float zeroFrictionCD = 10f;
-	private const float iceAgeCD = 3f;
+	private const float skillOneCD = 10f;  // zero friction
+	private const float skillTwoCD = 3f;  // ice age
 	
 	// skill timers
 	private float zeroFrictionTimer = -99f;
@@ -23,17 +23,17 @@ public class FanndisBehavior : MonoBehaviour {
 	private GameObject animation;
 	
 	// view cooldown
-	private GameObject skillOneCD;
+	private GameObject skillOneCDPrefab;
 	private GameObject skillOneCDViewer;
-	private GameObject skillTwoCD;
+	private GameObject skillTwoCDPrefab;
 	private GameObject skillTwoCDViewer;
 
 	void Start () {
 		loadResources();
 		loadAnimation();
 		
-		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
-		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
+		skillOneCDViewer = Instantiate(skillOneCDPrefab) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCDPrefab) as GameObject;
 	}
 	
 	void Update () {
@@ -63,8 +63,8 @@ public class FanndisBehavior : MonoBehaviour {
 		controller = GetComponent<XInputController>();
 		zeroFriction = gameObject.AddComponent<ZeroFriction>();
 		
-		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
-		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillOneCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	
 	private void loadAnimation() {
@@ -89,7 +89,7 @@ public class FanndisBehavior : MonoBehaviour {
 	
 	#region Character Skills
 	private void zeroFictionTriggered() {
-		if (Time.time - zeroFrictionTimer > zeroFrictionCD) {
+		if (Time.time - zeroFrictionTimer > skillOneCD) {
 			// skill 1 here
 			Debug.Log("Skill One Triggered!");
 			zeroFriction.triggerZeroFriction(gameObject);
@@ -100,7 +100,7 @@ public class FanndisBehavior : MonoBehaviour {
 	}
 	
 	private void iceAgeTriggered() {
-		if (Time.time - iceAgeTimer > iceAgeCD) {
+		if (Time.time - iceAgeTimer > skillTwoCD) {
 			// skill 2 here
 			Debug.Log("Skill Two Triggered!");
 			iceAge = gameObject.AddComponent<IceAge>();
@@ -114,17 +114,25 @@ public class FanndisBehavior : MonoBehaviour {
 	
 	public float getzeroFrictionCD()
 	{
-		if(Time.time - zeroFrictionTimer > zeroFrictionCD)
+		if(Time.time - zeroFrictionTimer > skillOneCD)
 			return 0;
 		else
-			return (int)((zeroFrictionCD+1) - (Time.time - zeroFrictionTimer));;
+			return (int)((skillOneCD+1) - (Time.time - zeroFrictionTimer));;
 	}
 	public float geticeAgeCD()
 	{
-		if(Time.time - iceAgeTimer > iceAgeCD)
+		if(Time.time - iceAgeTimer > skillTwoCD)
 			return 0;
 		else
-			return (int)((iceAgeCD+1) - (Time.time - iceAgeTimer));
+			return (int)((skillTwoCD+1) - (Time.time - iceAgeTimer));
+	}
+	
+	public float getSkillOneCD() {
+		return skillOneCD;
+	}
+	
+	public float getSkillTwoCD() {
+		return skillTwoCD;
 	}
 	
 	#region Cooldown Viewer Methods

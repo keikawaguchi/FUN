@@ -14,17 +14,17 @@ public class AlbionBehavior : MonoBehaviour {
 	private GameObject animation;
 	
 	// skill cooldown times
-	private const float holyTrapCD = 10f;
-	private const float holyBlinkCD = 15f;
+	private const float skillOneCD = 10f;  // holy trap
+	private const float skillTwoCD = 15f;  // holy blink
 	
 	// skill timers
-	private float holyTrapTimer = -99f;
-	private float holyBlinkTimer = -99f;
+	private float skillOneTimer = -99f;
+	private float skillTwoTimer = -99f;
 	
 	// view cooldown
-	private GameObject skillOneCD;
+	private GameObject skillOneCDPrefab;
 	private GameObject skillOneCDViewer;
-	private GameObject skillTwoCD;
+	private GameObject skillTwoCDPrefab;
 	private GameObject skillTwoCDViewer;
 	
 	void Start () {
@@ -32,8 +32,8 @@ public class AlbionBehavior : MonoBehaviour {
 		loadSkills();
 		loadAnimation();
 		
-		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
-		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
+		skillOneCDViewer = Instantiate(skillOneCDPrefab) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCDPrefab) as GameObject;
 	}
 	
 	void Update () {
@@ -58,8 +58,8 @@ public class AlbionBehavior : MonoBehaviour {
 	}
 	
 	private void loadSkills() {
-		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
-		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillOneCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	
 	private void loadAnimation() {	
@@ -74,20 +74,20 @@ public class AlbionBehavior : MonoBehaviour {
 	}
 	
 	private void HolyTrapTriggered() {
-		if (Time.time - holyTrapTimer > holyTrapCD) {
+		if (Time.time - skillOneTimer > skillOneCD) {
 			holyTrap = gameObject.AddComponent<HolyTrap>();
 			holyTrap.SetTrapOwner(gameObject);
 			
-			holyTrapTimer = Time.time;
+			skillOneTimer = Time.time;
 		}
 	}
 	
 	private void HolyBlinkTriggered() {
-		if (Time.time - holyBlinkTimer > holyBlinkCD) {
+		if (Time.time - skillTwoTimer > skillTwoCD) {
 			holyBlink = gameObject.AddComponent<HolyBlink>();
 			holyBlink.SetOwner(gameObject);
 		
-			holyBlinkTimer = Time.time;
+			skillTwoTimer = Time.time;
 		}
 	}
 	
@@ -97,18 +97,26 @@ public class AlbionBehavior : MonoBehaviour {
 	
 	public int gettrapCD()
 	{
-		if(Time.time - holyTrapTimer > holyTrapCD)
+		if(Time.time - skillOneTimer > skillOneCD)
 			return 0;
 		else
-			return (int)((holyTrapCD+1) - (Time.time - holyTrapTimer));
+			return (int)((skillOneCD+1) - (Time.time - skillOneTimer));
 	}
 	
 	public int getblinkCD()
 	{
-		if(Time.time - holyBlinkTimer > holyBlinkCD)
+		if(Time.time - skillTwoTimer > skillTwoCD)
 			return 0;
 		else
-			return (int)((holyBlinkCD+1) - (Time.time - holyBlinkTimer));
+			return (int)((skillTwoCD+1) - (Time.time - skillTwoTimer));
+	}
+	
+	public float getSkillOneCD() {
+		return skillOneCD;
+	}
+	
+	public float getSkillTwoCD() {
+		return skillTwoCD;
 	}
 	
 	public GameObject getAnimationObject() {

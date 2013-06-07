@@ -16,16 +16,16 @@ public class TemptressBehavior : MonoBehaviour {
 	private CharacterMovement characterMovement;
 	private XInputController controller;
 	
-	private const float lureCD = 5f;
-	private const float loveStruckCD = 10f;
+	private const float skillOneCD = 5f;  // lure
+	private const float skillTwoCD = 10f;  // love struck
 	
 	public float lureTimer = -99f;
 	public float loveStruckTimer = -99f;
 	
 	// view cooldown
-	private GameObject skillOneCD;
+	private GameObject skillOneCDPrefab;
 	private GameObject skillOneCDViewer;
-	private GameObject skillTwoCD;
+	private GameObject skillTwoCDPrefab;
 	private GameObject skillTwoCDViewer;
 	
 	void Start () {
@@ -33,8 +33,8 @@ public class TemptressBehavior : MonoBehaviour {
 		loadScripts();
 		loadAnimation();
 		
-		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
-		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
+		skillOneCDViewer = Instantiate(skillOneCDPrefab) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCDPrefab) as GameObject;
 	}
 	
 	void Update () {
@@ -61,29 +61,37 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	public int getLureCD() {
-		if(Time.time - lureTimer > lureCD) {
+		if(Time.time - lureTimer > skillOneCD) {
 			return 0;
 		}
 		else {
-			return (int)((lureCD+1) - (Time.time - lureTimer));
+			return (int)((skillOneCD+1) - (Time.time - lureTimer));
 		}
 	}
 	
 	public int getLSCD() {
-		if(Time.time - loveStruckTimer > loveStruckCD) {
+		if(Time.time - loveStruckTimer > skillTwoCD) {
 			return 0;
 		}
 		else {
-			return (int)((loveStruckCD+1) - (Time.time - loveStruckTimer));
+			return (int)((skillTwoCD+1) - (Time.time - loveStruckTimer));
 		}
+	}
+	
+	public float getSkillOneCD() {
+		return skillOneCD;
+	}
+	
+	public float getSkillTwoCD() {
+		return skillTwoCD;
 	}
 	
 	#region Initialization Methods
 	private void loadResources() {
 		lureSkillPrefab = Resources.Load(LURE_PREFAB_PATH) as GameObject;
 		
-		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
-		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillOneCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	
 	private void loadScripts() {
@@ -116,7 +124,7 @@ public class TemptressBehavior : MonoBehaviour {
 		if (currentLure != null) {
 			return;	
 		}
-		if (Time.time - lureTimer < lureCD) {
+		if (Time.time - lureTimer < skillOneCD) {
 			return;
 		}
 		
@@ -151,7 +159,7 @@ public class TemptressBehavior : MonoBehaviour {
 	}
 	
 	private void LoveStruckButtonPress() {
-		if (Time.time - loveStruckTimer > loveStruckCD) {
+		if (Time.time - loveStruckTimer > skillTwoCD) {
 			Debug.Log ("LoveStruck skill used");
 			loveStruck.execute();
 			loveStruckTimer = Time.time;

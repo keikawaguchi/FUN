@@ -18,17 +18,17 @@ public class MerliniBehavior : MonoBehaviour {
 	private GameObject bomb;
 	
 	// skill cooldown times
-	private const float hammerTimeCD = 10f;
-	private const float bombVoyageCD = 25f;
+	private const float skillOneCD = 10f;  // hammer time
+	private const float skillTwoCD = 25f;  // bomb voyage
 	
 	// skill timers
 	private float hammerTimeTimer = -99f;
 	private float bombVoyageTimer = -99f;
 	
 	// view cooldown
-	private GameObject skillOneCD;
+	private GameObject skillOneCDPrefab;
 	private GameObject skillOneCDViewer;
-	private GameObject skillTwoCD;
+	private GameObject skillTwoCDPrefab;
 	private GameObject skillTwoCDViewer;
 
 	void Start () {
@@ -36,8 +36,8 @@ public class MerliniBehavior : MonoBehaviour {
 		loadScripts();
 		loadAnimation();
 		
-		skillOneCDViewer = Instantiate(skillOneCD) as GameObject;
-		skillTwoCDViewer = Instantiate(skillTwoCD) as GameObject;
+		skillOneCDViewer = Instantiate(skillOneCDPrefab) as GameObject;
+		skillTwoCDViewer = Instantiate(skillTwoCDPrefab) as GameObject;
 	}
 	
 	void Update () {
@@ -66,8 +66,8 @@ public class MerliniBehavior : MonoBehaviour {
 		hammerPrefab = Resources.Load (HAMMERTIME_PREFAB_PATH) as GameObject;
 		bomb = Resources.Load (BOMB_PREFAB_PATH) as GameObject;
 		
-		skillOneCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
-		skillTwoCD = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillOneCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
+		skillTwoCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 	}
 	
 	private void loadScripts() {
@@ -99,7 +99,7 @@ public class MerliniBehavior : MonoBehaviour {
 	private void hammerTimeButtonPress() {
 		
 		// check if cooldown expired
-		if (Time.time - hammerTimeTimer > hammerTimeCD) {
+		if (Time.time - hammerTimeTimer > skillOneCD) {
 
 			Debug.Log("It's hammer time!!");
 			hammer = Instantiate (hammerPrefab) as GameObject;
@@ -116,7 +116,7 @@ public class MerliniBehavior : MonoBehaviour {
 	}
 	
 	private void bombVoyageButtonPress() {		
-		if (Time.time - bombVoyageTimer < bombVoyageCD) {
+		if (Time.time - bombVoyageTimer < skillTwoCD) {
 			return;
 		}
 			
@@ -136,17 +136,25 @@ public class MerliniBehavior : MonoBehaviour {
 	
 	public float getHammerTimeCD()
 	{
-		if(Time.time - hammerTimeTimer > hammerTimeCD)
+		if(Time.time - hammerTimeTimer > skillOneCD)
 			return 0;
 		else
-			return (int)((hammerTimeCD+1) - (Time.time - hammerTimeTimer));;
+			return (int)((skillOneCD+1) - (Time.time - hammerTimeTimer));;
 	}
 	public float getBombVoyageCD()
 	{
-		if(Time.time - bombVoyageTimer > bombVoyageCD)
+		if(Time.time - bombVoyageTimer > skillTwoCD)
 			return 0;
 		else
-			return (int)((bombVoyageCD+1) - (Time.time - bombVoyageTimer));
+			return (int)((skillTwoCD+1) - (Time.time - bombVoyageTimer));
+	}
+	
+	public float getSkillOneCD() {
+		return skillOneCD;
+	}
+	
+	public float getSkillTwoCD() {
+		return skillTwoCD;
 	}
 	
 	public GameObject getAnimationObject() {
