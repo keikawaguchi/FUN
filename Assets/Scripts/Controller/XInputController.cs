@@ -45,51 +45,54 @@ public class XInputController : MonoBehaviour {
 	
 	public bool GetButtonPressed(string button) {
 		button = button.ToLower();
-		bool buttonPressed = false;
 		
 		// Check keyboard
-		buttonPressed = GetButtonPressedKeyboard(button);
-		
-		switch (button) {
-		case BUTTON_BOMB:
-			if (currentGamePadState.Buttons.A == ButtonState.Pressed 
-				&& prevGamePadState.Buttons.A != ButtonState.Pressed) {
-				buttonPressed = true;
-			}
-			break;
-		case BUTTON_SKILL_1:
-			if (currentGamePadState.Buttons.X == ButtonState.Pressed 
-				&& prevGamePadState.Buttons.X != ButtonState.Pressed) {
-				buttonPressed = true;
-			}
-			break;
-		case BUTTON_SKILL_2:
-			if (currentGamePadState.Buttons.B == ButtonState.Pressed 
-				&& prevGamePadState.Buttons.B != ButtonState.Pressed) {
-				buttonPressed = true;
-			}
-			break;
-		case BUTTON_SKILL_3:
-			if (currentGamePadState.Buttons.Y == ButtonState.Pressed 
-				&& prevGamePadState.Buttons.Y != ButtonState.Pressed) {
-				buttonPressed = true;
-			}
-			break;
-		case BUTTON_START:
-			if (currentGamePadState.Buttons.Start == ButtonState.Pressed
-				&& prevGamePadState.Buttons.Start != ButtonState.Pressed) {
-				buttonPressed = true;
-			}
-			break;
-		case BUTTON_BACK:
-			if (currentGamePadState.Buttons.Back == ButtonState.Pressed
-				&& prevGamePadState.Buttons.Back != ButtonState.Pressed) {
-				buttonPressed = true;
-			}
-			break;
+		if (GetButtonPressedKeyboard(button)) {
+			return true;
 		}
 		
-		return buttonPressed;
+		if (button == BUTTON_BOMB || button == "a") {
+			if (currentGamePadState.Buttons.A == ButtonState.Pressed 
+				&& prevGamePadState.Buttons.A != ButtonState.Pressed) {
+				return true;
+			}
+		}
+		
+		if (button == BUTTON_SKILL_1 || button == "x") {
+			if (currentGamePadState.Buttons.X == ButtonState.Pressed 
+				&& prevGamePadState.Buttons.X != ButtonState.Pressed) {
+				return true;
+			}
+		}
+		
+		if (button == BUTTON_SKILL_2 || button == "b") {
+			if (currentGamePadState.Buttons.B == ButtonState.Pressed 
+				&& prevGamePadState.Buttons.B != ButtonState.Pressed) {
+				return true;
+			}
+		}
+		
+		if (button == BUTTON_SKILL_3 || button == "y") {
+			if (currentGamePadState.Buttons.Y == ButtonState.Pressed 
+				&& prevGamePadState.Buttons.Y != ButtonState.Pressed) {
+				return true;
+			}
+		}
+		
+		if (button == BUTTON_START) {
+			if (currentGamePadState.Buttons.Start == ButtonState.Pressed
+				&& prevGamePadState.Buttons.Start != ButtonState.Pressed) {
+				return true;
+			}
+		}
+		if (button == BUTTON_BACK) {
+			if (currentGamePadState.Buttons.Back == ButtonState.Pressed
+				&& prevGamePadState.Buttons.Back != ButtonState.Pressed) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public bool GetThumbstickDirectionOnce(string direction) {
@@ -167,7 +170,12 @@ public class XInputController : MonoBehaviour {
 	}
 	
 	private void assignControllersToPlayers() {
-		Champs = GameObject.Find("Controls").GetComponent<PlayerControls>();
+		GameObject controlls = GameObject.Find("Controls");
+		if (controlls == null) {
+			return;
+		}
+		
+		Champs = controlls.GetComponent<PlayerControls>();
 		if(gameObject.name == "Albion")
 		{
 			if(Champs.player1 == 0)
@@ -246,6 +254,9 @@ public class XInputController : MonoBehaviour {
 	public bool GetButtonPressedKeyboard(string button) {
 		if (buttons == null) {
 			calculateKeyboardBindings();
+		}
+		if (buttons[button] == null) {
+			return false;
 		}
 		return Input.GetButtonDown((string)buttons[button]);
 	}
