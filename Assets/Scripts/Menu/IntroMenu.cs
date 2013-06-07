@@ -22,37 +22,13 @@ public class IntroMenu : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (controller.GetThumbstickDirectionOnce("down")) {
-			currentSelectedItem++;
-		}
-		if (controller.GetThumbstickDirectionOnce("up")) {
-			currentSelectedItem--;
-		}
-		if (currentSelectedItem < 0) {
-			currentSelectedItem = menuItems.Length - 1;
-		}
-		if (currentSelectedItem >= menuItems.Length) {
-			currentSelectedItem = 0;
-		}
-		
-		if (controller.GetButtonPressed("a") || controller.GetButtonPressed("x")) {
-			Debug.Log ("Button pressed");
-			switch (menuItems[currentSelectedItem].tooltip) {
-			case "play":
-				Debug.Log ("Loading champion selection screen");
-				Application.LoadLevel("Champ Selection");
-				break;
-			case "quit":
-				Application.Quit();
-				break;
-			}
-		}
+		updateMenuByController();
+		handlePressedMenuButton();
 	}
 	
 	void OnGUI() {
 		setMenuStyle();
 		buildMenu();
-		Debug.Log ("Current item: " + menuItems[currentSelectedItem].tooltip);
 	}
 	
 	private void initMenu() {
@@ -79,10 +55,43 @@ public class IntroMenu : MonoBehaviour {
 		// on hover gui styles
 		GUI.skin.button.hover.textColor = Color.white;
 		GUI.skin.button.hover.background = menuBGHover;
+		
+		GUI.FocusControl("Play");
+		GUI.skin.button.focused.background = menuBGHover;
 	}
 	
 	private void buildMenu() {
 		GUI.SelectionGrid(new Rect(Screen.width / 2 - menuWidth / 2, Screen.height / 2 - menuHeight / 2, menuWidth, menuHeight * menuItems.Length), 
 			currentSelectedItem, menuItems, 1); 
+
+	}
+	
+	private void updateMenuByController() {
+		if (controller.GetThumbstickDirectionOnce("down")) {
+			currentSelectedItem++;
+		}
+		if (controller.GetThumbstickDirectionOnce("up")) {
+			currentSelectedItem--;
+		}
+		if (currentSelectedItem < 0) {
+			currentSelectedItem = menuItems.Length - 1;
+		}
+		if (currentSelectedItem >= menuItems.Length) {
+			currentSelectedItem = 0;
+		}
+	}
+	
+	private void handlePressedMenuButton() {
+		if (controller.GetButtonPressed("a") || controller.GetButtonPressed("x")) {
+			switch (menuItems[currentSelectedItem].tooltip) {
+			case "play":
+				Debug.Log ("Loading champion selection screen");
+				Application.LoadLevel("Champ Selection");
+				break;
+			case "quit":
+				Application.Quit();
+				break;
+			}
+		}
 	}
 }
