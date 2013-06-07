@@ -38,7 +38,7 @@ public class ChampSelection : MonoBehaviour {
 	private GUIStyle teamTagStyle;
 	
 	// selected info
-	private Texture2D[] teamTexture;
+	private Texture2D[] teamTextures;
 	private Texture2D[] champTextures;
 	private string[] champNames;
 	private string[] champSkillsDescrip;
@@ -67,10 +67,25 @@ public class ChampSelection : MonoBehaviour {
 	private ChampInfo champInfo;
 	
 	// current selected info
-	private int[] currentSelectedIndex;
+	private int[] currentSelectedChampIndex;
+	private int[] currentSelectedTeamIndex;
 	private Texture2D[] displayedChampTexture;
 	private string[] displayedChampName;
 	private string[] displayedChamSkillsDesctip;
+	private Texture2D[] displayedTeamTexture;
+	
+	// save the selected champions and teams
+	private PlayerControls saveSelection;
+	
+	private int player1Champ;
+	private int player2Champ;
+	private int player3Champ;
+	private int player4Champ;
+	
+	private int player1Team;
+	private int player2Team;
+	private int player3Team;
+	private int player4Team;
 	
 	// Use this for initialization
 	void Start () {
@@ -90,7 +105,15 @@ public class ChampSelection : MonoBehaviour {
 	}
 	
 	void Update() {
+		int currentLevel = Application.loadedLevel;
 		
+		if (controllers[1].GetButtonPressed ("dropbomb")) {  // next
+			saveSelectionInfo ();
+			
+			Application.LoadLevel(++currentLevel);
+		}
+		else if (controllers[1].GetButtonPressed ("skill2"))  // back
+			Application.LoadLevel(--currentLevel);
 	}
 	
 	private void OnGUI() {
@@ -131,15 +154,17 @@ public class ChampSelection : MonoBehaviour {
 		navigateUp = new bool[MAX_PLAYERS + 1];
 		navigateDown = new bool[MAX_PLAYERS + 1];
 		
-		teamTexture = new Texture2D[MAX_TEAM_TYPES];
+		teamTextures = new Texture2D[MAX_TEAM_TYPES];
 		champNames = new string[TOTAL_AVAILABLE_CHAMPS + 1];
 		champTextures = new Texture2D[TOTAL_AVAILABLE_CHAMPS + 1];  // 0 is for default view
 		champSkillsDescrip = new string[TOTAL_AVAILABLE_CHAMPS + 1];
 		
-		currentSelectedIndex = new int[MAX_PLAYERS + 1];
+		currentSelectedChampIndex = new int[MAX_PLAYERS + 1];
+		currentSelectedTeamIndex = new int[MAX_PLAYERS + 1];
 		displayedChampTexture = new Texture2D[MAX_PLAYERS + 1];
 		displayedChampName = new string[MAX_PLAYERS + 1];
 		displayedChamSkillsDesctip = new string[MAX_PLAYERS + 1];
+		displayedTeamTexture = new Texture2D[MAX_PLAYERS + 1];
 	}
 	
 	private void loadScripts() {
@@ -147,12 +172,13 @@ public class ChampSelection : MonoBehaviour {
 			controllers[i] = gameObject.AddComponent<XInputController>();
 		
 		champInfo = gameObject.AddComponent<ChampInfo>();
+		saveSelection = GameObject.Find("Controls").GetComponent<PlayerControls>();
 	}
 	
 	private void loadTextures() {
-		teamTexture[0] = Resources.Load (SOLO_IMAGE_PATH) as Texture2D;
-		teamTexture[1] = Resources.Load (TEAM1_IMAGE_PATH) as Texture2D;
-		teamTexture[2] = Resources.Load (TEAM2_IMAGE_PATH) as Texture2D;
+		teamTextures[0] = Resources.Load (SOLO_IMAGE_PATH) as Texture2D;
+		teamTextures[1] = Resources.Load (TEAM1_IMAGE_PATH) as Texture2D;
+		teamTextures[2] = Resources.Load (TEAM2_IMAGE_PATH) as Texture2D;
 		
 		champTextures[0] = Resources.Load (CHAMP_BOX_IMAGE_PATH) as Texture2D;
 		champTextures[1] = Resources.Load (ALBION_IMAGE_PATH) as Texture2D;
@@ -166,11 +192,11 @@ public class ChampSelection : MonoBehaviour {
 	}
 	
 	private void setChampNames() {
-		champNames[1] = "Albion";
-		champNames[2] = "Fanndis";
-		champNames[3] = "Kirito";
-		champNames[4] = "Merlini";
-		champNames[5] = "Temptress";
+		champNames[1] = "Albion, the Hunter";
+		champNames[2] = "Fanndis, the Ice Queen";
+		champNames[3] = "Kirito, the Ninja Assassin";
+		champNames[4] = "Merlini, the Magician";
+		champNames[5] = "Temptress, the Misguided";
 	}
 	
 	private void setSkillsDescrip() {
@@ -210,10 +236,12 @@ public class ChampSelection : MonoBehaviour {
 	private void setDefaultChampInfo() {
 		// the first champ to shown when join the room
 		for (int i = 0; i <= MAX_PLAYERS; i++) {
-			currentSelectedIndex[i] = 1;
+			currentSelectedChampIndex[i] = 1;
+			currentSelectedTeamIndex[i] = 0;
 			displayedChampTexture[i] = champTextures[1];
 			displayedChampName[i] = champNames[1];
 			displayedChamSkillsDesctip[i] = champSkillsDescrip[1];
+			displayedTeamTexture[i] = teamTextures[0];
 		}
 	}
 	
@@ -263,46 +291,49 @@ public class ChampSelection : MonoBehaviour {
 		// Player 1 group
 		GUI.BeginGroup (new Rect(35f, 80f, 500f, 500f));  // make a group
 		
-		displayChampionContents (controllers[1], controllers[1].GetControllerNumber ());
+		displayChampionContents (controllers[1]);
 		
 		GUI.EndGroup ();  // end the group
 		
 		// Player 2 group
 		GUI.BeginGroup (new Rect(35f, 300f, 500f, 500f));  // make a group
 		
-		displayChampionContents (controllers[2], controllers[2].GetControllerNumber ());
+		displayChampionContents (controllers[2]);
 		
 		GUI.EndGroup ();  // end the group
 		
 		// Player 3 group
 		GUI.BeginGroup (new Rect(425f, 80f, 500f, 500f));  // make a group
 		
-		displayChampionContents (controllers[3], controllers[3].GetControllerNumber ());
+		displayChampionContents (controllers[3]);
 		
 		GUI.EndGroup ();  // end the group
 		
 		// Player 4 group
 		GUI.BeginGroup (new Rect(425f, 300f, 500f, 500f));  // make a group
 		
-		displayChampionContents (controllers[4], controllers[4].GetControllerNumber ());
+		displayChampionContents (controllers[4]);
 		
 		GUI.EndGroup ();  // end the group
 	}
 	
-	private void displayChampionContents(XInputController controller, int playerNum) {
+	private void displayChampionContents(XInputController controller) {
 		/*
 		 * Conditions:
 		 * 1. No duplicates allowed
 		 */
+		int controllerNum = controller.GetControllerNumber ();
+		if (controllerNum == 1)
+			playerTagStyle.normal.textColor = Color.cyan;
+		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player " + controllerNum, playerTagStyle);  // player label
 		
-		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player " + playerNum, playerTagStyle);  // player label
-		
-		displayChampInfo (controller, playerNum);
+		displayChampInfo (controller);
 		displayTeamInfo (controller);
 		displayConfirmationButton (controller);
 	}
 	
-	private void displayChampInfo(XInputController controller, int controllerNum) {
+	private void displayChampInfo(XInputController controller) {
+		int controllerNum = controller.GetControllerNumber ();
 		Texture2D champTextureBox = displayedChampTexture[controllerNum];
 		string champNameLabel = displayedChampName[controllerNum];
 		string champSkillsBox = displayedChamSkillsDesctip[controllerNum];
@@ -313,14 +344,14 @@ public class ChampSelection : MonoBehaviour {
 			champSkillsBox = "";
 		}
 		else {
-			int index = currentSelectedIndex[controllerNum];
+			int index = currentSelectedChampIndex[controllerNum];
 			
 			if (navigateLeft[controllerNum]) {
 				index--;
 				if (index < 1)
 					index = TOTAL_AVAILABLE_CHAMPS;
 				
-				currentSelectedIndex[controllerNum] = index;
+				currentSelectedChampIndex[controllerNum] = index;
 				
 				// update champion texture
 				displayedChampTexture[controllerNum] = champTextures[index];
@@ -342,7 +373,7 @@ public class ChampSelection : MonoBehaviour {
 				if (index == 0)
 					index = TOTAL_AVAILABLE_CHAMPS;
 				
-				currentSelectedIndex[controllerNum] = index;
+				currentSelectedChampIndex[controllerNum] = index;
 				
 				// update champion texture
 				displayedChampTexture[controllerNum] = champTextures[index];
@@ -358,27 +389,71 @@ public class ChampSelection : MonoBehaviour {
 				
 				navigateRight[controllerNum] = false;
 			}
-			
-			Debug.Log ("Current Index: " + index);
 		}
 		
-		GUI.Box (new Rect (0f, 30f, 100f, 100f), champTextureBox);
-		GUI.Label (new Rect(110f, 0f, 0f, 0f), champNameLabel, playerTagStyle);
-		GUI.Box (new Rect(110f, 30f, 250f, 200f), champSkillsBox, bodyStyle);
+		GUI.Box (new Rect (0f, 30f, 100f, 100f), champTextureBox);  // show champion texture
+		GUI.Label (new Rect(110f, 0f, 0f, 0f), champNameLabel, playerTagStyle);  // show champion name
+		GUI.Box (new Rect(110f, 30f, 250f, 200f), champSkillsBox, bodyStyle);  // show champion skill description
 	}
 	
 	private void displayTeamInfo(XInputController controller) {
-		GUI.Label (new Rect(0f, 125f, 100f, 50f), teamTexture[0]);
+		int controllerNum = controller.GetControllerNumber ();
+		Texture2D teamLabel = displayedTeamTexture[controllerNum];
+		int index = currentSelectedTeamIndex[controllerNum];
+		
+		if (!isPlayerInRoom[controllerNum]) {
+			teamLabel = null;
+		}
+		else {
+			if (navigateUp[controllerNum]) {
+				index--;
+				if (index < 0)
+					index = MAX_TEAM_TYPES - 1;  // Team 2 is index 2 not 3
+				
+				Debug.Log ("Current Index: " + index);
+				currentSelectedTeamIndex[controllerNum] = index;  // here is the issue!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				Debug.Log ("Pointed Index: " + currentSelectedTeamIndex[controllerNum]);
+				
+				displayedTeamTexture[controllerNum] = teamTextures[index];
+				teamLabel = displayedTeamTexture[controllerNum];
+				
+				navigateUp[controllerNum] = false;
+			}
+			else if (navigateDown[controllerNum]) {
+				index++;
+				index %= MAX_TEAM_TYPES;
+				if (index < 0)
+					index = MAX_TEAM_TYPES - 1;  // Team 2 is index 2 not 3
+				
+				currentSelectedTeamIndex[controllerNum] = index;
+				
+				displayedTeamTexture[controllerNum] = teamTextures[index];
+				teamLabel = displayedTeamTexture[controllerNum];
+				
+				navigateDown[controllerNum] = false;
+			}
+			
+			GUI.Label (new Rect(0f, 130f, 100f, 50f), teamLabel);  // show team info
+		}
 	}
 	
 	private void displayConfirmationButton(XInputController controller) {
-		Texture2D confirmContent;
-		if (!confirmSelection[controller.GetControllerNumber ()])
-			confirmContent = confirm;
-		else
-			confirmContent = confirmed;
+		int controllerNum = controller.GetControllerNumber ();
+		Texture2D confirmTexture;
 		
-		GUI.Box (new Rect(0f, 150f, 100f, 25f), confirmContent);
+		if (!isPlayerInRoom[controllerNum]) {
+			confirmTexture = null;
+		}
+		else {
+			if (!confirmSelection[controllerNum]) {
+				confirmTexture = confirm;
+			}
+			else {
+				confirmTexture = confirmed;
+			}
+		}
+		
+		GUI.Label (new Rect(0f, 160f, 100f, 50f), confirmTexture);  // show confirmation status
 	}
 	
 //	private void displayChampName(int index) {
@@ -420,44 +495,56 @@ public class ChampSelection : MonoBehaviour {
 	
 	private void navigateState() {
 		// left
-		if (controllers[1].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[1] && !confirmSelection[1])
 			navigateLeft[1] = true; 
-		if (controllers[2].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[2] && !confirmSelection[2])
 			navigateLeft[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[3] && !confirmSelection[3])
 			navigateLeft[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[4] && !confirmSelection[4])
 			navigateLeft[4] = true;
 		
 		// right
 		
-		if (controllers[1].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[1] && !confirmSelection[1])
 			navigateRight[1] = true;
-		if (controllers[2].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[2] && !confirmSelection[2])
 			navigateRight[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[3] && !confirmSelection[3])
 			navigateRight[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[4] && !confirmSelection[4])
 			navigateRight[4] = true;
 		
 		// up
-		if (controllers[1].GetThumbstick ("left").y > 0 && isPlayerInRoom[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[1] && !confirmSelection[1])
 			navigateUp[1] = true;
-		if (controllers[2].GetThumbstick ("left").x > 0 && isPlayerInRoom[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[2] && !confirmSelection[2])
 			navigateUp[2] = true;
-		if (controllers[3].GetThumbstick ("left").x > 0 && isPlayerInRoom[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[3] && !confirmSelection[3])
 			navigateUp[3] = true;
-		if (controllers[4].GetThumbstick ("left").x > 0 && isPlayerInRoom[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[4] && !confirmSelection[4])
 			navigateUp[4] = true;
 		
 		// down
-		if (controllers[1].GetThumbstick ("left").y < 0 && isPlayerInRoom[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[1] && !confirmSelection[1])
 			navigateDown[1] = true;
-		if (controllers[2].GetThumbstick ("left").x < 0 && isPlayerInRoom[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[2] && !confirmSelection[2])
 			navigateDown[2] = true;
-		if (controllers[3].GetThumbstick ("left").x < 0 && isPlayerInRoom[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[3] && !confirmSelection[3])
 			navigateDown[3] = true;
-		if (controllers[4].GetThumbstick ("left").x < 0 && isPlayerInRoom[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[4] && !confirmSelection[4])
 			navigateDown[4] = true;
+	}
+	
+	private void saveSelectionInfo() {
+		saveSelection.player1 = currentSelectedChampIndex[1] - 1;
+		saveSelection.player2 = currentSelectedChampIndex[2] - 1;
+		saveSelection.player3 = currentSelectedChampIndex[3] - 1;
+		saveSelection.player4 = currentSelectedChampIndex[4] - 1;
+		
+		saveSelection.player1TEAM = currentSelectedTeamIndex[1];
+		saveSelection.player2TEAM = currentSelectedTeamIndex[2];
+		saveSelection.player3TEAM = currentSelectedTeamIndex[3];
+		saveSelection.player4TEAM = currentSelectedTeamIndex[4];
 	}
 }
