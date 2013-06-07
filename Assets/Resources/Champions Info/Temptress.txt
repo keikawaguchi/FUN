@@ -1,0 +1,12 @@
+Path:Textures/Champions/TemptressIcon
+
+Skill1 Name:Lure
+Skill1 Descrip:Temptress pulls an opponent within 5 units to your current location.
+Skill1 CD:5 seconds
+
+Skill2 Name:Love Struck
+Skill2 Descrip:Temptress applies slow-down for 2 seconds to nearest enemy in 3 squares.
+Skill2 CD:10 seconds
+
+Story:Integration of the embodiment of evil and elegant, Temptress playing with her enchanting grace to lure the innocent and greedy adventures strayed into her zone of darkness. In the dark secrets of the enigmatic under the guise, no one has ever escaped from her clutches.
+Temptress was born in a peaceful village. One day, the mysterious man claiming to be the demon, Marbas, destroyed entire village, with the exception of Temptress. She was taken to his kingdom that mutated her original innocence mind into a devil mind. Temptress struggled to escape from the kingdom. She had heard that Forsaken Universe of the North is filled with a variety of similar to her life exists that is not subject to any implication. Thus, she escaped from the kingdom and embarks on a journey to Forsaken Universe of the North.

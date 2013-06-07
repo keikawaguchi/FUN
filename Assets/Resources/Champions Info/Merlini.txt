@@ -1,0 +1,12 @@
+Path:Textures/Champions/MerliniIcon
+
+Skill1 Name:Hammer Time
+Skill1 Descrip:Merlini sends a hammer in the direction he's facing and stuns any nearby opponent for 2 seconds.
+Skill1 CD:10 seconds
+
+Skill2 Name:Bomb Voyage
+Skill2 Descrip:Merlini places a standard bomb below every player of the map.
+Skill2 CD:25 seconds
+
+Story:Merlini, although he is completely aware of his magical power, isn't quite sure where he came from. He had parents claiming to be his biological parents early in life, but soon was adopted by another couple who claimed that he is an orphan in the first place. His origin remains a mystery for him and his friends. He doesn't even know where his magical power come from - his supposedly biological parents said he was possessed thus gave him away to other parents. His latter parents, however, said he had anomalies in his body not quite detectable by current technology. Some other sources told him he had an accident early in life, causing it to be hard for him to remember things but altering his mind to be so powerful such that it can affect reality. Regardless, this lost mysterious soul is magical.
+Despite of this, Merlini can't use and practice his magic skills freely in his home town. With his passion and desire to improve and advance his skills, he decided to board to a place that his magical mind seems to be telling him to go to for some reason. Maybe he's needed in that place, or maybe that place has something to do with his origin, aside from he can practice his skills freely. Thus, he departed for this place called "FUN" for fun with no pun intended.

@@ -1,6 +1,12 @@
+Path:Textures/Champions/FanndisIcon
 
-Skills
-Zero Friction
-Fanndis sprints herself for 5 seconds.
-Ice Age
-Fanndis compresses the water vapor in the air to an impassible mountain of ice to block all movement and explosion; and slow down opponents by 50% for 2 seconds.
+Skill1 Name:Zero Friction
+Skill1 Descrip:Fanndis sprints herself for 5 seconds.
+Skill1 CD:10 seconds
+
+Skill2 Name:Ice Age
+Skill2 Descrip:Fanndis compresses the water vapor in the air to an impassible mountain of ice to block all movement and explosion; and slow down opponents by 50% for 2 seconds.
+Skill2 CD:3 seconds
+
+Story:For thousand years, the Ice Tribe which was ruled by the beautiful queen - Fanndis. The ice queen lived on the land of White peacefully. They draw their life and power from the coldness and the pureness of the ice. Until one day, the sky became so dark that the whole land was cover by endless darkness. All of a sudden, it started to rain. People realized that what dropped from the sky was not rain or white snow but black ashes. Then the ice started to melt. The people of the Ice Tribe sensed that their power was growing weaker.
+The war launched by Marbas was approaching. In order to clear the barrier of his army¡¦s advance, he ordered his evil army to burn down the whole sacred forest. And the giant fire had been lasting for months. The temperature of the world increased sharply within months. Fanndis realized that the only way for her tribe to survive was to master the power of space manipulation, and move the water in Black ocean to extinguish this forest fire. Only then, she can not only save her tribe but also stop the advance of the evil army. Heading to the North became her only choice.

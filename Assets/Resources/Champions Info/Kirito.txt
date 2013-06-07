@@ -1,0 +1,13 @@
+Path:Textures/Champions/KiritoIcon
+
+Skill1 Name:Suterusu
+Skill1 Descrip:Kirito becomes invisible and invincible for 1 seconds.
+Skill1 CD:10 seconds
+
+Skill2 Name:Chinmoku
+Skill2 Descrip:Kirito uses his Kiko to silence all the opponents within 3 units of his current location where the effect stays for 5 seconds on the opponents.
+Skill2 CD:15 seconds
+
+Story:He knows that he has no choice. His path had been destined long before he was born. Generation after generation, his family produces the best and skillful Ninja in the world. They used this special skill to assassinate. Their family business spread so fast, became so influential that on one can match.
+It just liked many of the assassination tasks before. But this time, something was different. He leaded the assassination team as usual. He killed without blinking his eyes. Blood made him exciting. Years of killing had made his heart cold like ice. The killing was continuing until the last member of this doomed family - the daughter who was at Kirito¡¦s age. At the moment the sword thrust into her heart, their eyes met. The feeling was so strange. It made his heartbeat quicken. She survived. 
+The next morning, he dressed up like an ordinary guy and went back to the place where the killing happened. He found the girl. They eloped. At the end, Kirito¡¦s family found out what happened, and sent out a team to hunt them down. The girl fell down right in his arm with the secret which he was the assassin who wiped out her family revealed. He was captured and took back to his family. The remorse tortured him day and night. What if he never learn how to be a Ninja? What if he was just a normal person? Would the ending be slightly different? Maybe he has choices if he can go back to the day his father began to teach him the skill of Ninja. What if time can be reversed?
