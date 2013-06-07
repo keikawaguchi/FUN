@@ -366,7 +366,7 @@ public class ChampSelection : MonoBehaviour {
 	private void navigateState() {
 		// left
 		if (controllers[1].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[1])
-			navigateLeft[1] = true;
+			navigateLeft[1] = true; 
 		if (controllers[2].GetThumbstick ("left").x < 0 && isPlayerInRoom[2])
 			navigateLeft[2] = true;
 		if (controllers[3].GetThumbstick ("left").x < 0 && isPlayerInRoom[3])
@@ -375,6 +375,7 @@ public class ChampSelection : MonoBehaviour {
 			navigateLeft[4] = true;
 		
 		// right
+		
 		if (controllers[1].GetThumbstick ("left").x > 0 && isPlayerInRoom[1])
 			navigateRight[1] = true;
 		if (controllers[2].GetThumbstick ("left").x > 0 && isPlayerInRoom[2])

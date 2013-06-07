@@ -97,22 +97,22 @@ public class XInputController : MonoBehaviour {
 		
 		switch (direction.ToLower()) {
 		case "up":
-			if (prevGamePadState.ThumbSticks.Left.Y <= 0) {
+			if (currentGamePadState.ThumbSticks.Left.Y > 0 && prevGamePadState.ThumbSticks.Left.Y <= 0) {
 				hasBeenPressed = true;
 			}
 			break;
 		case "down":
-			if (prevGamePadState.ThumbSticks.Left.Y >= 0) {
+			if (currentGamePadState.ThumbSticks.Left.Y < 0 && prevGamePadState.ThumbSticks.Left.Y >= 0) {
 				hasBeenPressed = true;
 			}
 			break;
 		case "left":
-			if (prevGamePadState.ThumbSticks.Left.X >= 0) {
+			if (currentGamePadState.ThumbSticks.Left.X < 0 && prevGamePadState.ThumbSticks.Left.X >= 0) {
 				hasBeenPressed = true;
 			}
 			break;
 		case "right":
-			if (prevGamePadState.ThumbSticks.Left.X <= 0) {
+			if (currentGamePadState.ThumbSticks.Left.X > 0 && prevGamePadState.ThumbSticks.Left.X <= 0) {
 				hasBeenPressed = true;
 			}
 			break;
