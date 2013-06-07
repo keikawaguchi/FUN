@@ -37,6 +37,7 @@ public class BombBehavior : MonoBehaviour {
 		if (isTimeToExplode()) {
 			explode();
 		}
+		addBombToMap ();
 	}
 	
 	public void OnTriggerEnter(Collider theCollision) {
@@ -61,12 +62,12 @@ public class BombBehavior : MonoBehaviour {
 	}
 	
 	private void addBombToMap() {
-		bool addedBombToMap;
-		addedBombToMap = 
+//		bool addedBombToMap;
+//		addedBombToMap = 
 			map.addImpassableObject(transform.position.x, transform.position.z, this.gameObject);
-		if (!addedBombToMap) {
-			Destroy(gameObject);
-		}
+//		if (!addedBombToMap) {
+//			Destroy(gameObject);
+//		}
 	}
 	#endregion
 	

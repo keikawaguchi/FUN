@@ -76,6 +76,8 @@ public class ChampSelection : MonoBehaviour {
 	// variables for checking conditions
 	private int numOfConfirmedPlayers;
 	private int numOfJoinedPlayers;
+	private bool[] buttonXPressed;
+	private bool[] buttonYPressed;
 	
 	// Use this for initialization
 	void Start () {
@@ -154,6 +156,9 @@ public class ChampSelection : MonoBehaviour {
 		displayedChampName = new string[MAX_PLAYERS + 1];
 		displayedChamSkillsDesctip = new string[MAX_PLAYERS + 1];
 		displayedTeamTexture = new Texture2D[MAX_PLAYERS + 1];
+		
+		buttonXPressed = new bool[MAX_PLAYERS + 1];
+		buttonYPressed = new bool[MAX_PLAYERS + 1];
 	}
 	
 	private void loadScripts() {
@@ -316,6 +321,8 @@ public class ChampSelection : MonoBehaviour {
 			champSkillsBox = "";
 		}
 		else {
+			if (currentSelectedChampIndex[controllerNum] == 0)
+				currentSelectedChampIndex[controllerNum] = 1;
 			int index = currentSelectedChampIndex[controllerNum];
 			
 			if (navigateLeft[controllerNum]) {
@@ -430,43 +437,51 @@ public class ChampSelection : MonoBehaviour {
 	
 	private void setPlayerJoined() {
 		// don't need a loop to set this to waste time complexity
-		if (controllers[1].GetButtonPressed ("skill3")) {
+		if (controllers[1].GetButtonPressed ("skill3") && !buttonYPressed[1]) {
 			isPlayerInRoom[1] = true;
+			buttonYPressed[1] = true;
 			numOfJoinedPlayers++;
 			Debug.Log ("Player 1 joined");
 		}
-		if (controllers[2].GetButtonPressed ("skill3")) {
+		if (controllers[2].GetButtonPressed ("skill3") && !buttonYPressed[2]) {
 			isPlayerInRoom[2] = true;
+			buttonYPressed[2] = true;
 			numOfJoinedPlayers++;
 			Debug.Log ("Player 2 joined");
 		}
-		if (controllers[3].GetButtonPressed ("skill3")) {
+		if (controllers[3].GetButtonPressed ("skill3") && !buttonYPressed[3]) {
 			isPlayerInRoom[3] = true;
+			buttonYPressed[3] = true;
 			numOfJoinedPlayers++;
 			Debug.Log ("Player 3 joined");
 		}
-		if (controllers[4].GetButtonPressed ("skill3")) {
+		if (controllers[4].GetButtonPressed ("skill3") && !buttonYPressed[4]) {
 			isPlayerInRoom[4] = true;
+			buttonYPressed[4] = true;
 			numOfJoinedPlayers++;
 			Debug.Log ("Player 4 joined");
 		}
 	}
 	
 	private void setSelectionConfirmed() {
-		if (controllers[1].GetButtonPressed ("skill1") && isPlayerInRoom[1]) {
+		if (controllers[1].GetButtonPressed ("skill1") && isPlayerInRoom[1] && !buttonXPressed[1]) {
 			confirmButtonPressed[1] = true;
+			buttonXPressed[1] = true;
 			numOfConfirmedPlayers++;
 		}
-		if (controllers[2].GetButtonPressed ("skill1") && isPlayerInRoom[2]) {
+		if (controllers[2].GetButtonPressed ("skill1") && isPlayerInRoom[2] && !buttonXPressed[2]) {
 			confirmButtonPressed[2] = true;
+			buttonXPressed[2] = true;
 			numOfConfirmedPlayers++;
 		}
-		if (controllers[3].GetButtonPressed ("skill1") && isPlayerInRoom[3]) {
+		if (controllers[3].GetButtonPressed ("skill1") && isPlayerInRoom[3] && !buttonXPressed[3]) {
 			confirmButtonPressed[3] = true;
+			buttonXPressed[3] = true;
 			numOfConfirmedPlayers++;
 		}
-		if (controllers[4].GetButtonPressed ("skill1") && isPlayerInRoom[4]) {
+		if (controllers[4].GetButtonPressed ("skill1") && isPlayerInRoom[4] && !buttonXPressed[4]) {
 			confirmButtonPressed[4] = true;
+			buttonXPressed[4] = true;
 			numOfConfirmedPlayers++;
 		}
 	}
