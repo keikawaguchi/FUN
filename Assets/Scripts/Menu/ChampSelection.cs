@@ -174,11 +174,9 @@ public class ChampSelection : MonoBehaviour {
 	}
 	
 	private void setSkillsDescrip() {
-		AlbionBehavior albion;
-		
 		champSkillsDescrip[1] = "Holy Trap - CD: 10 sec\n" +
 			"Albion places a trap on the map that is visible for 1 second " +
-			"by everyone, to stun whoever walks through it except the hero places the trap.\n\n" +
+			"by everyone and stun whoever walks through it except the champion who places the trap.\n\n" +
 			"Holy Blink - CD: 10 sec\n" +
 			"Albion teleports 3 squares to the front direction of the hero.";
 		champSkillsDescrip[2] = "Zero Friction - CD: 10 sec\n" +
@@ -187,20 +185,19 @@ public class ChampSelection : MonoBehaviour {
 			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
 			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
 		champSkillsDescrip[3] = "Suterusu - CD: 10 sec\n" +
-			"Fanndis sprints herself for 5 seconds.\n\n" +
-			"Ice Age - CD: 15 sec\n" +
-			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
-			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
-		champSkillsDescrip[4] = "Zero Friction - CD: 10 sec\n" +
-			"Fanndis sprints herself for 5 seconds.\n\n" +
-			"Ice Age - CD: 3 sec\n" +
-			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
-			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
-		champSkillsDescrip[5] = "Zero Friction - CD: 10 sec\n" +
-			"Fanndis sprints herself for 5 seconds.\n\n" +
-			"Ice Age - CD: 3 sec\n" +
-			"Fanndis compresses the water vapor in the air to an impassible mountain of ice to " +
-			"block all movement and explosion; and slow down opponents by 50% for 2 seconds.";
+			"Kirito becomes invisible and invincible for 1 seconds.\n\n" +
+			"Chinmoku - CD: 15 sec\n" +
+			"Kirito uses his Kiko to silence all the opponents within 3 units of his current " +
+			"location where the effect stays for 5 seconds on the opponents.";
+		champSkillsDescrip[4] = "Hammer Time - CD: 10 sec\n" +
+			"Merlini sends a hammer in the direction he's facing and stuns any nearby opponent for " +
+			"2 seconds.\n\n" +
+			"Bomb Voyage - CD: 25 sec\n" +
+			"Merlini places a standard bomb below every player of the map.";
+		champSkillsDescrip[5] = "Lure - CD: 5 sec\n" +
+			"Temptress pulls an opponent within 5 units to your current location.\n\n" +
+			"Love Struck - CD: 3 sec\n" +
+			"Temptress applies slow-down for 2 seconds to nearest enemy in 3 squares.";
 	}
 	
 	private void setControllers() {
@@ -245,7 +242,7 @@ public class ChampSelection : MonoBehaviour {
 		// font size
 		titleStyle.fontSize = 50;
 		playerTagStyle.fontSize = 20;
-		bodyStyle.fontSize = 13;
+		bodyStyle.fontSize = 15;
 		teamTagStyle.fontSize = 15;
 		
 		// font color
@@ -264,28 +261,28 @@ public class ChampSelection : MonoBehaviour {
 		GUI.Label (new Rect(150f, 0f, 0f, 0f), "Select Champions", titleStyle);
 		
 		// Player 1 group
-		GUI.BeginGroup (new Rect(50f, 80f, 300f, 500f));  // make a group
+		GUI.BeginGroup (new Rect(35f, 80f, 500f, 500f));  // make a group
 		
 		displayChampionContents (controllers[1], controllers[1].GetControllerNumber ());
 		
 		GUI.EndGroup ();  // end the group
 		
 		// Player 2 group
-		GUI.BeginGroup (new Rect(50f, 300f, 300f, 500f));  // make a group
+		GUI.BeginGroup (new Rect(35f, 300f, 500f, 500f));  // make a group
 		
 		displayChampionContents (controllers[2], controllers[2].GetControllerNumber ());
 		
 		GUI.EndGroup ();  // end the group
 		
 		// Player 3 group
-		GUI.BeginGroup (new Rect(400f, 80f, 300f, 500f));  // make a group
+		GUI.BeginGroup (new Rect(425f, 80f, 500f, 500f));  // make a group
 		
 		displayChampionContents (controllers[3], controllers[3].GetControllerNumber ());
 		
 		GUI.EndGroup ();  // end the group
 		
 		// Player 4 group
-		GUI.BeginGroup (new Rect(400f, 300f, 300f, 500f));  // make a group
+		GUI.BeginGroup (new Rect(425f, 300f, 500f, 500f));  // make a group
 		
 		displayChampionContents (controllers[4], controllers[4].GetControllerNumber ());
 		
@@ -367,8 +364,7 @@ public class ChampSelection : MonoBehaviour {
 		
 		GUI.Box (new Rect (0f, 30f, 100f, 100f), champTextureBox);
 		GUI.Label (new Rect(110f, 0f, 0f, 0f), champNameLabel, playerTagStyle);
-		GUI.skin.box.wordWrap = true;
-		GUI.Box (new Rect(110f, 30f, 200f, 200f), champSkillsBox, bodyStyle);
+		GUI.Box (new Rect(110f, 30f, 250f, 200f), champSkillsBox, bodyStyle);
 	}
 	
 	private void displayTeamInfo(XInputController controller) {
