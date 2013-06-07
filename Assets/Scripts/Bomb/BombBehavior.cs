@@ -37,7 +37,7 @@ public class BombBehavior : MonoBehaviour {
 		if (isTimeToExplode()) {
 			explode();
 		}
-		addBombToMap ();
+//		addBombToMap ();
 	}
 	
 	public void OnTriggerEnter(Collider theCollision) {
