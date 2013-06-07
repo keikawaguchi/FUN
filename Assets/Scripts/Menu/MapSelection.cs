@@ -6,6 +6,10 @@ public class MapSelection : MonoBehaviour {
 	public Font titleFont;
 	public Font mapTitleFont;
 	
+	// map grid size
+	public int[,] gridSize = new int[,] {{1, 1}};
+	public string[] mapTitle = new string[] {"NULL"};
+	
 	// GUIStyle
 	private GUIStyle titleStyle;
 	private GUIStyle mapTitleStyle;
@@ -28,7 +32,6 @@ public class MapSelection : MonoBehaviour {
 		initializeVariables ();
 		
 		loadScripts ();
-		
 		setController ();
 	}
 	

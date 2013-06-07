@@ -78,11 +78,14 @@ public class ChampSelection : MonoBehaviour {
 	private int numOfJoinedPlayers;
 	private bool[] buttonXPressed;
 	private bool[] buttonYPressed;
+//	public string[] mapTitle = new string[] {"NULL"};
+	private bool[] champNotAvailable;
 	
 	// Use this for initialization
 	void Start () {
 		initializeVariables ();
 		
+//		Debug.Log ("Size: " + mapTitle.GetLength(1));
 		loadScripts ();
 		loadTextures ();
 		
@@ -99,7 +102,7 @@ public class ChampSelection : MonoBehaviour {
 		int currentLevel = Application.loadedLevel;
 		
 		if (controllers[1].GetButtonPressed ("dropbomb") && numOfConfirmedPlayers > 0 &&
-			numOfConfirmedPlayers == numOfJoinedPlayers) {  // next
+			numOfConfirmedPlayers == numOfJoinedPlayers && isPlayerInRoom[controllers[1].GetControllerNumber ()]) {  // next
 			saveSelectionInfo ();
 			
 			Application.LoadLevel(++currentLevel);
@@ -156,6 +159,7 @@ public class ChampSelection : MonoBehaviour {
 		displayedChampName = new string[MAX_PLAYERS + 1];
 		displayedChamSkillsDesctip = new string[MAX_PLAYERS + 1];
 		displayedTeamTexture = new Texture2D[MAX_PLAYERS + 1];
+		champNotAvailable = new bool[TOTAL_AVAILABLE_CHAMPS + 1];
 		
 		buttonXPressed = new bool[MAX_PLAYERS + 1];
 		buttonYPressed = new bool[MAX_PLAYERS + 1];
@@ -464,25 +468,15 @@ public class ChampSelection : MonoBehaviour {
 	}
 	
 	private void setSelectionConfirmed() {
-		if (controllers[1].GetButtonPressed ("skill1") && isPlayerInRoom[1] && !buttonXPressed[1]) {
-			confirmButtonPressed[1] = true;
-			buttonXPressed[1] = true;
-			numOfConfirmedPlayers++;
-		}
-		if (controllers[2].GetButtonPressed ("skill1") && isPlayerInRoom[2] && !buttonXPressed[2]) {
-			confirmButtonPressed[2] = true;
-			buttonXPressed[2] = true;
-			numOfConfirmedPlayers++;
-		}
-		if (controllers[3].GetButtonPressed ("skill1") && isPlayerInRoom[3] && !buttonXPressed[3]) {
-			confirmButtonPressed[3] = true;
-			buttonXPressed[3] = true;
-			numOfConfirmedPlayers++;
-		}
-		if (controllers[4].GetButtonPressed ("skill1") && isPlayerInRoom[4] && !buttonXPressed[4]) {
-			confirmButtonPressed[4] = true;
-			buttonXPressed[4] = true;
-			numOfConfirmedPlayers++;
+		for (int i = 1; i <= MAX_PLAYERS; i++) {
+			if (controllers[i].GetButtonPressed ("skill1") && isPlayerInRoom[i] && !buttonXPressed[i]) {
+				if (champNotAvailable[currentSelectedChampIndex[controllers[i].GetControllerNumber ()]])
+					return;
+				confirmButtonPressed[i] = true;
+				buttonXPressed[i] = true;
+				champNotAvailable[currentSelectedChampIndex[controllers[1].GetControllerNumber ()]] = true;
+				numOfConfirmedPlayers++;
+			}
 		}
 	}
 	
