@@ -2,10 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class ChampSelection : MonoBehaviour {
-//	private const string BUTTON_NEXT_PREFAB_PATH = "Prefabs/Menu Buttons/Next";
-//	private const string BUTTON_BACK_PREFAB_PATH = "Prefabs/Menu Buttons/Back";
-//	private const string XBOX_BUTTON_A_ICON_PREFAB_PATH = "Prefabs/Menu Buttons/Xbox360ButtonA";
-//	private const string XBOX_BUTTON_B_ICON_PREFAB_PATH = "Prefabs/Menu Buttons/Xbox360ButtonB";
 	// team texture path
 	private const string SOLO_IMAGE_PATH = "Textures/Menu/Solo";
 	private const string TEAM1_IMAGE_PATH = "Textures/Menu/Team1";
@@ -35,7 +31,7 @@ public class ChampSelection : MonoBehaviour {
 	private GUIStyle titleStyle;
 	private GUIStyle playerTagStyle;
 	private GUIStyle bodyStyle;
-	private GUIStyle teamTagStyle;
+	
 	
 	// selected info
 	private Texture2D[] teamTextures;
@@ -56,7 +52,7 @@ public class ChampSelection : MonoBehaviour {
 	
 	// player selection info
 	private bool[] isPlayerInRoom;  // is the player in the room?
-	private bool[] confirmSelection;  // player confirmed champion selection
+	private bool[] confirmButtonPressed;  // player confirmed champion selection
 	private bool[] navigateLeft;
 	private bool[] navigateRight;
 	private bool[] navigateUp;
@@ -77,15 +73,9 @@ public class ChampSelection : MonoBehaviour {
 	// save the selected champions and teams
 	private PlayerControls saveSelection;
 	
-	private int player1Champ;
-	private int player2Champ;
-	private int player3Champ;
-	private int player4Champ;
-	
-	private int player1Team;
-	private int player2Team;
-	private int player3Team;
-	private int player4Team;
+	// variables for checking conditions
+	private int numOfConfirmedPlayers;
+	private int numOfJoinedPlayers;
 	
 	// Use this for initialization
 	void Start () {
@@ -93,7 +83,6 @@ public class ChampSelection : MonoBehaviour {
 		
 		loadScripts ();
 		loadTextures ();
-//		loadButtons ();
 		
 		setControllers ();
 		
@@ -107,7 +96,8 @@ public class ChampSelection : MonoBehaviour {
 	void Update() {
 		int currentLevel = Application.loadedLevel;
 		
-		if (controllers[1].GetButtonPressed ("dropbomb")) {  // next
+		if (controllers[1].GetButtonPressed ("dropbomb") && numOfConfirmedPlayers > 0 &&
+			numOfConfirmedPlayers == numOfJoinedPlayers) {  // next
 			saveSelectionInfo ();
 			
 			Application.LoadLevel(++currentLevel);
@@ -142,11 +132,10 @@ public class ChampSelection : MonoBehaviour {
 		titleStyle = new GUIStyle();
 		playerTagStyle = new GUIStyle();
 		bodyStyle = new GUIStyle();
-		teamTagStyle = new GUIStyle();
 		
 		// index 0 is not used
 		controllers = new XInputController[MAX_PLAYERS + 1];
-		confirmSelection = new bool[MAX_PLAYERS + 1];
+		confirmButtonPressed = new bool[MAX_PLAYERS + 1];
 		isPlayerInRoom = new bool[MAX_PLAYERS + 1];
 		defaultChampViewed = new bool[MAX_PLAYERS + 1];
 		navigateLeft = new bool[MAX_PLAYERS + 1];
@@ -236,7 +225,7 @@ public class ChampSelection : MonoBehaviour {
 	private void setDefaultChampInfo() {
 		// the first champ to shown when join the room
 		for (int i = 0; i <= MAX_PLAYERS; i++) {
-			currentSelectedChampIndex[i] = 1;
+			currentSelectedChampIndex[i] = 0;
 			currentSelectedTeamIndex[i] = 0;
 			displayedChampTexture[i] = champTextures[1];
 			displayedChampName[i] = champNames[1];
@@ -245,39 +234,21 @@ public class ChampSelection : MonoBehaviour {
 		}
 	}
 	
-//	private void loadButtons() {
-//		GameObject nextPrefab = Resources.Load (BUTTON_NEXT_PREFAB_PATH) as GameObject;
-//		GameObject backPrefab = Resources.Load (BUTTON_BACK_PREFAB_PATH) as GameObject;
-//		GameObject xboxAPrefab = Resources.Load (XBOX_BUTTON_A_ICON_PREFAB_PATH) as GameObject;
-//		GameObject xboxBPrefab = Resources.Load (XBOX_BUTTON_B_ICON_PREFAB_PATH) as GameObject;
-//		
-//		GameObject next = Instantiate (nextPrefab) as GameObject;
-//		GameObject back = Instantiate (backPrefab) as GameObject;
-//		GameObject xboxA = Instantiate (xboxAPrefab) as GameObject;
-//		GameObject xboxB = Instantiate (xboxBPrefab) as GameObject;
-//		
-//		next.transform.position = new Vector3(Screen.width - 300f, 0, Screen.height - 10f);
-//		back.transform.position = new Vector3(300f, 0, Screen.height - 10f);
-//	}
-	
 	private void setGUIStyle() {
 		// font style
 		titleStyle.font = titleFont;
 		playerTagStyle.font = bodyFont;
 		bodyStyle.font = bodyFont;
-		teamTagStyle.font = bodyFont;
 		
 		// font size
 		titleStyle.fontSize = 50;
 		playerTagStyle.fontSize = 20;
 		bodyStyle.fontSize = 15;
-		teamTagStyle.fontSize = 15;
 		
 		// font color
 		titleStyle.normal.textColor = new Color(255f, 128f, 0f, 100f);
-		playerTagStyle.normal.textColor = Color.white;
+		playerTagStyle.normal.textColor = Color.cyan;
 		bodyStyle.normal.textColor = Color.white;
-		teamTagStyle.normal.textColor = Color.cyan;
 		
 		// wrap the text
 		bodyStyle.wordWrap = true;
@@ -325,6 +296,7 @@ public class ChampSelection : MonoBehaviour {
 		int controllerNum = controller.GetControllerNumber ();
 		if (controllerNum == 1)
 			playerTagStyle.normal.textColor = Color.cyan;
+		
 		GUI.Label (new Rect(0f, 0f, 0f, 0f), "Player " + controllerNum, playerTagStyle);  // player label
 		
 		displayChampInfo (controller);
@@ -445,7 +417,7 @@ public class ChampSelection : MonoBehaviour {
 			confirmTexture = null;
 		}
 		else {
-			if (!confirmSelection[controllerNum]) {
+			if (!confirmButtonPressed[controllerNum]) {
 				confirmTexture = confirm;
 			}
 			else {
@@ -456,83 +428,89 @@ public class ChampSelection : MonoBehaviour {
 		GUI.Label (new Rect(0f, 160f, 100f, 50f), confirmTexture);  // show confirmation status
 	}
 	
-//	private void displayChampName(int index) {
-//		Debug.Log ("Champ Name: " + champNames[index]);
-////		GUI.Label (new Rect(130f, 0f, 0f, 0f), champInfo.getChampName (index), playerTagStyle);
-//		GUI.Label (new Rect(130f, 0f, 0f, 0f), champNames[index], playerTagStyle);
-//	}
-	
 	private void setPlayerJoined() {
 		// don't need a loop to set this to waste time complexity
 		if (controllers[1].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[1] = true;
+			numOfJoinedPlayers++;
 			Debug.Log ("Player 1 joined");
 		}
 		if (controllers[2].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[2] = true;
+			numOfJoinedPlayers++;
 			Debug.Log ("Player 2 joined");
 		}
 		if (controllers[3].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[3] = true;
+			numOfJoinedPlayers++;
 			Debug.Log ("Player 3 joined");
 		}
 		if (controllers[4].GetButtonPressed ("skill3")) {
 			isPlayerInRoom[4] = true;
+			numOfJoinedPlayers++;
 			Debug.Log ("Player 4 joined");
 		}
 	}
 	
 	private void setSelectionConfirmed() {
-		if (controllers[1].GetButtonPressed ("skill1") && isPlayerInRoom[1])
-			confirmSelection[1] = true;
-		if (controllers[2].GetButtonPressed ("skill1") && isPlayerInRoom[2])
-			confirmSelection[2] = true;
-		if (controllers[3].GetButtonPressed ("skill1") && isPlayerInRoom[3])
-			confirmSelection[3] = true;
-		if (controllers[4].GetButtonPressed ("skill1") && isPlayerInRoom[4])
-			confirmSelection[4] = true;
+		if (controllers[1].GetButtonPressed ("skill1") && isPlayerInRoom[1]) {
+			confirmButtonPressed[1] = true;
+			numOfConfirmedPlayers++;
+		}
+		if (controllers[2].GetButtonPressed ("skill1") && isPlayerInRoom[2]) {
+			confirmButtonPressed[2] = true;
+			numOfConfirmedPlayers++;
+		}
+		if (controllers[3].GetButtonPressed ("skill1") && isPlayerInRoom[3]) {
+			confirmButtonPressed[3] = true;
+			numOfConfirmedPlayers++;
+		}
+		if (controllers[4].GetButtonPressed ("skill1") && isPlayerInRoom[4]) {
+			confirmButtonPressed[4] = true;
+			numOfConfirmedPlayers++;
+		}
 	}
 	
 	private void navigateState() {
 		// left
-		if (controllers[1].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[1] && !confirmSelection[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[1] && !confirmButtonPressed[1])
 			navigateLeft[1] = true; 
-		if (controllers[2].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[2] && !confirmSelection[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[2] && !confirmButtonPressed[2])
 			navigateLeft[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[3] && !confirmSelection[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[3] && !confirmButtonPressed[3])
 			navigateLeft[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[4] && !confirmSelection[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[4] && !confirmButtonPressed[4])
 			navigateLeft[4] = true;
 		
 		// right
 		
-		if (controllers[1].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[1] && !confirmSelection[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[1] && !confirmButtonPressed[1])
 			navigateRight[1] = true;
-		if (controllers[2].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[2] && !confirmSelection[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[2] && !confirmButtonPressed[2])
 			navigateRight[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[3] && !confirmSelection[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[3] && !confirmButtonPressed[3])
 			navigateRight[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[4] && !confirmSelection[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[4] && !confirmButtonPressed[4])
 			navigateRight[4] = true;
 		
 		// up
-		if (controllers[1].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[1] && !confirmSelection[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[1] && !confirmButtonPressed[1])
 			navigateUp[1] = true;
-		if (controllers[2].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[2] && !confirmSelection[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[2] && !confirmButtonPressed[2])
 			navigateUp[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[3] && !confirmSelection[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[3] && !confirmButtonPressed[3])
 			navigateUp[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[4] && !confirmSelection[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[4] && !confirmButtonPressed[4])
 			navigateUp[4] = true;
 		
 		// down
-		if (controllers[1].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[1] && !confirmSelection[1])
+		if (controllers[1].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[1] && !confirmButtonPressed[1])
 			navigateDown[1] = true;
-		if (controllers[2].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[2] && !confirmSelection[2])
+		if (controllers[2].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[2] && !confirmButtonPressed[2])
 			navigateDown[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[3] && !confirmSelection[3])
+		if (controllers[3].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[3] && !confirmButtonPressed[3])
 			navigateDown[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[4] && !confirmSelection[4])
+		if (controllers[4].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[4] && !confirmButtonPressed[4])
 			navigateDown[4] = true;
 	}
 	
