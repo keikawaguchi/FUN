@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Map : MonoBehaviour {
 	
-	public int mapID = 1;
+	public int mapID;
 	
 	public GameObject[,] grid;
 	public GameObject[,] destructibleWallGrid;
@@ -12,6 +12,7 @@ public class Map : MonoBehaviour {
 
 	GridSystem gridSystem;
 	MapBuilder mapBuilder;
+	PlayerControls saveSelection;
 	
 	private int lastRespawnPoint = 0;	// keep track of last respawn index location
 	
@@ -156,10 +157,12 @@ public class Map : MonoBehaviour {
 	private void loadScripts() {
 		gridSystem = GetComponent<GridSystem>();
 		mapBuilder = GetComponent<MapBuilder>();
+		saveSelection = GameObject.Find ("Controls").GetComponent<PlayerControls>();
 	}
 	#endregion
 	
-	private void buildMap() {	
+	private void buildMap() {
+		mapID = saveSelection.mapNum;
 		int gridWidth = gridSystem.getGridWidth();
 		int gridHeight = gridSystem.getGridHeight();
 			

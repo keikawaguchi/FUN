@@ -18,7 +18,7 @@ public class PlayerControls : MonoBehaviour {
 	public int player3TEAM;
 	public int player4TEAM;
 	
-	public int mapInd;
+	public int mapNum;
 	// Use this for initialization
 	void Start () {
 		

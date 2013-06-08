@@ -2,17 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 public class MapSelection : MonoBehaviour {
+	private const string TEMP_MAP_ICON_PATH = "Textures/Maps/GoogleMapsIcon";
+	
+	private const int TOTAL_MAPS = 6;
+	
 	// Fonts
 	public Font titleFont;
-	public Font mapTitleFont;
-	
-	// map grid size
-	public int[,] gridSize = new int[,] {{1, 1}};
-	public string[] mapTitle = new string[] {"NULL"};
 	
 	// GUIStyle
 	private GUIStyle titleStyle;
-	private GUIStyle mapTitleStyle;
 	
 	// scaling
 	private Vector3 scale;
@@ -24,32 +22,35 @@ public class MapSelection : MonoBehaviour {
 	
 	// save the selected champions and teams
 	private PlayerControls saveSelection;
-		
-	private int selectedMapIndex;
+	
+	// maps info
+	GUIContent[] mapMenu;
+	GUIContent[] mapTitles;
+	Texture2D[] mapThumbnails;
+	
+	private float mapMenuWidth;
+	private float mapMenuHeight;
+	private Vector2 mapMenuPosition;
+	
+	private int currentSelectedMap = 0;
 	
 	// Use this for initialization
 	void Start () {
 		initializeVariables ();
 		
-		loadScripts ();
+		loadResources ();
 		setController ();
+		setMaps ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		int currentLevel = Application.loadedLevel;
-		
-		if (p1Controller.GetButtonPressed ("dropbomb")) {  // next
-			saveSelectionInfo ();
-			
-			Application.LoadLevel(++currentLevel);
-		}
-		else if (p1Controller.GetButtonPressed ("skill2"))  // back
-			Application.LoadLevel(--currentLevel);
+		updateMenuByController ();
+		handlePressedMenuButton ();
 	}
 	
 	private void OnGUI() {
-		if (titleFont != null && mapTitleFont != null) {
+		if (titleFont != null) {
 			setGUIStyle ();
 		
 			// begin scaling the contents
@@ -68,12 +69,30 @@ public class MapSelection : MonoBehaviour {
 	
 	private void initializeVariables() {
 		titleStyle = new GUIStyle();
-		mapTitleStyle = new GUIStyle();
+		
+		mapMenu = new GUIContent[TOTAL_MAPS];
+		mapTitles = new GUIContent[TOTAL_MAPS];
+		mapThumbnails = new Texture2D[1];  // need to change to TOTAL_MAPS when all thumbnails are done!!!!!!!!!!!!!!
+		
+		mapMenuHeight = Screen.height * 2;	// I don't know why this is working
+		mapMenuWidth = Screen.width / 2.5f;
+		mapMenuPosition = new Vector2(210, 150);
+		Debug.Log ("Width: " + Screen.width);
+		Debug.Log ("Height: " + Screen.height);
+		Debug.Log ("POS: " + mapMenuPosition);
 	}
 	
-	private void loadScripts() {
+	private void setMaps() {
+		for (int i = 0; i < TOTAL_MAPS; i++) {
+			mapMenu[i] = new GUIContent(mapThumbnails[0], "Map " + (i + 1));  // need to update this!!!!!!!!!!!!
+		}
+	}
+	
+	private void loadResources() {
 		p1Controller = gameObject.AddComponent<XInputController>();
 		saveSelection = GameObject.Find("Controls").GetComponent<PlayerControls>();
+		
+		mapThumbnails[0] = Resources.Load (TEMP_MAP_ICON_PATH) as Texture2D;  // need to update this!!!!!!!!!!!!!!!
 	}
 	
 	private void setController() {
@@ -83,15 +102,12 @@ public class MapSelection : MonoBehaviour {
 	private void setGUIStyle() {
 		// font style
 		titleStyle.font = titleFont;
-		mapTitleStyle.font = mapTitleFont;
 		
 		// font size
 		titleStyle.fontSize = 50;
-		mapTitleStyle.fontSize = 20;
 		
 		// font color
 		titleStyle.normal.textColor = new Color(255f, 128f, 0f, 100f);
-		mapTitleStyle.normal.textColor = Color.cyan;
 	}
 	
 	private void displayLayout() {
@@ -99,20 +115,34 @@ public class MapSelection : MonoBehaviour {
 		string title = "Map Selection";
 		GUI.Label (new Rect(250f, 0f, 0f, 0f), "Select Map", titleStyle);
 		
-		GUI.BeginGroup (new Rect(Screen.width/2 - 250f, Screen.height/2 - 125f, 500f, 250f));
-//		GUILayout.BeginArea(new Rect(Screen.width/2 - 250f, Screen.height/2 - 125f, 500f, 250f));
-		
-		
-		
-//		GUILayout.EndArea ();
-		GUI.EndGroup ();
+		GUI.SelectionGrid(new Rect(mapMenuPosition.x, mapMenuPosition.y, mapMenuWidth, mapMenuHeight / mapMenu.Length), 
+			currentSelectedMap, mapMenu, 3); 
 	}
 	
-	private void displayMiniMaps() {
-		
+	private void updateMenuByController() {
+		if (p1Controller.GetThumbstickDirectionOnce("right")) {
+			currentSelectedMap--;  // i don't know why this is -- not ++
+		}
+		if (p1Controller.GetThumbstickDirectionOnce("left")) {
+			currentSelectedMap++;
+		}
+		if (currentSelectedMap < 0) {
+			currentSelectedMap = mapMenu.Length - 1;
+		}
+		if (currentSelectedMap >= mapMenu.Length) {
+			currentSelectedMap = 0;
+		}
 	}
 	
-	private void saveSelectionInfo() {
-		saveSelection.mapInd = selectedMapIndex;
+	private void handlePressedMenuButton() {
+		int currentLevel = Application.loadedLevel;
+		
+		if (p1Controller.GetButtonPressed("a")) {  // start the game
+			saveSelection.mapNum = currentSelectedMap + 1;
+			Debug.Log ("Loading the game");
+			Application.LoadLevel(++currentLevel);
+		}
+		else if (p1Controller.GetButtonPressed ("b"))  // back
+			Application.LoadLevel(--currentLevel);
 	}
 }

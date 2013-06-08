@@ -78,7 +78,6 @@ public class ChampSelection : MonoBehaviour {
 	private int numOfJoinedPlayers;
 	private bool[] buttonXPressed;
 	private bool[] buttonYPressed;
-//	public string[] mapTitle = new string[] {"NULL"};
 	private bool[] champNotAvailable;
 	
 	// Use this for initialization
@@ -101,13 +100,13 @@ public class ChampSelection : MonoBehaviour {
 	void Update() {
 		int currentLevel = Application.loadedLevel;
 		
-		if (controllers[1].GetButtonPressed ("dropbomb") && numOfConfirmedPlayers > 0 &&
+		if (controllers[1].GetButtonPressed ("a") && numOfConfirmedPlayers > 0 &&
 			numOfConfirmedPlayers == numOfJoinedPlayers && isPlayerInRoom[controllers[1].GetControllerNumber ()]) {  // next
 			saveSelectionInfo ();
 			
 			Application.LoadLevel(++currentLevel);
 		}
-		else if (controllers[1].GetButtonPressed ("skill2"))  // back
+		else if (controllers[1].GetButtonPressed ("b"))  // back
 			Application.LoadLevel(--currentLevel);
 	}
 	
@@ -442,7 +441,7 @@ public class ChampSelection : MonoBehaviour {
 	private void setPlayerJoined() {
 		// don't need a loop to set this to waste time complexity
 		for (int i = 1; i <= MAX_PLAYERS; i++) {
-			if (controllers[i].GetButtonPressed ("skill3") && !buttonYPressed[i]) {
+			if (controllers[i].GetButtonPressed ("y") && !buttonYPressed[i]) {
 				isPlayerInRoom[i] = true;
 				buttonYPressed[i] = true;
 				numOfJoinedPlayers++;
@@ -453,7 +452,7 @@ public class ChampSelection : MonoBehaviour {
 	
 	private void setSelectionConfirmed() {
 		for (int i = 1; i <= MAX_PLAYERS; i++) {
-			if (controllers[i].GetButtonPressed ("skill1") && isPlayerInRoom[i] && !buttonXPressed[i]) {
+			if (controllers[i].GetButtonPressed ("x") && isPlayerInRoom[i] && !buttonXPressed[i]) {
 				if (champNotAvailable[currentSelectedChampIndex[controllers[i].GetControllerNumber ()]])
 					return;
 				confirmButtonPressed[i] = true;
