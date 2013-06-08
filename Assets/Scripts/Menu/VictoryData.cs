@@ -33,6 +33,8 @@ public class VictoryData : MonoBehaviour {
 	public int KiritoNumOfKills = -1;
 	public int KiritoNumOfDeaths = -1;
 	
+	public bool winnerIsTeam;
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -45,6 +47,7 @@ public class VictoryData : MonoBehaviour {
 	
 	public void GetData()
 	{
+		winnerIsTeam = GameObject.Find ("Game Manager").GetComponent<GameManager>().winnerIsTeam;
 		if(GameObject.Find("Albion") != null)
 		{
 			Albion = GameObject.Find("Albion").GetComponent<Hero>();

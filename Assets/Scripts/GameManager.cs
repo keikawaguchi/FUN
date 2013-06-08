@@ -4,6 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 	private int winner;
 	private bool foundWinner = false;
+	public bool winnerIsTeam = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -104,9 +105,11 @@ public class GameManager : MonoBehaviour {
 			if (numOfPlayers > 1) { 		// team won
 				winner = champTeamNum;
 				Debug.Log ("Team " + champTeamNum + " WON!");
+				winnerIsTeam = true;
 			} else {						// player won
 				winner = champPlayerNum;
 				Debug.Log ("Player " + champPlayerNum + " WON!");
+				winnerIsTeam = false;
 			}
 			GameObject.Find("Mule").GetComponent<VictoryData>().GetData();
 			foundWinner = true;
