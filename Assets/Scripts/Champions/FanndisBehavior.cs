@@ -32,12 +32,6 @@ public class FanndisBehavior : MonoBehaviour {
 		loadResources();
 		loadAnimation();
 		
-		
-		GameObject a = Resources.Load ("Prefabs/Team/RedTeamRing") as GameObject;
-		a = Instantiate (a) as GameObject;
-		a.GetComponent<Animation>().attachToObject (gameObject);
-		a.GetComponent<Animation>().setCustomOffset(new Vector3(0, -1, 5));
-		
 		skillOneCDViewer = Instantiate(skillOneCDPrefab) as GameObject;
 		skillTwoCDViewer = Instantiate(skillTwoCDPrefab) as GameObject;
 	}
