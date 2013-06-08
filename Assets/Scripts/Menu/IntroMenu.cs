@@ -3,8 +3,9 @@ using System.Collections;
 
 public class IntroMenu : MonoBehaviour {
 	
-	public float menuWidth;
-	public float menuHeight;
+	private float menuWidth;
+	private float menuHeight;
+	private Vector2 menuPosition;
 	
 	private Texture2D menuBG;
 	private Texture2D menuBGHover;
@@ -38,6 +39,10 @@ public class IntroMenu : MonoBehaviour {
 		menuItems[2] = new GUIContent("Options", "options");
 		menuItems[3] = new GUIContent("Credits", "credits");
 		menuItems[4] = new GUIContent("Quit", "quit");
+		
+		menuHeight = Screen.height * 2;	// I don't know why this is working
+		menuWidth = Screen.width / 3;
+		menuPosition = new Vector2(Screen.width / 2 - menuWidth / 2, Screen.height / 2);
 	}
 	
 	private void loadResources() {
@@ -47,21 +52,19 @@ public class IntroMenu : MonoBehaviour {
 	}
 	
 	private void setMenuStyle() {
-		// normal gui styles
-		GUI.skin.button.normal.textColor = Color.white;
 		GUI.skin.button.fontSize = 25;
+		
+		// normal gui styles
+		GUI.skin.button.normal.textColor = Color.white;	
 		GUI.skin.button.normal.background = menuBG;
 		
 		// on hover gui styles
 		GUI.skin.button.hover.textColor = Color.white;
 		GUI.skin.button.hover.background = menuBGHover;
-		
-		GUI.FocusControl("Play");
-		GUI.skin.button.focused.background = menuBGHover;
 	}
 	
 	private void buildMenu() {
-		GUI.SelectionGrid(new Rect(Screen.width / 2 - menuWidth / 2, Screen.height / 2 - menuHeight / 2, menuWidth, menuHeight * menuItems.Length), 
+		GUI.SelectionGrid(new Rect(menuPosition.x, menuPosition.y, menuWidth, menuHeight / menuItems.Length), 
 			currentSelectedItem, menuItems, 1); 
 
 	}
