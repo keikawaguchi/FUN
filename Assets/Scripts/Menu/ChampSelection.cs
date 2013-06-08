@@ -441,29 +441,13 @@ public class ChampSelection : MonoBehaviour {
 	
 	private void setPlayerJoined() {
 		// don't need a loop to set this to waste time complexity
-		if (controllers[1].GetButtonPressed ("skill3") && !buttonYPressed[1]) {
-			isPlayerInRoom[1] = true;
-			buttonYPressed[1] = true;
-			numOfJoinedPlayers++;
-			Debug.Log ("Player 1 joined");
-		}
-		if (controllers[2].GetButtonPressed ("skill3") && !buttonYPressed[2]) {
-			isPlayerInRoom[2] = true;
-			buttonYPressed[2] = true;
-			numOfJoinedPlayers++;
-			Debug.Log ("Player 2 joined");
-		}
-		if (controllers[3].GetButtonPressed ("skill3") && !buttonYPressed[3]) {
-			isPlayerInRoom[3] = true;
-			buttonYPressed[3] = true;
-			numOfJoinedPlayers++;
-			Debug.Log ("Player 3 joined");
-		}
-		if (controllers[4].GetButtonPressed ("skill3") && !buttonYPressed[4]) {
-			isPlayerInRoom[4] = true;
-			buttonYPressed[4] = true;
-			numOfJoinedPlayers++;
-			Debug.Log ("Player 4 joined");
+		for (int i = 1; i <= MAX_PLAYERS; i++) {
+			if (controllers[i].GetButtonPressed ("skill3") && !buttonYPressed[i]) {
+				isPlayerInRoom[i] = true;
+				buttonYPressed[i] = true;
+				numOfJoinedPlayers++;
+				Debug.Log ("Player " + i + " joined");
+			}
 		}
 	}
 	
@@ -482,45 +466,28 @@ public class ChampSelection : MonoBehaviour {
 	
 	private void navigateState() {
 		// left
-		if (controllers[1].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[1] && !confirmButtonPressed[1])
-			navigateLeft[1] = true; 
-		if (controllers[2].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[2] && !confirmButtonPressed[2])
-			navigateLeft[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[3] && !confirmButtonPressed[3])
-			navigateLeft[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[4] && !confirmButtonPressed[4])
-			navigateLeft[4] = true;
+		for (int i = 1; i <= MAX_PLAYERS; i++) {
+			if (controllers[i].GetThumbstickDirectionOnce ("left") && isPlayerInRoom[i] && !confirmButtonPressed[i])
+				navigateLeft[i] = true; 
+		}
 		
 		// right
-		
-		if (controllers[1].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[1] && !confirmButtonPressed[1])
-			navigateRight[1] = true;
-		if (controllers[2].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[2] && !confirmButtonPressed[2])
-			navigateRight[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[3] && !confirmButtonPressed[3])
-			navigateRight[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[4] && !confirmButtonPressed[4])
-			navigateRight[4] = true;
+		for (int i = 1; i <= MAX_PLAYERS; i++) {
+			if (controllers[i].GetThumbstickDirectionOnce ("right") && isPlayerInRoom[i] && !confirmButtonPressed[i])
+				navigateRight[i] = true; 
+		}
 		
 		// up
-		if (controllers[1].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[1] && !confirmButtonPressed[1])
-			navigateUp[1] = true;
-		if (controllers[2].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[2] && !confirmButtonPressed[2])
-			navigateUp[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[3] && !confirmButtonPressed[3])
-			navigateUp[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[4] && !confirmButtonPressed[4])
-			navigateUp[4] = true;
+		for (int i = 1; i <= MAX_PLAYERS; i++) {
+			if (controllers[i].GetThumbstickDirectionOnce ("up") && isPlayerInRoom[i] && !confirmButtonPressed[i])
+				navigateUp[i] = true; 
+		}
 		
 		// down
-		if (controllers[1].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[1] && !confirmButtonPressed[1])
-			navigateDown[1] = true;
-		if (controllers[2].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[2] && !confirmButtonPressed[2])
-			navigateDown[2] = true;
-		if (controllers[3].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[3] && !confirmButtonPressed[3])
-			navigateDown[3] = true;
-		if (controllers[4].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[4] && !confirmButtonPressed[4])
-			navigateDown[4] = true;
+		for (int i = 1; i <= MAX_PLAYERS; i++) {
+			if (controllers[i].GetThumbstickDirectionOnce ("down") && isPlayerInRoom[i] && !confirmButtonPressed[i])
+				navigateDown[i] = true; 
+		}
 	}
 	
 	private void saveSelectionInfo() {
