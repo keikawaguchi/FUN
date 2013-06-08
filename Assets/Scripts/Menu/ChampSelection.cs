@@ -420,11 +420,12 @@ public class ChampSelection : MonoBehaviour {
 	private void setSelectionConfirmed() {
 		for (int i = 1; i <= MAX_PLAYERS; i++) {
 			if (controllers[i].GetButtonPressed ("x") && isPlayerInRoom[i] && !buttonXPressed[i]) {
-				if (champNotAvailable[currentSelectedChampIndex[controllers[i].GetControllerNumber ()]])
-					return;
+//				for (int j = 1; j <= MAX_PLAYERS; j++)
+					if (champNotAvailable[currentSelectedChampIndex[controllers[i].GetControllerNumber ()]])
+						return;
 				confirmButtonPressed[i] = true;
 				buttonXPressed[i] = true;
-				champNotAvailable[currentSelectedChampIndex[controllers[1].GetControllerNumber ()]] = true;
+				champNotAvailable[currentSelectedChampIndex[controllers[i].GetControllerNumber ()]] = true;
 				numOfConfirmedPlayers++;
 			}
 		}

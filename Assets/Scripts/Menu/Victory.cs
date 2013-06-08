@@ -42,29 +42,21 @@ public class Victory : MonoBehaviour {
 	
 
 	
-	//Fonts
-	public Font titleFont;
-	public Font bodyFont;
-	
 	// GUIStyle
-	private GUIStyle titleStyle;
-	private GUIStyle playerTagStyle;
-	private GUIStyle bodyStyle;
+	public GUIStyle titleStyle;
+	public GUIStyle playerTagStyle;
+	public GUIStyle bodyStyle;
 	
 	float originalWidth = 800;
 	float originalHeight = 600;
 	Vector3 scale;
 	// Use this for initialization
 	void Start () {
-		titleStyle = new GUIStyle();
-		playerTagStyle = new GUIStyle();
-		bodyStyle = new GUIStyle();
 		GameObject managerObj = GameObject.Find ("Game Manager");
 		manager = managerObj.GetComponent<GameManager>();
 		VD = GameObject.Find("Mule").GetComponent<VictoryData>();
 		
 		setData();
-		setGUIStyle();
 	}
 	void Update()
 	{
@@ -78,11 +70,11 @@ public class Victory : MonoBehaviour {
     	var svMat = GUI.matrix; // save current matrix
 		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
 		if(winnerPlayerNum == 0)
-			GUI.Label(new Rect(350,100,100,100),"No Winner",titleStyle);
+			GUI.Label(new Rect(150,100,100,100),"No Winner",titleStyle);
 		else if(VD.winnerIsTeam == true)
-			GUI.Label(new Rect(350,100,100,100),"Team "+winnerPlayerNum+" Victory",titleStyle);
+			GUI.Label(new Rect(150,100,100,100),"Team "+winnerPlayerNum+" Victory",titleStyle);
 		else
-			GUI.Label(new Rect(350,100,100,100),"Player "+winnerPlayerNum+" Victory",titleStyle);
+			GUI.Label(new Rect(150,100,100,100),"Player "+winnerPlayerNum+" Victory",titleStyle);
 		
 		displaySolo();
 		displayTeam1();
@@ -350,26 +342,5 @@ public class Victory : MonoBehaviour {
 		MerliniPlayerNumber = VD.MerliniPlayerNumber;
 		FanndisPlayerNumber = VD.FanndisPlayerNumber;
 		KiritoPlayerNumber = VD.KiritoPlayerNumber;
-	}
-	
-	private void setGUIStyle() {
-		
-		// font style
-		titleStyle.font = titleFont;
-		playerTagStyle.font = bodyFont;
-		bodyStyle.font = bodyFont;
-		
-		// font size
-		titleStyle.fontSize = 50;
-		playerTagStyle.fontSize = 30;
-		bodyStyle.fontSize = 25;
-		
-		// font color
-		titleStyle.normal.textColor = new Color(255f, 128f, 0f, 100f);
-		playerTagStyle.normal.textColor = Color.cyan;
-		bodyStyle.normal.textColor = Color.white;
-		
-		// wrap the text
-		bodyStyle.wordWrap = true;
 	}
 }
