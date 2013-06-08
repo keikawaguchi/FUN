@@ -3,13 +3,14 @@ using System.Collections;
 
 public class IntroMenu : MonoBehaviour {
 	
+	public GUIStyle style;
+	public GUIStyle hoverStyle;
 	private float menuWidth;
 	private float menuHeight;
 	private Vector2 menuPosition;
 	
 	private Texture2D menuBG;
 	private Texture2D menuBGHover;
-	private GUIStyle style;
 	
 	private int currentSelectedItem = 0;
 	GUIContent[] menuItems;
@@ -28,11 +29,10 @@ public class IntroMenu : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		setMenuStyle();
 		buildMenu();
 	}
 	
-	private void initMenu() {
+	private void initMenu() {	
 		menuItems = new GUIContent[5];
 		menuItems[0] = new GUIContent("Play", "play");
 		menuItems[1] = new GUIContent("Tutorial", "tutorial");
@@ -40,33 +40,24 @@ public class IntroMenu : MonoBehaviour {
 		menuItems[3] = new GUIContent("Credits", "credits");
 		menuItems[4] = new GUIContent("Quit", "quit");
 		
-		menuHeight = Screen.height * 2;	// I don't know why this is working
+		menuHeight = Screen.height / 2.5f;
 		menuWidth = Screen.width / 3;
-		menuPosition = new Vector2(Screen.width / 2 - menuWidth / 2, Screen.height / 2);
+		menuPosition = new Vector2(Screen.width / 2 - menuWidth / 2, Screen.height / 2.5f);
 	}
 	
 	private void loadResources() {
-		menuBG = Resources.Load ("Textures/Menu/MenuButtonBG") as Texture2D;	
-		menuBGHover = Resources.Load ("Textures/Menu/MenuButtonBGHover") as Texture2D;
 		controller = GetComponent<XInputController>();
 	}
 	
-	private void setMenuStyle() {
-		GUI.skin.button.fontSize = 25;
-		
-		// normal gui styles
-		GUI.skin.button.normal.textColor = Color.white;	
-		GUI.skin.button.normal.background = menuBG;
-		
-		// on hover gui styles
-		GUI.skin.button.hover.textColor = Color.white;
-		GUI.skin.button.hover.background = menuBGHover;
-	}
-	
 	private void buildMenu() {
-		GUI.SelectionGrid(new Rect(menuPosition.x, menuPosition.y, menuWidth, menuHeight / menuItems.Length), 
-			currentSelectedItem, menuItems, 1); 
-
+		GUIStyle style;
+		for (int i = 0; i < menuItems.Length; i++) {
+			style = this.style;
+			if (currentSelectedItem == i) {
+				style = this.hoverStyle;
+			}
+			GUI.Button(new Rect(menuPosition.x, menuPosition.y + (menuHeight / menuItems.Length) * i + style.margin.bottom, menuWidth, menuHeight / menuItems.Length), menuItems[i], style);
+		}
 	}
 	
 	private void updateMenuByController() {
