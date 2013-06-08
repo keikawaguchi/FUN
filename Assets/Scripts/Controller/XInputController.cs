@@ -236,6 +236,7 @@ public class XInputController : MonoBehaviour {
 	
 	//////////////////////////////////////////////////////////
 	/// TEMPORARY KEYBOARD INPUT FUNCTIONALITY
+	/// Note: Only works for controller 1 and 2
 	//////////////////////////////////////////////////////////
 	
 	OrderedDictionary buttons;
@@ -252,6 +253,10 @@ public class XInputController : MonoBehaviour {
 	}
 	
 	public bool GetButtonPressedKeyboard(string button) {
+		if (playerIndexToInt(controllerNumber) > 2) {
+			return false;
+		}
+		
 		if (buttons == null) {
 			calculateKeyboardBindings();
 		}
@@ -262,6 +267,10 @@ public class XInputController : MonoBehaviour {
 	}
 	
 	public Vector2 GetAxisKeyboard() {
+		if (playerIndexToInt(controllerNumber) > 2) {
+			return new Vector2(0, 0);
+		}
+		
 		if (buttons == null) {
 			calculateKeyboardBindings();
 		}
