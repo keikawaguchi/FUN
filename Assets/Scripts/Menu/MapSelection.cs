@@ -6,11 +6,8 @@ public class MapSelection : MonoBehaviour {
 	
 	private const int TOTAL_MAPS = 6;
 	
-	// Fonts
-	public Font titleFont;
-	
 	// GUIStyle
-	private GUIStyle titleStyle;
+	public GUIStyle titleStyle;
 	
 	// scaling
 	private Vector3 scale;
@@ -50,26 +47,20 @@ public class MapSelection : MonoBehaviour {
 	}
 	
 	private void OnGUI() {
-		if (titleFont != null) {
-			setGUIStyle ();
+		// begin scaling the contents
+		scale.x = Screen.width/originalWidth;  // calculate hor scale
+    	scale.y = Screen.height/originalHeight;  // calculate vert scale
+    	scale.z = 1;
+    	var saveMatrix = GUI.matrix;  // save current matrix
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
 		
-			// begin scaling the contents
-			scale.x = Screen.width/originalWidth;  // calculate hor scale
-	    	scale.y = Screen.height/originalHeight;  // calculate vert scale
-	    	scale.z = 1;
-	    	var saveMatrix = GUI.matrix;  // save current matrix
-			GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
-			
-			displayLayout ();  // display the whole champion selection layout
-			
-			GUI.matrix = saveMatrix;
-			// end scaling the contents
-		}
+		displayLayout ();  // display the whole champion selection layout
+		
+		GUI.matrix = saveMatrix;
+		// end scaling the contents
 	}
 	
 	private void initializeVariables() {
-		titleStyle = new GUIStyle();
-		
 		mapMenu = new GUIContent[TOTAL_MAPS];
 		mapTitles = new GUIContent[TOTAL_MAPS];
 		mapThumbnails = new Texture2D[1];  // need to change to TOTAL_MAPS when all thumbnails are done!!!!!!!!!!!!!!
@@ -79,7 +70,7 @@ public class MapSelection : MonoBehaviour {
 		mapMenuPosition = new Vector2(210, 150);
 		Debug.Log ("Width: " + Screen.width);
 		Debug.Log ("Height: " + Screen.height);
-		Debug.Log ("POS: " + mapMenuPosition);
+		Debug.Log ("Pos: " + mapMenuPosition);
 	}
 	
 	private void setMaps() {
@@ -99,20 +90,8 @@ public class MapSelection : MonoBehaviour {
 		p1Controller.SetControllerNumber (1);
 	}
 	
-	private void setGUIStyle() {
-		// font style
-		titleStyle.font = titleFont;
-		
-		// font size
-		titleStyle.fontSize = 50;
-		
-		// font color
-		titleStyle.normal.textColor = new Color(255f, 128f, 0f, 100f);
-	}
-	
 	private void displayLayout() {
 		// title
-		string title = "Map Selection";
 		GUI.Label (new Rect(250f, 0f, 0f, 0f), "Select Map", titleStyle);
 		
 		GUI.SelectionGrid(new Rect(mapMenuPosition.x, mapMenuPosition.y, mapMenuWidth, mapMenuHeight / mapMenu.Length), 

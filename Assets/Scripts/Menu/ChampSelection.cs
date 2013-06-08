@@ -23,14 +23,10 @@ public class ChampSelection : MonoBehaviour {
 	private const int MAX_PLAYERS = 4;
 	private const int TOTAL_AVAILABLE_CHAMPS = 5;
 	
-	// Fonts
-	public Font titleFont;
-	public Font bodyFont;
-	
 	// GUIStyle
-	private GUIStyle titleStyle;
-	private GUIStyle playerTagStyle;
-	private GUIStyle bodyStyle;
+	public GUIStyle titleStyle;
+	public GUIStyle playerTagStyle;
+	public GUIStyle bodyStyle;
 	
 	
 	// selected info
@@ -84,7 +80,6 @@ public class ChampSelection : MonoBehaviour {
 	void Start () {
 		initializeVariables ();
 		
-//		Debug.Log ("Size: " + mapTitle.GetLength(1));
 		loadScripts ();
 		loadTextures ();
 		
@@ -115,28 +110,20 @@ public class ChampSelection : MonoBehaviour {
 		setSelectionConfirmed ();
 		navigateState ();
 		
-		if (titleFont != null && bodyFont != null) {
-			setGUIStyle ();
+		// begin scaling the contents
+		scale.x = Screen.width/originalWidth;  // calculate hor scale
+    	scale.y = Screen.height/originalHeight;  // calculate vert scale
+    	scale.z = 1;
+    	var saveMatrix = GUI.matrix;  // save current matrix
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
 		
-			// begin scaling the contents
-			scale.x = Screen.width/originalWidth;  // calculate hor scale
-	    	scale.y = Screen.height/originalHeight;  // calculate vert scale
-	    	scale.z = 1;
-	    	var saveMatrix = GUI.matrix;  // save current matrix
-			GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
-			
-			displayLayout ();  // display the whole champion selection layout
-			
-			GUI.matrix = saveMatrix;
-			// end scaling the contents
-		}
+		displayLayout ();  // display the whole champion selection layout
+		
+		GUI.matrix = saveMatrix;
+		// end scaling the contents
 	}
 	
 	private void initializeVariables() {
-		titleStyle = new GUIStyle();
-		playerTagStyle = new GUIStyle();
-		bodyStyle = new GUIStyle();
-		
 		// index 0 is not used
 		controllers = new XInputController[MAX_PLAYERS + 1];
 		confirmButtonPressed = new bool[MAX_PLAYERS + 1];
@@ -240,26 +227,6 @@ public class ChampSelection : MonoBehaviour {
 			displayedChamSkillsDesctip[i] = champSkillsDescrip[1];
 			displayedTeamTexture[i] = teamTextures[0];
 		}
-	}
-	
-	private void setGUIStyle() {
-		// font style
-		titleStyle.font = titleFont;
-		playerTagStyle.font = bodyFont;
-		bodyStyle.font = bodyFont;
-		
-		// font size
-		titleStyle.fontSize = 50;
-		playerTagStyle.fontSize = 20;
-		bodyStyle.fontSize = 15;
-		
-		// font color
-		titleStyle.normal.textColor = new Color(255f, 128f, 0f, 100f);
-		playerTagStyle.normal.textColor = Color.cyan;
-		bodyStyle.normal.textColor = Color.white;
-		
-		// wrap the text
-		bodyStyle.wordWrap = true;
 	}
 	
 	private void displayLayout() {
