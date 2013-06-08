@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-	private string winner;
+	private int winner;
 	private bool foundWinner = false;
 	
 	// Use this for initialization
@@ -102,13 +102,13 @@ public class GameManager : MonoBehaviour {
 		
 		if (winnerFound) {
 			if (numOfPlayers > 1) { 		// team won
-				winner = "Team " + champTeamNum;
+				winner = champTeamNum;
 				Debug.Log ("Team " + champTeamNum + " WON!");
 			} else {						// player won
-				winner = "Player " + champPlayerNum;
+				winner = champPlayerNum;
 				Debug.Log ("Player " + champPlayerNum + " WON!");
 			}
-			
+			GameObject.Find("Mule").GetComponent<VictoryData>().GetData();
 			foundWinner = true;
 			return winnerFound;
 		}
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour {
 		return winnerFound;
 	}
 	
-	public string getWinner() {
+	public int getWinner() {
 		return winner;
 	}
 	
