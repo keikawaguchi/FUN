@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Animation : MonoBehaviour {
 	
-	public GameObject objectToFollow;
+	private GameObject objectToFollow;
 	private string alignment;
 	private Vector3 customAnimationOffset;
 	
