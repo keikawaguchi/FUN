@@ -95,7 +95,7 @@ public class Victory : MonoBehaviour {
 	{
 		if(AlbionTeamNumber == 0 || TemptressTeamNumber == 0 || MerliniTeamNumber == 0 || FanndisTeamNumber == 0 || KiritoTeamNumber == 0)
 		{
-			GUI.Label(new Rect(349,225,100,100),"Solo",playerTagStyle);
+			GUI.Label(new Rect(270,225,100,100),"Solo",playerTagStyle);
 			GUI.Label(new Rect(368,275,100,100),"Kills",bodyStyle);
 			GUI.Label(new Rect(448,275,100,100),"Deaths",bodyStyle);
 			if(AlbionTeamNumber == 0)
@@ -172,7 +172,7 @@ public class Victory : MonoBehaviour {
 	{
 		if(AlbionTeamNumber == 1 || TemptressTeamNumber == 1 || MerliniTeamNumber == 1 || FanndisTeamNumber == 1 || KiritoTeamNumber == 1)
 		{
-			GUI.Label(new Rect(83,225,100,100),"Team 1",playerTagStyle);
+			GUI.Label(new Rect(5,225,100,100),"Team 1",playerTagStyle);
 			GUI.Label(new Rect(102,275,100,100),"Kills",bodyStyle);
 			GUI.Label(new Rect(170,275,100,100),"Deaths",bodyStyle);
 			if(AlbionTeamNumber == 1)
@@ -249,7 +249,7 @@ public class Victory : MonoBehaviour {
 	{
 		if(AlbionTeamNumber == 2 || TemptressTeamNumber == 2 || MerliniTeamNumber == 2 || FanndisTeamNumber == 2 || KiritoTeamNumber == 2)
 		{
-			GUI.Label(new Rect(616,225,100,100),"Team 2",playerTagStyle);
+			GUI.Label(new Rect(545,225,100,100),"Team 2",playerTagStyle);
 			GUI.Label(new Rect(647,275,100,100),"Kills",bodyStyle);
 			GUI.Label(new Rect(715,275,100,100),"Deaths",bodyStyle);
 			if(AlbionTeamNumber == 2)
