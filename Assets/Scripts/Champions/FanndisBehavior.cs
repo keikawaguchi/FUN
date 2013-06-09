@@ -3,6 +3,7 @@ using System.Collections;
 
 public class FanndisBehavior : MonoBehaviour {
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
+	private const string ICEAGE_PREFAB_PATH = "Prefabs/Skills/IceAge";
 	
 	private const string IDLE_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Fanndis/FanndisIdleSpritesheet";
 	private const string RUNNING_TEXTURE_PATH = "Textures/SpriteSheets/Characters/Fanndis/FanndisRunningSpritesheet";
@@ -18,9 +19,11 @@ public class FanndisBehavior : MonoBehaviour {
 	private CharacterMovement characterMovement;
 	private XInputController controller;
 	private ZeroFriction zeroFriction;
-	private IceAge iceAge;
 	private float iceAgeDestroyTimer;
 	private GameObject animation;
+	
+	private GameObject iceAgePrefab;
+	private GameObject iceAge;
 	
 	// view cooldown
 	private GameObject skillOneCDPrefab;
@@ -62,6 +65,7 @@ public class FanndisBehavior : MonoBehaviour {
 		characterMovement = GetComponent<CharacterMovement>();
 		controller = GetComponent<XInputController>();
 		zeroFriction = gameObject.AddComponent<ZeroFriction>();
+		iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
 		
 		skillOneCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 		skillTwoCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
@@ -90,8 +94,6 @@ public class FanndisBehavior : MonoBehaviour {
 	#region Character Skills
 	private void zeroFictionTriggered() {
 		if (Time.time - zeroFrictionTimer > skillOneCD) {
-			// skill 1 here
-			Debug.Log("Skill One Triggered!");
 			zeroFriction.triggerZeroFriction(gameObject);
 			
 			// keep track of cooldown timer
@@ -101,10 +103,13 @@ public class FanndisBehavior : MonoBehaviour {
 	
 	private void iceAgeTriggered() {
 		if (Time.time - iceAgeTimer > skillTwoCD) {
-			// skill 2 here
-			Debug.Log("Skill Two Triggered!");
-			iceAge = gameObject.AddComponent<IceAge>();
-			iceAge.setOwner (gameObject);
+			
+			iceAge = Instantiate (iceAgePrefab) as GameObject;
+			iceAge.GetComponent<IceAge>().SetOwner(this);
+			iceAge.transform.position = transform.position;
+			Debug.Log (iceAge.transform.position);
+			iceAge.transform.forward = characterMovement.getAimDirection();
+
 			
 			// keep track of cooldown timer
 			iceAgeTimer = Time.time;

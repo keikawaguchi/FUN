@@ -3,50 +3,50 @@ using System.Collections;
 
 public class IceAge : MonoBehaviour {
 	private const string PLAYER_TAG = "Player";
-	private const string ICEAGE_PREFAB_PATH = "Prefabs/Skills/IceAge";
+	
 	private const float ICE_AGE_DURATION = 3f;
 	private const string ICEAGE_SFX_PATH = "Audio/SFX/iceCracking";
 	
 	private GameObject owner;
 	private GameObject iceAgePrefab;
 	private GameObject iceAgeObj;
-//	private IndestructubleWall iceAge;
-	private float singleGridSize;
-	private bool skillTriggered;
+
+
 	private AudioClip iceAgeSFX;
-	
-	private Map map;
-	private GridSystem gridSystem;
+
 	private CharacterMovement characterMovement;
 	
 	
 	// Use this for initialization
 	void Start () {
 		loadScripts ();	
-		singleGridSize = gridSystem.getSingleGridWidth();
-		skillTriggered = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		//if(Input.GetButtonDown(controller.getButton("Skill2")))
-		if (skillTriggered) {
-			constructIceAge();
-		}
-		
-		
-		skillTriggered = false;
+
 	}
 	
 	private void loadScripts() {
-		GameObject mapObj = GameObject.Find ("Map");	
-		map = mapObj.GetComponent<Map>();
-		gridSystem = mapObj.GetComponent<GridSystem>();
 		characterMovement = GetComponent<CharacterMovement>();
-		iceAgeSFX = Resources.Load (ICEAGE_SFX_PATH)as AudioClip;
+		iceAgeSFX = Resources.Load (ICEAGE_SFX_PATH) as AudioClip;
 	}
 	
+	private void constructIceAge() {
+		Vector3 aimDirection = characterMovement.getAimDirection ();
+	}
+	
+	public void SetOwner(GameObject owner) {
+		this.owner = owner;
+	}
+	
+	public float getIceAgeDuration() {
+		return ICE_AGE_DURATION;
+	}
+	
+	/*
+	 * Old Ice Age
+	 *
 	private void constructIceAge() {
 		Vector3[] iceAge = new Vector3[3];
 //		Vector3 iceAgePos = owner.transform.position;
@@ -102,12 +102,5 @@ public class IceAge : MonoBehaviour {
 			Destroy (iceAgeObj, 3f);  // destroy the ice wall after 3 seconds
 		}
 	}
-	
-	public void setOwner(GameObject owner) {
-		this.owner = owner;
-	}
-	
-	public float getIceAgeDuration() {
-		return ICE_AGE_DURATION;
-	}
+	*/
 }
