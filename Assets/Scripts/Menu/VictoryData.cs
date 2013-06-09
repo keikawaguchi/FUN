@@ -8,32 +8,33 @@ public class VictoryData : MonoBehaviour {
 	Hero Merlini;
 	Hero Fanndis;
 	Hero Kirito;
-	public int AlbionPlayerNumber = -1;
-	public int AlbionTeamNumber = -1;
-	public int AlbionNumOfKills = -1;
-	public int AlbionNumOfDeaths = -1;
+	public int AlbionPlayerNumber;
+	public int AlbionTeamNumber = -999;
+	public int AlbionNumOfKills;
+	public int AlbionNumOfDeaths;
 	
-	public int TemptressPlayerNumber = -1;
-	public int TemptressTeamNumber = -1;
-	public int TemptressNumOfKills = -1;
-	public int TemptressNumOfDeaths = -1;
+	public int TemptressPlayerNumber;
+	public int TemptressTeamNumber = -999;
+	public int TemptressNumOfKills;
+	public int TemptressNumOfDeaths;
 	
-	public int MerliniPlayerNumber = -1;
-	public int MerliniTeamNumber = -1;
-	public int MerliniNumOfKills = -1;
-	public int MerliniNumOfDeaths = -1;
+	public int MerliniPlayerNumber;
+	public int MerliniTeamNumber = -999;
+	public int MerliniNumOfKills;
+	public int MerliniNumOfDeaths;
 	
-	public int FanndisPlayerNumber = -1;
-	public int FanndisTeamNumber = -1;
-	public int FanndisNumOfKills = -1;
-	public int FanndisNumOfDeaths = -1;
+	public int FanndisPlayerNumber;
+	public int FanndisTeamNumber = -999;
+	public int FanndisNumOfKills;
+	public int FanndisNumOfDeaths;
 	
-	public int KiritoPlayerNumber = -1;
-	public int KiritoTeamNumber = -1;
-	public int KiritoNumOfKills = -1;
-	public int KiritoNumOfDeaths = -1;
+	public int KiritoPlayerNumber;
+	public int KiritoTeamNumber = -999;
+	public int KiritoNumOfKills;
+	public int KiritoNumOfDeaths;
 	
 	public bool winnerIsTeam;
+	public int winnerNum;
 	
 	// Use this for initialization
 	void Start () 
@@ -48,6 +49,7 @@ public class VictoryData : MonoBehaviour {
 	public void GetData()
 	{
 		winnerIsTeam = GameObject.Find ("Game Manager").GetComponent<GameManager>().winnerIsTeam;
+		winnerNum = GameObject.Find ("Game Manager").GetComponent<GameManager>().winner;
 		if(GameObject.Find("Albion") != null)
 		{
 			Albion = GameObject.Find("Albion").GetComponent<Hero>();

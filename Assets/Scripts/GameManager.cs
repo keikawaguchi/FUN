@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-	private int winner;
+	public int winner;
 	private bool foundWinner = false;
-	public bool winnerIsTeam = false;
+	public bool winnerIsTeam;
 	
 	// Use this for initialization
 	void Start () {

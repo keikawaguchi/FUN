@@ -55,7 +55,7 @@ public class Victory : MonoBehaviour {
 		GameObject managerObj = GameObject.Find ("Game Manager");
 		manager = managerObj.GetComponent<GameManager>();
 		VD = GameObject.Find("Mule").GetComponent<VictoryData>();
-		
+		winnerPlayerNum = VD.winnerNum;
 		controllerOne = GameObject.Find("VictoryManager").GetComponent<XInputController>();
 		
 		setData();

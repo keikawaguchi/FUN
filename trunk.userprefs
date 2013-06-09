@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu\Victory.cs">
     <Files>
-      <File FileName="Assets\Scripts\GameManager.cs" Line="20" Column="3" />
-      <File FileName="Assets\Scripts\Menu\Victory.cs" Line="64" Column="3" />
-      <File FileName="Assets\Scripts\Menu\VictoryData.cs" Line="57" Column="43" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="138" Column="3" />
+      <File FileName="Assets\Scripts\Menu\Victory.cs" Line="88" Column="20" />
+      <File FileName="Assets\Scripts\Menu\VictoryData.cs" Line="37" Column="9" />
       <File FileName="Assets\Scripts\Menu\ChampSelection.cs" Line="84" Column="19" />
       <File FileName="Assets\Scripts\Controller\XInputController.cs" Line="247" Column="20" />
       <File FileName="Assets\Scripts\Player\Hero.cs" Line="9" Column="2" />
@@ -15,17 +15,18 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="Controller" expanded="True" />
+                <Node name="Champions" expanded="True" />
                 <Node name="Menu" expanded="True">
                   <Node name="Victory.cs" selected="True" />
                 </Node>
+                <Node name="Player" expanded="True" />
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
-        <State expanded="True" selected="True" />
+        <State selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
