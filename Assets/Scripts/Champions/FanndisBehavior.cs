@@ -112,7 +112,6 @@ public class FanndisBehavior : MonoBehaviour {
 			iceAge = Instantiate (iceAgePrefab) as GameObject;
 			iceAge.GetComponent<IceAgeUnit>().SetOwner(gameObject);
 			iceAge.transform.position = transform.position;
-			
 			iceAge.transform.forward = characterMovement.getAimDirection();
 			
 			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
@@ -121,7 +120,7 @@ public class FanndisBehavior : MonoBehaviour {
 			// keep track of cooldown timer
 			iceAgeTimer = Time.time;
 			
-			// Destroy(iceAge, 3);
+			Destroy(iceAge, 3);
 		}
 	}
 	#endregion
