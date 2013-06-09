@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class FanndisBehavior : MonoBehaviour {
+	private const string ICEAGE_SFX_PATH = "Audio/SFX/iceCracking";
+	
 	private const string CD_VIEWER_PREFAB_PATH = "Prefabs/Skills/CooldownViewer";
 	private const string ICEAGE_PREFAB_PATH = "Prefabs/Skills/IceAge";
 	
@@ -11,6 +13,7 @@ public class FanndisBehavior : MonoBehaviour {
 	// skill cooldown times
 	private const float skillOneCD = 10f;  // zero friction
 	private const float skillTwoCD = 3f;  // ice age
+	private const float iceAgeDuration = 3f;
 	
 	// skill timers
 	private float zeroFrictionTimer = -99f;
@@ -24,6 +27,7 @@ public class FanndisBehavior : MonoBehaviour {
 	
 	private GameObject iceAgePrefab;
 	private GameObject iceAge;
+	private AudioClip iceAgeSFX;
 	
 	// view cooldown
 	private GameObject skillOneCDPrefab;
@@ -71,6 +75,7 @@ public class FanndisBehavior : MonoBehaviour {
 		controller = GetComponent<XInputController>();
 		zeroFriction = gameObject.AddComponent<ZeroFriction>();
 		iceAgePrefab = Resources.Load (ICEAGE_PREFAB_PATH) as GameObject;
+		iceAgeSFX = Resources.Load (ICEAGE_SFX_PATH) as AudioClip;
 		
 		skillOneCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
 		skillTwoCDPrefab = Resources.Load (CD_VIEWER_PREFAB_PATH) as GameObject;	
@@ -109,18 +114,29 @@ public class FanndisBehavior : MonoBehaviour {
 	private void iceAgeTriggered() {
 		if (Time.time - iceAgeTimer > skillTwoCD) {
 			
-			iceAge = Instantiate (iceAgePrefab) as GameObject;
-			iceAge.GetComponent<IceAgeUnit>().SetOwner(gameObject);
-			iceAge.transform.position = transform.position;
-			iceAge.transform.forward = characterMovement.getAimDirection();
+			AudioSource.PlayClipAtPoint(iceAgeSFX, transform.position, 0.6f);
+			
+			Vector3 blockPos = transform.position;
+			Vector3 aimDirection = characterMovement.getAimDirection();
 			
 			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
-			iceAge.GetComponent<IceAgeUnit>().SetTeamNum(teamNum);
+			
+			for (int i = 0; i < 6; i++) {
+				iceAge = Instantiate (iceAgePrefab) as GameObject;
+				iceAge.GetComponent<IceAgeUnit>().SetOwner(gameObject);
+				iceAge.GetComponent<IceAgeUnit>().SetTeamNum(teamNum);
+				
+				blockPos.y = -1f;	// so ice cubes show below walls and such
+				iceAge.transform.position = blockPos;
+				iceAge.transform.forward = aimDirection;
+				
+				Destroy(iceAge, iceAgeDuration);
+				
+				blockPos += iceAge.transform.forward * 10f;
+			}
 			
 			// keep track of cooldown timer
 			iceAgeTimer = Time.time;
-			
-			Destroy(iceAge, 3);
 		}
 	}
 	#endregion

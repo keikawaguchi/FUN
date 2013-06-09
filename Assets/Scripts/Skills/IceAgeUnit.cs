@@ -5,7 +5,7 @@ public class IceAgeUnit : MonoBehaviour {
 	private const string PLAYER_TAG = "Player";
 	
 	private const float SLOW_DURATION = 0.06f;
-	private const float SLOW_MULTIPLIER = 0.5f;
+	private const float SLOW_MULTIPLIER = 0.35f;
 	
 	private GameObject owner;
 	private int teamNum;
