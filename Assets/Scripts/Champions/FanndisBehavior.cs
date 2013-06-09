@@ -115,6 +115,8 @@ public class FanndisBehavior : MonoBehaviour {
 			
 			// keep track of cooldown timer
 			iceAgeTimer = Time.time;
+			
+			Destroy(iceAge, 3);
 		}
 	}
 	#endregion
