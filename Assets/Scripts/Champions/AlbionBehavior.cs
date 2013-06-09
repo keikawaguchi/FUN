@@ -45,9 +45,6 @@ public class AlbionBehavior : MonoBehaviour {
 		if (!isAlive)
 			return;
 		
-		updateCDViewerPos();
-		updateCDViewerColor();
-		
 		if (isSilence ()) {
 			return;
 		}
