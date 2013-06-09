@@ -34,7 +34,7 @@ public class Chinmoku : MonoBehaviour {
 	private void loadScripts() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>(); 
 		map = GameObject.Find("Map").GetComponent<Map>();
-		animation = Resources.Load ("Prefabs/Animations/SmokeCloud") as GameObject;
+		animation = Resources.Load ("Prefabs/Animations/PoisonCloud") as GameObject;
 	}
 	
 	private void checkForPlayersInRadius() {
