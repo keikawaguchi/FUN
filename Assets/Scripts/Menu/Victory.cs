@@ -6,30 +6,30 @@ public class Victory : MonoBehaviour {
 	private GameManager manager;
 	VictoryData VD;
 	private int winnerPlayerNum;
-	int AlbionPlayerNumber;
-	int AlbionTeamNumber;
-	int AlbionNumOfKills;
-	int AlbionNumOfDeaths;
+	public int AlbionPlayerNumber;
+	public int AlbionTeamNumber;
+	public int AlbionNumOfKills;
+	public int AlbionNumOfDeaths;
 	
-	int TemptressPlayerNumber;
-	int TemptressTeamNumber;
-	int TemptressNumOfKills;
-	int TemptressNumOfDeaths;
+	public int TemptressPlayerNumber;
+	public int TemptressTeamNumber;
+	public int TemptressNumOfKills;
+	public int TemptressNumOfDeaths;
 	
-	int MerliniPlayerNumber;
-	int MerliniTeamNumber;
-	int MerliniNumOfKills;
-	int MerliniNumOfDeaths;
+	public int MerliniPlayerNumber;
+	public int MerliniTeamNumber;
+	public int MerliniNumOfKills;
+	public int MerliniNumOfDeaths;
 	
-	int FanndisPlayerNumber;
-	int FanndisTeamNumber;
-	int FanndisNumOfKills;
-	int FanndisNumOfDeaths;
+	public int FanndisPlayerNumber;
+	public int FanndisTeamNumber;
+	public int FanndisNumOfKills;
+	public int FanndisNumOfDeaths;
 	
-	int KiritoPlayerNumber;
-	int KiritoTeamNumber;
-	int KiritoNumOfKills;
-	int KiritoNumOfDeaths;
+	public int KiritoPlayerNumber;
+	public int KiritoTeamNumber;
+	public int KiritoNumOfKills;
+	public int KiritoNumOfDeaths;
 	
 	
 	int SoloPCounter = 1;
@@ -334,7 +334,7 @@ public class Victory : MonoBehaviour {
 		TemptressNumOfDeaths = VD.TemptressNumOfDeaths;
 		MerliniNumOfDeaths = VD.MerliniNumOfDeaths;
 		FanndisNumOfDeaths = VD.FanndisNumOfDeaths;
-		KiritoNumOfKills = VD.KiritoNumOfKills;
+		KiritoNumOfDeaths = VD.KiritoNumOfDeaths;
 		
 		AlbionNumOfKills = VD.AlbionNumOfKills;
 		TemptressNumOfKills = VD.TemptressNumOfKills;
