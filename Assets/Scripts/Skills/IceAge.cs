@@ -19,12 +19,13 @@ public class IceAge : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		Debug.Log("Ice age!!");
 		loadScripts ();	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		transform.position += transform.forward * 20 * Time.smoothDeltaTime;
 	}
 	
 	private void loadScripts() {

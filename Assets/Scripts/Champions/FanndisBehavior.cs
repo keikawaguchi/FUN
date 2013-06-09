@@ -40,6 +40,7 @@ public class FanndisBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
+		Debug.Log ("fanndis");
 		updateCDViewerPos();
 		updateCDViewerColor();		
 
@@ -105,11 +106,12 @@ public class FanndisBehavior : MonoBehaviour {
 		if (Time.time - iceAgeTimer > skillTwoCD) {
 			
 			iceAge = Instantiate (iceAgePrefab) as GameObject;
-			iceAge.GetComponent<IceAge>().SetOwner(this);
+			iceAge.GetComponent<IceAgeUnit>().SetOwner(gameObject);
 			iceAge.transform.position = transform.position;
-			Debug.Log (iceAge.transform.position);
 			iceAge.transform.forward = characterMovement.getAimDirection();
-
+			
+			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
+			iceAge.GetComponent<IceAgeUnit>().SetTeamNum(teamNum);
 			
 			// keep track of cooldown timer
 			iceAgeTimer = Time.time;
