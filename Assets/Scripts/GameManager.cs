@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(Application.loadedLevel == 1)
+			Destroy(this);
 	}
 	
 	public void SetTeams() {

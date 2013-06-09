@@ -43,7 +43,8 @@ public class VictoryData : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Application.loadedLevel == 1)
+			Destroy(this);
 	}
 	
 	public void GetData()
@@ -93,6 +94,6 @@ public class VictoryData : MonoBehaviour {
 	}
 	void Awake()
 	{
-		DontDestroyOnLoad(this);
+		DontDestroyOnLoad (this);
 	}
 }
