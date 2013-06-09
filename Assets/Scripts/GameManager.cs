@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour {
 				hero.teamNumber = playerControls.player3TEAM;
 			else 
 				hero.teamNumber = playerControls.player4TEAM;
-			
 		}
 		
 		// attach ring corresponding to team to each player
