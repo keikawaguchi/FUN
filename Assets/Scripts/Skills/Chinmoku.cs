@@ -20,9 +20,9 @@ public class Chinmoku : MonoBehaviour {
 		loadScripts();
 		
 		GameObject animationInstance = Instantiate (animation) as GameObject;
-		animationInstance.GetComponent<Animation>().attachToObject(gameObject);
-		animationInstance.GetComponent<Animation>().setAlignment("center");
-		
+		animationInstance.GetComponent<Animation>().setCustomOffset(new Vector3(0, 25, 20));
+		animationInstance.GetComponent<Animation>().setPosition(transform.position);
+
 		effectRadius = gridSystem.getSingleGridHeight() * 3;  // 3 units of effect radius
 		checkForPlayersInRadius();
 	}
@@ -34,7 +34,7 @@ public class Chinmoku : MonoBehaviour {
 	private void loadScripts() {
 		gridSystem = GameObject.Find("Map").GetComponent<GridSystem>(); 
 		map = GameObject.Find("Map").GetComponent<Map>();
-		animation = Resources.Load ("Prefabs/Animations/LoveStruck-Animation") as GameObject;
+		animation = Resources.Load ("Prefabs/Animations/SmokeCloud") as GameObject;
 	}
 	
 	private void checkForPlayersInRadius() {
