@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Animation : MonoBehaviour {
 	
+	private bool isFollowingObject = false;
 	private GameObject objectToFollow;
 	private string alignment;
 	private Vector3 customAnimationOffset;
@@ -26,6 +27,12 @@ public class Animation : MonoBehaviour {
 	}
 
 	void Update () {
+		if (isFollowingObject) {
+			if (objectToFollow == null) {
+				destroyAnimation();
+				return;
+			}
+		}
 		if (objectToFollow != null) {
 			updatePosition();
 			updateAnimationDirection();
@@ -34,6 +41,7 @@ public class Animation : MonoBehaviour {
 	}
 	
 	public void attachToObject(GameObject obj) {
+		isFollowingObject = true;
 		objectToFollow = obj;
 		characterMovement = objectToFollow.GetComponent<CharacterMovement>();
 	}
