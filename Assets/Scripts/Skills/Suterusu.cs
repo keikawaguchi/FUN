@@ -18,6 +18,11 @@ public class Suterusu : MonoBehaviour {
 		suterusuUsed = false;
 		suterusuTime = 0f;
 		loadScripts();
+		
+		GameObject animation = Resources.Load ("Prefabs/Animations/SmokeCloud") as GameObject;
+		GameObject animationInstance = Instantiate (animation) as GameObject;
+		animationInstance.GetComponent<Animation>().setCustomOffset(new Vector3(0, 25, 20));
+		animationInstance.GetComponent<Animation>().setPosition(transform.position);
 	}
 	
 	// Update is called once per frame

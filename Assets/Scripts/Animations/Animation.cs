@@ -14,32 +14,32 @@ public class Animation : MonoBehaviour {
 	
 	
 	void Start() {
-		if (objectToFollow == null) {
-			return;
-		}
-		transform.forward = objectToFollow.transform.forward;
 		if (customAnimationOffset == null) {
 			customAnimationOffset = new Vector3(0, 0, 0);
 		}
 		if (alignment == null) {
 			alignment = "bottom";
 		}
+		if (objectToFollow != null) {
+			transform.forward = objectToFollow.transform.forward;
+		}
 	}
 
 	void Update () {
-		if (objectToFollow == null) {
-			destroyAnimation();
-		}
-		else {
-			updateTexture();
+		if (objectToFollow != null) {
 			updatePosition();
 			updateAnimationDirection();
 		}
+		updateTexture();		
 	}
 	
 	public void attachToObject(GameObject obj) {
 		objectToFollow = obj;
 		characterMovement = objectToFollow.GetComponent<CharacterMovement>();
+	}
+	
+	public void setPosition(Vector3 position) {
+		transform.position = position + customAnimationOffset;
 	}
 	
 	public bool setAlignment(string alignment) {
