@@ -38,6 +38,8 @@ public class TimerCS : MonoBehaviour {
 	float originalWidth = 800;
 	float originalHeight = 600;
 	Vector3 scale;
+	
+	public int mapID;
 	// Use this for initialization
 	void Start () {		
 		timerStyle.fontSize = 45;
@@ -47,6 +49,11 @@ public class TimerCS : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+		mapID = GameObject.Find("Map").GetComponent<Map>().mapID;
+		if(mapID == 4)
+			timerStyle.normal.textColor = Color.black;
+		else
+			timerStyle.normal.textColor = Color.white;
 		CountUp();
     }
 	

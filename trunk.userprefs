@@ -1,13 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu\Victory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GridSystem\TimerCS.cs">
     <Files>
       <File FileName="Assets\Scripts\GameManager.cs" Line="138" Column="3" />
-      <File FileName="Assets\Scripts\Menu\Victory.cs" Line="88" Column="20" />
+      <File FileName="Assets\Scripts\Menu\Victory.cs" Line="68" Column="4" />
       <File FileName="Assets\Scripts\Menu\VictoryData.cs" Line="37" Column="9" />
       <File FileName="Assets\Scripts\Menu\ChampSelection.cs" Line="84" Column="19" />
       <File FileName="Assets\Scripts\Controller\XInputController.cs" Line="247" Column="20" />
       <File FileName="Assets\Scripts\Player\Hero.cs" Line="9" Column="2" />
+      <File FileName="Assets\Scripts\GridSystem\TimerCS.cs" Line="53" Column="16" />
+      <File FileName="Assets\Scripts\GridSystem\Map.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,10 +18,9 @@
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
                 <Node name="Champions" expanded="True" />
-                <Node name="Menu" expanded="True">
-                  <Node name="Victory.cs" selected="True" />
+                <Node name="GridSystem" expanded="True">
+                  <Node name="TimerCS.cs" selected="True" />
                 </Node>
-                <Node name="Player" expanded="True" />
               </Node>
             </Node>
           </Node>
