@@ -66,17 +66,16 @@ public class AlterSpeed : MonoBehaviour {
 		popupText.setDuration(duration);
 		popupText.setPosition(transform.position.x, transform.position.z + 20);
 		
-		if (speedMultiplier == 0) {
+		if (speedMultiplier == 0)
 			popupText.setPredefinedText("Stun");
-		}
-		else if (speedMultiplier < 1) {
-			popupText.setPredefinedText("Slowed");
-		}
-		else if (speedMultiplier > 1) {
-			popupText.setPredefinedText("PlusSpeed");
-		}
-		else if (speedMultiplier < 0) {
+		
+		else if (speedMultiplier < 0)
 			popupText.setPredefinedText("Confused");
-		}
+		
+		else if (speedMultiplier > 1)
+			popupText.setPredefinedText("PlusSpeed");
+		
+		else if (speedMultiplier < 1)
+			popupText.setPredefinedText("Slowed");
 	}
 }

@@ -48,16 +48,16 @@ public class Chinmoku : MonoBehaviour {
 			int teamNum = gameObject.GetComponent<Hero>().getTeamNumber();
 			if (player != gameObject && distance < effectRadius) {
 				if (teamNum == 0)
-					setSilenceOnPlayer(player);
+					setConfusionOnPlayer(player);
 				else if (teamNum != player.GetComponent<Hero>().getTeamNumber())
-					setSilenceOnPlayer(player);
+					setConfusionOnPlayer(player);
 			}
 		}
 	}
 	
-	private void setSilenceOnPlayer(GameObject otherPlayer) {
-		AlterSilence alterSilence;
-		alterSilence = otherPlayer.AddComponent<AlterSilence>();
-		alterSilence.Start (true, CHINMOKU_EFFECT_DURATION);
+	private void setConfusionOnPlayer(GameObject otherPlayer) {
+		AlterSpeed alterSpeed;
+		alterSpeed = otherPlayer.gameObject.AddComponent<AlterSpeed>();
+		alterSpeed.Start(-1.0f, CHINMOKU_EFFECT_DURATION);
 	}
 }
