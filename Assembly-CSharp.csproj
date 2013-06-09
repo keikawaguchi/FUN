@@ -41,6 +41,10 @@
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -121,7 +125,7 @@
      <None Include="Assets\Resources\Champions Info\Kirito.txt" />
      <None Include="Assets\Resources\Maps\map5.txt" />
      <None Include="Assets\Resources\Champions Info\Temptress.txt" />
- <Reference Include="XInputDotNetPure">
+ <Reference Include="Assets\XInputDotNetPure">
  <HintPath>Assets\XInputDotNetPure.dll</HintPath>
  </Reference>
   </ItemGroup>

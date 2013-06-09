@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour {
 			
 			Hero hero = player.GetComponent<Hero>();
 			
-			Debug.Log (hero + " " + hero.playerNumber);
-			
 			if (hero.playerNumber == 1)
 				hero.teamNumber = playerControls.player1TEAM;
 			else if (hero.playerNumber == 2)
@@ -42,6 +40,23 @@ public class GameManager : MonoBehaviour {
 			else 
 				hero.teamNumber = playerControls.player4TEAM;
 			
+		}
+		
+		// attach ring corresponding to team to each player
+		foreach (GameObject player in players) {
+			Hero hero = player.GetComponent<Hero>();
+			
+			if (hero.teamNumber == 1) {
+				GameObject animation = Resources.Load ("Prefabs/Team/RedTeamRing") as GameObject;
+				animation = Instantiate (animation) as GameObject;
+				animation.GetComponent<Animation>().attachToObject (player);
+				animation.GetComponent<Animation>().setCustomOffset(new Vector3(0, -1, 4));
+			} else if (hero.teamNumber == 2) {
+				GameObject animation = Resources.Load ("Prefabs/Team/BlueTeamRing") as GameObject;
+				animation = Instantiate (animation) as GameObject;
+				animation.GetComponent<Animation>().attachToObject (player);
+				animation.GetComponent<Animation>().setCustomOffset(new Vector3(0, -1, 4));
+			}
 		}
 	}
 	
