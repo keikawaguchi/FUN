@@ -40,7 +40,7 @@ public class Victory : MonoBehaviour {
 	Rect KillsPosition;
 	Rect DeathPosition;
 	
-
+	XInputController controllerOne;
 	
 	// GUIStyle
 	public GUIStyle titleStyle;
@@ -56,11 +56,16 @@ public class Victory : MonoBehaviour {
 		manager = managerObj.GetComponent<GameManager>();
 		VD = GameObject.Find("Mule").GetComponent<VictoryData>();
 		
+		controllerOne = GameObject.Find("VictoryManager").GetComponent<XInputController>();
+		
 		setData();
 	}
 	void Update()
 	{
-		winnerPlayerNum = manager.getWinner ();
+		if(controllerOne.GetButtonPressed("dropbomb"))
+		{
+			Application.LoadLevel(1);
+		}
 	}
 	// Update is called once per frame
 	void OnGUI () {
@@ -70,11 +75,11 @@ public class Victory : MonoBehaviour {
     	var svMat = GUI.matrix; // save current matrix
 		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
 		if(winnerPlayerNum == 0)
-			GUI.Label(new Rect(150,100,100,100),"No Winner",titleStyle);
+			GUI.Label(new Rect(250,100,100,100),"No Winner!",titleStyle);
 		else if(VD.winnerIsTeam == true)
-			GUI.Label(new Rect(150,100,100,100),"Team "+winnerPlayerNum+" Victory",titleStyle);
+			GUI.Label(new Rect(195,100,100,100),"Team "+winnerPlayerNum+" Victory!",titleStyle);
 		else
-			GUI.Label(new Rect(150,100,100,100),"Player "+winnerPlayerNum+" Victory",titleStyle);
+			GUI.Label(new Rect(195,100,100,100),"Player "+winnerPlayerNum+" Victory!",titleStyle);
 		
 		displaySolo();
 		displayTeam1();
@@ -90,9 +95,9 @@ public class Victory : MonoBehaviour {
 	{
 		if(AlbionTeamNumber == 0 || TemptressTeamNumber == 0 || MerliniTeamNumber == 0 || FanndisTeamNumber == 0 || KiritoTeamNumber == 0)
 		{
-			GUI.Label(new Rect(375,250,100,100),"Solo",playerTagStyle);
-			GUI.Label(new Rect(400,300,100,100),"Kills",bodyStyle);
-			GUI.Label(new Rect(475,300,100,100),"Deaths",bodyStyle);
+			GUI.Label(new Rect(349,225,100,100),"Solo",playerTagStyle);
+			GUI.Label(new Rect(368,275,100,100),"Kills",bodyStyle);
+			GUI.Label(new Rect(448,275,100,100),"Deaths",bodyStyle);
 			if(AlbionTeamNumber == 0)
 			{
 				setSoloPosition();
@@ -139,27 +144,27 @@ public class Victory : MonoBehaviour {
 	{
 		if(SoloPCounter == 1)
 		{
-			NamePosition = new Rect(305,350,100,100);
-			KillsPosition = new Rect(415,350,100,100);
-			DeathPosition = new Rect(510,350,100,100);
+			NamePosition = new Rect(270,325,100,100);
+			KillsPosition = new Rect(390,325,100,100);
+			DeathPosition = new Rect(480,325,100,100);
 		}
 		if(SoloPCounter == 2)
 		{
-			NamePosition = new Rect(305,400,100,100);
-			KillsPosition = new Rect(415,400,100,100);
-			DeathPosition = new Rect(510,400,100,100);
+			NamePosition = new Rect(270,375,100,100);
+			KillsPosition = new Rect(390,375,100,100);
+			DeathPosition = new Rect(480,375,100,100);
 		}
 		if(SoloPCounter == 3)
 		{
-			NamePosition = new Rect(305,450,100,100);
-			KillsPosition = new Rect(415,450,100,100);
-			DeathPosition = new Rect(510,450,100,100);
+			NamePosition = new Rect(270,425,100,100);
+			KillsPosition = new Rect(390,425,100,100);
+			DeathPosition = new Rect(480,425,100,100);
 		}
 		if(SoloPCounter == 4)
 		{
-			NamePosition = new Rect(305,500,100,100);
-			KillsPosition = new Rect(415,500,100,100);
-			DeathPosition = new Rect(510,500,100,100);
+			NamePosition = new Rect(270,475,100,100);
+			KillsPosition = new Rect(390,475,100,100);
+			DeathPosition = new Rect(480,475,100,100);
 		}
 	}
 	
@@ -167,9 +172,9 @@ public class Victory : MonoBehaviour {
 	{
 		if(AlbionTeamNumber == 1 || TemptressTeamNumber == 1 || MerliniTeamNumber == 1 || FanndisTeamNumber == 1 || KiritoTeamNumber == 1)
 		{
-			GUI.Label(new Rect(100,250,100,100),"Team 1",playerTagStyle);
-			GUI.Label(new Rect(115,300,100,100),"Kills",bodyStyle);
-			GUI.Label(new Rect(190,300,100,100),"Deaths",bodyStyle);
+			GUI.Label(new Rect(83,225,100,100),"Team 1",playerTagStyle);
+			GUI.Label(new Rect(102,275,100,100),"Kills",bodyStyle);
+			GUI.Label(new Rect(170,275,100,100),"Deaths",bodyStyle);
 			if(AlbionTeamNumber == 1)
 			{
 				setTeam1Position();
@@ -216,27 +221,27 @@ public class Victory : MonoBehaviour {
 	{
 		if(Team1PCounter == 1)
 		{
-			NamePosition = new Rect(30,350,100,100);
-			KillsPosition = new Rect(130,350,100,100);
-			DeathPosition = new Rect(225,350,100,100);
+			NamePosition = new Rect(5,325,100,100);
+			KillsPosition = new Rect(120,325,100,100);
+			DeathPosition = new Rect(200,325,100,100);
 		}
 		if(Team1PCounter == 2)
 		{
-			NamePosition = new Rect(30,400,100,100);
-			KillsPosition = new Rect(130,400,100,100);
-			DeathPosition = new Rect(225,400,100,100);
+			NamePosition = new Rect(5,375,100,100);
+			KillsPosition = new Rect(120,375,100,100);
+			DeathPosition = new Rect(200,375,100,100);
 		}
 		if(Team1PCounter == 3)
 		{
-			NamePosition = new Rect(30,450,100,100);
-			KillsPosition = new Rect(130,450,100,100);
-			DeathPosition = new Rect(225,450,100,100);
+			NamePosition = new Rect(5,425,100,100);
+			KillsPosition = new Rect(120,425,100,100);
+			DeathPosition = new Rect(200,425,100,100);
 		}
 		if(Team1PCounter == 4)
 		{
-			NamePosition = new Rect(30,500,100,100);
-			KillsPosition = new Rect(130,500,100,100);
-			DeathPosition = new Rect(225,500,100,100);
+			NamePosition = new Rect(5,475,100,100);
+			KillsPosition = new Rect(120,475,100,100);
+			DeathPosition = new Rect(200,475,100,100);
 		}
 	}
 	
@@ -244,9 +249,9 @@ public class Victory : MonoBehaviour {
 	{
 		if(AlbionTeamNumber == 2 || TemptressTeamNumber == 2 || MerliniTeamNumber == 2 || FanndisTeamNumber == 2 || KiritoTeamNumber == 2)
 		{
-			GUI.Label(new Rect(550,250,100,100),"Team 2",playerTagStyle);
-			GUI.Label(new Rect(575,300,100,100),"Kills",bodyStyle);
-			GUI.Label(new Rect(650,300,100,100),"Deaths",bodyStyle);
+			GUI.Label(new Rect(616,225,100,100),"Team 2",playerTagStyle);
+			GUI.Label(new Rect(647,275,100,100),"Kills",bodyStyle);
+			GUI.Label(new Rect(715,275,100,100),"Deaths",bodyStyle);
 			if(AlbionTeamNumber == 2)
 			{
 				setTeam2Position();
@@ -293,27 +298,27 @@ public class Victory : MonoBehaviour {
 	{
 		if(Team2PCounter == 1)
 		{
-			NamePosition = new Rect(480,350,100,100);
-			KillsPosition = new Rect(590,350,100,100);
-			DeathPosition = new Rect(685,350,100,100);
+			NamePosition = new Rect(545,325,100,100);
+			KillsPosition = new Rect(667,325,100,100);
+			DeathPosition = new Rect(745,325,100,100);
 		}
 		if(Team2PCounter == 2)
 		{
-			NamePosition = new Rect(480,400,100,100);
-			KillsPosition = new Rect(590,400,100,100);
-			DeathPosition = new Rect(685,400,100,100);
+			NamePosition = new Rect(545,375,100,100);
+			KillsPosition = new Rect(667,375,100,100);
+			DeathPosition = new Rect(745,375,100,100);
 		}
 		if(Team2PCounter == 3)
 		{
-			NamePosition = new Rect(480,450,100,100);
-			KillsPosition = new Rect(590,450,100,100);
-			DeathPosition = new Rect(510,450,100,100);
+			NamePosition = new Rect(545,425,100,100);
+			KillsPosition = new Rect(667,425,100,100);
+			DeathPosition = new Rect(745,425,100,100);
 		}
 		if(Team2PCounter == 4)
 		{
-			NamePosition = new Rect(480,500,100,100);
-			KillsPosition = new Rect(590,500,100,100);
-			DeathPosition = new Rect(685,500,100,100);
+			NamePosition = new Rect(545,475,100,100);
+			KillsPosition = new Rect(667,475,100,100);
+			DeathPosition = new Rect(745,475,100,100);
 		}
 	}
 	
