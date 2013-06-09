@@ -41,6 +41,11 @@ public class TemptressBehavior : MonoBehaviour {
 		updateCDViewerPos();
 		updateCDViewerColor();
 		
+		// don't do anything if hero is dead
+		bool isAlive = gameObject.GetComponent<Hero>().isAlive;
+		if (!isAlive)
+			return;
+		
 		if (isStunned()) {
 			return;
 		}
@@ -68,7 +73,7 @@ public class TemptressBehavior : MonoBehaviour {
 			return (int)((skillOneCD+1) - (Time.time - lureTimer));
 		}
 	}
-	
+
 	public int getLSCD() {
 		if(Time.time - loveStruckTimer > skillTwoCD) {
 			return 0;

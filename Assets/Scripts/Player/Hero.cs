@@ -50,7 +50,7 @@ public class Hero : MonoBehaviour {
 	void Update () {
 		
 		// check if dead
-		if (deathTimer > 0) {
+		if (isDead()) {
 				
 			// how long a hero is dead should be grabbed from another script
 			if (lives == 0) {
@@ -186,5 +186,13 @@ public class Hero : MonoBehaviour {
 			bombCounter--;
 		if (bombCounter == 0)
 			bombCounter = 0;
+	}
+	
+	public bool isDead() {
+		
+		if (deathTimer > 0)
+			return true;
+		
+		return false;
 	}
 }

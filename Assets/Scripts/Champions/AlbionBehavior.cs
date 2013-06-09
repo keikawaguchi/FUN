@@ -37,6 +37,11 @@ public class AlbionBehavior : MonoBehaviour {
 	}
 	
 	void Update () {
+		// don't do anything if hero is dead
+		bool isAlive = gameObject.GetComponent<Hero>().isAlive;
+		if (!isAlive)
+			return;
+		
 		updateCDViewerPos();
 		updateCDViewerColor();
 		

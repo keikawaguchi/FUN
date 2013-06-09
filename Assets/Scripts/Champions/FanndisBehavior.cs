@@ -39,10 +39,14 @@ public class FanndisBehavior : MonoBehaviour {
 		skillTwoCDViewer = Instantiate(skillTwoCDPrefab) as GameObject;
 	}
 	
-	void Update () {
-		Debug.Log ("fanndis");
+	void Update () {		
 		updateCDViewerPos();
-		updateCDViewerColor();		
+		updateCDViewerColor();	
+		
+		// don't do anything if hero is dead
+		bool isAlive = gameObject.GetComponent<Hero>().isAlive;
+		if (!isAlive)
+			return;
 
 		if (isStunned()) {
 			return;

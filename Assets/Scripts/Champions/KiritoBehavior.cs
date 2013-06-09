@@ -54,6 +54,11 @@ public class KiritoBehavior : MonoBehaviour {
 		updateCDViewerColor();
 		updateViewerVisibility();
 		
+		// don't do anything if hero is dead
+		bool isAlive = gameObject.GetComponent<Hero>().isAlive;
+		if (!isAlive)
+			return;
+		
 		if (isStunned()) {
 			return;
 		}

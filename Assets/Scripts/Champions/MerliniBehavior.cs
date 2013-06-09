@@ -42,7 +42,12 @@ public class MerliniBehavior : MonoBehaviour {
 	
 	void Update () {
 		updateCDViewerPos();
-		updateCDViewerColor();		
+		updateCDViewerColor();
+	
+		// don't do anything if hero is dead
+		bool isAlive = gameObject.GetComponent<Hero>().isAlive;
+		if (!isAlive)
+			return;
 
 		if (isStunned()) {
 			return;
