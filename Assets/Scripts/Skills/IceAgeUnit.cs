@@ -30,10 +30,7 @@ public class IceAgeUnit : MonoBehaviour {
 	
 	void OnTriggerStay(Collider collision) {
 		// check the collision with tag and exlude the trap owner
-		Debug.Log ("Trigger enter!");
 		GameObject enemyObj = collision.gameObject;
-		Debug.Log ("Collision Tag: " + collision.tag);
-		Debug.Log ("Enemy name: " + enemyObj.name);
 		
 		if (collision.tag == PLAYER_TAG) {
 			

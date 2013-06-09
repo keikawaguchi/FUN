@@ -47,8 +47,7 @@ public class Hero : MonoBehaviour {
 		isAlive = true;
 	}
 	
-	void Update () {	
-		handleControllerInput();
+	void Update () {
 		
 		// check if dead
 		if (deathTimer > 0) {
@@ -62,6 +61,8 @@ public class Hero : MonoBehaviour {
 				
 				respawnHero();
 			}
+		} else {
+			handleControllerInput();
 		}
 	}
 	
