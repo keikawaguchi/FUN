@@ -20,7 +20,7 @@ public class Chinmoku : MonoBehaviour {
 		loadScripts();
 		
 		GameObject animationInstance = Instantiate (animation) as GameObject;
-		animationInstance.GetComponent<Animation>().setCustomOffset(new Vector3(0, 25, 20));
+		animationInstance.GetComponent<Animation>().setCustomOffset(new Vector3(0, 25, 0));
 		animationInstance.GetComponent<Animation>().setPosition(transform.position);
 
 		effectRadius = gridSystem.getSingleGridHeight() * 3;  // 3 units of effect radius
