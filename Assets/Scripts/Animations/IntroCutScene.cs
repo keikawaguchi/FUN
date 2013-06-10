@@ -22,7 +22,7 @@ public class IntroCutScene : MonoBehaviour {
 		Vector3 pos;
 		for (int i = 0; i < numOfCharacters; i++) {
 			pos = Characters[i].transform.position;
-			pos.x += 1.3f;
+			pos.x += 50f * Time.smoothDeltaTime;
 			if (pos.x >= 160) {
 				pos.x = -160;
 			} 
