@@ -19,6 +19,9 @@ public class Chinmoku : MonoBehaviour {
 	public void execute() {
 		loadScripts();
 		
+		AudioClip sfx = Resources.Load ("Audio/SFX/steamBlast") as AudioClip;
+		AudioSource.PlayClipAtPoint(sfx, transform.position, 1);
+		
 		GameObject animationInstance = Instantiate (animation) as GameObject;
 		animationInstance.GetComponent<Animation>().setCustomOffset(new Vector3(0, 25, 0));
 		animationInstance.GetComponent<Animation>().setPosition(transform.position);
