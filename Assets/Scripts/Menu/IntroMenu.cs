@@ -82,6 +82,10 @@ public class IntroMenu : MonoBehaviour {
 				Debug.Log ("Loading champion selection screen");
 				Application.LoadLevel("Champ Selection");
 				break;
+			case "credits":
+				Debug.Log ("Loading credits screen");
+				Application.LoadLevel("Credits");
+				break;
 			case "quit":
 				Application.Quit();
 				break;

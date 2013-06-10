@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\GridSystem\SpawnChamps.cs" />
      <Compile Include="Assets\Scripts\GridSystem\TimerCS.cs" />
      <Compile Include="Assets\Scripts\Menu\ChampSelection.cs" />
+     <Compile Include="Assets\Scripts\Menu\CreditsMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\IntroMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\MapSelection.cs" />
      <Compile Include="Assets\Scripts\Menu\SplashDelay.cs" />
