@@ -61,13 +61,23 @@ public class HolyBlink : MonoBehaviour {
 			int blinkToGridY = gridSystem.getYPos(newPos.z);
 			
 			while (map.isGridFull(blinkToGridX,blinkToGridY) || isOutOfBounds(blinkToGridX, blinkToGridY)) {
-				Debug.Log ("RAWR");
 				blinkToGridX -= (int)blinkDirection.x;
 				blinkToGridY -= (int)blinkDirection.z;
 			}
 			
 			newPos.x = gridSystem.getXCoord(blinkToGridX);
 			newPos.z = gridSystem.getYCoord(blinkToGridY);
+			
+			// Play animation
+			GameObject animation = Resources.Load("Prefabs/Animations/Blink") as GameObject;
+			animation = Instantiate(animation) as GameObject;
+			animation.GetComponent<Animation>().setPosition(new Vector3(transform.position.x, 20, transform.position.z + transform.localScale.z / 2));
+			Vector3 aimDirection = heroObj.GetComponent<CharacterMovement>().getAimDirection();
+			if (aimDirection.x < 0) {
+				Vector3 mirroredScale = animation.transform.localScale;
+				mirroredScale.x *= -1;
+				animation.transform.localScale = mirroredScale;
+			}
 			
 			heroObj.transform.position = newPos;  // teleport to facing direction
 			AudioSource.PlayClipAtPoint(blinkSFX, transform.position, 1.0f);
