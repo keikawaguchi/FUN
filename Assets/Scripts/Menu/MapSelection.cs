@@ -3,6 +3,11 @@ using System.Collections;
 
 public class MapSelection : MonoBehaviour {
 	private const string TEMP_MAP_ICON_PATH = "Textures/Maps/GoogleMapsIcon";
+	private const string WOODS_MAP_ICON = "Textures/Maps/WoodsMap";
+	private const string FIRE_MAP_ICON = "Textures/Maps/FireMap";
+	private const string ICE_MAP_ICON = "Textures/Maps/IceMap";
+	private const string CITY_MAP_ICON = "Textures/Maps/GoogleMapsIcon";
+	private const string SPACE_MAP_ICON = "Textures/Maps/SpaceMap";
 	
 	private const int TOTAL_MAPS = 6;
 	
@@ -63,7 +68,7 @@ public class MapSelection : MonoBehaviour {
 	private void initializeVariables() {
 		mapMenu = new GUIContent[TOTAL_MAPS];
 		mapTitles = new GUIContent[TOTAL_MAPS];
-		mapThumbnails = new Texture2D[1];  // need to change to TOTAL_MAPS when all thumbnails are done!!!!!!!!!!!!!!
+		mapThumbnails = new Texture2D[TOTAL_MAPS];  // need to change to TOTAL_MAPS when all thumbnails are done!!!!!!!!!!!!!!
 		
 		mapMenuHeight = Screen.height * 2;	// I don't know why this is working
 		mapMenuWidth = Screen.width / 2.5f;
@@ -75,7 +80,7 @@ public class MapSelection : MonoBehaviour {
 	
 	private void setMaps() {
 		for (int i = 0; i < TOTAL_MAPS; i++) {
-			mapMenu[i] = new GUIContent(mapThumbnails[0], "Map " + (i + 1));  // need to update this!!!!!!!!!!!!
+			mapMenu[i] = new GUIContent(mapThumbnails[i], "Map " + (i + 1));  // need to update this!!!!!!!!!!!!
 		}
 	}
 	
@@ -83,7 +88,12 @@ public class MapSelection : MonoBehaviour {
 		p1Controller = gameObject.AddComponent<XInputController>();
 		saveSelection = GameObject.Find("Controls").GetComponent<PlayerControls>();
 		
-		mapThumbnails[0] = Resources.Load (TEMP_MAP_ICON_PATH) as Texture2D;  // need to update this!!!!!!!!!!!!!!!
+		mapThumbnails[0] = Resources.Load (TEMP_MAP_ICON_PATH) as Texture2D;
+		mapThumbnails[1] = Resources.Load (WOODS_MAP_ICON) as Texture2D;
+		mapThumbnails[2] = Resources.Load (FIRE_MAP_ICON) as Texture2D;
+		mapThumbnails[3] = Resources.Load (ICE_MAP_ICON) as Texture2D;
+		mapThumbnails[4] = Resources.Load (CITY_MAP_ICON) as Texture2D;
+		mapThumbnails[5] = Resources.Load (SPACE_MAP_ICON) as Texture2D;
 	}
 	
 	private void setController() {
