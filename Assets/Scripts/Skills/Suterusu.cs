@@ -19,6 +19,8 @@ public class Suterusu : MonoBehaviour {
 		suterusuTime = 0f;
 		loadScripts();
 		
+		AudioClip sfx = Resources.Load("Audio/SFX/poof") as AudioClip;
+		AudioSource.PlayClipAtPoint(sfx, transform.position, 1f);
 		GameObject animation = Resources.Load ("Prefabs/Animations/SmokeCloud") as GameObject;
 		GameObject animationInstance = Instantiate (animation) as GameObject;
 		animationInstance.GetComponent<Animation>().setCustomOffset(new Vector3(0, 25, 20));

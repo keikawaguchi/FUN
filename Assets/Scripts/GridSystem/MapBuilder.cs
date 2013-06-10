@@ -171,7 +171,7 @@ public class MapBuilder : MonoBehaviour {
 		}
 		
 		backgroundMusic = Resources.Load(match.Groups[1].ToString()) as AudioClip;
-		GameObject bgMusicObj = GameObject.Find("BGMusic") as GameObject;
+		GameObject bgMusicObj = GameObject.Find("Music") as GameObject;
 		
 		if (bgMusicObj != null) {
 			bgMusicObj.GetComponent<AudioSource>().clip = backgroundMusic;
