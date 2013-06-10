@@ -132,6 +132,6 @@ public class MapSelection : MonoBehaviour {
 			Application.LoadLevel(++currentLevel);
 		}
 		else if (p1Controller.GetButtonPressed ("b"))  // back
-			Application.LoadLevel(--currentLevel);
+			Application.LoadLevel("Champ Selection");
 	}
 }

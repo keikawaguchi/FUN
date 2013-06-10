@@ -102,7 +102,7 @@ public class ChampSelection : MonoBehaviour {
 			Application.LoadLevel(++currentLevel);
 		}
 		else if (controllers[1].GetButtonPressed ("b"))  // back
-			Application.LoadLevel(--currentLevel);
+			Application.LoadLevel("Intro");
 	}
 	
 	private void OnGUI() {

@@ -11,6 +11,7 @@ public class CreditsMenu: MonoBehaviour {
 	
 	void Update () {
 		if (controller.GetButtonPressed("b")) {
+			Destroy(gameObject);
 			Application.LoadLevel("Intro");
 		}
 	}
