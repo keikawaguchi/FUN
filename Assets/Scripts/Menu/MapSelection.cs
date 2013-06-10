@@ -3,10 +3,11 @@ using System.Collections;
 
 public class MapSelection : MonoBehaviour {
 	private const string TEMP_MAP_ICON_PATH = "Textures/Maps/GoogleMapsIcon";
+	private const string BASIC_MAP_ICON = "Textures/Maps/BasicMap";
 	private const string WOODS_MAP_ICON = "Textures/Maps/WoodsMap";
 	private const string FIRE_MAP_ICON = "Textures/Maps/FireMap";
 	private const string ICE_MAP_ICON = "Textures/Maps/IceMap";
-	private const string CITY_MAP_ICON = "Textures/Maps/GoogleMapsIcon";
+	private const string CITY_MAP_ICON = "Textures/Maps/CityMap";
 	private const string SPACE_MAP_ICON = "Textures/Maps/SpaceMap";
 	
 	private const int TOTAL_MAPS = 6;
@@ -88,7 +89,7 @@ public class MapSelection : MonoBehaviour {
 		p1Controller = gameObject.AddComponent<XInputController>();
 		saveSelection = GameObject.Find("Controls").GetComponent<PlayerControls>();
 		
-		mapThumbnails[0] = Resources.Load (TEMP_MAP_ICON_PATH) as Texture2D;
+		mapThumbnails[0] = Resources.Load (BASIC_MAP_ICON) as Texture2D;
 		mapThumbnails[1] = Resources.Load (WOODS_MAP_ICON) as Texture2D;
 		mapThumbnails[2] = Resources.Load (FIRE_MAP_ICON) as Texture2D;
 		mapThumbnails[3] = Resources.Load (ICE_MAP_ICON) as Texture2D;
@@ -115,11 +116,17 @@ public class MapSelection : MonoBehaviour {
 		if (p1Controller.GetThumbstickDirectionOnce("left")) {
 			currentSelectedMap++;
 		}
+		if (p1Controller.GetThumbstickDirectionOnce("down")) {
+			currentSelectedMap -= 3;
+		}
+		if (p1Controller.GetThumbstickDirectionOnce("up")) {
+			currentSelectedMap += 3;
+		}
 		if (currentSelectedMap < 0) {
-			currentSelectedMap = mapMenu.Length - 1;
+			currentSelectedMap += mapMenu.Length;
 		}
 		if (currentSelectedMap >= mapMenu.Length) {
-			currentSelectedMap = 0;
+			currentSelectedMap -= mapMenu.Length;
 		}
 	}
 	
