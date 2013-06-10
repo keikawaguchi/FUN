@@ -30,7 +30,7 @@ public class BombBehavior : MonoBehaviour {
 	public void setHero(Hero owner) {
 		this.owner = owner;	
 		
-		Debug.Log ("Controller Num: " + owner.playerNumber);
+		// Debug.Log ("Controller Num: " + owner.playerNumber);
 	}
 	
 	void Update() {
@@ -50,10 +50,10 @@ public class BombBehavior : MonoBehaviour {
 	private void loadBombPrefab() {
 		explosionPrefab = Resources.Load(EXPLOSION_PREFAB_PATH) as GameObject;
 		if (explosionPrefab == null) {
-			Debug.Log ("Explosion loaded unsuccessfully");
+			// Debug.Log ("Explosion loaded unsuccessfully");
 		}
 		else {
-			Debug.Log ("Explosion loaded successfully");
+			// Debug.Log ("Explosion loaded successfully");
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class BombBehavior : MonoBehaviour {
 	
 	void explode() {
 		Explosion boom;
-		Debug.Log("Bomb Exploded...");
+		// Debug.Log("Bomb Exploded...");
 		GameObject explosion = Instantiate(explosionPrefab) as GameObject;
 		boom = explosion.GetComponent<Explosion>();
 		boom.setExplosionDistance(bombX,bombZ);

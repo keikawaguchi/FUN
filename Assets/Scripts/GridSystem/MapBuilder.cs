@@ -58,7 +58,7 @@ public class MapBuilder : MonoBehaviour {
 		mapFile = loadMapFile(mapID);	
 		mapReader = new StringReader(mapFile.text);
 		if (mapReader == null) {
-			Debug.Log ("Map not found or not readable");
+			// Debug.Log ("Map not found or not readable");
 			return;
 		} 
 		
@@ -84,7 +84,7 @@ public class MapBuilder : MonoBehaviour {
 					spawnUpgrade(gridX, gridY);
 				}
 				if (mapUnit == SPAWN1 || mapUnit == SPAWN2 || mapUnit == SPAWN3 || mapUnit == SPAWN4) {
-					Debug.Log ("Respawn " + mapUnit + " added at index " + (mapUnit - 48));
+					// Debug.Log ("Respawn " + mapUnit + " added at index " + (mapUnit - 48));
 					spawnPoints[mapUnit - 48] = new Vector3(gridSystem.getXCoord(gridX), 0, gridSystem.getYCoord(gridY));
 				}
 				gridX++;
@@ -96,7 +96,7 @@ public class MapBuilder : MonoBehaviour {
 	public void spawnIndestructableWall(int gridX, int gridY, GameObject[,] indestructable) {
 		indestructable[gridX, gridY] = Instantiate(indestructableWallPrefab) as GameObject;
 		if (indestructableWallTexture == null) {
-			Debug.Log ("Indest Texture NULL");
+			// Debug.Log ("Indest Texture NULL");
 		}
 		indestructable[gridX, gridY].renderer.material.mainTexture = indestructableWallTexture;
 		indestructable[gridX, gridY].GetComponent<IndestructubleWall>().initialize(gridSystem.getXCoord(gridX), gridSystem.getYCoord(gridY));
@@ -135,7 +135,7 @@ public class MapBuilder : MonoBehaviour {
 	private TextAsset loadMapFile(int mapID) {
 		string mapToLoad = maps [mapID];
 		if (mapToLoad == null) {
-			Debug.Log ("MapID " + mapID + " does not exist.");
+			// Debug.Log ("MapID " + mapID + " does not exist.");
 		}	
 		return Resources.Load (mapToLoad, typeof(TextAsset)) as TextAsset;
 	}
@@ -146,19 +146,19 @@ public class MapBuilder : MonoBehaviour {
 		match = Regex.Match(mapFile.text, @"Indestructable:(.*)");
 		if (match.Success) {
 			indestructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
-			Debug.Log("Indest. Wall Texture: " + match.Groups[1].ToString ());
+			// Debug.Log("Indest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Destructable:(.*)");
 		if (match.Success) {
 			destructableWallTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
-			Debug.Log("Dest. Wall Texture: " + match.Groups[1].ToString ());
+			// Debug.Log("Dest. Wall Texture: " + match.Groups[1].ToString ());
 		}
 		
 		match = Regex.Match(mapFile.text, @"Floor:(.*)");
 		if (match.Success) {
 			floorTexture = Resources.Load(match.Groups[1].ToString()) as Texture;
-			Debug.Log("Floor Wall Texture: " + match.Groups[1].ToString ());
+			// Debug.Log("Floor Wall Texture: " + match.Groups[1].ToString ());
 		}
 	}
 	
@@ -176,7 +176,7 @@ public class MapBuilder : MonoBehaviour {
 		if (bgMusicObj != null) {
 			bgMusicObj.GetComponent<AudioSource>().clip = backgroundMusic;
 			bgMusicObj.GetComponent<AudioSource>().Play();
-			Debug.Log("Music: " + match.Groups[1].ToString ());
+			// Debug.Log("Music: " + match.Groups[1].ToString ());
 		}
 	}
 	

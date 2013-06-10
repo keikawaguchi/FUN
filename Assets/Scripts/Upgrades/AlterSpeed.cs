@@ -44,12 +44,12 @@ public class AlterSpeed : MonoBehaviour {
 	}
 	
 	private void setSpeed() {
-		Debug.Log("AlterSpeed set speed!");
+		// Debug.Log("AlterSpeed set speed!");
 		characterMovement.setSpeedMultiplier(speedMultiplier);
 	}
 	
 	private void unsetSpeed() {
-		Debug.Log("AlterSpeed unset speed!");
+		// Debug.Log("AlterSpeed unset speed!");
 		characterMovement.setSpeedMultiplier(1.0f);
 	}
 	

@@ -115,7 +115,7 @@ public class KiritoBehavior : MonoBehaviour {
 		// check if cooldown expired
 		if (Time.time - suterusuTimer > skillOneCD) {
 			// skill 1 here
-			Debug.Log("Skill One Triggered!");
+			// Debug.Log("Skill One Triggered!");
 			GameObject suterusuObj = Instantiate (suterusuPrefab) as GameObject;
 			suterusuObj.GetComponent<Suterusu>().setOwner (gameObject);
 			suterusuObj.GetComponent<Suterusu>().setAnimationScript(animation.GetComponent<Animation>());
@@ -130,7 +130,7 @@ public class KiritoBehavior : MonoBehaviour {
 		// check if cooldown expired
 		if (Time.time - chinmokuTimer > skillTwoCD) {
 			// skill 2 here
-			Debug.Log("Skill Two Triggered!");
+			// Debug.Log("Skill Two Triggered!");
 //			GameObject chinmokuObj = Instantiate (chinmokuPrefab) as GameObject;
 //			chinmokuObj.GetComponent<Chinmoku>().setOwner (gameObject);
 //			chinmokuObj.GetComponent<Chinmoku>().execute ();

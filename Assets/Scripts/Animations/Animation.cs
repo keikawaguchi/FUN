@@ -65,12 +65,12 @@ public class Animation : MonoBehaviour {
 	}
 	
 	public void setIdleTexture(Texture texture) {
-		Debug.Log ("Set Idle Texture");
+		// Debug.Log ("Set Idle Texture");
 		idleTexture = texture;
 	}
 	
 	public void setRunningTexture(Texture texture) {
-		Debug.Log ("Set Running Texture");
+		// Debug.Log ("Set Running Texture");
 		runningTexture = texture;
 	}
 
