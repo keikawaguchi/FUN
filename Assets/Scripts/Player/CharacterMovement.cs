@@ -101,7 +101,7 @@ public class CharacterMovement : MonoBehaviour {
 	
 	private void updateAimDirection() {
 		aimDirection.y = 0;
-		if (controller.GetThumbstick("left").x == 0 && controller.GetThumbstick("right").y == 0) {
+		if (controller.GetThumbstick("left").x == 0 && controller.GetThumbstick("left").y == 0) {
 			return;
 		}
 		aimDirection.x = controller.GetThumbstick("left").x;
